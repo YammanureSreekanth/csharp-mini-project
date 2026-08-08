@@ -11,7 +11,7 @@ namespace Domain.Classes.Product
         public bool IsOnline {get; set;}
         public bool IsSearchable {get; set;}
         public string ShortDescription {get; set;}
-        public SeoInfo Seo {get; set;}
+        public SeoInfo SEO {get; set;}
         public ProductType Type {get; set;}
         public IReadOnlyList<ProductImage> Images {get; set;}
         public abstract string GetPriceDisplay();

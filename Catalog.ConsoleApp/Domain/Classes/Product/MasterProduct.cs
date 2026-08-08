@@ -6,7 +6,7 @@ namespace Domain.Classes.Product
     {
         public List<string> VariationAttributes;
         public MasterProduct(string id, string name, List<string> variationAttributes)
-        : base(id, name,ProductType.MASTER_PRODUCT )
+        : base(id, name,ProductType.MASTER_PRODUCT)
         {
             VariationAttributes = variationAttributes;
         }

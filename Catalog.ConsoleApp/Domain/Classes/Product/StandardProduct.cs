@@ -9,7 +9,7 @@ namespace Domain.Classes.Product
         public Money Price { get; private set; }
         public StockStatus Availability { get; private set; }
         public StandardProduct(string id, string name, Money price, StockStatus availability)
-        : base(id, name,ProductType.STANDARD_PRODUCT )
+        : base(id, name,ProductType.STANDARD_PRODUCT)
         {
             Price = price;
             Availability = availability;
