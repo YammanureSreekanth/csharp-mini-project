@@ -1,29 +1,74 @@
-Creating a solution in VS Code (Mac) via terminal
+# Catalog Console App — Domain & Database Diagrams
 
-You're not doing this through a GUI wizard like Visual Studio on Windows — on Mac with VS Code, it's all dotnet CLI, and VS Code just edits the files.
+This document collects the diagrams for each table/class in the catalog model,
+plus one diagram showing how they all map together end to end.
 
-# 1. Navigate to your repo root (or wherever you want the solution)
-cd ~/path/to/csharp-mini-project
+Paste each diagram where indicated. If you're exporting images from VS Code,
+save them under a `diagrams/` folder next to this README and reference them
+with a relative path, e.g. `![Categories](./diagrams/categories.png)`.
+Mermaid/PlantUML source blocks work too — just paste the code block in place
+of the placeholder.
 
-# 2. Create the solution file
-dotnet new sln -n csharp-ecom-mini-app
+---
 
-# This creates CSharpLearningcsharp-ecom-mini-apps.slnx in the current directory
-Adding existing projects to the solution
+## Overall Mapping
 
-# Since you already have multiple console projects, you add each one:
+_The full picture — how `Category`, `Product` (and its subtypes), and their
+supporting tables relate to one another._
 
-dotnet sln add Catalog.ConsoleApp
+![alt text](Catalog.ConsoleApp/diagrams/overallFlow.png)
+---
 
-# Or, if you want to add all .csproj files under csharp-mini-project
+## Category
 
-find src -name "*.csproj" | xargs -I {} dotnet sln add {}
+_`Categories` table — self-referencing tree via `ParentCategoryId`._
 
-# Adding a brand-new project directly into the solution
+![alt text](Catalog.ConsoleApp/diagrams/categories.png)
+---
 
-dotnet new console -n NewProjectName -o src/NewProjectName
-dotnet sln add src/NewProjectName/NewProjectName.csproj
+## Products (BaseProduct / MasterProduct / StandardProduct / VariationProduct)
 
-# Verify
+_`Products` table — single table with a `Type` discriminator, plus the
+self-referencing `MasterProductId` for variations._
 
-dotnet sln list
+![alt text](Catalog.ConsoleApp/diagrams/products.png)
+
+---
+
+## MasterProduct.VariationAttributes
+
+_`MasterProductVariationAttributes` table — one row per attribute name a
+master varies by (e.g. "Size")._
+
+![alt text](Catalog.ConsoleApp/diagrams/products.png)
+---
+
+## VariationProduct.AttributeValues
+
+_`VariationProductAttributeValues` table — one row per attribute name/value
+pair for a given variation (e.g. "Size" → "48")._
+
+![alt text](Catalog.ConsoleApp/diagrams/products.png)
+
+---
+
+## ProductImages
+
+_`ProductImages` table — one product to many images._
+
+![alt text](Catalog.ConsoleApp/diagrams/productImages.png)
+
+---
+
+## ProductCategoryAssignments
+
+_`ProductCategoryAssignments` table — many-to-many join between products and
+categories, with one `IsPrimary` flag per product._
+
+![Catalog.ConsoleApp/diagrams/productCategoryAssignments.png](Catalog.ConsoleApp/diagrams/productCategoryAssignments.png)
+
+---
+
+## Notes / Open Questions
+
+_
