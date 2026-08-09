@@ -1,4 +1,7 @@
+using System.Text.Json;
 using Domain.Classes.Product;
+using Domain.Interfaces;
+using Factories;
 using Microsoft.Data.SqlClient;
 
 namespace DataAccess {
@@ -29,9 +32,28 @@ namespace DataAccess {
             throw new NotImplementedException();
         }
 
-        public BaseProduct SqlDataReaderProcessor(SqlDataReader sqlDataReader)
+        public BaseProduct? SqlDataReaderProcessor(SqlDataReader reader)
         {
-            return sqlDataReader[];
+            Dictionary<string, object> rowData = new Dictionary<string, object>();
+
+            for (var i = 0; i < reader.FieldCount; i++)
+            {
+                // Console.WriteLine($"Prop Name {reader.GetName(i)} \t {reader[i]}");
+                rowData.Add(reader.GetName(i), reader[i]);
+            }
+
+            string Id = (string)rowData["Id"];
+            string Name = (string)rowData["Name"];
+            byte type = (byte)rowData["Type"];
+            BaseProduct product = ProductFactory.Create(Id, Name, type, rowData);
+            if (product is ISellable sellable)
+            {
+                Console.WriteLine(sellable.Price.Amount);
+            }
+
+            string productStr = JsonSerializer.Serialize(product);
+            Console.WriteLine(productStr);
+            return product;
         }
     }
 }

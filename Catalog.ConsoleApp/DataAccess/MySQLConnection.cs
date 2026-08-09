@@ -31,7 +31,6 @@ public static class MySQLConnection
                 while (reader.Read())
                 {
                     results.Add(SqlDataReaderProcessor(reader));
-                    // Console.WriteLine($"\t{reader[0]}\t{reader[1]}\t{reader[2]}");
                 }
                 reader.Close();
             }
