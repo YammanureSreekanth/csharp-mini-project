@@ -1,13 +1,15 @@
 using Catalog.ConsoleApp.CustomAttributes;
+using Catalog.ConsoleApp.CustomExtensions;
 using Catalog.ConsoleApp.Domain.Classes.Product;
 using Catalog.ConsoleApp.Domain.Enums;
 using Catalog.ConsoleApp.Domain.Structs;
+using Microsoft.Data.SqlClient;
 
 namespace Catalog.ConsoleApp.Factories
 {
     public static class ProductFactory
     {
-        public static BaseProduct Create(string id, string name, int type, Dictionary<string, object> rowData)
+        public static BaseProduct Create(string id, string name, int type, Dictionary<string, object> rowData, SqlDataReader sqlDataReader)
         {
             BaseProduct product = null;
             if (type == 2)
@@ -29,7 +31,8 @@ namespace Catalog.ConsoleApp.Factories
 
                 string SeoPageTitle = (string)rowData["SeoPageTitle"];
                 object rawSeoPageKeywords = rowData["SeoPageKeywords"];
-                string? SeoPageKeywords = rawSeoPageKeywords is DBNull ? null : (string)rawSeoPageKeywords;
+                bool isdbNull = SqlDataReaderExtensions.isValueNullInDB(sqlDataReader,"SeoPageKeywords");
+                string? SeoPageKeywords = isdbNull ? null : (string)rawSeoPageKeywords;
                 SeoInfo SEO = new SeoInfo(SeoPageTitle);
                 if (SeoPageKeywords is not null)
                 {

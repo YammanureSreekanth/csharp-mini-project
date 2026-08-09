@@ -47,7 +47,7 @@ namespace Catalog.ConsoleApp.DataAccess {
             string Id = (string)rowData["Id"];
             string Name = (string)rowData["Name"];
             byte type = (byte)rowData["Type"];
-            BaseProduct product = ProductFactory.Create(Id, Name, type, rowData);
+            BaseProduct product = ProductFactory.Create(Id, Name, type, rowData, reader);
             if (product is ISellable sellable)
             {
                 Console.WriteLine(sellable.Price.Amount);
