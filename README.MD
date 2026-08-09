@@ -1,4 +1,4 @@
-# Catalog Console App — Domain & Database Diagrams
+# Catalog Console App - Domain & Database Diagrams
 
 This document collects the diagrams for each table/class in the catalog model,
 plus one diagram showing how they all map together end to end.
@@ -13,7 +13,7 @@ of the placeholder.
 
 ## Overall Mapping
 
-_The full picture — how `Category`, `Product` (and its subtypes), and their
+_The full picture - how `Category`, `Product` (and its subtypes), and their
 supporting tables relate to one another._
 
 ![alt text](Catalog.ConsoleApp/diagrams/overallFlow.png)
@@ -21,14 +21,14 @@ supporting tables relate to one another._
 
 ## Category
 
-_`Categories` table — self-referencing tree via `ParentCategoryId`._
+_`Categories` table - self-referencing tree via `ParentCategoryId`._
 
 ![alt text](Catalog.ConsoleApp/diagrams/categories.png)
 ---
 
 ## Products (BaseProduct / MasterProduct / StandardProduct / VariationProduct)
 
-_`Products` table — single table with a `Type` discriminator, plus the
+_`Products` table - single table with a `Type` discriminator, plus the
 self-referencing `MasterProductId` for variations._
 
 ![alt text](Catalog.ConsoleApp/diagrams/products.png)
@@ -37,7 +37,7 @@ self-referencing `MasterProductId` for variations._
 
 ## MasterProduct.VariationAttributes
 
-_`MasterProductVariationAttributes` table — one row per attribute name a
+_`MasterProductVariationAttributes` table - one row per attribute name a
 master varies by (e.g. "Size")._
 
 ![alt text](Catalog.ConsoleApp/diagrams/products.png)
@@ -45,7 +45,7 @@ master varies by (e.g. "Size")._
 
 ## VariationProduct.AttributeValues
 
-_`VariationProductAttributeValues` table — one row per attribute name/value
+_`VariationProductAttributeValues` table - one row per attribute name/value
 pair for a given variation (e.g. "Size" → "48")._
 
 ![alt text](Catalog.ConsoleApp/diagrams/products.png)
@@ -54,7 +54,7 @@ pair for a given variation (e.g. "Size" → "48")._
 
 ## ProductImages
 
-_`ProductImages` table — one product to many images._
+_`ProductImages` table - one product to many images._
 
 ![alt text](Catalog.ConsoleApp/diagrams/productImages.png)
 
@@ -62,7 +62,7 @@ _`ProductImages` table — one product to many images._
 
 ## ProductCategoryAssignments
 
-_`ProductCategoryAssignments` table — many-to-many join between products and
+_`ProductCategoryAssignments` table - many-to-many join between products and
 categories, with one `IsPrimary` flag per product._
 
 ![Catalog.ConsoleApp/diagrams/productCategoryAssignments.png](Catalog.ConsoleApp/diagrams/productCategoryAssignments.png)

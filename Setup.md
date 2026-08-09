@@ -48,7 +48,7 @@ Swap `console` for `classlib` for a class library project.
 
 ## Wire up project references
 
-Reminder: only ever reference "inward" toward `Catalog.Domain` — never the
+Reminder: only ever reference "inward" toward `Catalog.Domain` - never the
 other direction. See `README.md` for the layering rules.
 
 ```
@@ -76,7 +76,7 @@ dotnet build
 ## Run
 
 Once there's more than one project with a `Main` method in the solution,
-`dotnet run` alone is ambiguous — always specify which project:
+`dotnet run` alone is ambiguous - always specify which project:
 
 ```
 dotnet run --project Catalog.ConsoleApp/Catalog.ConsoleApp.csproj
