@@ -3,12 +3,6 @@
 This document collects the diagrams for each table/class in the catalog model,
 plus one diagram showing how they all map together end to end.
 
-Paste each diagram where indicated. If you're exporting images from VS Code,
-save them under a `diagrams/` folder next to this README and reference them
-with a relative path, e.g. `![Categories](./diagrams/categories.png)`.
-Mermaid/PlantUML source blocks work too — just paste the code block in place
-of the placeholder.
-
 ---
 
 ## Overall Mapping
