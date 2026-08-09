@@ -6,8 +6,8 @@ namespace Domain.Classes.Product
 {
     public class StandardProduct : BaseProduct, ISellable
     {
-        public Money Price { get; private set; }
-        public StockStatus Availability { get; private set; }
+        public Money Price { get; set; }
+        public StockStatus Availability { get; set; }
         public StandardProduct(string id, string name, Money price, StockStatus availability)
         : base(id, name,ProductType.STANDARD_PRODUCT)
         {
