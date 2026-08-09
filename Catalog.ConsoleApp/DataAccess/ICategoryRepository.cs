@@ -1,6 +1,6 @@
-using Domain.Classes.Category;
+using Catalog.ConsoleApp.Domain.Classes.Category;
 
-namespace DataAccess
+namespace  Catalog.ConsoleApp.DataAccess
 {
     public interface ICategoryRepository
     {

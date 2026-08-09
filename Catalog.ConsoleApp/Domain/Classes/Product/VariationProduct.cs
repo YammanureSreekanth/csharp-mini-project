@@ -1,8 +1,8 @@
-using Domain.Enums;
-using Domain.Interfaces;
-using Domain.Structs;
+using Catalog.ConsoleApp.Domain.Enums;
+using Catalog.ConsoleApp.Domain.Interfaces;
+using Catalog.ConsoleApp.Domain.Structs;
 
-namespace Domain.Classes.Product
+namespace Catalog.ConsoleApp.Domain.Classes.Product
 {
     public class VariationProduct : BaseProduct, ISellable
     {

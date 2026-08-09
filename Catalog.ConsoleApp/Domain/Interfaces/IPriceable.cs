@@ -1,4 +1,4 @@
-namespace Domain.Interfaces
+namespace Catalog.ConsoleApp.Domain.Interfaces
 {
     public interface IPriceable
     {

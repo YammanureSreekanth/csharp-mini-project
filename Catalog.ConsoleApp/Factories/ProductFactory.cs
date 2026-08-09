@@ -1,8 +1,9 @@
-using Domain.Classes.Product;
-using Domain.Enums;
-using Domain.Structs;
+using Catalog.ConsoleApp.CustomAttributes;
+using Catalog.ConsoleApp.Domain.Classes.Product;
+using Catalog.ConsoleApp.Domain.Enums;
+using Catalog.ConsoleApp.Domain.Structs;
 
-namespace Factories
+namespace Catalog.ConsoleApp.Factories
 {
     public static class ProductFactory
     {

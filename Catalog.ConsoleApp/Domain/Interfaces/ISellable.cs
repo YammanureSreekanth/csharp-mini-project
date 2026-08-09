@@ -1,6 +1,6 @@
-using Domain.Structs;
+using Catalog.ConsoleApp.Domain.Structs;
 
-namespace Domain.Interfaces
+namespace Catalog.ConsoleApp.Domain.Interfaces
 {
     public interface ISellable
     {

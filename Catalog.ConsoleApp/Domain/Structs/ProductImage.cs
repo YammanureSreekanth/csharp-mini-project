@@ -1,4 +1,4 @@
-namespace Domain.Structs
+namespace Catalog.ConsoleApp.Domain.Structs
 {
     public struct ProductImage
     {

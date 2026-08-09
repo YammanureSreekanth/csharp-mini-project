@@ -1,5 +1,5 @@
-using Domain.Enums;
-namespace Domain.Structs
+using Catalog.ConsoleApp.Domain.Enums;
+namespace Catalog.ConsoleApp.Domain.Structs
 {
     public struct StockStatus
     {

@@ -1,10 +1,12 @@
 using System.Text.Json;
-using Domain.Classes.Product;
-using Domain.Interfaces;
-using Factories;
+using Catalog.ConsoleApp.CustomAttributes;
+using Catalog.ConsoleApp.Domain.Classes.Product;
+using Catalog.ConsoleApp.Domain.Interfaces;
+using Catalog.ConsoleApp.Factories;
 using Microsoft.Data.SqlClient;
 
-namespace DataAccess {
+namespace Catalog.ConsoleApp.DataAccess {
+    [Info("Sreekanth", "1.0.0")]
     public class ProductRepository : IProductRepository
     {
         public List<BaseProduct> GetByCategory(string Id)

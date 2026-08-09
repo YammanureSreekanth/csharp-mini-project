@@ -1,4 +1,4 @@
-namespace Domain.Classes.Category
+namespace Catalog.ConsoleApp.Domain.Classes.Category
 {
     public class Category
     {

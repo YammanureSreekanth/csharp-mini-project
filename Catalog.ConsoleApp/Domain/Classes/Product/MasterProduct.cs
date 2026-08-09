@@ -1,6 +1,6 @@
-using Domain.Enums;
+using Catalog.ConsoleApp.Domain.Enums;
 
-namespace Domain.Classes.Product
+namespace Catalog.ConsoleApp.Domain.Classes.Product
 {
     public class MasterProduct : BaseProduct
     {

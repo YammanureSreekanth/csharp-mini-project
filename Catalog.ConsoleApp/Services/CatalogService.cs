@@ -1,7 +1,7 @@
-using DataAccess;
-using Domain.Classes.Product;
+using Catalog.ConsoleApp.DataAccess;
+using Catalog.ConsoleApp.Domain.Classes.Product;
 
-namespace Services
+namespace Catalog.ConsoleApp.Services
 {
     public class CatalogService
     {

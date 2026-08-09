@@ -1,6 +1,6 @@
-using Domain.Classes.Product;
+using Catalog.ConsoleApp.Domain.Classes.Product;
 
-namespace Domain.Classes.Category
+namespace Catalog.ConsoleApp.Domain.Classes.Category
 {
     public class ProductCategoryAssignment
     {

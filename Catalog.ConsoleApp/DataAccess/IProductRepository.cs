@@ -1,6 +1,6 @@
-using Domain.Classes.Product;
+using Catalog.ConsoleApp.Domain.Classes.Product;
 
-namespace DataAccess
+namespace Catalog.ConsoleApp.DataAccess
 {
     public interface IProductRepository
     {

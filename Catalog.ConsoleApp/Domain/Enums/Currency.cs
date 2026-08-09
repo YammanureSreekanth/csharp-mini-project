@@ -1,4 +1,4 @@
-namespace Domain.Enums
+namespace Catalog.ConsoleApp.Domain.Enums
 {
     public enum Currency
     {
