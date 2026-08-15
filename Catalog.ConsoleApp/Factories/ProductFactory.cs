@@ -1,4 +1,3 @@
-using Catalog.ConsoleApp.CustomAttributes;
 using Catalog.ConsoleApp.CustomExtensions;
 using Catalog.ConsoleApp.Domain.Classes.Product;
 using Catalog.ConsoleApp.Domain.Enums;

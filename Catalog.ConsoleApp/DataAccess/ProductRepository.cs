@@ -16,12 +16,12 @@ namespace Catalog.ConsoleApp.DataAccess {
 
         public BaseProduct? GetById(string Id)
         {
-            const string GET_PRODUCT_BY_ID = "SELECT * FROM dbo.Products WHERE Id = @Id";
+            const string GET_PRODUCT_BY_ID_QUERY = "SELECT * FROM dbo.Products WHERE Id = @Id";
             Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
             {
                 { "Id", Id }
             };
-            List<BaseProduct> baseProducts = MySQLConnection.RunQuery<BaseProduct>(GET_PRODUCT_BY_ID ,keyValuePairs, SqlDataReaderProcessor);
+            List<BaseProduct> baseProducts = MySQLConnection.RunQuery<BaseProduct>(GET_PRODUCT_BY_ID_QUERY ,keyValuePairs, SqlDataReaderProcessor);
             if (baseProducts.Count == 0)
             {
                 return null;

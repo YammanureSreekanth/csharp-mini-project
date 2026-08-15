@@ -18,7 +18,8 @@ namespace Catalog.ConsoleApp
                 Console.WriteLine($"Author {attr.Author} and Version {attr.Version}");
             }
             CatalogService catalogService = new CatalogService(categoryRepository, productRepository);
-            catalogService.GetProductById("D005");
+            // catalogService.GetProductById("D005");
+            catalogService.Catalog();
         }
     }
 }
