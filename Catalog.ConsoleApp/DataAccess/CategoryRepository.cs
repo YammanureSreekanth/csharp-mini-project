@@ -12,6 +12,21 @@ namespace Catalog.ConsoleApp.DataAccess {
             return categories;
         }
 
+        public List<string> GetProductAssigegmentsByCategoryId(string categoryId)
+        {
+            const string GET_PRODUCTS_ID_QUERY = "SELECT * FROM dbo.ProductCategoryAssignments where CategoryId = @CategoryId";
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
+            {
+                { "CategoryId", categoryId }
+            };
+            Func<SqlDataReader, string> DataReader = (SqlDataReader reader) =>
+            {
+                return reader["ProductId"]?.ToString();
+            };
+            List<string> productIds = MySQLConnection.RunQuery<string>(GET_PRODUCTS_ID_QUERY,keyValuePairs, DataReader);
+            return productIds;
+        }
+
         public Category GetById()
         {
             throw new NotImplementedException();

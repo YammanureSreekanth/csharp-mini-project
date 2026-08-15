@@ -19,7 +19,8 @@ namespace Catalog.ConsoleApp
             }
             CatalogService catalogService = new CatalogService(categoryRepository, productRepository);
             // catalogService.GetProductById("D005");
-            catalogService.Catalog();
+            // catalogService.Catalog();
+            catalogService.GetProductsByCategoryId("black-tie-collection");
         }
     }
 }

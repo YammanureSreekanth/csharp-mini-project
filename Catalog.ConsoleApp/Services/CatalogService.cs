@@ -27,6 +27,17 @@ namespace Catalog.ConsoleApp.Services
             return categories;
         }
 
+        public List<string> GetProductsByCategoryId(string categoryId)
+        {
+            Logger.Debug("Calling Method {0} from Service Class is {1}", "GetProductsByCategoryId", "CatalogService");
+            List<string> productIds = _categoryRepo.GetProductAssigegmentsByCategoryId(categoryId);
+            foreach (string productId in productIds)
+            {
+                Console.WriteLine($"{productId}");
+            }
+            return productIds;
+        }
+
         public BaseProduct? GetProductById(string Id)
         {
             Logger.Debug("Calling Method {0} from Service Class is {1}", "GetProductById", "CatalogService");
