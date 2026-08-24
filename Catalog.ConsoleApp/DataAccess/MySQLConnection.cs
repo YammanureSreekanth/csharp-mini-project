@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 public static class MySQLConnection
 {
     private readonly static string connectionString =
-            "Data Source=localhost;Initial Catalog=devdb;User ID=sreekanth;Password=Sreekanth@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
+            "Data Source=localhost;Initial Catalog=CatalogDb;User ID=sa;Password=PraticeApp@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
      public static List<T> RunQuery<T>(string Query, Dictionary<string, string> ParamsPlaceholders, Func<SqlDataReader, T> SqlDataReaderProcessor)
     {
         List<T> results = new List<T>();
