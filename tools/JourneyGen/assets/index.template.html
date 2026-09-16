@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<meta name="description" content="__TAGLINE__">
+<style>
+  :root {
+    color-scheme: light;
+    --plane:          #f9f9f7;
+    --surface:        #fcfcfb;
+    --ink:            #0b0b0b;
+    --ink-2:          #52514e;
+    --ink-muted:      #898781;
+    --grid:           #e1e0d9;
+    --axis:           #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --series-1:       #2a78d6;
+    --series-1-soft:  rgba(42,120,214,0.12);
+    --series-2:       #e34948;
+    --good:           #0ca30c;
+    --radius:         14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --plane:         #0d0d0d;
+      --surface:       #1a1a19;
+      --ink:           #ffffff;
+      --ink-2:         #c3c2b7;
+      --ink-muted:     #898781;
+      --grid:          #2c2c2a;
+      --axis:          #383835;
+      --border:        rgba(255,255,255,0.10);
+      --series-1:      #3987e5;
+      --series-1-soft: rgba(57,135,229,0.18);
+      --series-2:      #e66767;
+      --good:          #0ca30c;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane:         #0d0d0d;
+    --surface:       #1a1a19;
+    --ink:           #ffffff;
+    --ink-2:         #c3c2b7;
+    --ink-muted:     #898781;
+    --grid:          #2c2c2a;
+    --axis:          #383835;
+    --border:        rgba(255,255,255,0.10);
+    --series-1:      #3987e5;
+    --series-1-soft: rgba(57,135,229,0.18);
+    --series-2:      #e66767;
+    --good:          #0ca30c;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--ink);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 72px; }
+
+  header.page { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+  header.page h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.02em; }
+  header.page p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+  .meta { margin-top: 10px; font-size: 13px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .meta a { color: var(--series-1); text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  button.theme {
+    background: var(--surface); color: var(--ink-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 7px 14px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  button.theme:hover { color: var(--ink); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+  }
+  .card h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: -0.01em; }
+  .card .sub { margin: 0 0 14px; font-size: 13px; color: var(--ink-muted); }
+
+  /* ---- hero ---- */
+  .hero { display: grid; grid-template-columns: minmax(220px, 280px) 1fr; gap: 16px; margin-bottom: 16px; }
+  .ring { display: flex; align-items: center; gap: 18px; }
+  .ring svg { flex: none; }
+  .ring .pct { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
+  .ring .cap { font-size: 13px; color: var(--ink-2); }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(122px, 1fr)); gap: 12px; }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .tile .v { font-size: 24px; font-weight: 640; letter-spacing: -0.02em; }
+  .tile .k { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+  /* ---- charts ---- */
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .chartbox { position: relative; height: 240px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-2); margin: 0 0 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+
+  /* ---- concepts ---- */
+  .areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .bar { height: 6px; border-radius: 999px; background: var(--grid); overflow: hidden; margin: 10px 0 14px; }
+  .bar > i { display: block; height: 100%; border-radius: 999px; background: var(--series-1); }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px;
+    padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--ink-2);
+  }
+  .chip.done { background: var(--series-1-soft); border-color: transparent; color: var(--ink); }
+  .chip.todo { border-style: dashed; color: var(--ink-muted); }
+  .chip .mark { font-size: 11px; }
+  .chip.done .mark { color: var(--good); }
+
+  /* ---- diagram ---- */
+  .diagram { overflow-x: auto; padding-bottom: 6px; }
+  .diagram svg { max-width: none; height: auto; }
+
+  /* ---- tables ---- */
+  details.data { margin-top: 16px; }
+  details.data > summary { cursor: pointer; font-size: 13px; color: var(--ink-2); padding: 10px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; margin-bottom: 18px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--grid); }
+  th { color: var(--ink-muted); font-weight: 600; }
+  td.n, th.n { text-align: right; }
+
+  footer.page { margin-top: 34px; font-size: 12.5px; color: var(--ink-muted); }
+
+  section { margin-bottom: 16px; }
+  h2.section { font-size: 13px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-muted); margin: 30px 0 12px; font-weight: 600; }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; }
+    .wrap { padding: 22px 16px 56px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page">
+    <div>
+      <h1>__TITLE__</h1>
+      <p>__TAGLINE__</p>
+      <div class="meta">
+        <a href="__REPO__">__REPO_NAME__</a>
+        <span>Updated __UPDATED__</span>
+        <span id="range"></span>
+      </div>
+    </div>
+    <button class="theme" id="themeBtn" type="button">Theme</button>
+  </header>
+
+  <div class="hero">
+    <div class="card ring">
+      <svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true">
+        <circle cx="44" cy="44" r="38" fill="none" stroke="var(--grid)" stroke-width="9"></circle>
+        <circle id="ringArc" cx="44" cy="44" r="38" fill="none" stroke="var(--series-1)" stroke-width="9"
+                stroke-linecap="round" transform="rotate(-90 44 44)"></circle>
+      </svg>
+      <div>
+        <div class="pct" id="pctText">0%</div>
+        <div class="cap" id="pctCap">of tracked concepts</div>
+      </div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </div>
+
+  <h2 class="section">Activity</h2>
+  <div class="charts">
+    <div class="card">
+      <h2>Commits per week</h2>
+      <p class="sub">When the work actually happened.</p>
+      <div class="chartbox"><canvas id="commitsChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Lines changed per week</h2>
+      <p class="sub">Added above the line, removed below.</p>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--series-1)"></i>Added</span>
+        <span><i class="swatch" style="background:var(--series-2)"></i>Removed</span>
+      </div>
+      <div class="chartbox" style="height:206px"><canvas id="churnChart"></canvas></div>
+    </div>
+  </div>
+
+  <h2 class="section">Codebase</h2>
+  <div class="charts">
+    <div class="card">
+      <h2>Lines of C# per project</h2>
+      <p class="sub">Excludes generated and library files.</p>
+      <div class="chartbox" id="projBox"><canvas id="projectChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Types by kind</h2>
+      <p class="sub">Every type declared in the solution.</p>
+      <div class="chartbox" id="kindBox"><canvas id="kindChart"></canvas></div>
+    </div>
+  </div>
+
+  <h2 class="section">Concepts</h2>
+  <div class="areas" id="areas"></div>
+
+  <h2 class="section">Domain model</h2>
+  <section class="card">
+    <h2>Class diagram</h2>
+    <p class="sub">Parsed from the source with Roslyn on every push, so it cannot drift from the code.</p>
+    <div class="diagram"><pre class="mermaid" id="diagram"></pre></div>
+  </section>
+
+  <details class="data">
+    <summary>View the underlying data as tables</summary>
+    <div id="tables"></div>
+  </details>
+
+  <footer class="page">
+    Generated by <code>tools/JourneyGen</code> from the repository source and git history.
+  </footer>
+</div>
+
+<script id="journey-data" type="application/json">__DATA__</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.6.0/mermaid.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("journey-data").textContent);
+  var charts = [];
+
+  function css(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+  function isDark() {
+    var explicit = document.documentElement.getAttribute("data-theme");
+    if (explicit) return explicit === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function num(n) { return n.toLocaleString("en-US"); }
+
+  /* ---------- header + hero ---------- */
+  if (D.git.totalCommits > 0) {
+    document.getElementById("range").textContent =
+      D.git.firstCommit + " → " + D.git.lastCommit;
+  }
+
+  var pct = D.concepts.total ? Math.round(100 * D.concepts.done / D.concepts.total) : 0;
+  document.getElementById("pctText").textContent = pct + "%";
+  document.getElementById("pctCap").textContent =
+    D.concepts.done + " of " + D.concepts.total + " tracked concepts";
+  var arc = document.getElementById("ringArc");
+  var circ = 2 * Math.PI * 38;
+  arc.setAttribute("stroke-dasharray", circ.toFixed(1));
+  arc.setAttribute("stroke-dashoffset", (circ * (1 - pct / 100)).toFixed(1));
+
+  var tiles = [
+    ["C# files", num(D.code.files)],
+    ["Lines of C#", num(D.code.lines)],
+    ["Types", num(D.code.types)],
+    ["Commits", num(D.git.totalCommits)],
+    ["Active days", num(D.git.activeDays)]
+  ];
+  document.getElementById("tiles").innerHTML = tiles.map(function (t) {
+    return '<div class="tile"><div class="v">' + t[1] + '</div><div class="k">' + t[0] + "</div></div>";
+  }).join("");
+
+  /* ---------- concept areas ---------- */
+  document.getElementById("areas").innerHTML = D.concepts.areas.map(function (a) {
+    var p = a.concepts.length ? Math.round(100 * a.done / a.concepts.length) : 0;
+    var chips = a.concepts.map(function (c) {
+      var cls = c.done ? "chip done" : "chip todo";
+      var mark = c.done ? "✓" : "○";
+      var title = c.done && c.evidence.length ? c.evidence.join(", ") : (c.notes || "");
+      return '<span class="' + cls + '" title="' + esc(title) + '"><i class="mark">' + mark + "</i>" + esc(c.label) + "</span>";
+    }).join("");
+    return '<div class="card"><h2>' + esc(a.name) + "</h2>" +
+           '<p class="sub">' + a.done + " of " + a.concepts.length + " covered</p>" +
+           '<div class="bar"><i style="width:' + p + '%"></i></div>' +
+           '<div class="chips">' + chips + "</div></div>";
+  }).join("");
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  /* ---------- charts ---------- */
+  var valueLabels = {
+    id: "valueLabels",
+    afterDatasetsDraw: function (chart, args, opts) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function (ds, i) {
+        var meta = chart.getDatasetMeta(i);
+        if (meta.hidden) return;
+        meta.data.forEach(function (el, idx) {
+          var v = ds.data[idx];
+          if (v == null) return;
+          ctx.save();
+          ctx.fillStyle = opts.color;
+          ctx.font = '600 12px system-ui, -apple-system, "Segoe UI", sans-serif';
+          ctx.textBaseline = "middle";
+          ctx.textAlign = "left";
+          ctx.fillText(num(v), el.x + 8, el.y);
+          ctx.restore();
+        });
+      });
+    }
+  };
+
+  function baseOptions(muted, grid) {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 260 },
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: isDark() ? "#262624" : "#ffffff",
+          displayColors: true,
+          padding: 10,
+          cornerRadius: 8,
+          titleColor: css("--ink"),
+          bodyColor: css("--ink-2"),
+          borderColor: css("--border"),
+          borderWidth: 1
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: { color: css("--axis") },
+             ticks: { color: muted, font: { size: 11 }, maxRotation: 0, autoSkipPadding: 14 } },
+        y: { grid: { color: grid, drawTicks: false }, border: { display: false },
+             ticks: { color: muted, font: { size: 11 }, precision: 0, padding: 8 } }
+      }
+    };
+  }
+
+  function build() {
+    charts.forEach(function (c) { c.destroy(); });
+    charts = [];
+
+    var s1 = css("--series-1"), s2 = css("--series-2");
+    var muted = css("--ink-muted"), grid = css("--grid"), surface = css("--surface");
+
+    Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", sans-serif';
+
+    /* Commits per week - one series, so no legend; the title names it. */
+    var weeks = D.git.weeks;
+    var o1 = baseOptions(muted, grid);
+    o1.plugins.tooltip.callbacks = {
+      title: function (items) { return "Week of " + weeks[items[0].dataIndex].start; },
+      label: function (item) { return item.parsed.y + (item.parsed.y === 1 ? " commit" : " commits"); }
+    };
+    charts.push(new Chart(document.getElementById("commitsChart"), {
+      type: "bar",
+      data: {
+        labels: weeks.map(function (w) { return w.start.slice(5); }),
+        datasets: [{
+          data: weeks.map(function (w) { return w.commits; }),
+          backgroundColor: s1, borderRadius: 4, borderSkipped: false,
+          categoryPercentage: 0.82, barPercentage: 0.88
+        }]
+      },
+      options: o1
+    }));
+
+    /* Lines changed - added up, removed down, anchored to a shared zero baseline. */
+    var o2 = baseOptions(muted, grid);
+    o2.scales.y.ticks.callback = function (v) { return num(Math.abs(v)); };
+    o2.plugins.tooltip.callbacks = {
+      title: function (items) { return "Week of " + weeks[items[0].dataIndex].start; },
+      label: function (item) {
+        return item.dataset.label + ": " + num(Math.abs(item.parsed.y)) + " lines";
+      }
+    };
+    charts.push(new Chart(document.getElementById("churnChart"), {
+      type: "bar",
+      data: {
+        labels: weeks.map(function (w) { return w.start.slice(5); }),
+        datasets: [
+          { label: "Added", data: weeks.map(function (w) { return w.added; }),
+            backgroundColor: s1, borderRadius: 4, borderSkipped: false,
+            categoryPercentage: 0.82, barPercentage: 0.88 },
+          { label: "Removed", data: weeks.map(function (w) { return -w.removed; }),
+            backgroundColor: s2, borderRadius: 4, borderSkipped: false,
+            categoryPercentage: 0.82, barPercentage: 0.88 }
+        ]
+      },
+      options: o2
+    }));
+
+    /* Same measure across categories -> one hue, direct labels, no legend. */
+    function horizontal(canvasId, boxId, labels, values) {
+      var o = baseOptions(muted, grid);
+      o.indexAxis = "y";
+      o.interaction = { mode: "nearest", intersect: true };
+      o.layout = { padding: { right: 54 } };
+      o.scales = {
+        x: { display: false, grid: { display: false }, beginAtZero: true,
+             grace: "8%", border: { display: false } },
+        y: { grid: { display: false }, border: { color: css("--axis") },
+             ticks: { color: css("--ink-2"), font: { size: 12 } } }
+      };
+      o.plugins.valueLabels = { color: css("--ink-2") };
+      o.plugins.tooltip.callbacks = { label: function (i) { return num(i.parsed.x); } };
+
+      document.getElementById(boxId).style.height = Math.max(150, labels.length * 34 + 28) + "px";
+      charts.push(new Chart(document.getElementById(canvasId), {
+        type: "bar",
+        data: { labels: labels, datasets: [{
+          data: values, backgroundColor: s1, borderRadius: 4, borderSkipped: false,
+          categoryPercentage: 0.78, barPercentage: 0.9,
+          borderColor: surface, borderWidth: { top: 0, bottom: 0, left: 0, right: 0 }
+        }] },
+        options: o,
+        plugins: [valueLabels]
+      }));
+    }
+
+    horizontal("projectChart", "projBox",
+      D.code.projects.map(function (p) { return p.name; }),
+      D.code.projects.map(function (p) { return p.lines; }));
+
+    horizontal("kindChart", "kindBox",
+      D.code.kinds.map(function (k) { return k.kind; }),
+      D.code.kinds.map(function (k) { return k.count; }));
+  }
+
+  /* ---------- tables (accessible fallback for every chart) ---------- */
+  function table(caption, head, rows) {
+    return "<table><caption style='text-align:left;color:var(--ink-muted);font-size:12px;padding:6px 0'>" +
+      esc(caption) + "</caption><thead><tr>" +
+      head.map(function (h, i) { return "<th" + (i ? ' class="n"' : "") + ">" + esc(h) + "</th>"; }).join("") +
+      "</tr></thead><tbody>" +
+      rows.map(function (r) {
+        return "<tr>" + r.map(function (c, i) {
+          return "<td" + (i ? ' class="n"' : "") + ">" + esc(c) + "</td>";
+        }).join("") + "</tr>";
+      }).join("") + "</tbody></table>";
+  }
+
+  document.getElementById("tables").innerHTML =
+    table("Weekly activity", ["Week starting", "Commits", "Added", "Removed"],
+      D.git.weeks.map(function (w) { return [w.start, w.commits, w.added, w.removed]; })) +
+    table("Code by project", ["Project", "Files", "Lines", "Types"],
+      D.code.projects.map(function (p) { return [p.name, p.files, p.lines, p.types]; })) +
+    table("Types by kind", ["Kind", "Count"],
+      D.code.kinds.map(function (k) { return [k.kind, k.count]; }));
+
+  /* ---------- mermaid ---------- */
+  function renderDiagram() {
+    var el = document.getElementById("diagram");
+    el.removeAttribute("data-processed");
+    el.textContent = D.mermaid;
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: isDark() ? "dark" : "neutral",
+      themeVariables: { fontFamily: 'system-ui, -apple-system, "Segoe UI", sans-serif', fontSize: "13px" }
+    });
+    mermaid.run({ nodes: [el] }).catch(function (e) {
+      el.textContent = "Diagram failed to render: " + e.message;
+    });
+  }
+
+  /* ---------- theme ---------- */
+  function applyTheme(next) {
+    if (next) {
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("journey-theme", next); } catch (e) {}
+    }
+    build();
+    renderDiagram();
+  }
+
+  try {
+    var saved = localStorage.getItem("journey-theme");
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
+  } catch (e) {}
+
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    applyTheme(isDark() ? "light" : "dark");
+  });
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+    if (!document.documentElement.getAttribute("data-theme")) applyTheme(null);
+  });
+
+  build();
+  renderDiagram();
+})();
+</script>
+</body>
+</html>

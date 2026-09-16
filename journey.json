@@ -1,0 +1,143 @@
+{
+  // Which concepts the journey page tracks, and how each one is proven from the code.
+  //
+  //   "detect": "auto:<feature>"   a feature the Roslyn walker recognises (tools/JourneyGen/FeatureWalker.cs)
+  //             "regex:<pattern>"  matched against the text of every .cs file
+  //             "path:<fragment>"  matched against every file path in the repo
+  //             "manual"           roadmap only; never ticks itself
+  //
+  // Several detectors can be listed; any one matching marks the concept covered.
+  "title": "My .NET Journey",
+  "tagline": "A running record of the C# and .NET ground I have actually covered, generated from this repository on every push.",
+
+  "diagram": {
+    "namespaceContains": "Domain",
+    "showMembers": true,
+    "maxMembers": 8
+  },
+
+  "areas": [
+    {
+      "name": "C# fundamentals",
+      "concepts": [
+        { "id": "classes",              "label": "Classes",                "detect": "auto:classes" },
+        { "id": "structs",              "label": "Structs",                "detect": "auto:structs",              "notes": "value types" },
+        { "id": "enums",                "label": "Enums",                  "detect": "auto:enums" },
+        { "id": "properties",           "label": "Properties",             "detect": "auto:properties" },
+        { "id": "implicit-typing",      "label": "var / implicit typing",  "detect": "auto:implicit-typing" },
+        { "id": "string-interpolation", "label": "String interpolation",   "detect": "auto:string-interpolation" },
+        { "id": "foreach-iteration",    "label": "foreach",                "detect": "auto:foreach-iteration" },
+        { "id": "switch-statements",    "label": "switch",                 "detect": "auto:switch-statements" },
+        { "id": "optional-parameters",  "label": "Optional parameters",    "detect": "auto:optional-parameters" },
+        { "id": "out-parameters",       "label": "out parameters",         "detect": "auto:out-parameters" },
+        { "id": "params-arrays",        "label": "params arrays",          "detect": "auto:params-arrays" },
+        { "id": "console-io",           "label": "Console I/O",            "detect": "auto:console-io" }
+      ]
+    },
+    {
+      "name": "Object-oriented design",
+      "concepts": [
+        { "id": "interfaces",                "label": "Interfaces",                "detect": "auto:interfaces" },
+        { "id": "inheritance",               "label": "Inheritance",               "detect": "auto:inheritance" },
+        { "id": "abstract-classes",          "label": "Abstract classes",          "detect": "auto:abstract-classes" },
+        { "id": "abstract-members",          "label": "Abstract members",          "detect": "auto:abstract-members" },
+        { "id": "method-overriding",         "label": "Overriding",                "detect": "auto:method-overriding" },
+        { "id": "virtual-members",           "label": "virtual members",           "detect": "auto:virtual-members" },
+        { "id": "default-interface-methods", "label": "Default interface methods", "detect": "auto:default-interface-methods" },
+        { "id": "static-classes",            "label": "Static classes",            "detect": "auto:static-classes" },
+        { "id": "sealed-classes",            "label": "Sealed classes",            "detect": "auto:sealed-classes" },
+        { "id": "generics",                  "label": "Generics",                  "detect": "auto:generics" },
+        { "id": "generic-types",             "label": "Generic types of my own",   "detect": ["auto:generic-types", "auto:generic-methods"] },
+        { "id": "delegates",                 "label": "Delegates",                 "detect": "auto:delegates" },
+        { "id": "events",                    "label": "Events",                    "detect": "auto:events" },
+        { "id": "indexers",                  "label": "Indexers",                  "detect": "auto:indexers" },
+        { "id": "operator-overloading",      "label": "Operator overloading",      "detect": "auto:operator-overloading" }
+      ]
+    },
+    {
+      "name": "Modern C#",
+      "concepts": [
+        { "id": "records",                  "label": "Records",                  "detect": "auto:records" },
+        { "id": "init-only-properties",     "label": "init-only properties",     "detect": "auto:init-only-properties" },
+        { "id": "required-members",         "label": "required members",         "detect": "auto:required-members" },
+        { "id": "pattern-matching",         "label": "Pattern matching",         "detect": "auto:pattern-matching" },
+        { "id": "switch-expressions",       "label": "switch expressions",       "detect": "auto:switch-expressions" },
+        { "id": "nullable-types",           "label": "Nullable reference types", "detect": "auto:nullable-types" },
+        { "id": "null-conditional",         "label": "?. and ?[]",               "detect": "auto:null-conditional-operators" },
+        { "id": "null-coalescing",          "label": "?? and ??=",               "detect": "auto:null-coalescing" },
+        { "id": "expression-bodied",        "label": "Expression-bodied members", "detect": "auto:expression-bodied-members" },
+        { "id": "top-level-statements",     "label": "Top-level statements",     "detect": "auto:top-level-statements" },
+        { "id": "file-scoped-namespaces",   "label": "File-scoped namespaces",   "detect": "auto:file-scoped-namespaces" },
+        { "id": "target-typed-new",         "label": "Target-typed new",         "detect": "auto:target-typed-new" },
+        { "id": "collection-expressions",   "label": "Collection expressions",   "detect": "auto:collection-expressions" },
+        { "id": "primary-constructors",     "label": "Primary constructors",     "detect": "auto:primary-constructors" },
+        { "id": "tuples",                   "label": "Tuples",                   "detect": "auto:tuples" },
+        { "id": "lambdas",                  "label": "Lambdas",                  "detect": "auto:lambdas" },
+        { "id": "object-initializers",      "label": "Object initializers",      "detect": "auto:object-initializers" }
+      ]
+    },
+    {
+      "name": "Collections & LINQ",
+      "concepts": [
+        { "id": "collections",        "label": "Generic collections",  "detect": "auto:collections" },
+        { "id": "linq",               "label": "LINQ",                 "detect": "auto:linq" },
+        { "id": "linq-method-syntax", "label": "LINQ method syntax",   "detect": "auto:linq-method-syntax" },
+        { "id": "linq-query-syntax",  "label": "LINQ query syntax",    "detect": "auto:linq-query-syntax" },
+        { "id": "extension-methods",  "label": "Extension methods",    "detect": "auto:extension-methods" },
+        { "id": "iterators-yield",    "label": "Iterators (yield)",    "detect": "auto:iterators-yield" }
+      ]
+    },
+    {
+      "name": "Errors, resources & async",
+      "concepts": [
+        { "id": "exception-handling",  "label": "try / catch",          "detect": "auto:exception-handling" },
+        { "id": "throwing-exceptions", "label": "Throwing exceptions",  "detect": "auto:throwing-exceptions" },
+        { "id": "custom-exceptions",   "label": "Custom exceptions",    "detect": "auto:custom-exceptions" },
+        { "id": "exception-filters",   "label": "Exception filters",    "detect": "auto:exception-filters" },
+        { "id": "try-finally",         "label": "finally blocks",       "detect": "auto:try-finally" },
+        { "id": "using-idisposable",   "label": "using / IDisposable",  "detect": "auto:using-idisposable" },
+        { "id": "custom-attributes",   "label": "Custom attributes",    "detect": "auto:custom-attributes" },
+        { "id": "logging",             "label": "Logging",              "detect": ["regex:\\bILogger\\b", "regex:class\\s+Logger\\b"] },
+        { "id": "async-await",         "label": "async / await",        "detect": "auto:async-await" },
+        { "id": "task-based-async",    "label": "Task / ValueTask",     "detect": "auto:task-based-async" }
+      ]
+    },
+    {
+      "name": "Data access",
+      "concepts": [
+        { "id": "ado-net",            "label": "ADO.NET",             "detect": "auto:ado-net",            "notes": "raw SqlConnection / SqlDataReader" },
+        { "id": "sql-scripts",        "label": "Hand-written SQL",    "detect": "path:.sql" },
+        { "id": "repository-pattern", "label": "Repository pattern",  "detect": "auto:repository-pattern" },
+        { "id": "factory-pattern",    "label": "Factory pattern",     "detect": "auto:factory-pattern" },
+        { "id": "service-layer",      "label": "Service layer",       "detect": "auto:service-layer" },
+        { "id": "ef-core",            "label": "EF Core",             "detect": ["regex:\\bDbContext\\b", "regex:Microsoft\\.EntityFrameworkCore"], "notes": "next up" },
+        { "id": "migrations",         "label": "EF migrations",       "detect": "manual",                  "notes": "roadmap" }
+      ]
+    },
+    {
+      "name": "ASP.NET Core",
+      "concepts": [
+        { "id": "dependency-injection", "label": "Dependency injection",  "detect": "auto:dependency-injection" },
+        { "id": "middleware-pipeline",  "label": "Middleware pipeline",   "detect": "auto:middleware-pipeline" },
+        { "id": "mvc-controllers",      "label": "MVC controllers",       "detect": "auto:mvc-controllers" },
+        { "id": "mvc-routing",          "label": "MVC routing",           "detect": "auto:mvc-routing" },
+        { "id": "razor-views",          "label": "Razor views",           "detect": "auto:razor-views" },
+        { "id": "static-files",         "label": "Static files",          "detect": "auto:static-files" },
+        { "id": "minimal-apis",         "label": "Minimal APIs",          "detect": "auto:minimal-apis" },
+        { "id": "openapi",              "label": "OpenAPI / Swagger",     "detect": ["regex:AddOpenApi", "regex:MapOpenApi", "regex:Swagger"] },
+        { "id": "configuration",        "label": "Configuration binding", "detect": ["regex:GetConnectionString", "regex:builder\\.Configuration"] },
+        { "id": "auth",                 "label": "Authentication",        "detect": "manual",               "notes": "roadmap" }
+      ]
+    },
+    {
+      "name": "Tooling & practice",
+      "concepts": [
+        { "id": "solution-structure", "label": "Multi-project solution", "detect": "path:.slnx" },
+        { "id": "ci",                 "label": "CI with GitHub Actions", "detect": "path:.github/workflows" },
+        { "id": "unit-tests",         "label": "Unit tests",             "detect": "auto:unit-tests",      "notes": "roadmap" },
+        { "id": "docker",             "label": "Docker",                 "detect": "path:Dockerfile",      "notes": "roadmap" },
+        { "id": "deployment",         "label": "Deployment",             "detect": "manual",               "notes": "roadmap" }
+      ]
+    }
+  ]
+}
