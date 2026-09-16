@@ -5,11 +5,11 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-53_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-798-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-15-555555)
+![concepts](https://img.shields.io/badge/concepts-53_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-798-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-16-555555)
 
 **Progress** `█████████████░░░░░░░` **65%**
 
-Started 2026-08-08 · last commit 2026-08-25 · 5 active days
+Started 2026-08-08 · last commit 2026-09-16 · 6 active days
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
 
@@ -246,7 +246,7 @@ classDiagram
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
@@ -282,7 +282,7 @@ classDiagram
 
 </details>
 
-<sub>Last updated 2026-09-16 16:30 UTC</sub>
+<sub>Last updated 2026-09-16 16:34 UTC</sub>
 
 <!-- JOURNEY:END -->
 
