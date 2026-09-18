@@ -191,16 +191,8 @@ reassigns it to me automatically, so the split cannot drift from the code.
 Going forward this is automatic: any commit whose message carries an AI trailer
 (`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.
 
-The tooling that builds this page is a further 1994 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
-page template. It is kept out of the figures above rather than averaged into them,
-since it generates the page and is not part of the application.
-
-| Tooling | Mine | AI | Share written by AI |
-|---|---:|---:|---|
-| `tools` | 0 | 1994 | `████████████████████` 100% |
-
-9 commits are counted as something other than my own hand (8 AI, 1 scaffold). The full list, with a link to each commit, is on the
-dashboard under **How this is measured**.
+The AI-written tooling totals and the commit-by-commit audit trail, with a link to
+each declared commit, are on the dashboard under **How this is measured**.
 
 </details>
 
@@ -618,7 +610,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-18 13:47 UTC</sub>
+<sub>Last updated 2026-09-18 13:52 UTC</sub>
 
 <!-- JOURNEY:END -->
 

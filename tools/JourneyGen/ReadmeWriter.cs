@@ -214,7 +214,6 @@ public static class ReadmeWriter
     static void AppendProvenance(StringBuilder sb, Provenance prov)
     {
         var app = prov.App;
-        var tooling = prov.Tooling;
 
         sb.AppendLine("### Who wrote this code");
         sb.AppendLine();
@@ -245,28 +244,13 @@ public static class ReadmeWriter
         sb.AppendLine("Going forward this is automatic: any commit whose message carries an AI trailer");
         sb.AppendLine("(`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.");
         sb.AppendLine();
-        if (tooling.Total > 0)
-        {
-            sb.AppendLine($"The tooling that builds this page is a further {tooling.Total} lines, " +
-                          $"**{tooling.AiPercent}% AI-written** — `tools/JourneyGen`, the generator and its");
-            sb.AppendLine("page template. It is kept out of the figures above rather than averaged into them,");
-            sb.AppendLine("since it generates the page and is not part of the application.");
-            sb.AppendLine();
-            sb.AppendLine("| Tooling | Mine | AI | Share written by AI |");
-            sb.AppendLine("|---|---:|---:|---|");
-            foreach (var p in prov.Projects.Where(p => p.IsTooling))
-                sb.AppendLine($"| `{p.Project}` | {p.You} | {p.Ai} | `{Bar(p.AiPercent)}` {p.AiPercent}% |");
-            sb.AppendLine();
-        }
-
-        // The commit-level audit trail lives on the dashboard only. Listing shas here
-        // would put commit identity back into the committed block: an AI-declared
-        // commit adds its own row, so committing the block would make it stale again.
-        var ai = prov.Declared.Count(d => d.Source == Provenance.Source.Ai);
-        var scaffold = prov.Declared.Count - ai;
-        sb.AppendLine($"{prov.Declared.Count} commits are counted as something other than my own hand " +
-                      $"({ai} AI, {scaffold} scaffold). The full list, with a link to each commit, is on the");
-        sb.AppendLine("dashboard under **How this is measured**.");
+        // Nothing derived from commit identity may appear in this block. `git blame`
+        // attributes an uncommitted line to the zero sha, which defaults to "mine"; when
+        // an AI-trailered commit lands, those lines move to the AI bucket. So the AI
+        // tooling totals and the commit-level audit trail live on the dashboard only,
+        // which is regenerated on every deploy and never committed.
+        sb.AppendLine("The AI-written tooling totals and the commit-by-commit audit trail, with a link to");
+        sb.AppendLine("each declared commit, are on the dashboard under **How this is measured**.");
         sb.AppendLine();
         sb.AppendLine("</details>");
         sb.AppendLine();
