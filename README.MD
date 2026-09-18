@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-54_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-809-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-21-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-53_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-798-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-22-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `█████████████░░░░░░░` **66%**
+**Progress** `█████████████░░░░░░░` **65%**
 
 Started 2026-08-08 · last commit 2026-09-18 · 7 active days
 
@@ -147,20 +147,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 29 | 692 | 30 |
-| `Ecom.MvcWebApp` | 3 | 75 | 2 |
+| `Ecom.MvcWebApp` | 3 | 64 | 2 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 643 of the 643 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 634 of the 634 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
-| `Ecom.MvcWebApp` | 9 | 0 | 46 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 0 | 0 | 46 | — _template output only_ |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **643** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **634** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -185,6 +185,7 @@ Commits counted as anything other than my own hand:
 
 | Commit | Counted as | Subject |
 |---|---|---|
+| `3936d71` | AI | Move the tooling disclosure into the audit fold |
 | `5fc21eb` | AI | Add code provenance tracking to the journey page |
 | `00e0f1f` | AI | Add JourneyGen tool for analyzing C# source and git history |
 | `d56cc61` | scaffold | Add initial setup for Ecom.WebApiApp including project file, HT… |
@@ -250,7 +251,7 @@ Commits counted as anything other than my own hand:
 - [ ] Collection expressions
 - [ ] Primary constructors
 - [ ] Tuples
-- [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 - [x] **Object initializers** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 
 </details>
@@ -268,7 +269,7 @@ Commits counted as anything other than my own hand:
 </details>
 
 <details open>
-<summary><b>Errors, resources & async</b> — 7/10</summary>
+<summary><b>Errors, resources & async</b> — 6/10</summary>
 
 - [x] **try / catch** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
@@ -278,7 +279,7 @@ Commits counted as anything other than my own hand:
 - [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +1</sub>
 - [x] **Custom attributes** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
 - [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
-- [x] **async / await** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
+- [ ] async / await
 - [ ] Task / ValueTask
 
 </details>
@@ -287,7 +288,7 @@ Commits counted as anything other than my own hand:
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
@@ -323,7 +324,7 @@ Commits counted as anything other than my own hand:
 
 </details>
 
-<sub>Last updated 2026-09-18 09:04 UTC</sub>
+<sub>Last updated 2026-09-18 09:06 UTC</sub>
 
 <!-- JOURNEY:END -->
 
