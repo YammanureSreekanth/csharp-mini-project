@@ -298,8 +298,7 @@ public sealed class JourneyConfig
                     foreach (var f in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
                     {
                         var rel = Path.GetRelativePath(root, f).Replace('\\', '/');
-                        if (rel.StartsWith(".git/", StringComparison.Ordinal) ||
-                            rel.Contains("/obj/") || rel.Contains("/bin/")) continue;
+                        if (IsExcluded(rel)) continue;
                         if (rel.Contains(arg, StringComparison.OrdinalIgnoreCase)) { matched = true; evidence.Add(rel); }
                     }
                     break;
@@ -308,6 +307,19 @@ public sealed class JourneyConfig
 
         return (matched, evidence.Distinct(StringComparer.Ordinal).Take(6).ToList());
     }
+
+    /// <summary>
+    /// Paths no detector may look at. `artifacts/` matters most: it is this tool's own
+    /// output directory, so leaving it in made results depend on whether the generator
+    /// had been run before — the same commit produced different output on a machine
+    /// with a previous build than on a fresh CI checkout.
+    /// </summary>
+    static bool IsExcluded(string rel) =>
+        rel.StartsWith(".git/", StringComparison.Ordinal) ||
+        rel.StartsWith("artifacts/", StringComparison.OrdinalIgnoreCase) ||
+        rel.Contains("/bin/", StringComparison.Ordinal) ||
+        rel.Contains("/obj/", StringComparison.Ordinal) ||
+        rel.Contains("wwwroot/lib/", StringComparison.Ordinal);
 
     static readonly string[] TextExtensions =
     [
@@ -330,11 +342,7 @@ public sealed class JourneyConfig
             foreach (var full in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
             {
                 var rel = Path.GetRelativePath(root, full).Replace('\\', '/');
-                if (rel.StartsWith(".git/", StringComparison.Ordinal) ||
-                    rel.Contains("/bin/", StringComparison.Ordinal) ||
-                    rel.Contains("/obj/", StringComparison.Ordinal) ||
-                    rel.Contains("wwwroot/lib/", StringComparison.Ordinal) ||
-                    rel.StartsWith("artifacts/", StringComparison.Ordinal)) continue;
+                if (IsExcluded(rel)) continue;
 
                 // Never let the search find the thing that describes the search.
                 // journey.json holds every detector pattern, the generated README

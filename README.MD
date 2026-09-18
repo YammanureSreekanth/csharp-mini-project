@@ -5,17 +5,16 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![commits](https://img.shields.io/badge/commits-33-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████░░░░░░░░` **62%**
 
-Started 2026-08-08 · last commit 2026-09-18 · 7 active days
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
 
 ### Learning plan from my manager
 
-Set by my manager · assigned 2026-08-25 · next review **2026-09-22** (in 4 days)
+Set by my manager · assigned 2026-08-25 · next review **2026-09-22**
 
 `█████████░░░░░░░░░░░` **3 of 7 complete** · 4 in progress
 
@@ -192,25 +191,16 @@ reassigns it to me automatically, so the split cannot drift from the code.
 Going forward this is automatic: any commit whose message carries an AI trailer
 (`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.
 
-The tooling that builds this page is a further 1961 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
+The tooling that builds this page is a further 1969 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
 page template. It is kept out of the figures above rather than averaged into them,
 since it generates the page and is not part of the application.
 
 | Tooling | Mine | AI | Share written by AI |
 |---|---:|---:|---|
-| `tools` | 0 | 1961 | `████████████████████` 100% |
+| `tools` | 0 | 1969 | `████████████████████` 100% |
 
-Commits counted as anything other than my own hand:
-
-| Commit | Counted as | Subject |
-|---|---|---|
-| `04c9fd6` | AI | Prompt when the code overtakes a declared status |
-| `a4fa1d6` | AI | Add the full role roadmap: 13 areas, 162 topics |
-| `cdb7019` | AI | Add the manager's learning plan as a tracked section |
-| `3936d71` | AI | Move the tooling disclosure into the audit fold |
-| `5fc21eb` | AI | Add code provenance tracking to the journey page |
-| `00e0f1f` | AI | Add JourneyGen tool for analyzing C# source and git history |
-| `d56cc61` | scaffold | Add initial setup for Ecom.WebApiApp including project file, HT… |
+8 commits are counted as something other than my own hand (7 AI, 1 scaffold). The full list, with a link to each commit, is on the
+dashboard under **How this is measured**.
 
 </details>
 
@@ -362,7 +352,7 @@ _Shared by my manager._
 <summary><b>Databases and data modeling</b> — 3/11 · <sub>Relational and NoSQL thinking.</sub></summary>
 
 - [x] **SQL Server basics** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +3</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +3</sub>
 - [ ] Entity Framework Core
 - [ ] Migrations
 - [x] **Indexing** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +1</sub>
@@ -580,7 +570,7 @@ _Shared by my manager._
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
@@ -628,7 +618,7 @@ _Shared by my manager._
 
 </details>
 
-<sub>Last updated 2026-09-18 13:35 UTC</sub>
+<sub>Last updated 2026-09-18 13:41 UTC</sub>
 
 <!-- JOURNEY:END -->
 

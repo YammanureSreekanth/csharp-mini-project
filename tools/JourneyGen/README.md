@@ -8,6 +8,42 @@ Reads this repository's own C# source and git history, then regenerates:
 It parses with Roslyn (syntax only, no compilation), so it runs in seconds and
 never needs the projects to build.
 
+## The commit hook (enable once per clone)
+
+`.githooks/pre-commit` regenerates the README block and stages it, so what you
+commit always matches the code and CI only has to verify it. Enable it with:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+That setting is local, so it needs running once per clone. Without it nothing
+breaks immediately — but a push with a stale block fails the `--check` step in
+CI rather than being silently fixed.
+
+The hook stands down during a rebase, merge or cherry-pick, skips when `dotnet`
+is missing, and never blocks a commit if regeneration fails.
+
+**CI does not commit anything.** It verifies with `--check` and deploys the
+dashboard. That is deliberate: committing the README from CI produced a bot
+commit after every push and left every local branch divergent.
+
+### Keeping the block stable
+
+The README block must be a pure function of the code, or committing it makes it
+stale and the cycle starts again. Anything that changes when a commit lands is
+therefore kept on the dashboard only:
+
+| Not in the README | Why |
+|---|---|
+| commit count, first/last commit, active days | change when the README commit itself lands |
+| review countdown | changes with the calendar, not the code |
+| the commit-level provenance audit list | an AI-declared commit would add its own row |
+
+For the same reason `artifacts/` is excluded from every detector: it is this
+tool's own output, and including it made results differ between a machine with a
+previous build and a fresh CI checkout.
+
 ## Run it locally
 
 ```bash

@@ -29,8 +29,10 @@ public static class ReadmeWriter
         sb.Append(Badge("concepts", $"{done} of {total}", "512BD4")).Append(' ');
         sb.Append(Badge("C# files", analyzer.SourceFiles.Count.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
         sb.Append(Badge("lines", analyzer.TotalLines.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
-        sb.Append(Badge("types", analyzer.Types.Count.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
-        sb.Append(Badge("commits", git.TotalCommits.ToString(CultureInfo.InvariantCulture), "555555"));
+        sb.Append(Badge("types", analyzer.Types.Count.ToString(CultureInfo.InvariantCulture), "0078D4"));
+        // No commit count here on purpose: committing this block would change it, which
+        // makes the block stale the instant it lands. Commit stats live on the dashboard,
+        // which is regenerated on every deploy and never committed.
         if (prov.Available)
             sb.Append(' ').Append(Badge("app code by me", prov.App.YouPercent + "%", "1BAF7A"));
         sb.AppendLine();
@@ -38,8 +40,6 @@ public static class ReadmeWriter
 
         sb.AppendLine($"**Progress** `{Bar(pct)}` **{pct}%**");
         sb.AppendLine();
-        if (git.TotalCommits > 0)
-            sb.AppendLine($"Started {git.FirstCommit} · last commit {git.LastCommit} · {git.ActiveDays} active days");
         if (siteUrl is { Length: > 0 })
         {
             sb.AppendLine();
@@ -152,10 +152,9 @@ public static class ReadmeWriter
         if (a.AssignedOn.Length > 0) meta.Add($"assigned {a.AssignedOn}");
         if (a.ReviewOn.Length > 0)
         {
-            var days = a.DaysToReview;
-            meta.Add(days is null
-                ? $"next review {a.ReviewOn}"
-                : $"next review **{a.ReviewOn}** ({(days == 0 ? "today" : days == 1 ? "in 1 day" : $"in {days} days")})");
+            // The countdown belongs on the dashboard only: it moves every day, and a
+            // README that changes daily means a commit every day.
+            meta.Add($"next review **{a.ReviewOn}**");
         }
         if (meta.Count > 0) { sb.AppendLine(string.Join(" · ", meta)); sb.AppendLine(); }
 
@@ -260,12 +259,14 @@ public static class ReadmeWriter
             sb.AppendLine();
         }
 
-        sb.AppendLine("Commits counted as anything other than my own hand:");
-        sb.AppendLine();
-        sb.AppendLine("| Commit | Counted as | Subject |");
-        sb.AppendLine("|---|---|---|");
-        foreach (var (sha, subject, source) in prov.Declared.Take(20))
-            sb.AppendLine($"| `{sha}` | {(source == Provenance.Source.Ai ? "AI" : "scaffold")} | {Escape(Trim(subject, 64))} |");
+        // The commit-level audit trail lives on the dashboard only. Listing shas here
+        // would put commit identity back into the committed block: an AI-declared
+        // commit adds its own row, so committing the block would make it stale again.
+        var ai = prov.Declared.Count(d => d.Source == Provenance.Source.Ai);
+        var scaffold = prov.Declared.Count - ai;
+        sb.AppendLine($"{prov.Declared.Count} commits are counted as something other than my own hand " +
+                      $"({ai} AI, {scaffold} scaffold). The full list, with a link to each commit, is on the");
+        sb.AppendLine("dashboard under **How this is measured**.");
         sb.AppendLine();
         sb.AppendLine("</details>");
         sb.AppendLine();

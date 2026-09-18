@@ -1,0 +1,50 @@
+#!/bin/sh
+# Keep the generated JOURNEY block in README.MD current at commit time.
+#
+# Why this exists: CI used to regenerate the README and commit it back, which
+# produced a bot commit after every push and left you divergent from origin on
+# every single one. Generating here instead means the committed README already
+# matches the code, CI only has to verify it, and nothing commits behind you.
+#
+# Enable with:  git config core.hooksPath .githooks
+
+set -e
+
+# Never interfere with a rebase, merge or cherry-pick — regenerating mid-conflict
+# would fight whatever resolution is in progress.
+git_dir=$(git rev-parse --git-dir)
+for state in rebase-merge rebase-apply MERGE_HEAD CHERRY_PICK_HEAD; do
+    if [ -e "$git_dir/$state" ]; then
+        echo "journeygen: $state in progress, skipping regeneration"
+        exit 0
+    fi
+done
+
+if ! command -v dotnet >/dev/null 2>&1; then
+    echo "journeygen: dotnet not found, skipping (CI will flag a stale README)"
+    exit 0
+fi
+
+root=$(git rev-parse --show-toplevel)
+
+# Run the compiled tool when it is already built — about 1.5s instead of 2.2s —
+# and fall back to `dotnet run` otherwise.
+dll="$root/tools/JourneyGen/bin/Debug/net10.0/JourneyGen.dll"
+if [ -f "$dll" ]; then
+    dotnet "$dll" --root "$root" >/dev/null 2>&1 || regen_failed=1
+else
+    dotnet run --project "$root/tools/JourneyGen" -- --root "$root" >/dev/null 2>&1 || regen_failed=1
+fi
+
+if [ -n "$regen_failed" ]; then
+    echo "journeygen: regeneration failed, committing without refreshing the README"
+    exit 0
+fi
+
+# Only stage it if it actually changed, so the hook is invisible most of the time.
+if ! git diff --quiet -- "$root/README.MD"; then
+    git add "$root/README.MD"
+    echo "journeygen: refreshed and staged README.MD"
+fi
+
+exit 0

@@ -5,10 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# contents: write  -> commit the regenerated README block
+# contents: read   -> nothing is committed back any more; the pre-commit hook
+#                     keeps README.MD current, and this job only verifies it
 # pages / id-token -> publish the dashboard to GitHub Pages
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -33,27 +34,14 @@ jobs:
       - name: Build the solution
         run: dotnet build csharp-ecom-mini-app.slnx --configuration Release
 
-      - name: Is the README block stale?
-        id: stale
-        run: |
-          if dotnet run --project tools/JourneyGen --configuration Release -- --root . --check; then
-            echo "stale=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "stale=true" >> "$GITHUB_OUTPUT"
-          fi
+      # CI verifies, it does not write. The .githooks/pre-commit hook keeps the
+      # README current locally; committing it from here produced a bot commit after
+      # every push, which left every local branch divergent.
+      - name: Verify the README block is current
+        run: dotnet run --project tools/JourneyGen --configuration Release -- --root . --check
 
-      - name: Generate the journey page
+      - name: Generate the dashboard
         run: dotnet run --project tools/JourneyGen --configuration Release -- --root .
-
-      - name: Commit the refreshed README
-        if: steps.stale.outputs.stale == 'true'
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.MD
-          # [skip ci] keeps this commit from triggering the workflow again.
-          git diff --cached --quiet || git commit -m "docs: refresh .NET journey page [skip ci]"
-          git push
 
       # Requires a one-time repo setting: Settings -> Pages -> Source = "GitHub Actions".
       # Without it this step fails with "Get Pages site failed".
