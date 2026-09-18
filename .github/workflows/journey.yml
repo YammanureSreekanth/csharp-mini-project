@@ -21,12 +21,12 @@ jobs:
     name: Build and generate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # JourneyGen reads `git log`, so it needs the whole history, not a shallow clone.
           fetch-depth: 0
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
 
@@ -55,11 +55,15 @@ jobs:
           git diff --cached --quiet || git commit -m "docs: refresh .NET journey page [skip ci]"
           git push
 
-      - uses: actions/configure-pages@v5
+      # Requires a one-time repo setting: Settings -> Pages -> Source = "GitHub Actions".
+      # Without it this step fails with "Get Pages site failed".
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: artifacts/site
+          # Dotfiles are excluded by default, which would drop .nojekyll.
+          include-hidden-files: true
 
   deploy:
     name: Deploy to Pages
@@ -70,4 +74,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
