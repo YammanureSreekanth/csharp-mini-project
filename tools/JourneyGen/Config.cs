@@ -17,6 +17,7 @@ public sealed class JourneyConfig
     public DiagramOptions Diagram = new();
     public ProvenanceConfig Provenance = new();
     public Assignment Assignment = new();
+    public Roadmap Roadmap = new();
     public List<Concept> Concepts = new();
 
     static readonly JsonDocumentOptions ReadOpts = new()
@@ -77,6 +78,7 @@ public sealed class JourneyConfig
                     {
                         Label = it.TryGetProperty("label", out var il) ? il.GetString() ?? "" : "",
                         Status = it.TryGetProperty("status", out var ist) ? (ist.GetString() ?? "not-started") : "not-started",
+                        StatusDeclared = it.TryGetProperty("status", out _),
                         Notes = it.TryGetProperty("notes", out var inn) ? inn.GetString() ?? "" : "",
                     };
                     item.Detectors.AddRange(ReadDetectors(it));
@@ -95,6 +97,30 @@ public sealed class JourneyConfig
                     }
 
                     a.Items.Add(item);
+                }
+            }
+        }
+
+        if (root.TryGetProperty("roadmap", out var rm))
+        {
+            var r = cfg.Roadmap;
+            if (rm.TryGetProperty("title", out var rt)) r.Title = rt.GetString() ?? r.Title;
+            if (rm.TryGetProperty("source", out var rs)) r.Source = rs.GetString() ?? "";
+            if (rm.TryGetProperty("note", out var rn)) r.Note = rn.GetString() ?? "";
+
+            if (rm.TryGetProperty("areas", out var rAreas) && rAreas.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var ra in rAreas.EnumerateArray())
+                {
+                    var area = new RoadmapArea
+                    {
+                        Name = ra.TryGetProperty("name", out var rnm) ? rnm.GetString() ?? "" : "",
+                        Summary = ra.TryGetProperty("summary", out var rsm) ? rsm.GetString() ?? "" : "",
+                    };
+                    if (ra.TryGetProperty("items", out var rItems) && rItems.ValueKind == JsonValueKind.Array)
+                        foreach (var ri in rItems.EnumerateArray())
+                            area.Items.Add(ReadItem(ri));
+                    r.Areas.Add(area);
                 }
             }
         }
@@ -123,6 +149,32 @@ public sealed class JourneyConfig
         }
 
         return cfg;
+    }
+
+    static AssignmentItem ReadItem(JsonElement it)
+    {
+        var item = new AssignmentItem
+        {
+            Label = it.TryGetProperty("label", out var il) ? il.GetString() ?? "" : "",
+            Status = it.TryGetProperty("status", out var ist) ? (ist.GetString() ?? "not-started") : "not-started",
+            StatusDeclared = it.TryGetProperty("status", out _),
+            Notes = it.TryGetProperty("notes", out var inn) ? inn.GetString() ?? "" : "",
+        };
+        item.Detectors.AddRange(ReadDetectors(it));
+
+        if (it.TryGetProperty("parts", out var parts) && parts.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var pt in parts.EnumerateArray())
+            {
+                var part = new AssignmentPart
+                {
+                    Label = pt.TryGetProperty("label", out var pl) ? pl.GetString() ?? "" : "",
+                };
+                part.Detectors.AddRange(ReadDetectors(pt));
+                item.Parts.Add(part);
+            }
+        }
+        return item;
     }
 
     static void ReadStrings(JsonElement parent, string name, List<string> into)
@@ -194,6 +246,13 @@ public sealed class JourneyConfig
 
             item.Evidence = item.Evidence.Take(6).ToList();
         }
+
+        foreach (var item in Roadmap.Areas.SelectMany(a => a.Items))
+        {
+            var (matched, evidence) = RunDetectors(item.Detectors, analyzer, root, fileText);
+            item.Detected = matched;
+            item.Evidence = evidence.Take(4).ToList();
+        }
     }
 
     /// <summary>
@@ -227,6 +286,12 @@ public sealed class JourneyConfig
                         if (rx.IsMatch(text)) { matched = true; evidence.Add(file); }
                     break;
 
+                case "grep":
+                    var grx = new Regex(arg, RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    foreach (var (rel, text) in AllTextFiles(root).Value)
+                        if (grx.IsMatch(text)) { matched = true; evidence.Add(rel); }
+                    break;
+
                 case "path":
                     foreach (var f in analyzer.SourceFiles)
                         if (f.Contains(arg, StringComparison.OrdinalIgnoreCase)) { matched = true; evidence.Add(f); }
@@ -243,6 +308,58 @@ public sealed class JourneyConfig
 
         return (matched, evidence.Distinct(StringComparer.Ordinal).Take(6).ToList());
     }
+
+    static readonly string[] TextExtensions =
+    [
+        ".cs", ".csproj", ".slnx", ".sln", ".json", ".yml", ".yaml", ".bicep", ".tf",
+        ".sql", ".cshtml", ".razor", ".props", ".targets", ".config", ".xml",
+        ".http", ".ps1", ".sh", ".dockerfile",
+    ];
+
+    static Lazy<Dictionary<string, string>>? _allText;
+
+    /// <summary>
+    /// Every text file in the repo, read once. `grep:` needs this because a lot of
+    /// what a roadmap asks about lives outside .cs — a PackageReference, a bicep
+    /// template, a workflow step, a connection string.
+    /// </summary>
+    static Lazy<Dictionary<string, string>> AllTextFiles(string root) =>
+        _allText ??= new Lazy<Dictionary<string, string>>(() =>
+        {
+            var map = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (var full in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
+            {
+                var rel = Path.GetRelativePath(root, full).Replace('\\', '/');
+                if (rel.StartsWith(".git/", StringComparison.Ordinal) ||
+                    rel.Contains("/bin/", StringComparison.Ordinal) ||
+                    rel.Contains("/obj/", StringComparison.Ordinal) ||
+                    rel.Contains("wwwroot/lib/", StringComparison.Ordinal) ||
+                    rel.StartsWith("artifacts/", StringComparison.Ordinal)) continue;
+
+                // Never let the search find the thing that describes the search.
+                // journey.json holds every detector pattern, the generated README
+                // echoes every label back, and tools/ mentions half of .NET by name —
+                // searching any of them makes every detector prove itself.
+                if (rel.Equals("journey.json", StringComparison.OrdinalIgnoreCase) ||
+                    rel.StartsWith("tools/", StringComparison.OrdinalIgnoreCase) ||
+                    rel.EndsWith(".md", StringComparison.OrdinalIgnoreCase) ||
+                    rel.EndsWith(".MD", StringComparison.Ordinal)) continue;
+
+                var ext = Path.GetExtension(rel);
+                var named = Path.GetFileName(rel);
+                if (ext.Length > 0 && !TextExtensions.Contains(ext, StringComparer.OrdinalIgnoreCase)
+                    && !named.Equals("Dockerfile", StringComparison.OrdinalIgnoreCase)) continue;
+
+                try
+                {
+                    var info = new FileInfo(full);
+                    if (info.Length > 2_000_000) continue;   // don't slurp anything huge
+                    map[rel] = File.ReadAllText(full);
+                }
+                catch { /* unreadable file is simply not evidence */ }
+            }
+            return map;
+        });
 
     static (string scheme, string arg) Split(string detector)
     {

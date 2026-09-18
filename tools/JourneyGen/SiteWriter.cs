@@ -39,6 +39,31 @@ public static class SiteWriter
         {
             title = cfg.Title,
             repoUrl,
+            roadmap = cfg.Roadmap.Areas.Count == 0 ? null : new
+            {
+                title = cfg.Roadmap.Title,
+                source = cfg.Roadmap.Source,
+                note = cfg.Roadmap.Note,
+                done = cfg.Roadmap.Done,
+                total = cfg.Roadmap.Total,
+                percent = cfg.Roadmap.Percent,
+                areas = cfg.Roadmap.Areas.Select(a => new
+                {
+                    name = a.Name,
+                    summary = a.Summary,
+                    done = a.Done,
+                    total = a.Items.Count,
+                    percent = a.Percent,
+                    items = a.Items.Select(i => new
+                    {
+                        label = i.Label,
+                        status = i.EffectiveStatus,
+                        notes = i.Notes,
+                        detectable = i.CodeDetectable,
+                        evidence = i.Evidence,
+                    }),
+                }),
+            },
             assignment = cfg.Assignment.Items.Count == 0 ? null : new
             {
                 title = cfg.Assignment.Title,

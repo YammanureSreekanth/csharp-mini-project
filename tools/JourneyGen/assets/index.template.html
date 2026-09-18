@@ -158,6 +158,18 @@
   .note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; }
   .note code { font-size: 12px; }
 
+  /* ---- roadmap ---- */
+  .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px; }
+  .roadmap .card { display: flex; flex-direction: column; }
+  .roadmap h3 { margin: 0 0 3px; font-size: 14.5px; font-weight: 600; }
+  .roadmap .sum { margin: 0; font-size: 12.5px; color: var(--ink-muted); }
+  .roadmap .frac { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .roadmap details { margin-top: 4px; }
+  .roadmap summary { cursor: pointer; font-size: 12.5px; color: var(--ink-2); padding: 4px 0; }
+  .topline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; margin-bottom: 14px; }
+  .topline .big { font-size: 30px; font-weight: 650; letter-spacing: -0.03em; }
+  .topline .of { font-size: 13px; color: var(--ink-2); }
+
   /* ---- concepts ---- */
   .areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; margin-bottom: 16px; }
   .bar { height: 6px; border-radius: 999px; background: var(--grid); overflow: hidden; margin: 10px 0 14px; }
@@ -307,6 +319,19 @@
       </details>
     </div>
   </div>
+
+  <h2 class="section" id="roadHeading" hidden>Roadmap</h2>
+  <section class="card" id="roadSummary" hidden style="margin-bottom:16px">
+    <h2 id="roadTitle">Roadmap</h2>
+    <p class="sub" id="roadSource"></p>
+    <div class="topline">
+      <span class="big" id="roadBig">—</span>
+      <span class="of" id="roadOf"></span>
+    </div>
+    <div class="bar"><i id="roadBar" style="width:0%"></i></div>
+    <p class="note" id="roadNote" hidden></p>
+  </section>
+  <div class="roadmap" id="roadAreas" hidden></div>
 
   <h2 class="section">Concepts</h2>
   <div class="areas" id="areas"></div>
@@ -485,6 +510,47 @@
     }
     document.getElementById("provAuditBody").innerHTML = method;
 
+  }
+
+  /* ---------- roadmap ---------- */
+  var R = D.roadmap;
+  if (R && R.areas && R.areas.length) {
+    document.getElementById("roadHeading").hidden = false;
+    document.getElementById("roadSummary").hidden = false;
+    document.getElementById("roadAreas").hidden = false;
+    document.getElementById("roadTitle").textContent = R.title;
+    document.getElementById("roadSource").textContent = R.source || "";
+    document.getElementById("roadBig").textContent = R.percent + "%";
+    document.getElementById("roadOf").textContent =
+      R.done + " of " + R.total + " topics, across " + R.areas.length + " areas";
+    document.getElementById("roadBar").style.width = R.percent + "%";
+    if (R.note) {
+      var rn = document.getElementById("roadNote");
+      rn.textContent = R.note;
+      rn.hidden = false;
+    }
+
+    document.getElementById("roadAreas").innerHTML = R.areas.map(function (a) {
+      var chips = a.items.map(function (i) {
+        var done = i.status === "done";
+        var wip = i.status === "in-progress";
+        var cls = done ? "chip done" : "chip todo";
+        var mark = done ? "\u2713" : wip ? "\u25D0" : "\u25CB";
+        var tip = done && i.evidence.length ? i.evidence.join(", ")
+                : !i.detectable ? "judgement topic \u2014 no detector can prove this"
+                : (i.notes || "");
+        return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +
+               "</i>" + esc(i.label) + "</span>";
+      }).join("");
+
+      return '<div class="card">' +
+        "<h3>" + esc(a.name) + "</h3>" +
+        '<p class="sum">' + esc(a.summary || "") + "</p>" +
+        '<div class="bar" style="margin:10px 0 8px"><i style="width:' + a.percent + '%"></i></div>' +
+        '<span class="frac">' + a.done + " of " + a.total + " \u00b7 " + a.percent + "%</span>" +
+        "<details><summary>Show topics</summary><div class=\"chips\" style=\"margin-top:8px\">" +
+        chips + "</div></details></div>";
+    }).join("");
   }
 
   /* ---------- concept areas ---------- */

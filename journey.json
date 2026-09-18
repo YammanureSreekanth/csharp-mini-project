@@ -21,6 +21,780 @@
   // not infer it. The detectors are separate: they look for evidence in the code and
   // the page shows both, so a "done" with nothing behind it is visible rather than
   // hidden. Replace `items` after each review and bump the two dates.
+  // The full curriculum for the senior backend role, shared by my manager.
+  // Status is inferred from the code unless an item declares one explicitly.
+  // "detect": "manual" marks judgement topics that no detector can prove.
+  "roadmap": {
+      "title": "Senior backend engineer: what the role needs",
+      "source": "Shared by my manager",
+      "note": "The long-range curriculum. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.",
+      "areas": [
+        {
+          "name": "C# and modern .NET depth",
+          "summary": "Strong enough that C# feels natural.",
+          "items": [
+            {
+              "label": "Classes and interfaces",
+              "detect": [
+                "auto:classes",
+                "auto:interfaces"
+              ]
+            },
+            {
+              "label": "Records",
+              "detect": "auto:records"
+            },
+            {
+              "label": "Generics",
+              "detect": "auto:generics"
+            },
+            {
+              "label": "Delegates and events",
+              "detect": [
+                "auto:delegates",
+                "auto:events"
+              ]
+            },
+            {
+              "label": "LINQ",
+              "detect": "auto:linq"
+            },
+            {
+              "label": "async / await / Task",
+              "detect": [
+                "auto:async-await",
+                "auto:task-based-async"
+              ]
+            },
+            {
+              "label": "Cancellation tokens",
+              "detect": "grep:CancellationToken"
+            },
+            {
+              "label": "Parallelism",
+              "detect": "grep:Task\\.WhenAll|Parallel\\.(For|ForEach|Invoke)"
+            },
+            {
+              "label": "Dependency injection",
+              "detect": "grep:Add(Scoped|Singleton|Transient)\\b"
+            },
+            {
+              "label": "Configuration",
+              "detect": "grep:builder\\.Configuration|GetConnectionString|IOptions<"
+            },
+            {
+              "label": "Error handling",
+              "detect": "auto:exception-handling"
+            },
+            {
+              "label": "Logging",
+              "detect": [
+                "grep:\\bILogger\\b",
+                "regex:class\\s+Logger\\b"
+              ]
+            },
+            {
+              "label": "Validation",
+              "detect": "grep:\\[Required\\]|ModelState|FluentValidation|ValidationAttribute"
+            },
+            {
+              "label": "SOLID principles",
+              "detect": "manual",
+              "notes": "judgement, not detectable"
+            },
+            {
+              "label": "Clean code",
+              "detect": "manual",
+              "notes": "judgement, not detectable"
+            },
+            {
+              "label": "Garbage collection basics",
+              "detect": "manual",
+              "notes": "judgement, not detectable"
+            },
+            {
+              "label": "Value vs reference types",
+              "detect": [
+                "auto:structs",
+                "auto:classes"
+              ]
+            },
+            {
+              "label": "IDisposable",
+              "detect": [
+                "grep:\\bIDisposable\\b",
+                "grep:\\bvoid\\s+Dispose\\s*\\("
+              ]
+            },
+            {
+              "label": ".NET 8/9 app structure",
+              "detect": "grep:<TargetFramework>net(8|9|10)"
+            },
+            {
+              "label": "Minimal APIs",
+              "detect": "auto:minimal-apis"
+            },
+            {
+              "label": "ASP.NET Core Web APIs",
+              "detect": "grep:Microsoft\\.NET\\.Sdk\\.Web"
+            },
+            {
+              "label": "Build and explain a production-style API",
+              "detect": "manual",
+              "notes": "the real bar for this area"
+            }
+          ]
+        },
+        {
+          "name": "ASP.NET Core Web APIs",
+          "summary": "Central to the role.",
+          "items": [
+            {
+              "label": "REST API design",
+              "detect": "manual"
+            },
+            {
+              "label": "Controllers",
+              "detect": "auto:mvc-controllers"
+            },
+            {
+              "label": "Minimal APIs",
+              "detect": "auto:minimal-apis"
+            },
+            {
+              "label": "Middleware pipeline",
+              "detect": "auto:middleware-pipeline"
+            },
+            {
+              "label": "Custom middleware",
+              "detect": [
+                "path:Middlewares/",
+                "grep:\\bInvokeAsync\\b"
+              ]
+            },
+            {
+              "label": "Authentication",
+              "detect": "grep:AddAuthentication|UseAuthentication"
+            },
+            {
+              "label": "Authorization",
+              "detect": "grep:AddAuthorization|\\[Authorize"
+            },
+            {
+              "label": "Model binding and validation",
+              "detect": "grep:\\[From(Body|Query|Route)\\]|ModelState"
+            },
+            {
+              "label": "API versioning",
+              "detect": "grep:ApiVersion|Asp\\.Versioning"
+            },
+            {
+              "label": "Swagger / OpenAPI",
+              "detect": "grep:AddOpenApi|MapOpenApi|Swashbuckle"
+            },
+            {
+              "label": "Structured error responses",
+              "detect": "grep:ProblemDetails"
+            },
+            {
+              "label": "Health checks",
+              "detect": "grep:AddHealthChecks|MapHealthChecks"
+            },
+            {
+              "label": "Rate limiting",
+              "detect": "grep:AddRateLimiter|RateLimiting"
+            },
+            {
+              "label": "Resilience",
+              "detect": "grep:Polly|AddStandardResilienceHandler"
+            }
+          ]
+        },
+        {
+          "name": "Domain-Driven Design",
+          "summary": "Explicitly named in the role.",
+          "items": [
+            {
+              "label": "Entities and value objects",
+              "detect": [
+                "auto:structs",
+                "path:Domain/"
+              ]
+            },
+            {
+              "label": "Aggregates and aggregate roots",
+              "detect": "grep:AggregateRoot"
+            },
+            {
+              "label": "Repositories",
+              "detect": "auto:repository-pattern"
+            },
+            {
+              "label": "Factories",
+              "detect": "auto:factory-pattern"
+            },
+            {
+              "label": "Domain events",
+              "detect": "grep:DomainEvent"
+            },
+            {
+              "label": "Specification pattern",
+              "detect": "grep:Specification"
+            },
+            {
+              "label": "Bounded contexts",
+              "detect": "manual"
+            },
+            {
+              "label": "Ubiquitous language",
+              "detect": "manual"
+            },
+            {
+              "label": "Application vs domain layer",
+              "detect": "path:Domain/"
+            },
+            {
+              "label": "Practice project: tailoring order management",
+              "detect": "manual",
+              "notes": "orders, measurements, alterations, payments, shipping"
+            }
+          ]
+        },
+        {
+          "name": "Microservices architecture",
+          "summary": "Know when they help and when they cost.",
+          "items": [
+            {
+              "label": "Service boundaries",
+              "detect": "manual"
+            },
+            {
+              "label": "Database-per-service",
+              "detect": "manual"
+            },
+            {
+              "label": "API gateway basics",
+              "detect": "manual"
+            },
+            {
+              "label": "Synchronous vs asynchronous communication",
+              "detect": "manual"
+            },
+            {
+              "label": "Service discovery",
+              "detect": "manual"
+            },
+            {
+              "label": "Distributed transactions",
+              "detect": "manual"
+            },
+            {
+              "label": "Saga pattern",
+              "detect": "grep:\\bSaga\\b"
+            },
+            {
+              "label": "Idempotency",
+              "detect": "grep:Idempoten"
+            },
+            {
+              "label": "Eventual consistency",
+              "detect": "manual"
+            },
+            {
+              "label": "Observability across services",
+              "detect": "manual"
+            },
+            {
+              "label": "Knowing when not to split",
+              "detect": "manual",
+              "notes": "the answer they want to hear in interviews"
+            }
+          ]
+        },
+        {
+          "name": "Event-driven architecture and messaging",
+          "summary": "One of the biggest topics for the role.",
+          "items": [
+            {
+              "label": "Queues vs topics",
+              "detect": "manual"
+            },
+            {
+              "label": "Commands vs events",
+              "detect": "manual"
+            },
+            {
+              "label": "Publish / subscribe",
+              "detect": "manual"
+            },
+            {
+              "label": "Azure Service Bus queues",
+              "detect": "grep:ServiceBusClient|QueueClient"
+            },
+            {
+              "label": "Azure Service Bus topics",
+              "detect": "grep:ServiceBusSender|CreateTopic|TopicClient"
+            },
+            {
+              "label": "Dead-letter queues",
+              "detect": "grep:DeadLetter"
+            },
+            {
+              "label": "Retries",
+              "detect": "grep:MaxDeliveryCount|RetryPolicy|Polly"
+            },
+            {
+              "label": "Poison messages",
+              "detect": "manual"
+            },
+            {
+              "label": "Idempotent message handling",
+              "detect": "grep:Idempoten"
+            },
+            {
+              "label": "Outbox pattern",
+              "detect": "grep:Outbox"
+            },
+            {
+              "label": "Message ordering",
+              "detect": "grep:SessionId|RequiresSession"
+            },
+            {
+              "label": "Duplicate detection",
+              "detect": "grep:DuplicateDetection"
+            },
+            {
+              "label": "OrderCreated fan-out scenario",
+              "detect": "grep:OrderCreated",
+              "notes": "inventory, payments, warehouse, email, CRM react independently"
+            }
+          ]
+        },
+        {
+          "name": "Azure cloud services",
+          "summary": "The services named on the profile.",
+          "items": [
+            {
+              "label": "Azure App Service",
+              "detect": "grep:Microsoft\\.Web/sites|azurewebsites"
+            },
+            {
+              "label": "Azure Functions",
+              "detect": "grep:Microsoft\\.Azure\\.Functions|FunctionName|host\\.json"
+            },
+            {
+              "label": "Azure Service Bus",
+              "detect": "grep:ServiceBus"
+            },
+            {
+              "label": "Azure Cosmos DB",
+              "detect": "grep:Microsoft\\.Azure\\.Cosmos|CosmosClient"
+            },
+            {
+              "label": "Azure Table Storage",
+              "detect": "grep:Azure\\.Data\\.Tables|TableClient"
+            },
+            {
+              "label": "Azure Storage Accounts",
+              "detect": "grep:Azure\\.Storage|BlobServiceClient"
+            },
+            {
+              "label": "Application Insights",
+              "detect": "grep:ApplicationInsights"
+            },
+            {
+              "label": "Azure Key Vault",
+              "detect": "grep:KeyVault|SecretClient"
+            },
+            {
+              "label": "Azure Monitor",
+              "detect": "manual"
+            },
+            {
+              "label": "Managed identities",
+              "detect": "grep:DefaultAzureCredential|ManagedIdentity"
+            },
+            {
+              "label": "Bicep templates",
+              "detect": "path:.bicep"
+            },
+            {
+              "label": "Bicep parameters and modules",
+              "detect": "grep:^param |^module "
+            },
+            {
+              "label": "Resource groups",
+              "detect": "grep:targetScope|resourceGroup\\("
+            },
+            {
+              "label": "Environment-specific configuration",
+              "detect": "grep:appsettings\\.(Development|Staging|Production)"
+            }
+          ]
+        },
+        {
+          "name": "Databases and data modeling",
+          "summary": "Relational and NoSQL thinking.",
+          "items": [
+            {
+              "label": "SQL Server basics",
+              "detect": "grep:Microsoft\\.Data\\.SqlClient|SqlConnection"
+            },
+            {
+              "label": "Hand-written SQL",
+              "detect": "path:.sql"
+            },
+            {
+              "label": "Entity Framework Core",
+              "detect": "grep:Microsoft\\.EntityFrameworkCore|\\bDbContext\\b"
+            },
+            {
+              "label": "Migrations",
+              "detect": [
+                "path:Migrations/",
+                "grep:dotnet ef migrations"
+              ]
+            },
+            {
+              "label": "Indexing",
+              "detect": "grep:CREATE\\s+(UNIQUE\\s+)?INDEX|HasIndex"
+            },
+            {
+              "label": "Transactions",
+              "detect": "grep:BeginTransaction|TransactionScope"
+            },
+            {
+              "label": "Optimistic concurrency",
+              "detect": "grep:RowVersion|IsConcurrencyToken|ETag"
+            },
+            {
+              "label": "Cosmos DB partition keys",
+              "detect": "grep:PartitionKey",
+              "notes": "poor choices are expensive and hard to undo"
+            },
+            {
+              "label": "Document modeling",
+              "detect": "manual"
+            },
+            {
+              "label": "Table Storage design",
+              "detect": "grep:TableEntity|RowKey"
+            },
+            {
+              "label": "Relational vs NoSQL choice",
+              "detect": "manual"
+            }
+          ]
+        },
+        {
+          "name": "Testing and code quality",
+          "summary": "Called out in the job description.",
+          "items": [
+            {
+              "label": "xUnit or NUnit",
+              "detect": "grep:xunit|NUnit"
+            },
+            {
+              "label": "Unit tests",
+              "detect": "auto:unit-tests"
+            },
+            {
+              "label": "Mocking",
+              "detect": "grep:\\bMoq\\b|NSubstitute|FakeItEasy"
+            },
+            {
+              "label": "Integration testing",
+              "detect": "grep:WebApplicationFactory"
+            },
+            {
+              "label": "Testing APIs",
+              "detect": "manual"
+            },
+            {
+              "label": "Testing message handlers",
+              "detect": "manual"
+            },
+            {
+              "label": "Contract testing",
+              "detect": "grep:\\bPact\\b"
+            },
+            {
+              "label": "Testcontainers",
+              "detect": "grep:Testcontainers"
+            },
+            {
+              "label": "Clean architecture testability",
+              "detect": "manual"
+            },
+            {
+              "label": "Code review principles",
+              "detect": "manual"
+            },
+            {
+              "label": "Explaining what you do not test, and why",
+              "detect": "manual"
+            }
+          ]
+        },
+        {
+          "name": "CI/CD and DevOps basics",
+          "summary": "They expect pipeline improvements.",
+          "items": [
+            {
+              "label": "Git fundamentals",
+              "detect": "path:.gitignore"
+            },
+            {
+              "label": "Branching strategies",
+              "detect": "manual"
+            },
+            {
+              "label": "Pull requests",
+              "detect": "manual"
+            },
+            {
+              "label": "Build pipelines",
+              "detect": "path:.github/workflows"
+            },
+            {
+              "label": "GitHub Actions",
+              "detect": "path:.github/workflows"
+            },
+            {
+              "label": "Automated tests in CI",
+              "detect": "grep:dotnet test"
+            },
+            {
+              "label": "Static analysis",
+              "detect": "grep:TreatWarningsAsErrors|EnableNETAnalyzers|\\.editorconfig"
+            },
+            {
+              "label": "Secrets management",
+              "detect": "grep:secrets\\.[A-Z_]+|user-secrets|KeyVault"
+            },
+            {
+              "label": "Release pipelines",
+              "detect": "manual"
+            },
+            {
+              "label": "Environment promotion",
+              "detect": "manual",
+              "notes": "dev, test, staging, production"
+            },
+            {
+              "label": "Rollback strategies",
+              "detect": "manual"
+            },
+            {
+              "label": "Blue-green or slot deployments",
+              "detect": "manual"
+            }
+          ]
+        },
+        {
+          "name": "Integrations with external systems",
+          "summary": "Salesforce, Dynamics, WMS, POS, OMS, WeChat.",
+          "items": [
+            {
+              "label": "REST integrations",
+              "detect": "grep:\\bHttpClient\\b"
+            },
+            {
+              "label": "Typed API clients",
+              "detect": "grep:AddHttpClient"
+            },
+            {
+              "label": "Webhooks",
+              "detect": "grep:[Ww]ebhook"
+            },
+            {
+              "label": "Authenticating with external APIs",
+              "detect": "manual"
+            },
+            {
+              "label": "OAuth basics",
+              "detect": "grep:OAuth|OpenIdConnect"
+            },
+            {
+              "label": "Retry policies",
+              "detect": "grep:Polly|RetryPolicy|WaitAndRetry"
+            },
+            {
+              "label": "Circuit breakers",
+              "detect": "grep:CircuitBreaker"
+            },
+            {
+              "label": "Rate limits",
+              "detect": "grep:RateLimit"
+            },
+            {
+              "label": "Data mapping",
+              "detect": "grep:AutoMapper|Mapster"
+            },
+            {
+              "label": "Anti-corruption layer",
+              "detect": "manual"
+            },
+            {
+              "label": "Integration events",
+              "detect": "grep:IntegrationEvent"
+            },
+            {
+              "label": "Reconciliation jobs",
+              "detect": "manual"
+            },
+            {
+              "label": "Handling partial failure",
+              "detect": "manual"
+            }
+          ]
+        },
+        {
+          "name": "Observability and production readiness",
+          "summary": "“It works locally” is not enough.",
+          "items": [
+            {
+              "label": "Structured logging",
+              "detect": "grep:\\.Log\\w+\\(\\\"[^\\\"]*\\{[A-Za-z]"
+            },
+            {
+              "label": "Correlation IDs",
+              "detect": "grep:CorrelationId|TraceIdentifier"
+            },
+            {
+              "label": "Distributed tracing",
+              "detect": "grep:ActivitySource|OpenTelemetry"
+            },
+            {
+              "label": "Metrics",
+              "detect": "grep:IMeterFactory|new Meter\\(|OpenTelemetry\\.Metrics"
+            },
+            {
+              "label": "Application Insights",
+              "detect": "grep:ApplicationInsights"
+            },
+            {
+              "label": "Health checks",
+              "detect": "grep:AddHealthChecks"
+            },
+            {
+              "label": "Dashboards",
+              "detect": "manual"
+            },
+            {
+              "label": "Alerts",
+              "detect": "manual"
+            },
+            {
+              "label": "Performance monitoring",
+              "detect": "manual"
+            },
+            {
+              "label": "Exception tracking",
+              "detect": "manual"
+            },
+            {
+              "label": "Diagnosing slow APIs",
+              "detect": "manual"
+            },
+            {
+              "label": "Diagnosing failed messages",
+              "detect": "manual"
+            },
+            {
+              "label": "Answering “how would you know this is healthy in production?”",
+              "detect": "manual"
+            }
+          ]
+        },
+        {
+          "name": "Security basics",
+          "summary": "Production awareness, not specialism.",
+          "items": [
+            {
+              "label": "OAuth2 / OpenID Connect",
+              "detect": "grep:OpenIdConnect|OAuth2?"
+            },
+            {
+              "label": "JWT tokens",
+              "detect": "grep:JwtBearer|JwtSecurityToken"
+            },
+            {
+              "label": "Role-based authorization",
+              "detect": "grep:\\[Authorize\\(Roles|RequireRole"
+            },
+            {
+              "label": "Secrets in Key Vault",
+              "detect": "grep:KeyVault|SecretClient"
+            },
+            {
+              "label": "Managed identities",
+              "detect": "grep:DefaultAzureCredential"
+            },
+            {
+              "label": "HTTPS",
+              "detect": "grep:UseHttpsRedirection|UseHsts"
+            },
+            {
+              "label": "Input validation",
+              "detect": "grep:\\[Required\\]|ModelState|FluentValidation"
+            },
+            {
+              "label": "OWASP Top 10 basics",
+              "detect": "manual"
+            },
+            {
+              "label": "Secure API design",
+              "detect": "manual"
+            },
+            {
+              "label": "Least privilege access",
+              "detect": "manual"
+            }
+          ]
+        },
+        {
+          "name": "AI-assisted development",
+          "summary": "Use it professionally, not blindly.",
+          "items": [
+            {
+              "label": "Generate boilerplate faster",
+              "detect": "manual"
+            },
+            {
+              "label": "Refactor code with review",
+              "detect": "manual"
+            },
+            {
+              "label": "Write tests with AI",
+              "detect": "manual"
+            },
+            {
+              "label": "Explain unfamiliar code",
+              "detect": "manual"
+            },
+            {
+              "label": "Generate infrastructure templates",
+              "detect": "manual"
+            },
+            {
+              "label": "Improve documentation",
+              "detect": "manual"
+            },
+            {
+              "label": "Validate AI output through tests and review",
+              "detect": "manual"
+            },
+            {
+              "label": "Declaring AI authorship honestly",
+              "detect": "path:journey.json",
+              "notes": "the provenance tracking in this repo"
+            }
+          ]
+        }
+      ]
+    },
+
   "assignment": {
     "title": "Learning plan from my manager",
     "source": "Set by my manager",

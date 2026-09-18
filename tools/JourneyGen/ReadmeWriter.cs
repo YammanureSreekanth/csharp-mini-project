@@ -68,6 +68,8 @@ public static class ReadmeWriter
 
         if (prov.Available) AppendProvenance(sb, prov);
 
+        if (cfg.Roadmap.Areas.Count > 0) AppendRoadmap(sb, cfg.Roadmap);
+
         sb.AppendLine("### Concepts covered");
         sb.AppendLine();
         foreach (var area in cfg.Concepts.GroupBy(c => c.Area))
@@ -95,6 +97,49 @@ public static class ReadmeWriter
         sb.AppendLine();
         sb.Append(End);
         return sb.ToString();
+    }
+
+    static void AppendRoadmap(StringBuilder sb, Roadmap r)
+    {
+        sb.AppendLine($"### {Escape(r.Title)}");
+        sb.AppendLine();
+        if (r.Source.Length > 0) { sb.AppendLine($"_{Escape(r.Source)}._"); sb.AppendLine(); }
+
+        sb.AppendLine($"`{Bar(r.Percent)}` **{r.Done} of {r.Total} covered** across {r.Areas.Count} areas");
+        sb.AppendLine();
+        if (r.Note.Length > 0) { sb.AppendLine($"<sub>{Escape(r.Note)}</sub>"); sb.AppendLine(); }
+
+        sb.AppendLine("| Area | Covered | |");
+        sb.AppendLine("|---|---:|---|");
+        foreach (var a in r.Areas)
+            sb.AppendLine($"| {Escape(a.Name)} | {a.Done}/{a.Items.Count} | `{Bar(a.Percent)}` {a.Percent}% |");
+        sb.AppendLine();
+
+        foreach (var a in r.Areas)
+        {
+            sb.AppendLine("<details>");
+            sb.AppendLine($"<summary><b>{Escape(a.Name)}</b> — {a.Done}/{a.Items.Count}" +
+                          (a.Summary.Length > 0 ? $" · <sub>{Escape(a.Summary)}</sub>" : "") + "</summary>");
+            sb.AppendLine();
+            foreach (var i in a.Items)
+            {
+                var st = i.EffectiveStatus;
+                var box = st == "done" ? "[x]" : "[ ]";
+                var label = st == "done" ? $"**{Escape(i.Label)}**" : Escape(i.Label);
+                var tail = st switch
+                {
+                    "done" when i.Evidence.Count > 0 => $" <sub>`{i.Evidence[0]}`{(i.Evidence.Count > 1 ? $" +{i.Evidence.Count - 1}" : "")}</sub>",
+                    "in-progress" => " <sub>in progress</sub>",
+                    _ when !i.CodeDetectable => " <sub>judgement — not code-detectable</sub>",
+                    _ => "",
+                };
+                var note = i.Notes.Length > 0 ? $" — {Escape(i.Notes)}" : "";
+                sb.AppendLine($"- {box} {label}{note}{tail}");
+            }
+            sb.AppendLine();
+            sb.AppendLine("</details>");
+            sb.AppendLine();
+        }
     }
 
     static void AppendAssignment(StringBuilder sb, Assignment a)

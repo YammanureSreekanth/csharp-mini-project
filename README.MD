@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![commits](https://img.shields.io/badge/commits-29-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![commits](https://img.shields.io/badge/commits-31-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████░░░░░░░░` **62%**
 
@@ -192,23 +192,288 @@ reassigns it to me automatically, so the split cannot drift from the code.
 Going forward this is automatic: any commit whose message carries an AI trailer
 (`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.
 
-The tooling that builds this page is a further 1739 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
+The tooling that builds this page is a further 1940 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
 page template. It is kept out of the figures above rather than averaged into them,
 since it generates the page and is not part of the application.
 
 | Tooling | Mine | AI | Share written by AI |
 |---|---:|---:|---|
-| `tools` | 0 | 1739 | `████████████████████` 100% |
+| `tools` | 0 | 1940 | `████████████████████` 100% |
 
 Commits counted as anything other than my own hand:
 
 | Commit | Counted as | Subject |
 |---|---|---|
+| `b248fa9` | AI | Add the full role roadmap: 13 areas, 162 topics |
 | `cdb7019` | AI | Add the manager's learning plan as a tracked section |
 | `3936d71` | AI | Move the tooling disclosure into the audit fold |
 | `5fc21eb` | AI | Add code provenance tracking to the journey page |
 | `00e0f1f` | AI | Add JourneyGen tool for analyzing C# source and git history |
 | `d56cc61` | scaffold | Add initial setup for Ecom.WebApiApp including project file, HT… |
+
+</details>
+
+### Senior backend engineer: what the role needs
+
+_Shared by my manager._
+
+`████░░░░░░░░░░░░░░░░` **30 of 162 covered** across 13 areas
+
+<sub>The long-range curriculum. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
+
+| Area | Covered | |
+|---|---:|---|
+| C# and modern .NET depth | 12/22 | `███████████░░░░░░░░░` 55% |
+| ASP.NET Core Web APIs | 5/14 | `███████░░░░░░░░░░░░░` 36% |
+| Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
+| Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Azure cloud services | 0/14 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Databases and data modeling | 3/11 | `█████░░░░░░░░░░░░░░░` 27% |
+| Testing and code quality | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| CI/CD and DevOps basics | 3/12 | `█████░░░░░░░░░░░░░░░` 25% |
+| Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Observability and production readiness | 1/13 | `██░░░░░░░░░░░░░░░░░░` 8% |
+| Security basics | 1/10 | `██░░░░░░░░░░░░░░░░░░` 10% |
+| AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
+
+<details>
+<summary><b>C# and modern .NET depth</b> — 12/22 · <sub>Strong enough that C# feels natural.</sub></summary>
+
+- [x] **Classes and interfaces** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
+- [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
+- [x] **Generics** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [ ] Delegates and events
+- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +1</sub>
+- [x] **async / await / Task** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
+- [ ] Cancellation tokens
+- [ ] Parallelism
+- [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
+- [ ] Configuration
+- [x] **Error handling** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
+- [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
+- [ ] Validation
+- [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
+- [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
+- [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
+- [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
+- [ ] IDisposable
+- [x] **.NET 8/9 app structure** <sub>`Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +2</sub>
+- [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
+- [x] **ASP.NET Core Web APIs** <sub>`Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
+- [ ] Build and explain a production-style API — the real bar for this area <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>ASP.NET Core Web APIs</b> — 5/14 · <sub>Central to the role.</sub></summary>
+
+- [ ] REST API design <sub>judgement — not code-detectable</sub>
+- [x] **Controllers** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
+- [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
+- [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
+- [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
+- [ ] Authentication
+- [ ] Authorization
+- [ ] Model binding and validation
+- [ ] API versioning
+- [x] **Swagger / OpenAPI** <sub>`Ecom.WebApiApp/Program.cs`</sub>
+- [ ] Structured error responses
+- [ ] Health checks
+- [ ] Rate limiting
+- [ ] Resilience
+
+</details>
+
+<details>
+<summary><b>Domain-Driven Design</b> — 4/10 · <sub>Explicitly named in the role.</sub></summary>
+
+- [x] **Entities and value objects** <sub>`Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
+- [ ] Aggregates and aggregate roots
+- [x] **Repositories** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Factories** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
+- [ ] Domain events
+- [ ] Specification pattern
+- [ ] Bounded contexts <sub>judgement — not code-detectable</sub>
+- [ ] Ubiquitous language <sub>judgement — not code-detectable</sub>
+- [x] **Application vs domain layer** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
+- [ ] Practice project: tailoring order management — orders, measurements, alterations, payments, shipping <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Microservices architecture</b> — 0/11 · <sub>Know when they help and when they cost.</sub></summary>
+
+- [ ] Service boundaries <sub>judgement — not code-detectable</sub>
+- [ ] Database-per-service <sub>judgement — not code-detectable</sub>
+- [ ] API gateway basics <sub>judgement — not code-detectable</sub>
+- [ ] Synchronous vs asynchronous communication <sub>judgement — not code-detectable</sub>
+- [ ] Service discovery <sub>judgement — not code-detectable</sub>
+- [ ] Distributed transactions <sub>judgement — not code-detectable</sub>
+- [ ] Saga pattern
+- [ ] Idempotency
+- [ ] Eventual consistency <sub>judgement — not code-detectable</sub>
+- [ ] Observability across services <sub>judgement — not code-detectable</sub>
+- [ ] Knowing when not to split — the answer they want to hear in interviews <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Event-driven architecture and messaging</b> — 0/13 · <sub>One of the biggest topics for the role.</sub></summary>
+
+- [ ] Queues vs topics <sub>judgement — not code-detectable</sub>
+- [ ] Commands vs events <sub>judgement — not code-detectable</sub>
+- [ ] Publish / subscribe <sub>judgement — not code-detectable</sub>
+- [ ] Azure Service Bus queues
+- [ ] Azure Service Bus topics
+- [ ] Dead-letter queues
+- [ ] Retries
+- [ ] Poison messages <sub>judgement — not code-detectable</sub>
+- [ ] Idempotent message handling
+- [ ] Outbox pattern
+- [ ] Message ordering
+- [ ] Duplicate detection
+- [ ] OrderCreated fan-out scenario — inventory, payments, warehouse, email, CRM react independently
+
+</details>
+
+<details>
+<summary><b>Azure cloud services</b> — 0/14 · <sub>The services named on the profile.</sub></summary>
+
+- [ ] Azure App Service
+- [ ] Azure Functions
+- [ ] Azure Service Bus
+- [ ] Azure Cosmos DB
+- [ ] Azure Table Storage
+- [ ] Azure Storage Accounts
+- [ ] Application Insights
+- [ ] Azure Key Vault
+- [ ] Azure Monitor <sub>judgement — not code-detectable</sub>
+- [ ] Managed identities
+- [ ] Bicep templates
+- [ ] Bicep parameters and modules
+- [ ] Resource groups
+- [ ] Environment-specific configuration
+
+</details>
+
+<details>
+<summary><b>Databases and data modeling</b> — 3/11 · <sub>Relational and NoSQL thinking.</sub></summary>
+
+- [x] **SQL Server basics** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +3</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +3</sub>
+- [ ] Entity Framework Core
+- [ ] Migrations
+- [x] **Indexing** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +1</sub>
+- [ ] Transactions
+- [ ] Optimistic concurrency
+- [ ] Cosmos DB partition keys — poor choices are expensive and hard to undo
+- [ ] Document modeling <sub>judgement — not code-detectable</sub>
+- [ ] Table Storage design
+- [ ] Relational vs NoSQL choice <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Testing and code quality</b> — 0/11 · <sub>Called out in the job description.</sub></summary>
+
+- [ ] xUnit or NUnit
+- [ ] Unit tests
+- [ ] Mocking
+- [ ] Integration testing
+- [ ] Testing APIs <sub>judgement — not code-detectable</sub>
+- [ ] Testing message handlers <sub>judgement — not code-detectable</sub>
+- [ ] Contract testing
+- [ ] Testcontainers
+- [ ] Clean architecture testability <sub>judgement — not code-detectable</sub>
+- [ ] Code review principles <sub>judgement — not code-detectable</sub>
+- [ ] Explaining what you do not test, and why <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>CI/CD and DevOps basics</b> — 3/12 · <sub>They expect pipeline improvements.</sub></summary>
+
+- [x] **Git fundamentals** <sub>`.gitignore`</sub>
+- [ ] Branching strategies <sub>judgement — not code-detectable</sub>
+- [ ] Pull requests <sub>judgement — not code-detectable</sub>
+- [x] **Build pipelines** <sub>`.github/workflows/journey.yml`</sub>
+- [x] **GitHub Actions** <sub>`.github/workflows/journey.yml`</sub>
+- [ ] Automated tests in CI
+- [ ] Static analysis
+- [ ] Secrets management
+- [ ] Release pipelines <sub>judgement — not code-detectable</sub>
+- [ ] Environment promotion — dev, test, staging, production <sub>judgement — not code-detectable</sub>
+- [ ] Rollback strategies <sub>judgement — not code-detectable</sub>
+- [ ] Blue-green or slot deployments <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Integrations with external systems</b> — 0/13 · <sub>Salesforce, Dynamics, WMS, POS, OMS, WeChat.</sub></summary>
+
+- [ ] REST integrations
+- [ ] Typed API clients
+- [ ] Webhooks
+- [ ] Authenticating with external APIs <sub>judgement — not code-detectable</sub>
+- [ ] OAuth basics
+- [ ] Retry policies
+- [ ] Circuit breakers
+- [ ] Rate limits
+- [ ] Data mapping
+- [ ] Anti-corruption layer <sub>judgement — not code-detectable</sub>
+- [ ] Integration events
+- [ ] Reconciliation jobs <sub>judgement — not code-detectable</sub>
+- [ ] Handling partial failure <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Observability and production readiness</b> — 1/13 · <sub>“It works locally” is not enough.</sub></summary>
+
+- [ ] Structured logging
+- [x] **Correlation IDs** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
+- [ ] Distributed tracing
+- [ ] Metrics
+- [ ] Application Insights
+- [ ] Health checks
+- [ ] Dashboards <sub>judgement — not code-detectable</sub>
+- [ ] Alerts <sub>judgement — not code-detectable</sub>
+- [ ] Performance monitoring <sub>judgement — not code-detectable</sub>
+- [ ] Exception tracking <sub>judgement — not code-detectable</sub>
+- [ ] Diagnosing slow APIs <sub>judgement — not code-detectable</sub>
+- [ ] Diagnosing failed messages <sub>judgement — not code-detectable</sub>
+- [ ] Answering “how would you know this is healthy in production?” <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Security basics</b> — 1/10 · <sub>Production awareness, not specialism.</sub></summary>
+
+- [ ] OAuth2 / OpenID Connect
+- [ ] JWT tokens
+- [ ] Role-based authorization
+- [ ] Secrets in Key Vault
+- [ ] Managed identities
+- [x] **HTTPS** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
+- [ ] Input validation
+- [ ] OWASP Top 10 basics <sub>judgement — not code-detectable</sub>
+- [ ] Secure API design <sub>judgement — not code-detectable</sub>
+- [ ] Least privilege access <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>AI-assisted development</b> — 1/8 · <sub>Use it professionally, not blindly.</sub></summary>
+
+- [ ] Generate boilerplate faster <sub>judgement — not code-detectable</sub>
+- [ ] Refactor code with review <sub>judgement — not code-detectable</sub>
+- [ ] Write tests with AI <sub>judgement — not code-detectable</sub>
+- [ ] Explain unfamiliar code <sub>judgement — not code-detectable</sub>
+- [ ] Generate infrastructure templates <sub>judgement — not code-detectable</sub>
+- [ ] Improve documentation <sub>judgement — not code-detectable</sub>
+- [ ] Validate AI output through tests and review <sub>judgement — not code-detectable</sub>
+- [x] **Declaring AI authorship honestly** — the provenance tracking in this repo <sub>`journey.json` +1</sub>
 
 </details>
 
@@ -314,7 +579,7 @@ Commits counted as anything other than my own hand:
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
@@ -362,7 +627,7 @@ Commits counted as anything other than my own hand:
 
 </details>
 
-<sub>Last updated 2026-09-18 13:18 UTC</sub>
+<sub>Last updated 2026-09-18 13:25 UTC</sub>
 
 <!-- JOURNEY:END -->
 

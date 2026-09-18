@@ -142,6 +142,20 @@ public sealed class AssignmentItem
     public string Label = "";
     /// <summary>Declared by the learner, not inferred: done | in-progress | not-started.</summary>
     public string Status = "not-started";
+
+    /// <summary>False when the config said nothing, so the code decides instead.</summary>
+    public bool StatusDeclared;
+
+    /// <summary>What to show: a declared status wins; otherwise the code speaks.</summary>
+    public string EffectiveStatus =>
+        StatusDeclared ? Status : (Detected ? "done" : "not-started");
+
+    /// <summary>
+    /// False when nothing but `manual` was given — judgement topics like SOLID or
+    /// "when not to split into microservices" that no detector can honestly prove.
+    /// </summary>
+    public bool CodeDetectable =>
+        Detectors.Any(d => !d.Equals("manual", StringComparison.OrdinalIgnoreCase)) || Parts.Count > 0;
     public string Notes = "";
     public List<string> Detectors = new();
     public List<AssignmentPart> Parts = new();
@@ -164,4 +178,29 @@ public sealed class AssignmentPart
     public List<string> Detectors = new();
     public bool Detected;
     public List<string> Evidence = new();
+}
+
+
+/// <summary>The long-range curriculum: many areas, mostly not started yet, and that is fine.</summary>
+public sealed class Roadmap
+{
+    public string Title = "Roadmap";
+    public string Source = "";
+    public string Note = "";
+    public List<RoadmapArea> Areas = new();
+
+    public int Total => Areas.Sum(a => a.Items.Count);
+    public int Done => Areas.Sum(a => a.Done);
+    public int Percent => Total == 0 ? 0 : (int)Math.Round(100.0 * Done / Total);
+}
+
+public sealed class RoadmapArea
+{
+    public string Name = "";
+    public string Summary = "";
+    public List<AssignmentItem> Items = new();
+
+    public int Done => Items.Count(i => i.EffectiveStatus == "done");
+    public int InProgress => Items.Count(i => i.EffectiveStatus == "in-progress");
+    public int Percent => Items.Count == 0 ? 0 : (int)Math.Round(100.0 * Done / Items.Count);
 }
