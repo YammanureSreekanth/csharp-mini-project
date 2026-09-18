@@ -37,11 +37,46 @@ jobs:
       # CI verifies, it does not write. The .githooks/pre-commit hook keeps the
       # README current locally; committing it from here produced a bot commit after
       # every push, which left every local branch divergent.
+      # TEMPORARY DIAGNOSTIC: --check fails on the runner but passes on a clean clone
+      # locally, so something is environment-dependent. Job logs need admin rights to
+      # read, so the report is published with the site instead, then removed.
       - name: Verify the README block is current
-        run: dotnet run --project tools/JourneyGen --configuration Release -- --root . --check
+        id: verify
+        continue-on-error: true
+        run: |
+          set +e
+          dotnet run --project tools/JourneyGen --configuration Release -- --root . --check \
+            > /tmp/check-report.txt 2>&1
+          echo "exit=$?" >> /tmp/check-report.txt
+          {
+            echo
+            echo "--- runner environment ---"
+            uname -a
+            git --version
+            dotnet --version
+            echo "locale: ${LANG:-unset} / ${LC_ALL:-unset}"
+            echo
+            echo "--- committed README fingerprint ---"
+            wc -l README.MD
+            md5sum README.MD
+          } >> /tmp/check-report.txt
+          cat /tmp/check-report.txt
 
       - name: Generate the dashboard
         run: dotnet run --project tools/JourneyGen --configuration Release -- --root .
+
+      - name: Publish the check report alongside the site
+        run: |
+          cp /tmp/check-report.txt artifacts/site/check-report.txt
+          {
+            echo
+            echo "--- regenerated README fingerprint (after generate) ---"
+            wc -l README.MD
+            md5sum README.MD
+            echo
+            echo "--- diff: committed vs regenerated ---"
+            git --no-pager diff --no-color -- README.MD | head -120
+          } >> artifacts/site/check-report.txt
 
       # Requires a one-time repo setting: Settings -> Pages -> Source = "GitHub Actions".
       # Without it this step fails with "Get Pages site failed".

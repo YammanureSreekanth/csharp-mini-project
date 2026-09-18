@@ -12,9 +12,9 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
 
-### Learning plan from my manager
+### Current focus
 
-Set by my manager · assigned 2026-08-25 · next review **2026-09-22**
+What I am working on right now · assigned 2026-08-25 · next review **2026-09-22**
 
 `█████████░░░░░░░░░░░` **3 of 7 complete** · 4 in progress
 
@@ -199,18 +199,18 @@ since it generates the page and is not part of the application.
 |---|---:|---:|---|
 | `tools` | 0 | 1994 | `████████████████████` 100% |
 
-8 commits are counted as something other than my own hand (7 AI, 1 scaffold). The full list, with a link to each commit, is on the
+9 commits are counted as something other than my own hand (8 AI, 1 scaffold). The full list, with a link to each commit, is on the
 dashboard under **How this is measured**.
 
 </details>
 
-### Senior backend engineer: what the role needs
+### .NET backend engineering skills
 
-_Shared by my manager._
+_The ground I want to cover for my career in .NET._
 
 `████░░░░░░░░░░░░░░░░` **30 of 162 covered** across 13 areas
 
-<sub>The long-range curriculum. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
+<sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
 | Area | Covered | |
 |---|---:|---|
@@ -618,7 +618,7 @@ _Shared by my manager._
 
 </details>
 
-<sub>Last updated 2026-09-18 13:44 UTC</sub>
+<sub>Last updated 2026-09-18 13:47 UTC</sub>
 
 <!-- JOURNEY:END -->
 

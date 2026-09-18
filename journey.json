@@ -15,19 +15,19 @@
   // Default is "you": a line only counts as AI or scaffold when something below
   // says so. Going forward the trailer in `aiMarkers` does this automatically —
   // put it in any commit message where AI wrote code and the line moves bucket.
-  // The learning plan my manager set, with my own declared status for each item.
+  // What I am focused on right now, with my own declared status for each item.
   //
   // Status is DECLARED by me ("done" / "in-progress" / "not-started") — the tool does
   // not infer it. The detectors are separate: they look for evidence in the code and
   // the page shows both, so a "done" with nothing behind it is visible rather than
   // hidden. Replace `items` after each review and bump the two dates.
-  // The full curriculum for the senior backend role, shared by my manager.
+  // The skills I want to cover across C#, ASP.NET Core, Azure and architecture.
   // Status is inferred from the code unless an item declares one explicitly.
   // "detect": "manual" marks judgement topics that no detector can prove.
   "roadmap": {
-      "title": "Senior backend engineer: what the role needs",
-      "source": "Shared by my manager",
-      "note": "The long-range curriculum. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.",
+      "title": ".NET backend engineering skills",
+      "source": "The ground I want to cover for my career in .NET",
+      "note": "The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.",
       "areas": [
         {
           "name": "C# and modern .NET depth",
@@ -796,11 +796,11 @@
     },
 
   "assignment": {
-    "title": "Learning plan from my manager",
-    "source": "Set by my manager",
+    "title": "Current focus",
+    "source": "What I am working on right now",
     "assignedOn": "2026-08-25",
     "reviewOn": "2026-09-22",
-    "note": "Reviewed at each follow-up meeting; the list is replaced with a new one based on the feedback.",
+    "note": "Replaced with a new list at each review as priorities move on.",
     "items": [
       {
         "label": "DI & IoC",
