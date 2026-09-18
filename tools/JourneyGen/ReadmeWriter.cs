@@ -118,20 +118,6 @@ public static class ReadmeWriter
         sb.AppendLine($"| **Application total** | **{app.You}** | **{app.Ai}** | **{app.Scaffold}** | `{Bar(app.YouPercent)}` **{app.YouPercent}%** |");
         sb.AppendLine();
 
-        if (tooling.Total > 0)
-        {
-            sb.AppendLine($"Separately, the tooling that generates this page is {tooling.Total} lines and " +
-                          $"**{tooling.AiPercent}% AI-written**. It is reported apart from the application " +
-                          "figures rather than averaged into them, since it builds the page and is not part " +
-                          "of the app:");
-            sb.AppendLine();
-            sb.AppendLine("| Tooling | Mine | AI | Share written by AI |");
-            sb.AppendLine("|---|---:|---:|---|");
-            foreach (var p in prov.Projects.Where(p => p.IsTooling))
-                sb.AppendLine($"| `{p.Project}` | {p.You} | {p.Ai} | `{Bar(p.AiPercent)}` {p.AiPercent}% |");
-            sb.AppendLine();
-        }
-
         sb.AppendLine("<details>");
         sb.AppendLine("<summary>How this is measured, and what is declared</summary>");
         sb.AppendLine();
@@ -143,6 +129,20 @@ public static class ReadmeWriter
         sb.AppendLine("Going forward this is automatic: any commit whose message carries an AI trailer");
         sb.AppendLine("(`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.");
         sb.AppendLine();
+        if (tooling.Total > 0)
+        {
+            sb.AppendLine($"The tooling that builds this page is a further {tooling.Total} lines, " +
+                          $"**{tooling.AiPercent}% AI-written** — `tools/JourneyGen`, the generator and its");
+            sb.AppendLine("page template. It is kept out of the figures above rather than averaged into them,");
+            sb.AppendLine("since it generates the page and is not part of the application.");
+            sb.AppendLine();
+            sb.AppendLine("| Tooling | Mine | AI | Share written by AI |");
+            sb.AppendLine("|---|---:|---:|---|");
+            foreach (var p in prov.Projects.Where(p => p.IsTooling))
+                sb.AppendLine($"| `{p.Project}` | {p.You} | {p.Ai} | `{Bar(p.AiPercent)}` {p.AiPercent}% |");
+            sb.AppendLine();
+        }
+
         sb.AppendLine("Commits counted as anything other than my own hand:");
         sb.AppendLine();
         sb.AppendLine("| Commit | Counted as | Subject |");

@@ -240,7 +240,6 @@
         <span><i class="swatch" style="background:var(--prov-scaffold)"></i><code>dotnet new</code> scaffold</span>
       </div>
       <div class="chartbox" id="provBox"><canvas id="provChart"></canvas></div>
-      <p class="note" id="provNote"></p>
       <details class="data" id="provAudit">
         <summary>How this is measured, and which commits are declared</summary>
         <div id="provAuditBody"></div>
@@ -342,6 +341,15 @@
       "(<code>Co-Authored-By: Claude</code>) has its lines counted as AI-written. Commits with my own " +
       "message and no trailer count as mine.</p>";
 
+    if (P.tooling && P.tooling.total > 0) {
+      method +=
+        "<p class='note'>The tooling that builds this page is a further <b>" + num(P.tooling.total) +
+        "</b> lines, <b>" + P.tooling.aiPercent + "% AI-written</b> \u2014 " +
+        "<code>tools/JourneyGen</code>, the generator and its page template. It is kept out of the " +
+        "figures above rather than averaged into them, since it generates this page and is not part " +
+        "of the application.</p>";
+    }
+
     var declared = (P.declared || []);
     if (declared.length) {
       method += table("Commits counted as anything other than my own hand",
@@ -355,12 +363,6 @@
     }
     document.getElementById("provAuditBody").innerHTML = method;
 
-    if (P.tooling && P.tooling.total > 0) {
-      document.getElementById("provNote").innerHTML =
-        "The tooling that builds this page is a further <b>" + num(P.tooling.total) +
-        "</b> lines, <b>" + P.tooling.aiPercent + "% AI-written</b>. It is kept out of the " +
-        "figures above rather than averaged in, since it generates the page and is not part of the app.";
-    }
   }
 
   /* ---------- concept areas ---------- */
