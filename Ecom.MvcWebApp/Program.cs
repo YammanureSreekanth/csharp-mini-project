@@ -1,8 +1,15 @@
 using Middlewares;
+using Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IMessageService, MessageService>();
+
+builder.Services.AddSingleton<SingletonService>();
+builder.Services.AddScoped<ScopedService>();
+builder.Services.AddTransient<TransientService>();
 
 var app = builder.Build();
 
@@ -62,6 +69,63 @@ app.MapWhen(context => context.Request.Headers["X-Diagnostic"] == true, NoFurthe
         await context.Response.WriteAsync("This is the end");
     });
 });
+
+app.Map("/No-DI", NoDIBranch =>
+{
+    NoDIBranch.Run(async context =>
+    {
+        IMessageService messageService = new MessageService();
+        await context.Response.WriteAsync(messageService.GetMessage());
+    });
+});
+
+app.Map("/With-DI", WithDIBranch =>
+{
+    WithDIBranch.Run(async context =>
+    {
+        IMessageService messageService = context.RequestServices.GetRequiredService<IMessageService>();
+        await context.Response.WriteAsync(messageService.GetMessage());
+    });
+});
+
+
+app.Map("/Lifetimes", lifetimesBranch =>
+{
+    lifetimesBranch.Run(async context =>
+    {
+        SingletonService singletonService1 = context.RequestServices.GetRequiredService<SingletonService>();
+        SingletonService singletonService2 = context.RequestServices.GetRequiredService<SingletonService>();
+
+        ScopedService scopedService1 = context.RequestServices.GetRequiredService<ScopedService>();
+        ScopedService scopedService2 = context.RequestServices.GetRequiredService<ScopedService>();
+
+        TransientService transientService1 = context.RequestServices.GetRequiredService<TransientService>();
+        TransientService transientService2 = context.RequestServices.GetRequiredService<TransientService>();
+
+        context.Response.ContentType = "text/pain";
+
+        await context.Response.WriteAsync(
+            $"""
+            Service Lifetimes
+
+            Singleton: Same object everytime
+            First: {singletonService1.Id}
+            Second: {singletonService2.Id}
+
+            Scoped: one object per request life
+            First: {scopedService1.Id}
+            Second: {scopedService2.Id}
+
+            Transient: New object on every time requesting
+            First: {transientService1.Id}
+            Second: {transientService2.Id}
+
+            """
+        );
+
+    });
+});
+
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 
