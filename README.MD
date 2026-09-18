@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-53_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-798-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-19-555555)
+![concepts](https://img.shields.io/badge/concepts-53_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-798-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-20-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `█████████████░░░░░░░` **65%**
 
@@ -150,6 +150,44 @@ classDiagram
 | `Ecom.MvcWebApp` | 3 | 64 | 2 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
+### Who wrote this code
+
+**100% of the application code is mine** — 634 of the 634 lines in it that anyone authored by hand.
+A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
+
+| Project | Mine | AI | Scaffold | Share authored by me |
+|---|---:|---:|---:|---|
+| `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 0 | 0 | 46 | — _template output only_ |
+| `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
+| **Application total** | **634** | **0** | **79** | `████████████████████` **100%** |
+
+Separately, the tooling that generates this page is 1397 lines and **100% AI-written**. It is reported apart from the application figures rather than averaged into them, since it builds the page and is not part of the app:
+
+| Tooling | Mine | AI | Share written by AI |
+|---|---:|---:|---|
+| `tools` | 0 | 1397 | `████████████████████` 100% |
+
+<details>
+<summary>How this is measured, and what is declared</summary>
+
+Every non-blank line is attributed with `git blame` to the commit that last touched it,
+and each commit is classified once. Lines count as mine by default — a line is only
+AI or scaffold because a rule in `journey.json` says so. Edit a scaffold line and blame
+reassigns it to me automatically, so the split cannot drift from the code.
+
+Going forward this is automatic: any commit whose message carries an AI trailer
+(`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.
+
+Commits counted as anything other than my own hand:
+
+| Commit | Counted as | Subject |
+|---|---|---|
+| `00e0f1f` | AI | Add JourneyGen tool for analyzing C# source and git history |
+| `d56cc61` | scaffold | Add initial setup for Ecom.WebApiApp including project file, HT… |
+
+</details>
+
 ### Concepts covered
 
 <details open>
@@ -246,7 +284,7 @@ classDiagram
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
@@ -282,7 +320,7 @@ classDiagram
 
 </details>
 
-<sub>Last updated 2026-09-18 08:29 UTC</sub>
+<sub>Last updated 2026-09-18 08:47 UTC</sub>
 
 <!-- JOURNEY:END -->
 

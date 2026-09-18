@@ -9,12 +9,11 @@ public static class SiteWriter
     static readonly JsonSerializerOptions Json = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         WriteIndented = false,
         // Default encoder escapes < > &, so the payload is safe inside <script>.
     };
 
-    public static object BuildPayload(JourneyConfig cfg, CodeAnalyzer analyzer, GitSummary git)
+    public static object BuildPayload(JourneyConfig cfg, CodeAnalyzer analyzer, GitSummary git, Provenance prov, string repoUrl = "")
     {
         var kinds = analyzer.Types
             .GroupBy(t => t.Kind)
@@ -39,6 +38,7 @@ public static class SiteWriter
         return new
         {
             title = cfg.Title,
+            repoUrl,
             code = new
             {
                 files = analyzer.SourceFiles.Count,
@@ -61,15 +61,32 @@ public static class SiteWriter
                 total = cfg.Concepts.Count,
                 areas,
             },
+            provenance = !prov.Available ? null : new
+            {
+                available = true,
+                app = Row(prov.App),
+                tooling = Row(prov.Tooling),
+                projects = prov.Projects.Select(p => new
+                {
+                    project = p.Project, isTooling = p.IsTooling,
+                    you = p.You, ai = p.Ai, scaffold = p.Scaffold,
+                    authored = p.Authored, youPercent = p.YouPercent, aiPercent = p.AiPercent,
+                }),
+                declared = prov.Declared.Select(d => new
+                {
+                    sha = d.Sha, subject = d.Subject,
+                    source = d.Source == Provenance.Source.Ai ? "AI" : "scaffold",
+                }),
+            },
             mermaid = MermaidRenderer.ClassDiagram(analyzer.Types, cfg.Diagram),
         };
     }
 
-    public static void Write(string outDir, JourneyConfig cfg, CodeAnalyzer analyzer, GitSummary git, string repoUrl)
+    public static void Write(string outDir, JourneyConfig cfg, CodeAnalyzer analyzer, GitSummary git, Provenance prov, string repoUrl)
     {
         Directory.CreateDirectory(outDir);
 
-        var payload = BuildPayload(cfg, analyzer, git);
+        var payload = BuildPayload(cfg, analyzer, git, prov, repoUrl);
         var json = JsonSerializer.Serialize(payload, Json);
 
         // Raw data next to the page, so the numbers are consumable without scraping HTML.
@@ -96,6 +113,12 @@ public static class SiteWriter
         // Pages otherwise runs the output through Jekyll, which drops files it doesn't like.
         File.WriteAllText(Path.Combine(outDir, ".nojekyll"), "");
     }
+
+    static object Row(ProvenanceStats s) => new
+    {
+        you = s.You, ai = s.Ai, scaffold = s.Scaffold, total = s.Total,
+        authored = s.Authored, youPercent = s.YouPercent, aiPercent = s.AiPercent,
+    };
 
     static string Pluralize(string kind, int count) => count == 1 ? kind : kind switch
     {

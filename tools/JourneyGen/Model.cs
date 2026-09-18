@@ -67,3 +67,44 @@ public sealed class GitSummary
     public List<WeekPoint> Weeks = new();
     public Dictionary<string, int> CommitsByProject = new();
 }
+
+public sealed class ProvenanceStats
+{
+    public string Project = "";
+    public bool IsTooling;
+    public int You;
+    public int Ai;
+    public int Scaffold;
+
+    public int Total => You + Ai + Scaffold;
+
+    /// <summary>Share of lines you wrote, counting only lines somebody actually authored.</summary>
+    public int YouPercent => Authored == 0 ? 0 : (int)Math.Round(100.0 * You / Authored);
+    public int AiPercent => Authored == 0 ? 0 : (int)Math.Round(100.0 * Ai / Authored);
+
+    /// <summary>Human + AI lines: template output is excluded, since neither of you wrote it.</summary>
+    public int Authored => You + Ai;
+
+    public void Add(Provenance.Source source)
+    {
+        switch (source)
+        {
+            case Provenance.Source.You: You++; break;
+            case Provenance.Source.Ai: Ai++; break;
+            case Provenance.Source.Scaffold: Scaffold++; break;
+        }
+    }
+}
+
+public sealed class ProvenanceConfig
+{
+    public bool Enabled = true;
+    public List<string> AiMarkers = new();
+    public List<string> AiCommits = new();
+    public List<string> AiPaths = new();
+    public List<string> ScaffoldCommits = new();
+    public List<string> ScaffoldPaths = new();
+    public List<string> BotAuthors = new();
+    /// <summary>Extra directories to measure that the code stats skip, e.g. tools/.</summary>
+    public List<string> ExtraPaths = new();
+}

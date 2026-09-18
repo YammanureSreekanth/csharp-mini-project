@@ -12,7 +12,7 @@ public static class ReadmeWriter
     public const string Start = "<!-- JOURNEY:START -->";
     public const string End = "<!-- JOURNEY:END -->";
 
-    public static string Render(JourneyConfig cfg, CodeAnalyzer analyzer, GitSummary git, string? siteUrl)
+    public static string Render(JourneyConfig cfg, CodeAnalyzer analyzer, GitSummary git, Provenance prov, string? siteUrl)
     {
         var done = cfg.Concepts.Count(c => c.Done);
         var total = cfg.Concepts.Count;
@@ -31,6 +31,8 @@ public static class ReadmeWriter
         sb.Append(Badge("lines", analyzer.TotalLines.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
         sb.Append(Badge("types", analyzer.Types.Count.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
         sb.Append(Badge("commits", git.TotalCommits.ToString(CultureInfo.InvariantCulture), "555555"));
+        if (prov.Available)
+            sb.Append(' ').Append(Badge("app code by me", prov.App.YouPercent + "%", "1BAF7A"));
         sb.AppendLine();
         sb.AppendLine();
 
@@ -62,6 +64,8 @@ public static class ReadmeWriter
             sb.AppendLine($"| `{p.Name}` | {p.Files} | {p.Lines} | {p.Types} |");
         sb.AppendLine();
 
+        if (prov.Available) AppendProvenance(sb, prov);
+
         sb.AppendLine("### Concepts covered");
         sb.AppendLine();
         foreach (var area in cfg.Concepts.GroupBy(c => c.Area))
@@ -90,6 +94,67 @@ public static class ReadmeWriter
         sb.Append(End);
         return sb.ToString();
     }
+
+    static void AppendProvenance(StringBuilder sb, Provenance prov)
+    {
+        var app = prov.App;
+        var tooling = prov.Tooling;
+
+        sb.AppendLine("### Who wrote this code");
+        sb.AppendLine();
+        sb.AppendLine($"**{app.YouPercent}% of the application code is mine** — {app.You} of the {app.Authored} " +
+                      "lines in it that anyone authored by hand.");
+        if (app.Scaffold > 0)
+            sb.AppendLine($"A further {app.Scaffold} lines are `dotnet new` template output, which neither I nor an AI wrote.");
+        sb.AppendLine();
+        sb.AppendLine("| Project | Mine | AI | Scaffold | Share authored by me |");
+        sb.AppendLine("|---|---:|---:|---:|---|");
+
+        foreach (var p in prov.Projects.Where(p => !p.IsTooling))
+        {
+            var share = p.Authored == 0 ? "— _template output only_" : $"`{Bar(p.YouPercent)}` {p.YouPercent}%";
+            sb.AppendLine($"| `{p.Project}` | {p.You} | {p.Ai} | {p.Scaffold} | {share} |");
+        }
+        sb.AppendLine($"| **Application total** | **{app.You}** | **{app.Ai}** | **{app.Scaffold}** | `{Bar(app.YouPercent)}` **{app.YouPercent}%** |");
+        sb.AppendLine();
+
+        if (tooling.Total > 0)
+        {
+            sb.AppendLine($"Separately, the tooling that generates this page is {tooling.Total} lines and " +
+                          $"**{tooling.AiPercent}% AI-written**. It is reported apart from the application " +
+                          "figures rather than averaged into them, since it builds the page and is not part " +
+                          "of the app:");
+            sb.AppendLine();
+            sb.AppendLine("| Tooling | Mine | AI | Share written by AI |");
+            sb.AppendLine("|---|---:|---:|---|");
+            foreach (var p in prov.Projects.Where(p => p.IsTooling))
+                sb.AppendLine($"| `{p.Project}` | {p.You} | {p.Ai} | `{Bar(p.AiPercent)}` {p.AiPercent}% |");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine("<details>");
+        sb.AppendLine("<summary>How this is measured, and what is declared</summary>");
+        sb.AppendLine();
+        sb.AppendLine("Every non-blank line is attributed with `git blame` to the commit that last touched it,");
+        sb.AppendLine("and each commit is classified once. Lines count as mine by default — a line is only");
+        sb.AppendLine("AI or scaffold because a rule in `journey.json` says so. Edit a scaffold line and blame");
+        sb.AppendLine("reassigns it to me automatically, so the split cannot drift from the code.");
+        sb.AppendLine();
+        sb.AppendLine("Going forward this is automatic: any commit whose message carries an AI trailer");
+        sb.AppendLine("(`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.");
+        sb.AppendLine();
+        sb.AppendLine("Commits counted as anything other than my own hand:");
+        sb.AppendLine();
+        sb.AppendLine("| Commit | Counted as | Subject |");
+        sb.AppendLine("|---|---|---|");
+        foreach (var (sha, subject, source) in prov.Declared.Take(20))
+            sb.AppendLine($"| `{sha}` | {(source == Provenance.Source.Ai ? "AI" : "scaffold")} | {Escape(Trim(subject, 64))} |");
+        sb.AppendLine();
+        sb.AppendLine("</details>");
+        sb.AppendLine();
+    }
+
+    static string Trim(string s, int max) => s.Length <= max ? s : s[..(max - 1)] + "…";
 
     public static string Inject(string readme, string block)
     {

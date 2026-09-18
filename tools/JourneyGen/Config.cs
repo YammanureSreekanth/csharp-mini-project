@@ -15,6 +15,7 @@ public sealed class JourneyConfig
     public string Title = "My .NET Journey";
     public string Tagline = "";
     public DiagramOptions Diagram = new();
+    public ProvenanceConfig Provenance = new();
     public List<Concept> Concepts = new();
 
     static readonly JsonDocumentOptions ReadOpts = new()
@@ -45,6 +46,19 @@ public sealed class JourneyConfig
             if (d.TryGetProperty("maxMembers", out var mm)) cfg.Diagram.MaxMembers = mm.GetInt32();
         }
 
+        if (root.TryGetProperty("provenance", out var pv))
+        {
+            var c = cfg.Provenance;
+            if (pv.TryGetProperty("enabled", out var en)) c.Enabled = en.GetBoolean();
+            ReadStrings(pv, "aiMarkers", c.AiMarkers);
+            ReadStrings(pv, "aiCommits", c.AiCommits);
+            ReadStrings(pv, "aiPaths", c.AiPaths);
+            ReadStrings(pv, "scaffoldCommits", c.ScaffoldCommits);
+            ReadStrings(pv, "scaffoldPaths", c.ScaffoldPaths);
+            ReadStrings(pv, "botAuthors", c.BotAuthors);
+            ReadStrings(pv, "extraPaths", c.ExtraPaths);
+        }
+
         if (root.TryGetProperty("areas", out var areas))
         {
             foreach (var area in areas.EnumerateArray())
@@ -69,6 +83,14 @@ public sealed class JourneyConfig
         }
 
         return cfg;
+    }
+
+    static void ReadStrings(JsonElement parent, string name, List<string> into)
+    {
+        if (!parent.TryGetProperty(name, out var arr) || arr.ValueKind != JsonValueKind.Array) return;
+        foreach (var e in arr.EnumerateArray())
+            if (e.ValueKind == JsonValueKind.String && e.GetString() is { Length: > 0 } v)
+                into.Add(v);
     }
 
     static IEnumerable<string> ReadDetectors(JsonElement c)

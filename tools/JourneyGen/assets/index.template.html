@@ -19,6 +19,9 @@
     --series-1:       #2a78d6;
     --series-1-soft:  rgba(42,120,214,0.12);
     --series-2:       #e34948;
+    --prov-you:       #2a78d6;
+    --prov-ai:        #eb6834;
+    --prov-scaffold:  #1baf7a;
     --good:           #0ca30c;
     --radius:         14px;
   }
@@ -36,6 +39,9 @@
       --series-1:      #3987e5;
       --series-1-soft: rgba(57,135,229,0.18);
       --series-2:      #e66767;
+      --prov-you:      #3987e5;
+      --prov-ai:       #d95926;
+      --prov-scaffold: #199e70;
       --good:          #0ca30c;
     }
   }
@@ -52,6 +58,9 @@
     --series-1:      #3987e5;
     --series-1-soft: rgba(57,135,229,0.18);
     --series-2:      #e66767;
+    --prov-you:      #3987e5;
+    --prov-ai:       #d95926;
+    --prov-scaffold: #199e70;
     --good:          #0ca30c;
   }
 
@@ -103,6 +112,16 @@
   .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-2); margin: 0 0 10px; }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+
+  /* ---- provenance ---- */
+  .prov { display: grid; grid-template-columns: minmax(230px, 300px) 1fr; gap: 16px; }
+  .prov .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
+  .prov .headline small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
+  .prov .split { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+  .prov .split div { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
+  .prov .split b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; }
+  .note code { font-size: 12px; }
 
   /* ---- concepts ---- */
   .areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; margin-bottom: 16px; }
@@ -204,6 +223,31 @@
     </div>
   </div>
 
+  <h2 class="section">Provenance</h2>
+  <div class="prov" id="provSection" hidden>
+    <div class="card">
+      <h2>Written by me</h2>
+      <p class="sub">Application code, by line.</p>
+      <div class="headline" id="provPct">—<small id="provCap"></small></div>
+      <div class="split" id="provSplit"></div>
+    </div>
+    <div class="card">
+      <h2>Per project</h2>
+      <p class="sub">Application projects. Every non-blank line, attributed with <code>git blame</code>.</p>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--prov-you)"></i>Mine</span>
+        <span><i class="swatch" style="background:var(--prov-ai)"></i>AI-written</span>
+        <span><i class="swatch" style="background:var(--prov-scaffold)"></i><code>dotnet new</code> scaffold</span>
+      </div>
+      <div class="chartbox" id="provBox"><canvas id="provChart"></canvas></div>
+      <p class="note" id="provNote"></p>
+      <details class="data" id="provAudit">
+        <summary>How this is measured, and which commits are declared</summary>
+        <div id="provAuditBody"></div>
+      </details>
+    </div>
+  </div>
+
   <h2 class="section">Concepts</h2>
   <div class="areas" id="areas"></div>
 
@@ -269,6 +313,56 @@
     return '<div class="tile"><div class="v">' + t[1] + '</div><div class="k">' + t[0] + "</div></div>";
   }).join("");
 
+  /* ---------- provenance ---------- */
+  var P = D.provenance;
+  if (P && P.available) {
+    document.getElementById("provSection").hidden = false;
+    document.getElementById("provPct").firstChild.nodeValue = P.app.youPercent + "%";
+    document.getElementById("provCap").textContent =
+      P.app.you + " of " + P.app.authored + " hand-authored lines in the application";
+
+    var rows = [
+      ["var(--prov-you)", "Mine", P.app.you],
+      ["var(--prov-ai)", "AI-written", P.app.ai],
+      ["var(--prov-scaffold)", "Scaffold", P.app.scaffold]
+    ];
+    document.getElementById("provSplit").innerHTML = rows.map(function (r) {
+      return '<div><i class="swatch" style="background:' + r[0] + '"></i>' +
+             r[1] + " &middot; <b>" + num(r[2]) + "</b> lines</div>";
+    }).join("");
+
+    var method =
+      "<p class='note'>Every non-blank line is attributed with <code>git blame -w -M</code> to the " +
+      "commit that last touched it, and each commit is classified once. <b>Lines count as mine by " +
+      "default</b> \u2014 a line is only AI or scaffold because a rule in <code>journey.json</code> says so. " +
+      "<code>-w</code> ignores whitespace-only changes and <code>-M</code> follows code moved within a " +
+      "file, so a reformat does not transfer authorship. Edit a scaffold line and blame reassigns it " +
+      "to me automatically.</p>" +
+      "<p class='note'>Going forward this is automatic: any commit whose message carries an AI trailer " +
+      "(<code>Co-Authored-By: Claude</code>) has its lines counted as AI-written. Commits with my own " +
+      "message and no trailer count as mine.</p>";
+
+    var declared = (P.declared || []);
+    if (declared.length) {
+      method += table("Commits counted as anything other than my own hand",
+        ["Commit", "Counted as", "Subject"],
+        declared.map(function (r) {
+          var sha = D.repoUrl
+            ? '<a href="' + D.repoUrl + '/commit/' + r.sha + '">' + r.sha + "</a>"
+            : r.sha;
+          return [{ html: sha }, r.source, r.subject];
+        }), false);
+    }
+    document.getElementById("provAuditBody").innerHTML = method;
+
+    if (P.tooling && P.tooling.total > 0) {
+      document.getElementById("provNote").innerHTML =
+        "The tooling that builds this page is a further <b>" + num(P.tooling.total) +
+        "</b> lines, <b>" + P.tooling.aiPercent + "% AI-written</b>. It is kept out of the " +
+        "figures above rather than averaged in, since it generates the page and is not part of the app.";
+    }
+  }
+
   /* ---------- concept areas ---------- */
   document.getElementById("areas").innerHTML = D.concepts.areas.map(function (a) {
     var p = a.concepts.length ? Math.round(100 * a.done / a.concepts.length) : 0;
@@ -306,6 +400,30 @@
           ctx.textBaseline = "middle";
           ctx.textAlign = "left";
           ctx.fillText(num(v), el.x + 8, el.y);
+          ctx.restore();
+        });
+      });
+    }
+  };
+
+  var segmentLabels = {
+    id: "segmentLabels",
+    afterDatasetsDraw: function (chart, args, opts) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function (dset, i) {
+        var meta = chart.getDatasetMeta(i);
+        if (meta.hidden) return;
+        meta.data.forEach(function (el, idx) {
+          var v = dset.data[idx];
+          if (!v) return;
+          var w = Math.abs(el.x - el.base);
+          if (w < 36) return;                     // too narrow to hold a number
+          ctx.save();
+          ctx.fillStyle = opts.color;
+          ctx.font = '600 11.5px system-ui, -apple-system, "Segoe UI", sans-serif';
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(num(v), (el.x + el.base) / 2, el.y);
           ctx.restore();
         });
       });
@@ -429,17 +547,64 @@
     horizontal("kindChart", "kindBox",
       D.code.kinds.map(function (k) { return k.kind; }),
       D.code.kinds.map(function (k) { return k.count; }));
+
+    /* Provenance: stacked by line count, 2px surface gap between segments. */
+    if (P && P.available) {
+      var pr = P.projects.filter(function (r) { return !r.isTooling; });
+      var o = baseOptions(muted, grid);
+      o.indexAxis = "y";
+      o.interaction = { mode: "index", intersect: false };
+      o.scales = {
+        x: { stacked: true, display: false, grid: { display: false }, beginAtZero: true, border: { display: false } },
+        y: { stacked: true, grid: { display: false }, border: { color: css("--axis") },
+             ticks: { color: css("--ink-2"), font: { size: 12 } } }
+      };
+      o.plugins.segmentLabels = { color: "#ffffff" };
+      o.plugins.tooltip.callbacks = {
+        label: function (i) {
+          if (!i.parsed.x) return null;
+          return i.dataset.label + ": " + num(i.parsed.x) + " lines";
+        }
+      };
+
+      function ds(label, color, pick) {
+        return {
+          label: label, data: pr.map(pick), backgroundColor: color,
+          borderColor: surface, borderWidth: 2, borderSkipped: false, borderRadius: 4,
+          categoryPercentage: 0.74, barPercentage: 0.9
+        };
+      }
+
+      document.getElementById("provBox").style.height = Math.max(150, pr.length * 38 + 26) + "px";
+      charts.push(new Chart(document.getElementById("provChart"), {
+        type: "bar",
+        data: {
+          labels: pr.map(function (r) { return r.project; }),
+          datasets: [
+            ds("Mine", css("--prov-you"), function (r) { return r.you; }),
+            ds("AI-written", css("--prov-ai"), function (r) { return r.ai; }),
+            ds("Scaffold", css("--prov-scaffold"), function (r) { return r.scaffold; })
+          ]
+        },
+        options: o,
+        plugins: [segmentLabels]
+      }));
+    }
   }
 
   /* ---------- tables (accessible fallback for every chart) ---------- */
-  function table(caption, head, rows) {
+  // numeric (default true): right-align every column after the first.
+  function table(caption, head, rows, numeric) {
+    var n = numeric !== false;
     return "<table><caption style='text-align:left;color:var(--ink-muted);font-size:12px;padding:6px 0'>" +
       esc(caption) + "</caption><thead><tr>" +
-      head.map(function (h, i) { return "<th" + (i ? ' class="n"' : "") + ">" + esc(h) + "</th>"; }).join("") +
+      head.map(function (h, i) { return "<th" + (n && i ? ' class="n"' : "") + ">" + esc(h) + "</th>"; }).join("") +
       "</tr></thead><tbody>" +
       rows.map(function (r) {
         return "<tr>" + r.map(function (c, i) {
-          return "<td" + (i ? ' class="n"' : "") + ">" + esc(c) + "</td>";
+          var cell = (c && typeof c === "object" && "html" in c) ? c.html : esc(c);
+          var cls = (n && i && typeof c !== "object") ? ' class="n"' : "";
+          return "<td" + cls + ">" + cell + "</td>";
         }).join("") + "</tr>";
       }).join("") + "</tbody></table>";
   }
@@ -450,7 +615,11 @@
     table("Code by project", ["Project", "Files", "Lines", "Types"],
       D.code.projects.map(function (p) { return [p.name, p.files, p.lines, p.types]; })) +
     table("Types by kind", ["Kind", "Count"],
-      D.code.kinds.map(function (k) { return [k.kind, k.count]; }));
+      D.code.kinds.map(function (k) { return [k.kind, k.count]; })) +
+    (P && P.available
+      ? table("Code provenance (lines)", ["Project", "Mine", "AI", "Scaffold"],
+          P.projects.map(function (r) { return [r.project, r.you, r.ai, r.scaffold]; }))
+      : "");
 
   /* ---------- mermaid ---------- */
   function renderDiagram() {

@@ -30,11 +30,33 @@ Console.WriteLine($"journeygen: {analyzer.SourceFiles.Count} files, {analyzer.To
 var git = GitHistory.Read(root);
 Console.WriteLine($"journeygen: {git.TotalCommits} commits across {git.Weeks.Count} weeks");
 
+var provenance = new Provenance(root, config.Provenance);
+if (config.Provenance.Enabled)
+{
+    // The code stats skip tools/, but hiding AI-written tooling from an AI-share
+    // number would defeat the point, so measure the extra paths too.
+    var extra = config.Provenance.ExtraPaths
+        .Select(p => Path.Combine(root, p))
+        .Where(Directory.Exists)
+        .SelectMany(dir => Directory.EnumerateFiles(dir, "*.cs", SearchOption.AllDirectories))
+        .Select(f => Path.GetRelativePath(root, f).Replace('\\', '/'))
+        .Where(f => !f.Contains("/bin/") && !f.Contains("/obj/"));
+
+    provenance.Run(analyzer.SourceFiles.Concat(extra).Distinct(StringComparer.Ordinal));
+
+    if (provenance.Available)
+        Console.WriteLine($"journeygen: app code {provenance.App.YouPercent}% yours " +
+                          $"({provenance.App.You} yours / {provenance.App.Ai} AI / {provenance.App.Scaffold} scaffold); " +
+                          $"tooling {provenance.Tooling.Total} lines ({provenance.Tooling.Ai} AI)");
+    else
+        Console.Error.WriteLine("journeygen: provenance unavailable (no git history?)");
+}
+
 config.Evaluate(analyzer, root);
 var done = config.Concepts.Count(c => c.Done);
 Console.WriteLine($"journeygen: {done}/{config.Concepts.Count} concepts covered");
 
-var block = ReadmeWriter.Render(config, analyzer, git, siteUrl);
+var block = ReadmeWriter.Render(config, analyzer, git, provenance, siteUrl);
 
 if (readmePath is null)
 {
@@ -63,7 +85,7 @@ else
 
 if (!check)
 {
-    SiteWriter.Write(outDir, config, analyzer, git, repoUrl);
+    SiteWriter.Write(outDir, config, analyzer, git, provenance, repoUrl);
     Console.WriteLine($"journeygen: wrote {Path.GetRelativePath(root, outDir)}/index.html");
 }
 

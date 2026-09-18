@@ -48,6 +48,55 @@ List several and any one match counts. The `auto:` ids are the strings passed to
 `CodeAnalyzer.DetectRepoShapeFeatures`. To teach it something new, add a
 `Mark("my-feature")` to the walker and reference `auto:my-feature` in the config.
 
+## Code provenance
+
+The page reports how much of the code each party actually wrote, split three ways:
+**mine**, **AI-written**, and **`dotnet new` scaffold**. Application projects carry the
+headline figure; `tools/` is reported separately so AI-written tooling cannot skew it.
+
+Every non-blank line is attributed with `git blame -w -M` to the commit that last touched
+it, and each commit is classified once. Lines count as yours by default — a line is only
+AI or scaffold because a rule in `journey.json` says so. `-w` ignores whitespace-only
+changes and `-M` follows code moved within a file, so a reformat does not transfer
+authorship.
+
+### Keeping it honest going forward
+
+**When AI writes code for you, put a trailer in the commit message.** That is the whole
+convention, and it is what keeps the number true without any bookkeeping:
+
+```
+Add product search with filters
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+```
+
+Any commit whose message matches an entry in `provenance.aiMarkers` has its lines counted
+as AI-written. Commits without a marker count as yours. If you forget on a commit, add its
+sha to `provenance.aiCommits` instead — that is how `00e0f1f` (which added this tool) is
+declared, since it predates the convention.
+
+### The declarations in place
+
+| Rule | Value | Why |
+|---|---|---|
+| `aiPaths` | `tools/` | this generator is AI-written in full |
+| `aiCommits` | `00e0f1f` | added `tools/JourneyGen` before the trailer convention existed |
+| `scaffoldCommits` | `d56cc61` | `dotnet new mvc` + `dotnet new webapi`; every `.cs` file it added is still byte-identical to the template |
+| `botAuthors` | `github-actions[bot]` | the workflow's own README commits |
+
+Edit a scaffold line and blame reassigns it to you automatically — the split tracks the
+code rather than the declaration going stale.
+
+### Verifying a scaffold claim
+
+To re-check that a file really is untouched template output:
+
+```bash
+dotnet new mvc -n Ecom.MvcWebApp -o /tmp/tpl --no-restore
+diff /tmp/tpl/Program.cs Ecom.MvcWebApp/Program.cs
+```
+
 ## Files
 
 | File | Role |
@@ -55,6 +104,7 @@ List several and any one match counts. The `auto:` ids are the strings passed to
 | `CodeAnalyzer.cs` | walks every `.cs` file, collects types and per-project stats |
 | `FeatureWalker.cs` | the syntax-level feature detectors |
 | `GitHistory.cs` | weekly commit/churn timeline from `git log` |
+| `Provenance.cs` | line-level authorship split via `git blame` |
 | `Config.cs` | loads `journey.json`, evaluates each concept |
 | `MermaidRenderer.cs` | class diagram from the parsed types |
 | `ReadmeWriter.cs` | the README block |

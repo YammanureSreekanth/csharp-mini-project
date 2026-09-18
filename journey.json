@@ -10,6 +10,40 @@
   "title": "My .NET Journey",
   "tagline": "A running record of the C# and .NET ground I have actually covered, generated from this repository on every push.",
 
+  // Who actually wrote each surviving line, counted with `git blame`.
+  //
+  // Default is "you": a line only counts as AI or scaffold when something below
+  // says so. Going forward the trailer in `aiMarkers` does this automatically —
+  // put it in any commit message where AI wrote code and the line moves bucket.
+  "provenance": {
+    "enabled": true,
+
+    // A commit message containing any of these counts as AI-written.
+    "aiMarkers": [
+      "Co-Authored-By: Claude",
+      "Assisted-By: Claude",
+      "Co-Authored-By: Copilot",
+      "Assisted-By: AI"
+    ],
+
+    // History written before the trailer convention existed, declared by hand.
+    // 00e0f1f added tools/JourneyGen, which Claude wrote in full.
+    "aiCommits": ["00e0f1f"],
+
+    // Everything under these paths is AI-written regardless of commit.
+    "aiPaths": ["tools/"],
+
+    // `dotnet new` output, not authored by anyone. d56cc61 scaffolded both web
+    // projects; every .cs file it added is still byte-identical to the template.
+    "scaffoldCommits": ["d56cc61"],
+    "scaffoldPaths": [],
+
+    "botAuthors": ["github-actions[bot]", "dependabot"],
+
+    // Measured for provenance even though the code stats above skip them.
+    "extraPaths": ["tools"]
+  },
+
   "diagram": {
     "namespaceContains": "Domain",
     "showMembers": true,
