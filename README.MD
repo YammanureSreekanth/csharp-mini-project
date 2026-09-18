@@ -5,13 +5,32 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-54_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![commits](https://img.shields.io/badge/commits-27-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![commits](https://img.shields.io/badge/commits-28-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `█████████████░░░░░░░` **66%**
+**Progress** `████████████░░░░░░░░` **62%**
 
 Started 2026-08-08 · last commit 2026-09-18 · 7 active days
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
+
+### Learning plan from my manager
+
+Set by my manager · assigned 2026-08-25 · next review **2026-09-22** (in 4 days)
+
+`█████████░░░░░░░░░░░` **3 of 7 complete** · 4 in progress
+
+| Item | Status | Evidence in the code |
+|---|---|---|
+| DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
+| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✗ `IList<T>`<br>✗ `IEnumerable<T>` |
+| Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
+| ILogger | 🔄 In progress | _none yet_ |
+| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress | _none yet_ |
+| Service Bus | 🔄 In progress | _none yet_ |
+| IDisposable | 🔄 In progress | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/MySQLConnection.cs</sub><br>✗ `Implemented myself` |
+
+> **Marked complete, but the code does not fully show it yet:** List, IList and IEnumerable.
+> Status above is my own; the evidence column is generated from the source, so the two can disagree.
 
 ### Domain model
 
@@ -173,13 +192,13 @@ reassigns it to me automatically, so the split cannot drift from the code.
 Going forward this is automatic: any commit whose message carries an AI trailer
 (`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.
 
-The tooling that builds this page is a further 1537 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
+The tooling that builds this page is a further 1739 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
 page template. It is kept out of the figures above rather than averaged into them,
 since it generates the page and is not part of the application.
 
 | Tooling | Mine | AI | Share written by AI |
 |---|---:|---:|---|
-| `tools` | 0 | 1537 | `████████████████████` 100% |
+| `tools` | 0 | 1739 | `████████████████████` 100% |
 
 Commits counted as anything other than my own hand:
 
@@ -257,7 +276,7 @@ Commits counted as anything other than my own hand:
 </details>
 
 <details open>
-<summary><b>Collections & LINQ</b> — 3/6</summary>
+<summary><b>Collections & LINQ</b> — 4/9</summary>
 
 - [x] **Generic collections** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +1</sub>
@@ -265,11 +284,14 @@ Commits counted as anything other than my own hand:
 - [ ] LINQ query syntax
 - [ ] Extension methods
 - [ ] Iterators (yield)
+- [ ] IEnumerable<T>
+- [ ] IList<T>
+- [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 
 </details>
 
 <details open>
-<summary><b>Errors, resources & async</b> — 7/10</summary>
+<summary><b>Errors, resources & async</b> — 7/13</summary>
 
 - [x] **try / catch** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
@@ -281,6 +303,9 @@ Commits counted as anything other than my own hand:
 - [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
 - [x] **async / await** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
 - [ ] Task / ValueTask
+- [ ] ILogger
+- [ ] Structured logging
+- [ ] IDisposable implemented
 
 </details>
 
@@ -288,7 +313,7 @@ Commits counted as anything other than my own hand:
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
@@ -298,7 +323,7 @@ Commits counted as anything other than my own hand:
 </details>
 
 <details open>
-<summary><b>ASP.NET Core</b> — 8/10</summary>
+<summary><b>ASP.NET Core</b> — 11/13</summary>
 
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
@@ -310,6 +335,18 @@ Commits counted as anything other than my own hand:
 - [x] **OpenAPI / Swagger** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [ ] Configuration binding
 - [ ] Authentication — roadmap <sub>planned</sub>
+- [x] **IoC container** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
+- [x] **DI lifetimes** — scoped / singleton / transient <sub>`Ecom.MvcWebApp/Program.cs`</sub>
+- [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
+
+</details>
+
+<details>
+<summary><b>Messaging & integration</b> — 0/3</summary>
+
+- [ ] Azure Service Bus
+- [ ] HttpClient
+- [ ] Background services
 
 </details>
 
@@ -324,7 +361,7 @@ Commits counted as anything other than my own hand:
 
 </details>
 
-<sub>Last updated 2026-09-18 13:03 UTC</sub>
+<sub>Last updated 2026-09-18 13:17 UTC</sub>
 
 <!-- JOURNEY:END -->
 

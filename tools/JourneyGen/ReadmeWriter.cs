@@ -47,6 +47,8 @@ public static class ReadmeWriter
         }
         sb.AppendLine();
 
+        if (cfg.Assignment.Items.Count > 0) AppendAssignment(sb, cfg.Assignment);
+
         sb.AppendLine("### Domain model");
         sb.AppendLine();
         sb.AppendLine("_Generated from the source on every push — this diagram cannot drift from the code._");
@@ -93,6 +95,63 @@ public static class ReadmeWriter
         sb.AppendLine();
         sb.Append(End);
         return sb.ToString();
+    }
+
+    static void AppendAssignment(StringBuilder sb, Assignment a)
+    {
+        sb.AppendLine($"### {Escape(a.Title)}");
+        sb.AppendLine();
+
+        var meta = new List<string>();
+        if (a.Source.Length > 0) meta.Add(Escape(a.Source));
+        if (a.AssignedOn.Length > 0) meta.Add($"assigned {a.AssignedOn}");
+        if (a.ReviewOn.Length > 0)
+        {
+            var days = a.DaysToReview;
+            meta.Add(days is null
+                ? $"next review {a.ReviewOn}"
+                : $"next review **{a.ReviewOn}** ({(days == 0 ? "today" : days == 1 ? "in 1 day" : $"in {days} days")})");
+        }
+        if (meta.Count > 0) { sb.AppendLine(string.Join(" · ", meta)); sb.AppendLine(); }
+
+        sb.AppendLine($"`{Bar(a.DonePercent)}` **{a.Done} of {a.Items.Count} complete** " +
+                      $"· {a.InProgress} in progress" + (a.NotStarted > 0 ? $" · {a.NotStarted} not started" : ""));
+        sb.AppendLine();
+
+        sb.AppendLine("| Item | Status | Evidence in the code |");
+        sb.AppendLine("|---|---|---|");
+        foreach (var i in a.Items)
+            sb.AppendLine($"| {Escape(i.Label)}{(i.Notes.Length > 0 ? $"<br><sub>{Escape(i.Notes)}</sub>" : "")} " +
+                          $"| {StatusLabel(i)} | {EvidenceCell(i)} |");
+        sb.AppendLine();
+
+        var shaky = a.Items.Where(i => i.Unevidenced || i.PartiallyEvidenced).ToList();
+        if (shaky.Count > 0)
+        {
+            sb.AppendLine("> **Marked complete, but the code does not fully show it yet:** " +
+                          string.Join(", ", shaky.Select(i => Escape(i.Label))) + ".");
+            sb.AppendLine("> Status above is my own; the evidence column is generated from the source, so the two can disagree.");
+            sb.AppendLine();
+        }
+    }
+
+    static string StatusLabel(AssignmentItem i) => i.Status switch
+    {
+        "done" => "✅ Completed",
+        "in-progress" => "🔄 In progress",
+        _ => "⬜ Not started",
+    };
+
+    static string EvidenceCell(AssignmentItem i)
+    {
+        if (i.Parts.Count > 0)
+            return string.Join("<br>", i.Parts.Select(p =>
+                $"{(p.Detected ? "✓" : "✗")} `{Escape(p.Label)}`" +
+                (p.Detected && p.Evidence.Count > 0 ? $" <sub>{p.Evidence[0]}</sub>" : "")));
+
+        if (!i.Detected) return "_none yet_";
+        var first = i.Evidence.Count > 0 ? $"`{i.Evidence[0]}`" : "found";
+        return first + (i.Evidence.Count > 1 ? $" <sub>+{i.Evidence.Count - 1}</sub>" : "");
     }
 
     static void AppendProvenance(StringBuilder sb, Provenance prov)

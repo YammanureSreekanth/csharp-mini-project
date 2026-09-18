@@ -108,3 +108,60 @@ public sealed class ProvenanceConfig
     /// <summary>Extra directories to measure that the code stats skip, e.g. tools/.</summary>
     public List<string> ExtraPaths = new();
 }
+
+/// <summary>A learning plan handed down by someone else, with dates and declared status.</summary>
+public sealed class Assignment
+{
+    public string Title = "Learning plan";
+    public string Source = "";              // who set it
+    public string AssignedOn = "";           // ISO date
+    public string ReviewOn = "";             // ISO date of the next check-in
+    public string Note = "";
+    public List<AssignmentItem> Items = new();
+
+    public int Done => Items.Count(i => i.Status == "done");
+    public int InProgress => Items.Count(i => i.Status == "in-progress");
+    public int NotStarted => Items.Count(i => i.Status == "not-started");
+
+    public int DonePercent => Items.Count == 0 ? 0 : (int)Math.Round(100.0 * Done / Items.Count);
+
+    /// <summary>Whole days until the review, or null when no date is set or it has passed.</summary>
+    public int? DaysToReview
+    {
+        get
+        {
+            if (!DateOnly.TryParse(ReviewOn, out var d)) return null;
+            var days = d.DayNumber - DateOnly.FromDateTime(DateTime.UtcNow).DayNumber;
+            return days < 0 ? null : days;
+        }
+    }
+}
+
+public sealed class AssignmentItem
+{
+    public string Label = "";
+    /// <summary>Declared by the learner, not inferred: done | in-progress | not-started.</summary>
+    public string Status = "not-started";
+    public string Notes = "";
+    public List<string> Detectors = new();
+    public List<AssignmentPart> Parts = new();
+
+    /// <summary>Whether the code actually shows this, independent of the declared status.</summary>
+    public bool Detected;
+    public List<string> Evidence = new();
+
+    /// <summary>Declared complete but nothing in the code backs it up.</summary>
+    public bool Unevidenced => Status == "done" && !Detected && Parts.Count == 0;
+
+    /// <summary>Declared complete but only some named parts are present.</summary>
+    public bool PartiallyEvidenced =>
+        Status == "done" && Parts.Count > 0 && Parts.Any(p => !p.Detected);
+}
+
+public sealed class AssignmentPart
+{
+    public string Label = "";
+    public List<string> Detectors = new();
+    public bool Detected;
+    public List<string> Evidence = new();
+}

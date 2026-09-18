@@ -15,6 +15,70 @@
   // Default is "you": a line only counts as AI or scaffold when something below
   // says so. Going forward the trailer in `aiMarkers` does this automatically —
   // put it in any commit message where AI wrote code and the line moves bucket.
+  // The learning plan my manager set, with my own declared status for each item.
+  //
+  // Status is DECLARED by me ("done" / "in-progress" / "not-started") — the tool does
+  // not infer it. The detectors are separate: they look for evidence in the code and
+  // the page shows both, so a "done" with nothing behind it is visible rather than
+  // hidden. Replace `items` after each review and bump the two dates.
+  "assignment": {
+    "title": "Learning plan from my manager",
+    "source": "Set by my manager",
+    "assignedOn": "2026-08-25",
+    "reviewOn": "2026-09-22",
+    "note": "Reviewed at each follow-up meeting; the list is replaced with a new one based on the feedback.",
+    "items": [
+      {
+        "label": "DI & IoC",
+        "status": "done",
+        "detect": [
+          "regex:Add(Scoped|Singleton|Transient)\\b",
+          "regex:\\b(IServiceProvider|IServiceCollection|GetRequiredService)\\b"
+        ]
+      },
+      {
+        "label": "List, IList and IEnumerable",
+        "status": "done",
+        "notes": "the trade-off between exposing a concrete list and an abstraction",
+        "parts": [
+          { "label": "List<T>",          "detect": "regex:\\bList<" },
+          { "label": "IReadOnlyList<T>", "detect": "regex:\\bIReadOnlyList[<\\s]" },
+          { "label": "IList<T>",         "detect": "regex:\\bIList[<\\s]" },
+          { "label": "IEnumerable<T>",   "detect": "regex:\\bIEnumerable[<\\s]" }
+        ]
+      },
+      {
+        "label": "Async",
+        "status": "done",
+        "detect": ["auto:async-await", "auto:task-based-async"]
+      },
+      {
+        "label": "ILogger",
+        "status": "in-progress",
+        "detect": ["regex:\\bILogger\\b", "regex:Microsoft\\.Extensions\\.Logging"]
+      },
+      {
+        "label": "Structured logging",
+        "status": "in-progress",
+        "notes": "message templates with named placeholders, not string interpolation",
+        "detect": "regex:\\.Log\\w+\\(\"[^\"]*\\{[A-Za-z]"
+      },
+      {
+        "label": "Service Bus",
+        "status": "in-progress",
+        "detect": ["regex:ServiceBus", "regex:QueueClient", "regex:Azure\\.Messaging"]
+      },
+      {
+        "label": "IDisposable",
+        "status": "in-progress",
+        "parts": [
+          { "label": "Consumed with using", "detect": "auto:using-idisposable" },
+          { "label": "Implemented myself",  "detect": ["regex:\\bvoid\\s+Dispose\\s*\\(", "regex:\\bIDisposable\\b"] }
+        ]
+      }
+    ]
+  },
+
   "provenance": {
     "enabled": true,
 
@@ -118,7 +182,10 @@
         { "id": "linq-method-syntax", "label": "LINQ method syntax",   "detect": "auto:linq-method-syntax" },
         { "id": "linq-query-syntax",  "label": "LINQ query syntax",    "detect": "auto:linq-query-syntax" },
         { "id": "extension-methods",  "label": "Extension methods",    "detect": "auto:extension-methods" },
-        { "id": "iterators-yield",    "label": "Iterators (yield)",    "detect": "auto:iterators-yield" }
+        { "id": "iterators-yield",    "label": "Iterators (yield)",    "detect": "auto:iterators-yield" },
+        { "id": "ienumerable",        "label": "IEnumerable<T>",       "detect": "regex:\\bIEnumerable[<\\s]" },
+        { "id": "ilist",              "label": "IList<T>",             "detect": "regex:\\bIList[<\\s]" },
+        { "id": "ireadonlylist",      "label": "IReadOnlyList<T>",     "detect": "regex:\\bIReadOnlyList[<\\s]" }
       ]
     },
     {
@@ -133,7 +200,10 @@
         { "id": "custom-attributes",   "label": "Custom attributes",    "detect": "auto:custom-attributes" },
         { "id": "logging",             "label": "Logging",              "detect": ["regex:\\bILogger\\b", "regex:class\\s+Logger\\b"] },
         { "id": "async-await",         "label": "async / await",        "detect": "auto:async-await" },
-        { "id": "task-based-async",    "label": "Task / ValueTask",     "detect": "auto:task-based-async" }
+        { "id": "task-based-async",    "label": "Task / ValueTask",     "detect": "auto:task-based-async" },
+        { "id": "ilogger",             "label": "ILogger",              "detect": ["regex:\\bILogger\\b", "regex:Microsoft\\.Extensions\\.Logging"] },
+        { "id": "structured-logging",  "label": "Structured logging",   "detect": "regex:\\.Log\\w+\\(\"[^\"]*\\{[A-Za-z]" },
+        { "id": "idisposable-impl",    "label": "IDisposable implemented", "detect": ["regex:\\bvoid\\s+Dispose\\s*\\(", "regex:\\bIDisposable\\b"] }
       ]
     },
     {
@@ -160,7 +230,18 @@
         { "id": "minimal-apis",         "label": "Minimal APIs",          "detect": "auto:minimal-apis" },
         { "id": "openapi",              "label": "OpenAPI / Swagger",     "detect": ["regex:AddOpenApi", "regex:MapOpenApi", "regex:Swagger"] },
         { "id": "configuration",        "label": "Configuration binding", "detect": ["regex:GetConnectionString", "regex:builder\\.Configuration"] },
-        { "id": "auth",                 "label": "Authentication",        "detect": "manual",               "notes": "roadmap" }
+        { "id": "auth",                 "label": "Authentication",        "detect": "manual",               "notes": "roadmap" },
+        { "id": "ioc-container",        "label": "IoC container",         "detect": "regex:\\b(IServiceProvider|IServiceCollection|GetRequiredService)\\b" },
+        { "id": "di-lifetimes",         "label": "DI lifetimes",          "detect": "regex:Add(Scoped|Singleton|Transient)\\b", "notes": "scoped / singleton / transient" },
+        { "id": "custom-middleware",    "label": "Custom middleware",     "detect": ["path:Middlewares/", "regex:\\bInvokeAsync\\b"] }
+      ]
+    },
+    {
+      "name": "Messaging & integration",
+      "concepts": [
+        { "id": "service-bus",  "label": "Azure Service Bus", "detect": ["regex:ServiceBus", "regex:QueueClient", "regex:Azure\\.Messaging"] },
+        { "id": "http-client",  "label": "HttpClient",        "detect": ["regex:\\bHttpClient\\b", "regex:AddHttpClient"] },
+        { "id": "background-services", "label": "Background services", "detect": ["regex:BackgroundService", "regex:IHostedService"] }
       ]
     },
     {

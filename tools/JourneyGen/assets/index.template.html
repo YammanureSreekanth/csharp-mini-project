@@ -113,6 +113,41 @@
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
 
+  /* ---- assignment ---- */
+  .plan { display: grid; grid-template-columns: minmax(230px, 290px) 1fr; gap: 16px; }
+  .plan .count { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
+  .plan .count small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
+  .plan dl { margin: 16px 0 0; font-size: 13px; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; }
+  .plan dt { color: var(--ink-muted); }
+  .plan dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .due { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 10px;
+         border-radius: 999px; background: var(--series-1-soft); color: var(--ink); margin-top: 14px; }
+
+  .items { display: flex; flex-direction: column; }
+  .item { display: grid; grid-template-columns: 148px 1fr; gap: 14px; padding: 13px 0;
+          border-top: 1px solid var(--grid); align-items: start; }
+  .item:first-child { border-top: 0; }
+  .pill { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; white-space: nowrap; }
+  .pill .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .pill.done .dot { background: var(--good); }
+  .pill.wip  .dot { background: var(--series-1); }
+  .pill.todo .dot { background: transparent; border: 1.5px solid var(--ink-muted); }
+  .pill.done { color: var(--ink); }
+  .pill.wip  { color: var(--ink); }
+  .pill.todo { color: var(--ink-muted); }
+  .item h3 { margin: 0 0 3px; font-size: 14.5px; font-weight: 600; }
+  .item .why { margin: 0 0 6px; font-size: 12.5px; color: var(--ink-muted); }
+  .parts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+  .part { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 3px 9px;
+          border-radius: 999px; border: 1px solid var(--border); color: var(--ink-2); }
+  .part.yes { background: var(--series-1-soft); border-color: transparent; color: var(--ink); }
+  .part.yes .m { color: var(--good); }
+  .part.no { border-style: dashed; color: var(--ink-muted); }
+  .ev { font-size: 12px; color: var(--ink-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .ev.empty { font-family: inherit; font-style: italic; }
+  .caution { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; margin-top: 6px;
+             padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); color: var(--ink-2); }
+
   /* ---- provenance ---- */
   .prov { display: grid; grid-template-columns: minmax(230px, 300px) 1fr; gap: 16px; }
   .prov .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
@@ -155,9 +190,17 @@
   h2.section { font-size: 13px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-muted); margin: 30px 0 12px; font-weight: 600; }
 
   @media (max-width: 720px) {
-    .hero { grid-template-columns: 1fr; }
+    /* Every two-column grid collapses; a fixed min column would force the page
+       wider than the screen. */
+    .hero, .plan, .prov { grid-template-columns: 1fr; }
+    .item { grid-template-columns: 1fr; gap: 5px; }
     .wrap { padding: 22px 16px 56px; }
   }
+
+  /* Repo-relative paths are long and unbreakable; let them wrap rather than
+     push the page sideways. */
+  .ev { overflow-wrap: anywhere; }
+  .part, .chip { max-width: 100%; }
 </style>
 </head>
 <body>
@@ -189,6 +232,24 @@
       </div>
     </div>
     <div class="tiles" id="tiles"></div>
+  </div>
+
+  <h2 class="section" id="planHeading" hidden>Learning plan</h2>
+  <div class="plan" id="planSection" hidden>
+    <div class="card">
+      <h2 id="planTitle">Learning plan</h2>
+      <p class="sub" id="planSource"></p>
+      <div class="count" id="planCount">—<small id="planCountCap"></small></div>
+      <div class="bar"><i id="planBar" style="width:0%"></i></div>
+      <dl id="planDates"></dl>
+      <div class="due" id="planDue" hidden></div>
+    </div>
+    <div class="card">
+      <h2>Items</h2>
+      <p class="sub">Status is my own; the evidence beside it is generated from the source.</p>
+      <div class="items" id="planItems"></div>
+      <p class="note" id="planNote" hidden></p>
+    </div>
   </div>
 
   <h2 class="section">Activity</h2>
@@ -311,6 +372,67 @@
   document.getElementById("tiles").innerHTML = tiles.map(function (t) {
     return '<div class="tile"><div class="v">' + t[1] + '</div><div class="k">' + t[0] + "</div></div>";
   }).join("");
+
+  /* ---------- learning plan ---------- */
+  var A = D.assignment;
+  if (A && A.items && A.items.length) {
+    document.getElementById("planHeading").hidden = false;
+    document.getElementById("planSection").hidden = false;
+    document.getElementById("planTitle").textContent = A.title;
+    document.getElementById("planSource").textContent = A.source || "";
+
+    document.getElementById("planCount").firstChild.nodeValue = A.done + " of " + A.total;
+    document.getElementById("planCountCap").textContent =
+      "complete" + (A.inProgress ? " \u00b7 " + A.inProgress + " in progress" : "") +
+      (A.notStarted ? " \u00b7 " + A.notStarted + " not started" : "");
+    document.getElementById("planBar").style.width = A.donePercent + "%";
+
+    var dates = "";
+    if (A.assignedOn) dates += "<dt>Assigned</dt><dd>" + esc(A.assignedOn) + "</dd>";
+    if (A.reviewOn)   dates += "<dt>Next review</dt><dd>" + esc(A.reviewOn) + "</dd>";
+    document.getElementById("planDates").innerHTML = dates;
+
+    if (A.daysToReview !== null && A.daysToReview !== undefined) {
+      var d = A.daysToReview;
+      var due = document.getElementById("planDue");
+      due.textContent = d === 0 ? "Review is today" : d === 1 ? "Review tomorrow" : "Review in " + d + " days";
+      due.hidden = false;
+    }
+
+    document.getElementById("planItems").innerHTML = A.items.map(function (i) {
+      var cls = i.status === "done" ? "done" : i.status === "in-progress" ? "wip" : "todo";
+      var word = i.status === "done" ? "Completed" : i.status === "in-progress" ? "In progress" : "Not started";
+
+      var right = "<h3>" + esc(i.label) + "</h3>";
+      if (i.notes) right += '<p class="why">' + esc(i.notes) + "</p>";
+
+      if (i.parts && i.parts.length) {
+        right += '<div class="parts">' + i.parts.map(function (p) {
+          return '<span class="part ' + (p.detected ? "yes" : "no") + '" title="' +
+                 esc((p.evidence || []).join(", ")) + '"><i class="m">' +
+                 (p.detected ? "\u2713" : "\u25CB") + "</i>" + esc(p.label) + "</span>";
+        }).join("") + "</div>";
+      } else if (i.detected && i.evidence.length) {
+        right += '<div class="ev">' + esc(i.evidence[0]) +
+                 (i.evidence.length > 1 ? " +" + (i.evidence.length - 1) : "") + "</div>";
+      } else {
+        right += '<div class="ev empty">no code for this yet</div>';
+      }
+
+      if (i.unevidenced || i.partiallyEvidenced) {
+        right += '<div class="caution">\u26A0 marked complete, not fully shown in the code</div>';
+      }
+
+      return '<div class="item"><span class="pill ' + cls + '"><i class="dot"></i>' + word +
+             "</span><div>" + right + "</div></div>";
+    }).join("");
+
+    if (A.note) {
+      var n = document.getElementById("planNote");
+      n.textContent = A.note;
+      n.hidden = false;
+    }
+  }
 
   /* ---------- provenance ---------- */
   var P = D.provenance;

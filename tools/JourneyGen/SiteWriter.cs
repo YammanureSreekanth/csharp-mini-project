@@ -39,6 +39,34 @@ public static class SiteWriter
         {
             title = cfg.Title,
             repoUrl,
+            assignment = cfg.Assignment.Items.Count == 0 ? null : new
+            {
+                title = cfg.Assignment.Title,
+                source = cfg.Assignment.Source,
+                assignedOn = cfg.Assignment.AssignedOn,
+                reviewOn = cfg.Assignment.ReviewOn,
+                note = cfg.Assignment.Note,
+                done = cfg.Assignment.Done,
+                inProgress = cfg.Assignment.InProgress,
+                notStarted = cfg.Assignment.NotStarted,
+                total = cfg.Assignment.Items.Count,
+                donePercent = cfg.Assignment.DonePercent,
+                daysToReview = cfg.Assignment.DaysToReview,
+                items = cfg.Assignment.Items.Select(i => new
+                {
+                    label = i.Label,
+                    status = i.Status,
+                    notes = i.Notes,
+                    detected = i.Detected,
+                    evidence = i.Evidence,
+                    unevidenced = i.Unevidenced,
+                    partiallyEvidenced = i.PartiallyEvidenced,
+                    parts = i.Parts.Select(pt => new
+                    {
+                        label = pt.Label, detected = pt.Detected, evidence = pt.Evidence,
+                    }),
+                }),
+            },
             code = new
             {
                 files = analyzer.SourceFiles.Count,

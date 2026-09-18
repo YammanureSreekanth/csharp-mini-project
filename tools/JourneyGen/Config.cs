@@ -16,6 +16,7 @@ public sealed class JourneyConfig
     public string Tagline = "";
     public DiagramOptions Diagram = new();
     public ProvenanceConfig Provenance = new();
+    public Assignment Assignment = new();
     public List<Concept> Concepts = new();
 
     static readonly JsonDocumentOptions ReadOpts = new()
@@ -57,6 +58,45 @@ public sealed class JourneyConfig
             ReadStrings(pv, "scaffoldPaths", c.ScaffoldPaths);
             ReadStrings(pv, "botAuthors", c.BotAuthors);
             ReadStrings(pv, "extraPaths", c.ExtraPaths);
+        }
+
+        if (root.TryGetProperty("assignment", out var asg))
+        {
+            var a = cfg.Assignment;
+            if (asg.TryGetProperty("title", out var at)) a.Title = at.GetString() ?? a.Title;
+            if (asg.TryGetProperty("source", out var asrc)) a.Source = asrc.GetString() ?? "";
+            if (asg.TryGetProperty("assignedOn", out var ao)) a.AssignedOn = ao.GetString() ?? "";
+            if (asg.TryGetProperty("reviewOn", out var ro)) a.ReviewOn = ro.GetString() ?? "";
+            if (asg.TryGetProperty("note", out var an)) a.Note = an.GetString() ?? "";
+
+            if (asg.TryGetProperty("items", out var items) && items.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var it in items.EnumerateArray())
+                {
+                    var item = new AssignmentItem
+                    {
+                        Label = it.TryGetProperty("label", out var il) ? il.GetString() ?? "" : "",
+                        Status = it.TryGetProperty("status", out var ist) ? (ist.GetString() ?? "not-started") : "not-started",
+                        Notes = it.TryGetProperty("notes", out var inn) ? inn.GetString() ?? "" : "",
+                    };
+                    item.Detectors.AddRange(ReadDetectors(it));
+
+                    if (it.TryGetProperty("parts", out var parts) && parts.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var pt in parts.EnumerateArray())
+                        {
+                            var part = new AssignmentPart
+                            {
+                                Label = pt.TryGetProperty("label", out var pl) ? pl.GetString() ?? "" : "",
+                            };
+                            part.Detectors.AddRange(ReadDetectors(pt));
+                            item.Parts.Add(part);
+                        }
+                    }
+
+                    a.Items.Add(item);
+                }
+            }
         }
 
         if (root.TryGetProperty("areas", out var areas))
@@ -106,6 +146,12 @@ public sealed class JourneyConfig
     /// Decide, per concept, whether the repo actually demonstrates it yet.
     /// A concept with no detectors (or `manual`) stays on the roadmap.
     /// </summary>
+    /// <summary>
+    /// Decide, per concept, whether the repo actually demonstrates it yet, then do the
+    /// same for the assignment items. A concept with no detectors (or `manual`) stays
+    /// on the roadmap; an assignment item keeps its declared status either way, and only
+    /// gains or loses its supporting evidence.
+    /// </summary>
     public void Evaluate(CodeAnalyzer analyzer, string root)
     {
         var fileText = new Lazy<Dictionary<string, string>>(() =>
@@ -116,47 +162,86 @@ public sealed class JourneyConfig
 
         foreach (var concept in Concepts)
         {
-            if (concept.Detectors.Count == 0 || concept.Detectors.All(d => d.Equals("manual", StringComparison.OrdinalIgnoreCase)))
+            if (concept.Detectors.Count == 0 ||
+                concept.Detectors.All(d => d.Equals("manual", StringComparison.OrdinalIgnoreCase)))
             {
                 concept.Planned = true;
                 continue;
             }
 
-            foreach (var detector in concept.Detectors)
+            var (matched, evidence) = RunDetectors(concept.Detectors, analyzer, root, fileText);
+            concept.Done = matched;
+            concept.Evidence = evidence;
+        }
+
+        foreach (var item in Assignment.Items)
+        {
+            var (matched, evidence) = RunDetectors(item.Detectors, analyzer, root, fileText);
+            item.Detected = matched;
+            item.Evidence = evidence;
+
+            foreach (var part in item.Parts)
             {
-                var (scheme, arg) = Split(detector);
-                switch (scheme)
+                var (pm, pe) = RunDetectors(part.Detectors, analyzer, root, fileText);
+                part.Detected = pm;
+                part.Evidence = pe;
+                if (pm)
                 {
-                    case "auto":
-                        if (analyzer.Features.TryGetValue(arg, out var hits))
-                        {
-                            concept.Done = true;
-                            concept.Evidence.AddRange(hits);
-                        }
-                        break;
-
-                    case "regex":
-                        var rx = new Regex(arg, RegexOptions.Multiline | RegexOptions.CultureInvariant);
-                        foreach (var (file, text) in fileText.Value)
-                            if (rx.IsMatch(text)) { concept.Done = true; concept.Evidence.Add(file); }
-                        break;
-
-                    case "path":
-                        foreach (var f in analyzer.SourceFiles)
-                            if (f.Contains(arg, StringComparison.OrdinalIgnoreCase)) { concept.Done = true; concept.Evidence.Add(f); }
-                        // Also allow matching non-.cs assets (Views, wwwroot, scripts).
-                        foreach (var f in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
-                        {
-                            var rel = Path.GetRelativePath(root, f).Replace('\\', '/');
-                            if (rel.StartsWith(".git/", StringComparison.Ordinal) || rel.Contains("/obj/") || rel.Contains("/bin/")) continue;
-                            if (rel.Contains(arg, StringComparison.OrdinalIgnoreCase)) { concept.Done = true; concept.Evidence.Add(rel); }
-                        }
-                        break;
+                    item.Detected = true;
+                    foreach (var f in pe) if (!item.Evidence.Contains(f)) item.Evidence.Add(f);
                 }
             }
 
-            concept.Evidence = concept.Evidence.Distinct(StringComparer.Ordinal).Take(6).ToList();
+            item.Evidence = item.Evidence.Take(6).ToList();
         }
+    }
+
+    /// <summary>
+    /// Run a detector list against the repo. Any single match counts.
+    /// `auto:` consults the Roslyn walker, `regex:` the text of every .cs file,
+    /// `path:` every file path; `manual` never matches.
+    /// </summary>
+    static (bool matched, List<string> evidence) RunDetectors(
+        IEnumerable<string> detectors, CodeAnalyzer analyzer, string root,
+        Lazy<Dictionary<string, string>> fileText)
+    {
+        var matched = false;
+        var evidence = new List<string>();
+
+        foreach (var detector in detectors)
+        {
+            var (scheme, arg) = Split(detector);
+            switch (scheme)
+            {
+                case "auto":
+                    if (analyzer.Features.TryGetValue(arg, out var hits))
+                    {
+                        matched = true;
+                        evidence.AddRange(hits);
+                    }
+                    break;
+
+                case "regex":
+                    var rx = new Regex(arg, RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    foreach (var (file, text) in fileText.Value)
+                        if (rx.IsMatch(text)) { matched = true; evidence.Add(file); }
+                    break;
+
+                case "path":
+                    foreach (var f in analyzer.SourceFiles)
+                        if (f.Contains(arg, StringComparison.OrdinalIgnoreCase)) { matched = true; evidence.Add(f); }
+                    foreach (var f in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
+                    {
+                        var rel = Path.GetRelativePath(root, f).Replace('\\', '/');
+                        if (rel.StartsWith(".git/", StringComparison.Ordinal) ||
+                            rel.Contains("/obj/") || rel.Contains("/bin/")) continue;
+                        if (rel.Contains(arg, StringComparison.OrdinalIgnoreCase)) { matched = true; evidence.Add(rel); }
+                    }
+                    break;
+            }
+        }
+
+        return (matched, evidence.Distinct(StringComparer.Ordinal).Take(6).ToList());
     }
 
     static (string scheme, string arg) Split(string detector)
