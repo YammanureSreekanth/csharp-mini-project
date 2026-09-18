@@ -204,7 +204,7 @@ Commits counted as anything other than my own hand:
 
 | Commit | Counted as | Subject |
 |---|---|---|
-| `b248fa9` | AI | Add the full role roadmap: 13 areas, 162 topics |
+| `a4fa1d6` | AI | Add the full role roadmap: 13 areas, 162 topics |
 | `cdb7019` | AI | Add the manager's learning plan as a tracked section |
 | `3936d71` | AI | Move the tooling disclosure into the audit fold |
 | `5fc21eb` | AI | Add code provenance tracking to the journey page |
@@ -361,7 +361,7 @@ _Shared by my manager._
 <summary><b>Databases and data modeling</b> — 3/11 · <sub>Relational and NoSQL thinking.</sub></summary>
 
 - [x] **SQL Server basics** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +3</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +3</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
 - [ ] Entity Framework Core
 - [ ] Migrations
 - [x] **Indexing** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +1</sub>
@@ -473,7 +473,7 @@ _Shared by my manager._
 - [ ] Generate infrastructure templates <sub>judgement — not code-detectable</sub>
 - [ ] Improve documentation <sub>judgement — not code-detectable</sub>
 - [ ] Validate AI output through tests and review <sub>judgement — not code-detectable</sub>
-- [x] **Declaring AI authorship honestly** — the provenance tracking in this repo <sub>`journey.json` +1</sub>
+- [x] **Declaring AI authorship honestly** — the provenance tracking in this repo <sub>`journey.json`</sub>
 
 </details>
 
@@ -579,7 +579,7 @@ _Shared by my manager._
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
@@ -627,7 +627,7 @@ _Shared by my manager._
 
 </details>
 
-<sub>Last updated 2026-09-18 13:25 UTC</sub>
+<sub>Last updated 2026-09-18 13:26 UTC</sub>
 
 <!-- JOURNEY:END -->
 
