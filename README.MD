@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-53_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-33-0078D4) ![lines](https://img.shields.io/badge/lines-798-0078D4) ![types](https://img.shields.io/badge/types-33-0078D4) ![commits](https://img.shields.io/badge/commits-22-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-54_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-34-0078D4) ![lines](https://img.shields.io/badge/lines-868-0078D4) ![types](https://img.shields.io/badge/types-34-0078D4) ![commits](https://img.shields.io/badge/commits-24-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `█████████████░░░░░░░` **65%**
+**Progress** `█████████████░░░░░░░` **66%**
 
 Started 2026-08-08 · last commit 2026-09-18 · 7 active days
 
@@ -147,20 +147,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 29 | 692 | 30 |
-| `Ecom.MvcWebApp` | 3 | 64 | 2 |
+| `Ecom.MvcWebApp` | 4 | 134 | 3 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 634 of the 634 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 696 of the 696 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
-| `Ecom.MvcWebApp` | 0 | 0 | 46 | — _template output only_ |
+| `Ecom.MvcWebApp` | 62 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **634** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **696** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -202,13 +202,13 @@ Commits counted as anything other than my own hand:
 - [x] **Enums** <sub>`Catalog.ConsoleApp/Domain/Enums/AvailableStatus.cs` +2</sub>
 - [x] **Properties** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +3</sub>
+- [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
 - [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +2</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
 - [x] **params arrays** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
-- [x] **Console I/O** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
+- [x] **Console I/O** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 
 </details>
 
@@ -246,12 +246,12 @@ Commits counted as anything other than my own hand:
 - [x] **?? and ??=** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [x] **Expression-bodied members** <sub>`Ecom.MvcWebApp/Models/ErrorViewModel.cs` +1</sub>
 - [x] **Top-level statements** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
+- [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 - [x] **Target-typed new** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [ ] Collection expressions
 - [ ] Primary constructors
 - [ ] Tuples
-- [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
+- [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Object initializers** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 
 </details>
@@ -269,7 +269,7 @@ Commits counted as anything other than my own hand:
 </details>
 
 <details open>
-<summary><b>Errors, resources & async</b> — 6/10</summary>
+<summary><b>Errors, resources & async</b> — 7/10</summary>
 
 - [x] **try / catch** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
@@ -279,7 +279,7 @@ Commits counted as anything other than my own hand:
 - [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +1</sub>
 - [x] **Custom attributes** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
 - [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
-- [ ] async / await
+- [x] **async / await** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
 - [ ] Task / ValueTask
 
 </details>
@@ -324,7 +324,7 @@ Commits counted as anything other than my own hand:
 
 </details>
 
-<sub>Last updated 2026-09-18 09:06 UTC</sub>
+<sub>Last updated 2026-09-18 11:28 UTC</sub>
 
 <!-- JOURNEY:END -->
 
