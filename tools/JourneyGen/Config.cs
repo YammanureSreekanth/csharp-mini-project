@@ -295,7 +295,8 @@ public sealed class JourneyConfig
                 case "path":
                     foreach (var f in analyzer.SourceFiles)
                         if (f.Contains(arg, StringComparison.OrdinalIgnoreCase)) { matched = true; evidence.Add(f); }
-                    foreach (var f in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
+                    foreach (var f in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories)
+                                               .OrderBy(x => x, StringComparer.Ordinal))
                     {
                         var rel = Path.GetRelativePath(root, f).Replace('\\', '/');
                         if (IsExcluded(rel)) continue;
@@ -305,7 +306,10 @@ public sealed class JourneyConfig
             }
         }
 
-        return (matched, evidence.Distinct(StringComparer.Ordinal).Take(6).ToList());
+        // Ordered so the same commit renders identically on any machine.
+        return (matched, evidence.Distinct(StringComparer.Ordinal)
+                                 .OrderBy(e => e, StringComparer.Ordinal)
+                                 .Take(6).ToList());
     }
 
     /// <summary>
@@ -328,18 +332,22 @@ public sealed class JourneyConfig
         ".http", ".ps1", ".sh", ".dockerfile",
     ];
 
-    static Lazy<Dictionary<string, string>>? _allText;
+    static Lazy<SortedDictionary<string, string>>? _allText;
 
     /// <summary>
     /// Every text file in the repo, read once. `grep:` needs this because a lot of
     /// what a roadmap asks about lives outside .cs — a PackageReference, a bicep
     /// template, a workflow step, a connection string.
     /// </summary>
-    static Lazy<Dictionary<string, string>> AllTextFiles(string root) =>
-        _allText ??= new Lazy<Dictionary<string, string>>(() =>
+    static Lazy<SortedDictionary<string, string>> AllTextFiles(string root) =>
+        _allText ??= new Lazy<SortedDictionary<string, string>>(() =>
         {
-            var map = new Dictionary<string, string>(StringComparer.Ordinal);
-            foreach (var full in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories))
+            // Sorted, not filesystem order: APFS and ext4 enumerate differently, so an
+            // unsorted walk made the generated evidence differ between a mac and a Linux
+            // CI runner for the same commit.
+            var map = new SortedDictionary<string, string>(StringComparer.Ordinal);
+            foreach (var full in Directory.EnumerateFiles(root, "*", SearchOption.AllDirectories)
+                                          .OrderBy(f => f, StringComparer.Ordinal))
             {
                 var rel = Path.GetRelativePath(root, full).Replace('\\', '/');
                 if (IsExcluded(rel)) continue;

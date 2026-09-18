@@ -69,9 +69,26 @@ else
 
     if (check)
     {
-        if (Normalize(existing) != Normalize(updated))
+        var a = Normalize(existing);
+        var b = Normalize(updated);
+        if (a != b)
         {
             Console.Error.WriteLine($"journeygen: {Path.GetFileName(readmePath)} is out of date. Run `dotnet run --project tools/JourneyGen -- --root .`");
+
+            // Say what differs — a bare "out of date" in CI is undiagnosable.
+            var left = a.Split('\n');
+            var right = b.Split('\n');
+            var shown = 0;
+            for (var i = 0; i < Math.Max(left.Length, right.Length) && shown < 5; i++)
+            {
+                var l = i < left.Length ? left[i] : "(missing)";
+                var r = i < right.Length ? right[i] : "(missing)";
+                if (l == r) continue;
+                Console.Error.WriteLine($"  line {i + 1}:");
+                Console.Error.WriteLine($"    committed: {Trunc(l)}");
+                Console.Error.WriteLine($"    generated: {Trunc(r)}");
+                shown++;
+            }
             return 1;
         }
         Console.WriteLine("journeygen: README is up to date");
@@ -90,6 +107,8 @@ if (!check)
 }
 
 return 0;
+
+static string Trunc(string s) => s.Length <= 160 ? s : s[..157] + "...";
 
 // The generated block carries a timestamp, so ignore it when deciding staleness.
 static string Normalize(string s)

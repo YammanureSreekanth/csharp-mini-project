@@ -191,13 +191,13 @@ reassigns it to me automatically, so the split cannot drift from the code.
 Going forward this is automatic: any commit whose message carries an AI trailer
 (`Co-Authored-By: Claude`, `Assisted-By: Claude`) has its lines counted as AI-written.
 
-The tooling that builds this page is a further 1969 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
+The tooling that builds this page is a further 1994 lines, **100% AI-written** — `tools/JourneyGen`, the generator and its
 page template. It is kept out of the figures above rather than averaged into them,
 since it generates the page and is not part of the application.
 
 | Tooling | Mine | AI | Share written by AI |
 |---|---:|---:|---|
-| `tools` | 0 | 1969 | `████████████████████` 100% |
+| `tools` | 0 | 1994 | `████████████████████` 100% |
 
 8 commits are counted as something other than my own hand (7 AI, 1 scaffold). The full list, with a link to each commit, is on the
 dashboard under **How this is measured**.
@@ -247,9 +247,9 @@ _Shared by my manager._
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
-- [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
+- [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
 - [ ] IDisposable
-- [x] **.NET 8/9 app structure** <sub>`Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +2</sub>
+- [x] **.NET 8/9 app structure** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +2</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **ASP.NET Core Web APIs** <sub>`Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
 - [ ] Build and explain a production-style API — the real bar for this area <sub>judgement — not code-detectable</sub>
@@ -279,7 +279,7 @@ _Shared by my manager._
 <details>
 <summary><b>Domain-Driven Design</b> — 4/10 · <sub>Explicitly named in the role.</sub></summary>
 
-- [x] **Entities and value objects** <sub>`Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
+- [x] **Entities and value objects** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [ ] Aggregates and aggregate roots
 - [x] **Repositories** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factories** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
@@ -352,7 +352,7 @@ _Shared by my manager._
 <summary><b>Databases and data modeling</b> — 3/11 · <sub>Relational and NoSQL thinking.</sub></summary>
 
 - [x] **SQL Server basics** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +3</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +3</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
 - [ ] Entity Framework Core
 - [ ] Migrations
 - [x] **Indexing** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +1</sub>
@@ -570,7 +570,7 @@ _Shared by my manager._
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
@@ -618,7 +618,7 @@ _Shared by my manager._
 
 </details>
 
-<sub>Last updated 2026-09-18 13:41 UTC</sub>
+<sub>Last updated 2026-09-18 13:44 UTC</sub>
 
 <!-- JOURNEY:END -->
 
