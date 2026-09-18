@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-37-0078D4) ![lines](https://img.shields.io/badge/lines-1006-0078D4) ![types](https://img.shields.io/badge/types-42-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████░░░░░░░░` **62%**
 
@@ -165,20 +165,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 29 | 692 | 30 |
-| `Ecom.MvcWebApp` | 5 | 232 | 9 |
+| `Ecom.MvcWebApp` | 7 | 272 | 11 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 772 of the 772 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 805 of the 805 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
-| `Ecom.MvcWebApp` | 138 | 0 | 46 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 171 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **772** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **805** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -252,7 +252,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>ASP.NET Core Web APIs</b> — 5/14 · <sub>Central to the role.</sub></summary>
 
 - [ ] REST API design <sub>judgement — not code-detectable</sub>
-- [x] **Controllers** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
+- [x] **Controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +1</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
@@ -576,7 +576,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
+- [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +1</sub>
 - [x] **MVC routing** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Razor views** <sub>`Ecom.MvcWebApp/Views`</sub>
 - [x] **Static files** <sub>`Ecom.MvcWebApp/wwwroot`</sub>
@@ -610,7 +610,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-18 13:52 UTC</sub>
+<sub>Last updated 2026-09-18 15:21 UTC</sub>
 
 <!-- JOURNEY:END -->
 
