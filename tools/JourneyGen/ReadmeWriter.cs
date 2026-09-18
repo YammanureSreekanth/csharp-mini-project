@@ -170,6 +170,15 @@ public static class ReadmeWriter
                           $"| {StatusLabel(i)} | {EvidenceCell(i)} |");
         sb.AppendLine();
 
+        var ready = a.Items.Where(i => i.ReadyToAdvance).ToList();
+        if (ready.Count > 0)
+        {
+            sb.AppendLine($"> **The code now covers {(ready.Count == 1 ? "an item" : $"{ready.Count} items")} still marked as unfinished:** " +
+                          string.Join(", ", ready.Select(i => Escape(i.Label))) + ".");
+            sb.AppendLine("> Status here is declared by hand — update `status` in `journey.json` to close them off.");
+            sb.AppendLine();
+        }
+
         var shaky = a.Items.Where(i => i.Unevidenced || i.PartiallyEvidenced).ToList();
         if (shaky.Count > 0)
         {
@@ -180,12 +189,16 @@ public static class ReadmeWriter
         }
     }
 
-    static string StatusLabel(AssignmentItem i) => i.Status switch
+    static string StatusLabel(AssignmentItem i)
     {
-        "done" => "✅ Completed",
-        "in-progress" => "🔄 In progress",
-        _ => "⬜ Not started",
-    };
+        var label = i.Status switch
+        {
+            "done" => "✅ Completed",
+            "in-progress" => "🔄 In progress",
+            _ => "⬜ Not started",
+        };
+        return i.ReadyToAdvance ? label + "<br><sub>→ ready to mark complete</sub>" : label;
+    }
 
     static string EvidenceCell(AssignmentItem i)
     {

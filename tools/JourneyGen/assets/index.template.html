@@ -147,6 +147,11 @@
   .ev.empty { font-family: inherit; font-style: italic; }
   .caution { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; margin-top: 6px;
              padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); color: var(--ink-2); }
+  .ready { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; margin-top: 6px;
+           padding: 3px 9px; border-radius: 999px; background: var(--series-1-soft); color: var(--ink); }
+  .readyline { margin: 12px 0 0; font-size: 13px; color: var(--ink); }
+  .chip.ready { background: var(--series-1-soft); border-color: transparent; color: var(--ink); }
+  .chip.ready .mark { color: var(--series-1); }
 
   /* ---- provenance ---- */
   .prov { display: grid; grid-template-columns: minmax(230px, 300px) 1fr; gap: 16px; }
@@ -444,6 +449,9 @@
         right += '<div class="ev empty">no code for this yet</div>';
       }
 
+      if (i.readyToAdvance) {
+        right += '<div class="ready">\u2713 the code covers this now \u2014 ready to mark complete</div>';
+      }
       if (i.unevidenced || i.partiallyEvidenced) {
         right += '<div class="caution">\u26A0 marked complete, not fully shown in the code</div>';
       }
@@ -451,6 +459,16 @@
       return '<div class="item"><span class="pill ' + cls + '"><i class="dot"></i>' + word +
              "</span><div>" + right + "</div></div>";
     }).join("");
+
+    var readyCount = A.items.filter(function (i) { return i.readyToAdvance; }).length;
+    if (readyCount) {
+      var rl = document.createElement("p");
+      rl.className = "readyline";
+      rl.innerHTML = "<b>" + readyCount + (readyCount === 1 ? " item is" : " items are") +
+        "</b> covered by the code but still marked unfinished \u2014 update <code>status</code> in " +
+        "<code>journey.json</code> before the review.";
+      document.querySelector("#planSection .card").appendChild(rl);
+    }
 
     if (A.note) {
       var n = document.getElementById("planNote");
@@ -534,9 +552,10 @@
       var chips = a.items.map(function (i) {
         var done = i.status === "done";
         var wip = i.status === "in-progress";
-        var cls = done ? "chip done" : "chip todo";
-        var mark = done ? "\u2713" : wip ? "\u25D0" : "\u25CB";
-        var tip = done && i.evidence.length ? i.evidence.join(", ")
+        var cls = done ? "chip done" : i.ready ? "chip ready" : "chip todo";
+        var mark = done ? "\u2713" : i.ready ? "\u2713" : wip ? "\u25D0" : "\u25CB";
+        var tip = i.ready ? "the code covers this \u2014 ready to mark complete"
+                : done && i.evidence.length ? i.evidence.join(", ")
                 : !i.detectable ? "judgement topic \u2014 no detector can prove this"
                 : (i.notes || "");
         return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +

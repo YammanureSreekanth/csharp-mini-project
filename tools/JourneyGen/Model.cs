@@ -167,6 +167,14 @@ public sealed class AssignmentItem
     /// <summary>Declared complete but nothing in the code backs it up.</summary>
     public bool Unevidenced => Status == "done" && !Detected && Parts.Count == 0;
 
+    /// <summary>
+    /// Not declared complete, yet the code now shows it. The prompt to go update the
+    /// status — the plan's status is declared by hand, so without this the page would
+    /// quietly understate progress until someone remembered to edit the config.
+    /// </summary>
+    public bool ReadyToAdvance =>
+        Status != "done" && Detected && (Parts.Count == 0 || Parts.All(p => p.Detected));
+
     /// <summary>Declared complete but only some named parts are present.</summary>
     public bool PartiallyEvidenced =>
         Status == "done" && Parts.Count > 0 && Parts.Any(p => !p.Detected);

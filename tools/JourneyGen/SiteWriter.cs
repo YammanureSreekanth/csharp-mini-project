@@ -58,6 +58,7 @@ public static class SiteWriter
                     {
                         label = i.Label,
                         status = i.EffectiveStatus,
+                        ready = i.ReadyToAdvance,
                         notes = i.Notes,
                         detectable = i.CodeDetectable,
                         evidence = i.Evidence,
@@ -84,6 +85,7 @@ public static class SiteWriter
                     notes = i.Notes,
                     detected = i.Detected,
                     evidence = i.Evidence,
+                    readyToAdvance = i.ReadyToAdvance,
                     unevidenced = i.Unevidenced,
                     partiallyEvidenced = i.PartiallyEvidenced,
                     parts = i.Parts.Select(pt => new
