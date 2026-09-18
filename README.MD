@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-54_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-34-0078D4) ![lines](https://img.shields.io/badge/lines-868-0078D4) ![types](https://img.shields.io/badge/types-34-0078D4) ![commits](https://img.shields.io/badge/commits-24-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-54_of_82-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-35-0078D4) ![lines](https://img.shields.io/badge/lines-966-0078D4) ![types](https://img.shields.io/badge/types-40-0078D4) ![commits](https://img.shields.io/badge/commits-26-555555) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `█████████████░░░░░░░` **66%**
 
@@ -147,20 +147,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 29 | 692 | 30 |
-| `Ecom.MvcWebApp` | 4 | 134 | 3 |
+| `Ecom.MvcWebApp` | 5 | 232 | 9 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 696 of the 696 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 772 of the 772 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
-| `Ecom.MvcWebApp` | 62 | 0 | 46 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 138 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **696** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **772** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -202,7 +202,7 @@ Commits counted as anything other than my own hand:
 - [x] **Enums** <sub>`Catalog.ConsoleApp/Domain/Enums/AvailableStatus.cs` +2</sub>
 - [x] **Properties** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
+- [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 - [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +2</sub>
 - [ ] switch
 - [ ] Optional parameters
@@ -215,7 +215,7 @@ Commits counted as anything other than my own hand:
 <details open>
 <summary><b>Object-oriented design</b> — 8/15</summary>
 
-- [x] **Interfaces** <sub>`Catalog.ConsoleApp/DataAccess/ICategoryRepository.cs` +4</sub>
+- [x] **Interfaces** <sub>`Catalog.ConsoleApp/DataAccess/ICategoryRepository.cs` +5</sub>
 - [x] **Inheritance** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/MasterProduct.cs` +2</sub>
 - [x] **Abstract classes** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 - [x] **Abstract members** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
@@ -288,10 +288,10 @@ Commits counted as anything other than my own hand:
 <summary><b>Data access</b> — 5/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
+- [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Seed Data.sql` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
-- [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
+- [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
 - [ ] EF Core — next up
 - [ ] EF migrations — roadmap <sub>planned</sub>
 
@@ -324,7 +324,7 @@ Commits counted as anything other than my own hand:
 
 </details>
 
-<sub>Last updated 2026-09-18 11:28 UTC</sub>
+<sub>Last updated 2026-09-18 13:01 UTC</sub>
 
 <!-- JOURNEY:END -->
 
