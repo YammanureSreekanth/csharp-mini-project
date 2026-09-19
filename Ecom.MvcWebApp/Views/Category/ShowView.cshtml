@@ -1,7 +1,14 @@
 @model Catagory
 
-<div class="">
+@* <div class="">
     <span>Id: @Model.Id</span>
     <span>Name: @Model.Name</span>
     <span>Online: @Model.Online</span>
-</div>
+</div> *@
+
+<vc:category/>
+@await Component.InvokeAsync("Category")
+
+<email address="syammanure@suitsupply.com"></email>
+
+<vc:dynamic-category id="Jacket" name="Jacket & Coats" online=true />

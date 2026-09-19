@@ -1,0 +1,13 @@
+<p>@ViewData["FirstName"] @ViewBag.LastName</p>
+
+<ul>
+    @foreach (var name in ViewBag.Names) {
+        <li>@name</li>
+    }
+</ul>
+
+<ul>
+    @foreach (var name in ViewData["Names"] as List<string>) {
+         <li>@name</li>
+    }
+</ul>

@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-37-0078D4) ![lines](https://img.shields.io/badge/lines-1006-0078D4) ![types](https://img.shields.io/badge/types-42-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-45-0078D4) ![lines](https://img.shields.io/badge/lines-1200-0078D4) ![types](https://img.shields.io/badge/types-50-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████░░░░░░░░` **62%**
 
@@ -165,20 +165,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 29 | 692 | 30 |
-| `Ecom.MvcWebApp` | 7 | 272 | 11 |
+| `Ecom.MvcWebApp` | 15 | 466 | 19 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 805 of the 805 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 962 of the 962 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
-| `Ecom.MvcWebApp` | 171 | 0 | 46 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 328 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **805** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **962** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -200,14 +200,14 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`████░░░░░░░░░░░░░░░░` **30 of 162 covered** across 13 areas
+`████░░░░░░░░░░░░░░░░` **33 of 162 covered** across 13 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
 | Area | Covered | |
 |---|---:|---|
-| C# and modern .NET depth | 12/22 | `███████████░░░░░░░░░` 55% |
-| ASP.NET Core Web APIs | 5/14 | `███████░░░░░░░░░░░░░` 36% |
+| C# and modern .NET depth | 13/22 | `████████████░░░░░░░░` 59% |
+| ASP.NET Core Web APIs | 6/14 | `█████████░░░░░░░░░░░` 43% |
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
@@ -217,11 +217,11 @@ _The ground I want to cover for my career in .NET._
 | CI/CD and DevOps basics | 3/12 | `█████░░░░░░░░░░░░░░░` 25% |
 | Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Observability and production readiness | 1/13 | `██░░░░░░░░░░░░░░░░░░` 8% |
-| Security basics | 1/10 | `██░░░░░░░░░░░░░░░░░░` 10% |
+| Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
 <details>
-<summary><b>C# and modern .NET depth</b> — 12/22 · <sub>Strong enough that C# feels natural.</sub></summary>
+<summary><b>C# and modern .NET depth</b> — 13/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
 - [x] **Classes and interfaces** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
@@ -235,7 +235,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Configuration
 - [x] **Error handling** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
-- [ ] Validation
+- [x] **Validation** <sub>`Ecom.MvcWebApp/Controllers/RegisterUserController.cs` +2</sub>
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
@@ -249,16 +249,16 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>ASP.NET Core Web APIs</b> — 5/14 · <sub>Central to the role.</sub></summary>
+<summary><b>ASP.NET Core Web APIs</b> — 6/14 · <sub>Central to the role.</sub></summary>
 
 - [ ] REST API design <sub>judgement — not code-detectable</sub>
-- [x] **Controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +1</sub>
+- [x] **Controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +3</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
+- [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
 - [ ] Authentication
 - [ ] Authorization
-- [ ] Model binding and validation
+- [x] **Model binding and validation** <sub>`Ecom.MvcWebApp/Controllers/RegisterUserController.cs`</sub>
 - [ ] API versioning
 - [x] **Swagger / OpenAPI** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [ ] Structured error responses
@@ -431,7 +431,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Security basics</b> — 1/10 · <sub>Production awareness, not specialism.</sub></summary>
+<summary><b>Security basics</b> — 2/10 · <sub>Production awareness, not specialism.</sub></summary>
 
 - [ ] OAuth2 / OpenID Connect
 - [ ] JWT tokens
@@ -439,7 +439,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Secrets in Key Vault
 - [ ] Managed identities
 - [x] **HTTPS** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [ ] Input validation
+- [x] **Input validation** <sub>`Ecom.MvcWebApp/Controllers/RegisterUserController.cs` +1</sub>
 - [ ] OWASP Top 10 basics <sub>judgement — not code-detectable</sub>
 - [ ] Secure API design <sub>judgement — not code-detectable</sub>
 - [ ] Least privilege access <sub>judgement — not code-detectable</sub>
@@ -487,7 +487,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Inheritance** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/MasterProduct.cs` +2</sub>
 - [x] **Abstract classes** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 - [x] **Abstract members** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
-- [x] **Overriding** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/MasterProduct.cs` +2</sub>
+- [x] **Overriding** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/MasterProduct.cs` +4</sub>
 - [ ] virtual members
 - [ ] Default interface methods
 - [x] **Static classes** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
@@ -507,7 +507,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **init-only properties** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [ ] required members
-- [x] **Pattern matching** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +2</sub>
+- [x] **Pattern matching** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +3</sub>
 - [ ] switch expressions
 - [x] **Nullable reference types** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +2</sub>
@@ -576,7 +576,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +1</sub>
+- [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +3</sub>
 - [x] **MVC routing** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Razor views** <sub>`Ecom.MvcWebApp/Views`</sub>
 - [x] **Static files** <sub>`Ecom.MvcWebApp/wwwroot`</sub>
@@ -610,7 +610,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-18 15:21 UTC</sub>
+<sub>Last updated 2026-09-19 13:12 UTC</sub>
 
 <!-- JOURNEY:END -->
 

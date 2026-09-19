@@ -1,0 +1,9 @@
+@model Employee
+
+<h1>Save Employee</h1>
+
+<form asp-action="SaveEmployee" method="post">
+    <input asp-for="FirstName"/>
+    <input asp-for="LastName"/>
+    <input type="submit" value="Save"/>
+</form>
