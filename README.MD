@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-58_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-45-0078D4) ![lines](https://img.shields.io/badge/lines-1200-0078D4) ![types](https://img.shields.io/badge/types-50-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-59_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-47-0078D4) ![lines](https://img.shields.io/badge/lines-1275-0078D4) ![types](https://img.shields.io/badge/types-52-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `████████████░░░░░░░░` **62%**
+**Progress** `█████████████░░░░░░░` **63%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -21,7 +21,7 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
-| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✗ `IList<T>`<br>✗ `IEnumerable<T>` |
+| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✗ `IList<T>`<br>✓ `IEnumerable<T>` <sub>Ecom.MvcWebApp/Controllers/LinqController.cs</sub> |
 | Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
 | ILogger | 🔄 In progress | _none yet_ |
 | Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress | _none yet_ |
@@ -165,20 +165,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 29 | 692 | 30 |
-| `Ecom.MvcWebApp` | 15 | 466 | 19 |
+| `Ecom.MvcWebApp` | 17 | 541 | 21 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 962 of the 962 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1024 of the 1024 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
-| `Ecom.MvcWebApp` | 328 | 0 | 46 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 390 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **962** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1024** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -227,7 +227,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Generics** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [ ] Delegates and events
-- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +1</sub>
+- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +2</sub>
 - [x] **async / await / Task** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
 - [ ] Cancellation tokens
 - [ ] Parallelism
@@ -469,9 +469,9 @@ _The ground I want to cover for my career in .NET._
 - [x] **Structs** — value types <sub>`Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Catalog.ConsoleApp/Domain/Enums/AvailableStatus.cs` +2</sub>
 - [x] **Properties** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
-- [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
+- [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Controllers/LinqController.cs` +2</sub>
 - [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
-- [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +2</sub>
+- [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +3</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
@@ -519,21 +519,21 @@ _The ground I want to cover for my career in .NET._
 - [ ] Collection expressions
 - [ ] Primary constructors
 - [ ] Tuples
-- [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
-- [x] **Object initializers** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
+- [x] **Object initializers** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
 
 </details>
 
 <details open>
-<summary><b>Collections & LINQ</b> — 4/9</summary>
+<summary><b>Collections & LINQ</b> — 5/9</summary>
 
 - [x] **Generic collections** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
-- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +1</sub>
-- [x] **LINQ method syntax** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +1</sub>
+- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +2</sub>
+- [x] **LINQ method syntax** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +2</sub>
 - [ ] LINQ query syntax
 - [ ] Extension methods
 - [ ] Iterators (yield)
-- [ ] IEnumerable<T>
+- [x] **IEnumerable<T>** <sub>`Ecom.MvcWebApp/Controllers/LinqController.cs`</sub>
 - [ ] IList<T>
 - [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 
@@ -576,7 +576,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +3</sub>
+- [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +4</sub>
 - [x] **MVC routing** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Razor views** <sub>`Ecom.MvcWebApp/Views`</sub>
 - [x] **Static files** <sub>`Ecom.MvcWebApp/wwwroot`</sub>
@@ -610,7 +610,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-19 13:12 UTC</sub>
+<sub>Last updated 2026-09-19 18:46 UTC</sub>
 
 <!-- JOURNEY:END -->
 
