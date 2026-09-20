@@ -1,0 +1,33 @@
+@model List<Employee>
+
+<h1>List of Employees</h1>
+
+<a asp-action="Create">Create new Employee</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">FirstName</th>
+      <th scope="col">LastName</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var employee in Model) {
+        <tr>
+            <th scope="row">@employee.Id</th>
+            <td>@employee.FirstName</td>
+            <td>@employee.LastName</td>
+            <td>@employee.Email</td>
+            <td>@employee.Address</td>
+            <td>
+              <a asp-action="Edit" asp-route-id = "@employee.Id">Edit</a>
+              <a asp-action="Delete" asp-route-id = "@employee.Id">Delete</a>
+            </td>
+        </tr>
+    }
+  </tbody>
+</table>

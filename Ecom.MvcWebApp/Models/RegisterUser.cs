@@ -16,7 +16,6 @@ public class RegisterUser
     [Required]
     [StringLength(100, MinimumLength = 5)]
     [EmailAddress]
-    // [RegularExpression("a-zA-Z0-9")]
     public string? Email {set; get;}
 
     [Required]

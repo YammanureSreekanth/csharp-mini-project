@@ -1,3 +1,5 @@
+using Ecom.MvcWebApp.Data;
+using Microsoft.EntityFrameworkCore;
 using Middlewares;
 using Services;
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,13 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddSingleton<SingletonService>();
 builder.Services.AddScoped<ScopedService>();
 builder.Services.AddTransient<TransientService>();
+
+string? connectionString = builder.Configuration.GetConnectionString("DbCon");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 var app = builder.Build();
 
