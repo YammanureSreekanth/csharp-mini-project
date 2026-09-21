@@ -1,3 +1,4 @@
+using Catalog.ConsoleApp.Domain.Classes.Category;
 using Catalog.ConsoleApp.Domain.Enums;
 using Catalog.ConsoleApp.Domain.Interfaces;
 using Catalog.ConsoleApp.Domain.Structs;
@@ -13,7 +14,22 @@ namespace Catalog.ConsoleApp.Domain.Classes.Product
         public string ShortDescription {get; set;}
         public SeoInfo SEO {get; set;}
         public ProductType Type {get; set;}
-        public IReadOnlyList<ProductImage> Images {get; set;}
+        private readonly List<ProductImage> _images = new List<ProductImage>();
+        private readonly List<ProductCategoryAssignment> _categoryAssignment = new List<ProductCategoryAssignment>();
+
+        public IReadOnlyList<ProductImage> Images => _images;
+        public IReadOnlyList<ProductCategoryAssignment> CategoryAssignment => _categoryAssignment;
+
+        public void AddImages(ProductImage image)
+        {
+            _images.Add(image);
+        }
+
+        public void AssignCateggory(ProductCategoryAssignment productCategory)
+        {
+            _categoryAssignment.Add(productCategory);
+        }
+
         public abstract string GetPriceDisplay();
         public abstract bool MatchesKeyword(string keyword);
         public BaseProduct(string id, string name, ProductType type)

@@ -45,7 +45,7 @@ public static class MySQLConnection
     public static List<T> RunNonQuery<T>(string Query, Func<SqlDataReader, T> SqlDataReaderProcessor)
     {
         const string connectionString =
-            "Data Source=localhost;Initial Catalog=devdb;User ID=sreekanth;Password=Sreekanth@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
+            "Data Source=localhost;Initial Catalog=CatalogDb;User ID=sa;Password=PraticeApp@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
 
         List<T> results = new List<T>();
         // Create and open the connection in a using block. This

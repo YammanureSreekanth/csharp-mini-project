@@ -20,11 +20,12 @@ namespace Catalog.ConsoleApp.Services
             Logger.Debug("Calling Method {0} from Service Class is {1}", "Catalog", "CatalogService");
             List<Category> categories = _categoryRepo.GetAll();
             Console.WriteLine("Welcome to Suitsupply");
-            foreach (Category category in categories)
+            Category? rootCategory = CatalogMenu(categories);
+            foreach (Category c in rootCategory.Childs())
             {
-                Console.WriteLine($"{category.Name}");
+                Console.WriteLine(c.Name);
             }
-            return categories;
+            return [];
         }
 
         public List<string> GetProductsByCategoryId(string categoryId)
@@ -47,6 +48,29 @@ namespace Catalog.ConsoleApp.Services
                 return null;
             }
             return baseProduct;
+        }
+
+        public static Category? CatalogMenu(List<Category> rows)
+        {
+            Dictionary<string, Category>? byId = rows.ToDictionary(r => r.Id, r => r);
+
+            Category? root = null;
+
+            foreach (Category row in rows)
+            {
+                Category category = byId[row.Id];
+
+                if (row.ParentCategoryId is null)
+                {
+                    root = category;
+                }
+                else
+                {
+                    byId[row.ParentCategoryId].AddSubCategory(category);
+                }
+            }
+
+            return root;
         }
     }
 }

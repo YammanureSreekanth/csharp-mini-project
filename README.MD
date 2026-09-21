@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-61_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1538-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-63_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1604-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `█████████████░░░░░░░` **65%**
+**Progress** `█████████████░░░░░░░` **67%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -21,7 +21,7 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
-| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✗ `IList<T>`<br>✓ `IEnumerable<T>` <sub>Ecom.MvcWebApp/Controllers/LinqController.cs</sub> |
+| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✗ `IList<T>`<br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
 | Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
 | ILogger | 🔄 In progress | _none yet_ |
 | Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress | _none yet_ |
@@ -60,15 +60,19 @@ classDiagram
         +string ShortDescription
         +SeoInfo SEO
         +ProductType Type
-        +IReadOnlyList~ProductImage~ Images
-        +GetPriceDisplay()* string
-        +MatchesKeyword()* bool
+        -List~ProductImage~ _images
+        +AddImages() void
+        +AssignCateggory() void
+        ...5 more
     }
     class Category {
         +string Id
         +string Name
-        +Category ParentCategory
-        +List~Category~ SubCategories
+        +string ParentCategoryId
+        -List~Category~ _subCategories
+        +IReadOnlyList~Category~ SubCategories
+        +AddSubCategory() void
+        +Childs() IEnumerable~Category~
     }
     class MasterProduct {
         +List~string~ VariationAttributes
@@ -143,7 +147,10 @@ classDiagram
     ISearchable <|.. BaseProduct : implements
     IPriceable <|.. BaseProduct : implements
     BaseProduct --> SeoInfo : SEO
+    BaseProduct "1" --> "*" ProductImage : _images
+    BaseProduct "1" --> "*" ProductCategoryAssignment : _categoryAssignment
     BaseProduct "1" --> "*" ProductImage : Images
+    BaseProduct "1" --> "*" ProductCategoryAssignment : CategoryAssignment
     BaseProduct <|-- MasterProduct
     MasterProduct "1" --> "*" VariationProduct : Variations
     ProductCategoryAssignment --> BaseProduct : Product
@@ -157,7 +164,7 @@ classDiagram
     VariationProduct --> MasterProduct : Master
     VariationProduct --> Money : Price
     VariationProduct --> StockStatus : Availability
-    Category --> Category : ParentCategory
+    Category --> Category : _subCategories
 ```
 
 ### Projects
@@ -165,20 +172,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
-| `Catalog.ConsoleApp` | 29 | 692 | 30 |
+| `Catalog.ConsoleApp` | 29 | 758 | 30 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 1240 of the 1240 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1295 of the 1295 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
+| `Catalog.ConsoleApp` | 689 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
-| `Catalog.ConsoleApp` | 634 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **1240** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1295** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -471,7 +478,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Properties** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Controllers/LinqController.cs` +2</sub>
 - [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
-- [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +3</sub>
+- [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +4</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
@@ -502,7 +509,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Modern C#</b> — 12/17</summary>
+<summary><b>Modern C#</b> — 13/17</summary>
 
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **init-only properties** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
@@ -512,11 +519,11 @@ _The ground I want to cover for my career in .NET._
 - [x] **Nullable reference types** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +2</sub>
 - [x] **?? and ??=** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
-- [x] **Expression-bodied members** <sub>`Ecom.MvcWebApp/Models/ErrorViewModel.cs` +1</sub>
+- [x] **Expression-bodied members** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [x] **Top-level statements** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 - [x] **Target-typed new** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [ ] Collection expressions
+- [x] **Collection expressions** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
 - [ ] Primary constructors
 - [ ] Tuples
 - [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
@@ -525,17 +532,17 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Collections & LINQ</b> — 5/9</summary>
+<summary><b>Collections & LINQ</b> — 6/9</summary>
 
 - [x] **Generic collections** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
-- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +3</sub>
-- [x] **LINQ method syntax** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +3</sub>
+- [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +4</sub>
+- [x] **LINQ method syntax** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +4</sub>
 - [ ] LINQ query syntax
 - [ ] Extension methods
-- [ ] Iterators (yield)
-- [x] **IEnumerable<T>** <sub>`Ecom.MvcWebApp/Controllers/LinqController.cs`</sub>
+- [x] **Iterators (yield)** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
+- [x] **IEnumerable<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [ ] IList<T>
-- [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
+- [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 
 </details>
 
@@ -610,7 +617,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-20 15:52 UTC</sub>
+<sub>Last updated 2026-09-21 15:21 UTC</sub>
 
 <!-- JOURNEY:END -->
 

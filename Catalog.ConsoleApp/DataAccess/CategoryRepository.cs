@@ -39,17 +39,13 @@ namespace Catalog.ConsoleApp.DataAccess {
 
          public Category SqlDataReaderProcessor(SqlDataReader reader)
         {
-            Dictionary<string, object> rowData = new Dictionary<string, object>();
+            string id = reader.GetString(reader.GetOrdinal("Id"));
+            string name = reader.GetString(reader.GetOrdinal("Name"));
+            string? parentId = reader.IsDBNull(reader.GetOrdinal("ParentCategoryId"))
+                ? null
+                : reader.GetString(reader.GetOrdinal("ParentCategoryId"));
 
-            for (var i = 0; i < reader.FieldCount; i++)
-            {
-                // Console.WriteLine($"Prop Name {reader.GetName(i)} \t {reader[i]}");
-                rowData.Add(reader.GetName(i), reader[i]);
-            }
-
-            Category category = CategoryFactory.GetCategory(rowData);
-
-            return category;
+            return new Category(id, name, parentId);
         }
     }
 }

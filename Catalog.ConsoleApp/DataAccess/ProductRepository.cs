@@ -1,7 +1,9 @@
 using System.Text.Json;
 using Catalog.ConsoleApp.CustomAttributes;
+using Catalog.ConsoleApp.Domain.Classes.Category;
 using Catalog.ConsoleApp.Domain.Classes.Product;
 using Catalog.ConsoleApp.Domain.Interfaces;
+using Catalog.ConsoleApp.Domain.Structs;
 using Catalog.ConsoleApp.Factories;
 using Microsoft.Data.SqlClient;
 
@@ -52,6 +54,17 @@ namespace Catalog.ConsoleApp.DataAccess {
             {
                 Console.WriteLine(sellable.Price.Amount);
             }
+
+            ProductImage productImage = new ProductImage();
+            productImage.Alt = "Black Tailored Fit Lazio Dinner Jacket";
+            productImage.Title = "Black Tailored Fit Lazio Dinner Jacket";
+            productImage.Path = "products/Jackets/default/Winter/C1199_1";
+            product.AddImages(productImage);
+
+            ProductCategoryAssignment productCategory = new ProductCategoryAssignment();
+            productCategory.Category = new Category("suits", "Suits", "");
+            productCategory.IsPrimary = true;
+            product.AssignCateggory(productCategory);
 
             string productStr = JsonSerializer.Serialize(product);
             Console.WriteLine(productStr);
