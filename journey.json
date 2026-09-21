@@ -1063,7 +1063,7 @@
         { "id": "factory-pattern",    "label": "Factory pattern",     "detect": "auto:factory-pattern" },
         { "id": "service-layer",      "label": "Service layer",       "detect": "auto:service-layer" },
         { "id": "ef-core",            "label": "EF Core",             "detect": ["regex:\\bDbContext\\b", "regex:Microsoft\\.EntityFrameworkCore"], "notes": "next up" },
-        { "id": "migrations",         "label": "EF migrations",       "detect": "manual",                  "notes": "roadmap" }
+        { "id": "migrations",         "label": "EF migrations",       "detect": ["path:Migrations/", "grep:dotnet ef migrations"] }
       ]
     },
     {
@@ -1078,7 +1078,7 @@
         { "id": "minimal-apis",         "label": "Minimal APIs",          "detect": "auto:minimal-apis" },
         { "id": "openapi",              "label": "OpenAPI / Swagger",     "detect": ["regex:AddOpenApi", "regex:MapOpenApi", "regex:Swagger"] },
         { "id": "configuration",        "label": "Configuration binding", "detect": ["regex:GetConnectionString", "regex:builder\\.Configuration"] },
-        { "id": "auth",                 "label": "Authentication",        "detect": "manual",               "notes": "roadmap" },
+        { "id": "auth",                 "label": "Authentication",        "detect": "grep:AddAuthentication|UseAuthentication|\\[Authorize" },
         { "id": "ioc-container",        "label": "IoC container",         "detect": "regex:\\b(IServiceProvider|IServiceCollection|GetRequiredService)\\b" },
         { "id": "di-lifetimes",         "label": "DI lifetimes",          "detect": "regex:Add(Scoped|Singleton|Transient)\\b", "notes": "scoped / singleton / transient" },
         { "id": "custom-middleware",    "label": "Custom middleware",     "detect": ["path:Middlewares/", "regex:\\bInvokeAsync\\b"] }

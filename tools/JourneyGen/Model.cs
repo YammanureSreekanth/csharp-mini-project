@@ -45,6 +45,13 @@ public sealed class Concept
     public string Notes = "";
     public bool Done;
     public bool Planned;                   // explicitly on the roadmap, never auto-detected
+
+    /// <summary>
+    /// Ticked by hand in journey.json rather than found in the code. Needed for the
+    /// judgement topics: without it a concept whose only detector is `manual` could
+    /// never be completed by any means.
+    /// </summary>
+    public bool DeclaredDone;
     public List<string> Detectors = new(); // auto:<feature> | regex:<pattern> | path:<fragment> | manual
     public List<string> Evidence = new();  // repo-relative files that prove it
 }

@@ -140,6 +140,8 @@ public sealed class JourneyConfig
                         Id = c.TryGetProperty("id", out var id) ? id.GetString() ?? "" : "",
                         Label = c.TryGetProperty("label", out var lb) ? lb.GetString() ?? "" : "",
                         Notes = c.TryGetProperty("notes", out var nt) ? nt.GetString() ?? "" : "",
+                        DeclaredDone = c.TryGetProperty("status", out var st) &&
+                                       (st.GetString() ?? "").Equals("done", StringComparison.OrdinalIgnoreCase),
                     };
                     if (concept.Label.Length == 0) concept.Label = concept.Id;
                     concept.Detectors.AddRange(ReadDetectors(c));
@@ -214,16 +216,22 @@ public sealed class JourneyConfig
 
         foreach (var concept in Concepts)
         {
-            if (concept.Detectors.Count == 0 ||
-                concept.Detectors.All(d => d.Equals("manual", StringComparison.OrdinalIgnoreCase)))
+            var detectable = concept.Detectors.Count > 0 &&
+                             concept.Detectors.Any(d => !d.Equals("manual", StringComparison.OrdinalIgnoreCase));
+
+            if (detectable)
+            {
+                var (matched, evidence) = RunDetectors(concept.Detectors, analyzer, root, fileText);
+                concept.Done = matched;
+                concept.Evidence = evidence;
+            }
+            else
             {
                 concept.Planned = true;
-                continue;
             }
 
-            var (matched, evidence) = RunDetectors(concept.Detectors, analyzer, root, fileText);
-            concept.Done = matched;
-            concept.Evidence = evidence;
+            // A hand-declared status wins: some things are true without being greppable.
+            if (concept.DeclaredDone) concept.Done = true;
         }
 
         foreach (var item in Assignment.Items)

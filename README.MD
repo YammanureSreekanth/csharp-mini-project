@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-66_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1737-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-67_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1737-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `██████████████░░░░░░` **70%**
+**Progress** `██████████████░░░░░░` **71%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -589,7 +589,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Data access</b> — 6/7</summary>
+<summary><b>Data access</b> — 7/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
@@ -597,7 +597,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs` +1</sub>
 - [x] **EF Core** — next up <sub>`Ecom.MvcWebApp/Data/ApplicationDbContext.cs` +4</sub>
-- [ ] EF migrations — roadmap <sub>planned</sub>
+- [x] **EF migrations** <sub>`Ecom.MvcWebApp/Migrations/20260920132203_InitialCreate.Designer.cs` +2</sub>
 
 </details>
 
@@ -613,7 +613,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **OpenAPI / Swagger** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Configuration binding** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
-- [ ] Authentication — roadmap <sub>planned</sub>
+- [ ] Authentication
 - [x] **IoC container** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **DI lifetimes** — scoped / singleton / transient <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
@@ -640,7 +640,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 18:55 UTC</sub>
+<sub>Last updated 2026-09-21 18:58 UTC</sub>
 
 <!-- JOURNEY:END -->
 
