@@ -927,7 +927,7 @@
       },
       {
         "label": "Service Bus",
-        "status": "in-progress",
+        "status": "not-started",
         "detect": ["regex:ServiceBus", "regex:QueueClient", "regex:Azure\\.Messaging"]
       },
       {

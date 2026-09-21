@@ -16,7 +16,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 What I am working on right now · assigned 2026-08-25 · next review **2026-09-22**
 
-`█████████████████░░░` **6 of 7 complete** · 1 in progress
+`█████████████████░░░` **6 of 7 complete** · 0 in progress · 1 not started
 
 | Item | Status | Evidence in the code |
 |---|---|---|
@@ -25,7 +25,7 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
 | ILogger | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
 | Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
-| Service Bus | 🔄 In progress | _none yet_ |
+| Service Bus | ⬜ Not started | _none yet_ |
 | IDisposable | ✅ Completed | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
 
 ### Domain model
@@ -637,7 +637,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 19:01 UTC</sub>
+<sub>Last updated 2026-09-21 19:06 UTC</sub>
 
 <!-- JOURNEY:END -->
 
