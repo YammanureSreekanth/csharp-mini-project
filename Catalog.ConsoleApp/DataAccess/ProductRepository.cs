@@ -9,8 +9,12 @@ using Microsoft.Data.SqlClient;
 
 namespace Catalog.ConsoleApp.DataAccess {
     [Info("Sreekanth", "1.0.0")]
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : IProductRepository, IDisposable
     {
+        private readonly MySQLConnection _db;
+
+        public ProductRepository(string connectionString) => _db = new MySQLConnection(connectionString);
+
         public List<BaseProduct> GetByCategory(string Id)
         {
             throw new NotImplementedException();
@@ -23,7 +27,7 @@ namespace Catalog.ConsoleApp.DataAccess {
             {
                 { "Id", Id }
             };
-            List<BaseProduct> baseProducts = MySQLConnection.RunQuery<BaseProduct>(GET_PRODUCT_BY_ID_QUERY ,keyValuePairs, SqlDataReaderProcessor);
+            List<BaseProduct> baseProducts = _db.RunQuery<BaseProduct>(GET_PRODUCT_BY_ID_QUERY ,keyValuePairs, SqlDataReaderProcessor);
             if (baseProducts.Count == 0)
             {
                 return null;
@@ -70,5 +74,10 @@ namespace Catalog.ConsoleApp.DataAccess {
             Console.WriteLine(productStr);
             return product;
         }
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
     }
+
 }

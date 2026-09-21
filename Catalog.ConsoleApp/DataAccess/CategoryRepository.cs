@@ -3,12 +3,16 @@ using Catalog.ConsoleApp.Factories;
 using Microsoft.Data.SqlClient;
 
 namespace Catalog.ConsoleApp.DataAccess {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository, IDisposable
     {
+        private readonly MySQLConnection _db;
+
+        public CategoryRepository(string connectionString) => _db = new MySQLConnection(connectionString);
+
         public List<Category> GetAll()
         {
             const string GET_CATEGORY_QUERY = "SELECT * FROM dbo.Categories";
-            List<Category> categories = MySQLConnection.RunNonQuery<Category>(GET_CATEGORY_QUERY, SqlDataReaderProcessor);
+            List<Category> categories = _db.RunNonQuery<Category>(GET_CATEGORY_QUERY, SqlDataReaderProcessor);
             return categories;
         }
 
@@ -23,7 +27,7 @@ namespace Catalog.ConsoleApp.DataAccess {
             {
                 return reader["ProductId"]?.ToString();
             };
-            List<string> productIds = MySQLConnection.RunQuery<string>(GET_PRODUCTS_ID_QUERY,keyValuePairs, DataReader);
+            List<string> productIds = _db.RunQuery<string>(GET_PRODUCTS_ID_QUERY,keyValuePairs, DataReader);
             return productIds;
         }
 
@@ -47,5 +51,7 @@ namespace Catalog.ConsoleApp.DataAccess {
 
             return new Category(id, name, parentId);
         }
+
+        public void Dispose() => _db.Dispose();
     }
 }

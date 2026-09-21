@@ -9,8 +9,10 @@ namespace Catalog.ConsoleApp
     {
         public static void Main()
         {
-            ICategoryRepository categoryRepository = new CategoryRepository();
-            IProductRepository productRepository = new ProductRepository();
+            string DbCon = "Data Source=localhost;Initial Catalog=CatalogDb;User ID=sa;Password=PraticeApp@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
+
+            ICategoryRepository categoryRepository = new CategoryRepository(DbCon);
+            IProductRepository productRepository = new ProductRepository(DbCon);
             Type type = typeof (ProductRepository);
             object[] attrs = type.GetCustomAttributes(typeof(InfoAttribute), false);
             foreach (InfoAttribute attr in attrs)

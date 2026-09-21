@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-63_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1604-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-63_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1609-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `█████████████░░░░░░░` **67%**
 
@@ -26,7 +26,10 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | ILogger | 🔄 In progress | _none yet_ |
 | Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress | _none yet_ |
 | Service Bus | 🔄 In progress | _none yet_ |
-| IDisposable | 🔄 In progress | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/MySQLConnection.cs</sub><br>✗ `Implemented myself` |
+| IDisposable | 🔄 In progress<br><sub>→ ready to mark complete</sub> | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/MySQLConnection.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
+
+> **The code now covers an item still marked as unfinished:** IDisposable.
+> Status here is declared by hand — update `status` in `journey.json` to close them off.
 
 > **Marked complete, but the code does not fully show it yet:** List, IList and IEnumerable.
 > Status above is my own; the evidence column is generated from the source, so the two can disagree.
@@ -172,20 +175,20 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
-| `Catalog.ConsoleApp` | 29 | 758 | 30 |
+| `Catalog.ConsoleApp` | 29 | 763 | 30 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 1295 of the 1295 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1287 of the 1287 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `Catalog.ConsoleApp` | 689 | 0 | 0 | `████████████████████` 100% |
+| `Catalog.ConsoleApp` | 681 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **1295** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1287** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -207,13 +210,13 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`████░░░░░░░░░░░░░░░░` **36 of 178 covered** across 14 areas
+`████░░░░░░░░░░░░░░░░` **37 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
 | Area | Covered | |
 |---|---:|---|
-| C# and modern .NET depth | 14/22 | `█████████████░░░░░░░` 64% |
+| C# and modern .NET depth | 15/22 | `██████████████░░░░░░` 68% |
 | ASP.NET Core Web APIs | 6/14 | `█████████░░░░░░░░░░░` 43% |
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
@@ -229,7 +232,7 @@ _The ground I want to cover for my career in .NET._
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
 <details>
-<summary><b>C# and modern .NET depth</b> — 14/22 · <sub>Strong enough that C# feels natural.</sub></summary>
+<summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
 - [x] **Classes and interfaces** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
@@ -248,7 +251,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
-- [ ] IDisposable
+- [x] **IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 - [x] **.NET 8/9 app structure** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +2</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **ASP.NET Core Web APIs** <sub>`Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
@@ -520,7 +523,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Overriding** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/MasterProduct.cs` +5</sub>
 - [ ] virtual members
 - [ ] Default interface methods
-- [x] **Static classes** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
+- [x] **Static classes** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +3</sub>
 - [ ] Sealed classes
 - [x] **Generics** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **Generic types of my own** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
@@ -532,7 +535,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Modern C#</b> — 13/17</summary>
+<summary><b>Modern C#</b> — 12/17</summary>
 
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **init-only properties** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
@@ -542,10 +545,10 @@ _The ground I want to cover for my career in .NET._
 - [x] **Nullable reference types** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +2</sub>
 - [x] **?? and ??=** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
-- [x] **Expression-bodied members** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
+- [x] **Expression-bodied members** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
 - [x] **Top-level statements** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
-- [x] **Target-typed new** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
+- [ ] Target-typed new
 - [x] **Collection expressions** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
 - [ ] Primary constructors
 - [ ] Tuples
@@ -570,10 +573,10 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Errors, resources & async</b> — 7/13</summary>
+<summary><b>Errors, resources & async</b> — 8/13</summary>
 
 - [x] **try / catch** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
+- [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Catalog.ConsoleApp/CustomExceptions/NoProductsFoundException.cs`</sub>
 - [ ] Exception filters
 - [ ] finally blocks
@@ -584,7 +587,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Task / ValueTask
 - [ ] ILogger
 - [ ] Structured logging
-- [ ] IDisposable implemented
+- [x] **IDisposable implemented** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 
 </details>
 
@@ -640,7 +643,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 15:54 UTC</sub>
+<sub>Last updated 2026-09-21 17:55 UTC</sub>
 
 <!-- JOURNEY:END -->
 
