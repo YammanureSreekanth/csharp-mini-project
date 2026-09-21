@@ -413,22 +413,96 @@
             {
               "label": "Managed identities",
               "detect": "grep:DefaultAzureCredential|ManagedIdentity"
-            },
+            }
+          ]
+        },
+        {
+          "name": "Infrastructure as Code (Bicep)",
+          "summary": "Declaring the whole backend, not clicking it together in the portal.",
+          "items": [
             {
               "label": "Bicep templates",
               "detect": "path:.bicep"
             },
             {
-              "label": "Bicep parameters and modules",
-              "detect": "grep:^param |^module "
+              "label": "Resource declarations",
+              "detect": "grepin:.bicep:^resource\\s+\\w+\\s+'"
             },
             {
-              "label": "Resource groups",
-              "detect": "grep:targetScope|resourceGroup\\("
+              "label": "targetScope and resource groups",
+              "detect": "grepin:.bicep:^targetScope|resourceGroup\\("
+            },
+            {
+              "label": "Parameters",
+              "detect": "grepin:.bicep:^param "
+            },
+            {
+              "label": "Parameter files (.bicepparam)",
+              "detect": "path:.bicepparam"
+            },
+            {
+              "label": "Decorators",
+              "detect": "grepin:.bicep:@(description|allowed|secure|minLength|maxLength)\\(",
+              "notes": "@description, @allowed, @secure"
+            },
+            {
+              "label": "Variables and expressions",
+              "detect": "grepin:.bicep:^var "
+            },
+            {
+              "label": "Modules",
+              "detect": "grepin:.bicep:^module ",
+              "notes": "composing templates instead of one long file"
+            },
+            {
+              "label": "Outputs",
+              "detect": "grepin:.bicep:^output "
+            },
+            {
+              "label": "Referencing existing resources",
+              "detect": "grepin:.bicep:^resource\\s+\\w+\\s+'[^']+'\\s+existing"
+            },
+            {
+              "label": "Deploying App Service",
+              "detect": "grep:Microsoft\\.Web/sites"
+            },
+            {
+              "label": "Deploying Azure Functions",
+              "detect": "grep:kind:\\s*'functionapp|Microsoft\\.Web/serverfarms"
+            },
+            {
+              "label": "Deploying Service Bus",
+              "detect": "grep:Microsoft\\.ServiceBus/namespaces"
+            },
+            {
+              "label": "Deploying Cosmos DB",
+              "detect": "grep:Microsoft\\.DocumentDB/databaseAccounts"
+            },
+            {
+              "label": "Deploying Key Vault and secrets",
+              "detect": "grep:Microsoft\\.KeyVault/vaults|getSecret\\("
+            },
+            {
+              "label": "Managed identity and RBAC in Bicep",
+              "detect": "grep:Microsoft\\.Authorization/roleAssignments|SystemAssigned"
             },
             {
               "label": "Environment-specific configuration",
-              "detect": "grep:appsettings\\.(Development|Staging|Production)"
+              "detect": "grep:appsettings\\.(Development|Staging|Production)|^param\\s+environment",
+              "notes": "one template, parameterised per environment"
+            },
+            {
+              "label": "Linting and bicep build",
+              "detect": "grep:bicepconfig\\.json|az bicep build"
+            },
+            {
+              "label": "Previewing with what-if",
+              "detect": "grep:--what-if|Test-AzResourceGroupDeployment",
+              "notes": "see the change before it lands"
+            },
+            {
+              "label": "Deploying from CI",
+              "detect": "grep:az deployment group create|azure/arm-deploy|azure/login"
             }
           ]
         },

@@ -30,6 +30,21 @@ public sealed class FeatureWalker : CSharpSyntaxWalker
     static readonly HashSet<string> MinimalApiMethods = new(StringComparer.Ordinal)
         { "MapGet", "MapPost", "MapPut", "MapDelete", "MapPatch" };
 
+    /// <summary>
+    /// Named explicitly rather than matched as "anything starting with Use": EF Core's
+    /// model builder is full of UseIdentityColumn/UseCollation calls, and a generated
+    /// migration was being reported as evidence of a middleware pipeline.
+    /// </summary>
+    static readonly HashSet<string> MiddlewareMethods = new(StringComparer.Ordinal)
+    {
+        "UseRouting", "UseEndpoints", "UseAuthentication", "UseAuthorization",
+        "UseStaticFiles", "UseHttpsRedirection", "UseHsts", "UseExceptionHandler",
+        "UseDeveloperExceptionPage", "UseStatusCodePages", "UseMiddleware", "UseCors",
+        "UseSession", "UseResponseCaching", "UseResponseCompression", "UseOutputCache",
+        "UseRateLimiter", "UseSwagger", "UseSwaggerUI", "UseWebSockets",
+        "UseForwardedHeaders", "UseAntiforgery", "UseRequestLocalization",
+    };
+
     static readonly HashSet<string> AdoTypes = new(StringComparer.Ordinal)
     {
         "SqlConnection", "SqlCommand", "SqlDataReader", "SqlParameter",
@@ -172,8 +187,15 @@ public sealed class FeatureWalker : CSharpSyntaxWalker
         if (LinqMethods.Contains(name)) { Mark("linq"); Mark("linq-method-syntax"); }
         if (DiMethods.Contains(name)) Mark("dependency-injection");
         if (MinimalApiMethods.Contains(name)) Mark("minimal-apis");
-        if (name.StartsWith("Use", StringComparison.Ordinal) && name.Length > 3 && char.IsUpper(name[3]))
+        if (MiddlewareMethods.Contains(name)) Mark("middleware-pipeline");
+
+        // The inline form `app.Use(async (context, next) => ...)`, which the old
+        // "starts with Use" rule missed entirely because the name is exactly "Use".
+        if (name == "Use" && node.Expression is MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "app" or "builder" } })
+        {
             Mark("middleware-pipeline");
+            Mark("inline-middleware");
+        }
         if (name is "MapControllerRoute" or "MapControllers" or "MapDefaultControllerRoute") Mark("mvc-routing");
         if (name is "ExecuteReader" or "ExecuteNonQuery" or "ExecuteScalar" or "OpenAsync" or "Open") Mark("ado-net");
         if (name is "WriteLine" or "ReadLine" && node.Expression.ToString().StartsWith("Console", StringComparison.Ordinal))

@@ -207,7 +207,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`████░░░░░░░░░░░░░░░░` **36 of 162 covered** across 13 areas
+`████░░░░░░░░░░░░░░░░` **36 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -218,7 +218,8 @@ _The ground I want to cover for my career in .NET._
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
-| Azure cloud services | 0/14 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Azure cloud services | 0/10 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Infrastructure as Code (Bicep) | 0/20 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
 | Testing and code quality | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | CI/CD and DevOps basics | 3/12 | `█████░░░░░░░░░░░░░░░` 25% |
@@ -261,7 +262,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] REST API design <sub>judgement — not code-detectable</sub>
 - [x] **Controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +3</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
-- [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Migrations/20260920132203_InitialCreate.Designer.cs` +3</sub>
+- [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Custom middleware** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
 - [ ] Authentication
 - [ ] Authorization
@@ -328,7 +329,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Azure cloud services</b> — 0/14 · <sub>The services named on the profile.</sub></summary>
+<summary><b>Azure cloud services</b> — 0/10 · <sub>The services named on the profile.</sub></summary>
 
 - [ ] Azure App Service
 - [ ] Azure Functions
@@ -340,10 +341,32 @@ _The ground I want to cover for my career in .NET._
 - [ ] Azure Key Vault
 - [ ] Azure Monitor <sub>judgement — not code-detectable</sub>
 - [ ] Managed identities
+
+</details>
+
+<details>
+<summary><b>Infrastructure as Code (Bicep)</b> — 0/20 · <sub>Declaring the whole backend, not clicking it together in the portal.</sub></summary>
+
 - [ ] Bicep templates
-- [ ] Bicep parameters and modules
-- [ ] Resource groups
-- [ ] Environment-specific configuration
+- [ ] Resource declarations
+- [ ] targetScope and resource groups
+- [ ] Parameters
+- [ ] Parameter files (.bicepparam)
+- [ ] Decorators — @description, @allowed, @secure
+- [ ] Variables and expressions
+- [ ] Modules — composing templates instead of one long file
+- [ ] Outputs
+- [ ] Referencing existing resources
+- [ ] Deploying App Service
+- [ ] Deploying Azure Functions
+- [ ] Deploying Service Bus
+- [ ] Deploying Cosmos DB
+- [ ] Deploying Key Vault and secrets
+- [ ] Managed identity and RBAC in Bicep
+- [ ] Environment-specific configuration — one template, parameterised per environment
+- [ ] Linting and bicep build
+- [ ] Previewing with what-if — see the change before it lands
+- [ ] Deploying from CI
 
 </details>
 
@@ -582,7 +605,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>ASP.NET Core</b> — 12/13</summary>
 
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
-- [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Migrations/20260920132203_InitialCreate.Designer.cs` +3</sub>
+- [x] **Middleware pipeline** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **MVC controllers** <sub>`Ecom.MvcWebApp/Controllers/CategoryController.cs` +5</sub>
 - [x] **MVC routing** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Razor views** <sub>`Ecom.MvcWebApp/Views`</sub>
@@ -617,7 +640,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 15:21 UTC</sub>
+<sub>Last updated 2026-09-21 15:54 UTC</sub>
 
 <!-- JOURNEY:END -->
 

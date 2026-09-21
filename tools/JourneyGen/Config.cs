@@ -286,6 +286,22 @@ public sealed class JourneyConfig
                         if (rx.IsMatch(text)) { matched = true; evidence.Add(file); }
                     break;
 
+                // grepin:<path fragment>:<regex> — same as grep but only in matching files.
+                // Bicep keywords like "param" and "var" also occur in C#, so a language's
+                // syntax detectors have to be scoped to that language's files.
+                case "grepin":
+                {
+                    var sep = arg.IndexOf(':');
+                    if (sep <= 0) break;
+                    var where = arg[..sep];
+                    var pattern = arg[(sep + 1)..];
+                    var irx = new Regex(pattern, RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    foreach (var (rel, text) in AllTextFiles(root).Value)
+                        if (rel.Contains(where, StringComparison.OrdinalIgnoreCase) && irx.IsMatch(text))
+                        { matched = true; evidence.Add(rel); }
+                    break;
+                }
+
                 case "grep":
                     var grx = new Regex(arg, RegexOptions.Multiline | RegexOptions.CultureInvariant);
                     foreach (var (rel, text) in AllTextFiles(root).Value)
