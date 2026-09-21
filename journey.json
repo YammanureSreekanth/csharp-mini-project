@@ -1,12 +1,26 @@
 {
-  // Which concepts the journey page tracks, and how each one is proven from the code.
+  // What the journey page tracks, and how each item is decided.
   //
-  //   "detect": "auto:<feature>"   a feature the Roslyn walker recognises (tools/JourneyGen/FeatureWalker.cs)
-  //             "regex:<pattern>"  matched against the text of every .cs file
-  //             "path:<fragment>"  matched against every file path in the repo
-  //             "manual"           roadmap only; never ticks itself
+  // "detect" — how the code proves it. Several may be listed; any one match counts.
   //
-  // Several detectors can be listed; any one matching marks the concept covered.
+  //   "auto:<feature>"              a feature the Roslyn walker recognises
+  //                                 (tools/JourneyGen/FeatureWalker.cs)
+  //   "regex:<pattern>"             matched against the text of every .cs file
+  //   "grep:<pattern>"              matched against every text file: csproj, yml,
+  //                                 bicep, appsettings, sql — not just .cs
+  //   "grepin:<fragment>:<pattern>" grep, restricted to paths containing <fragment>,
+  //                                 e.g. grepin:.bicep:^param
+  //   "path:<fragment>"             matched against every file path in the repo
+  //   "manual"                      nothing can prove it; judgement only
+  //
+  // "status" — my own word, and it overrides the code in BOTH directions:
+  //
+  //   "done"          tick it even with no evidence (judgement topics)
+  //   "not-started"   hold it back even though the code contains it — use when the
+  //                   scaffold or a library brought it in and I have not learned it
+  //   "in-progress"   current focus only; shows as In progress
+  //
+  // Leave "status" out and the code decides. That is the normal case.
   "title": "My .NET Journey",
   "tagline": "A running record of the C# and .NET ground I have actually covered, generated from this repository on every push.",
 
@@ -902,12 +916,12 @@
       },
       {
         "label": "ILogger",
-        "status": "in-progress",
+        "status": "done",
         "detect": ["regex:\\bILogger\\b", "regex:Microsoft\\.Extensions\\.Logging"]
       },
       {
         "label": "Structured logging",
-        "status": "in-progress",
+        "status": "done",
         "notes": "message templates with named placeholders, not string interpolation",
         "detect": "regex:\\.Log\\w+\\(\"[^\"]*\\{[A-Za-z]"
       },
@@ -918,7 +932,7 @@
       },
       {
         "label": "IDisposable",
-        "status": "in-progress",
+        "status": "done",
         "parts": [
           { "label": "Consumed with using", "detect": "auto:using-idisposable" },
           { "label": "Implemented myself",  "detect": ["regex:\\bvoid\\s+Dispose\\s*\\(", "regex:\\bIDisposable\\b"] }

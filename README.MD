@@ -16,20 +16,17 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 What I am working on right now · assigned 2026-08-25 · next review **2026-09-22**
 
-`█████████░░░░░░░░░░░` **3 of 7 complete** · 4 in progress
+`█████████████████░░░` **6 of 7 complete** · 1 in progress
 
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
 | List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✓ `IList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
 | Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
-| ILogger | 🔄 In progress<br><sub>→ ready to mark complete</sub> | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
-| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress<br><sub>→ ready to mark complete</sub> | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
+| ILogger | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
+| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
 | Service Bus | 🔄 In progress | _none yet_ |
-| IDisposable | 🔄 In progress<br><sub>→ ready to mark complete</sub> | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
-
-> **The code now covers 3 items still marked as unfinished:** ILogger, Structured logging, IDisposable.
-> Status here is declared by hand — update `status` in `journey.json` to close them off.
+| IDisposable | ✅ Completed | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
 
 ### Domain model
 
@@ -640,7 +637,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 18:58 UTC</sub>
+<sub>Last updated 2026-09-21 19:01 UTC</sub>
 
 <!-- JOURNEY:END -->
 

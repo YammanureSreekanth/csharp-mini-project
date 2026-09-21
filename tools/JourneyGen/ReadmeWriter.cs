@@ -86,6 +86,7 @@ public static class ReadmeWriter
                 var where = c.Done && c.Evidence.Count > 0
                     ? $" <sub>`{c.Evidence[0]}`{(c.Evidence.Count > 1 ? $" +{c.Evidence.Count - 1}" : "")}</sub>"
                     : c.Done ? " <sub>declared — not code-detectable</sub>"
+                    : c.Detected ? " <sub>in the code, but not one I claim yet</sub>"
                     : c.Planned ? " <sub>planned</sub>" : "";
                 sb.AppendLine($"- {box} {label}{note}{where}");
             }

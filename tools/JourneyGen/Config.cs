@@ -140,8 +140,7 @@ public sealed class JourneyConfig
                         Id = c.TryGetProperty("id", out var id) ? id.GetString() ?? "" : "",
                         Label = c.TryGetProperty("label", out var lb) ? lb.GetString() ?? "" : "",
                         Notes = c.TryGetProperty("notes", out var nt) ? nt.GetString() ?? "" : "",
-                        DeclaredDone = c.TryGetProperty("status", out var st) &&
-                                       (st.GetString() ?? "").Equals("done", StringComparison.OrdinalIgnoreCase),
+                        DeclaredStatus = c.TryGetProperty("status", out var st) ? st.GetString() : null,
                     };
                     if (concept.Label.Length == 0) concept.Label = concept.Id;
                     concept.Detectors.AddRange(ReadDetectors(c));
@@ -222,6 +221,7 @@ public sealed class JourneyConfig
             if (detectable)
             {
                 var (matched, evidence) = RunDetectors(concept.Detectors, analyzer, root, fileText);
+                concept.Detected = matched;
                 concept.Done = matched;
                 concept.Evidence = evidence;
             }
@@ -230,8 +230,12 @@ public sealed class JourneyConfig
                 concept.Planned = true;
             }
 
-            // A hand-declared status wins: some things are true without being greppable.
-            if (concept.DeclaredDone) concept.Done = true;
+            // A hand-declared status wins in both directions.
+            if (concept.DeclaredStatus is { Length: > 0 } declared)
+            {
+                concept.Done = declared.Equals("done", StringComparison.OrdinalIgnoreCase);
+                concept.Planned = false;
+            }
         }
 
         foreach (var item in Assignment.Items)

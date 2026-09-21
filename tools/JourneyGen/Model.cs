@@ -47,11 +47,15 @@ public sealed class Concept
     public bool Planned;                   // explicitly on the roadmap, never auto-detected
 
     /// <summary>
-    /// Ticked by hand in journey.json rather than found in the code. Needed for the
-    /// judgement topics: without it a concept whose only detector is `manual` could
-    /// never be completed by any means.
+    /// Set by hand in journey.json: "done", "not-started" or "in-progress". Overrides
+    /// what the code says in both directions — a judgement topic can be ticked without
+    /// evidence, and something the scaffold happens to contain can be held back until
+    /// I have actually learned it.
     /// </summary>
-    public bool DeclaredDone;
+    public string? DeclaredStatus;
+
+    /// <summary>Whether the detectors found it, regardless of what I declared.</summary>
+    public bool Detected;
     public List<string> Detectors = new(); // auto:<feature> | regex:<pattern> | path:<fragment> | manual
     public List<string> Evidence = new();  // repo-relative files that prove it
 }
