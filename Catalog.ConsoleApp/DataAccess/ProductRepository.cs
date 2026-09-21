@@ -6,6 +6,7 @@ using Catalog.ConsoleApp.Domain.Interfaces;
 using Catalog.ConsoleApp.Domain.Structs;
 using Catalog.ConsoleApp.Factories;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 
 namespace Catalog.ConsoleApp.DataAccess {
     [Info("Sreekanth", "1.0.0")]
@@ -13,7 +14,13 @@ namespace Catalog.ConsoleApp.DataAccess {
     {
         private readonly MySQLConnection _db;
 
-        public ProductRepository(string connectionString) => _db = new MySQLConnection(connectionString);
+        private readonly ILogger<ProductRepository> _logger;
+
+        public ProductRepository(string connectionString, ILogger<ProductRepository> logger, ILogger<MySQLConnection> dbLogger)
+        {
+             _db = new MySQLConnection(connectionString, dbLogger);
+             _logger = logger;
+        }
 
         public List<BaseProduct> GetByCategory(string Id)
         {
@@ -23,15 +30,19 @@ namespace Catalog.ConsoleApp.DataAccess {
         public BaseProduct? GetById(string Id)
         {
             const string GET_PRODUCT_BY_ID_QUERY = "SELECT * FROM dbo.Products WHERE Id = @Id";
+            
             Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
             {
                 { "Id", Id }
             };
+
             List<BaseProduct> baseProducts = _db.RunQuery<BaseProduct>(GET_PRODUCT_BY_ID_QUERY ,keyValuePairs, SqlDataReaderProcessor);
+            
             if (baseProducts.Count == 0)
             {
                 return null;
             }
+            
             return baseProducts.First();
         }
 
@@ -51,15 +62,20 @@ namespace Catalog.ConsoleApp.DataAccess {
             }
 
             string Id = (string)rowData["Id"];
+
             string Name = (string)rowData["Name"];
+
             byte type = (byte)rowData["Type"];
+
             BaseProduct product = ProductFactory.Create(Id, Name, type, rowData, reader);
+
             if (product is ISellable sellable)
             {
                 Console.WriteLine(sellable.Price.Amount);
             }
 
             ProductImage productImage = new ProductImage();
+
             productImage.Alt = "Black Tailored Fit Lazio Dinner Jacket";
             productImage.Title = "Black Tailored Fit Lazio Dinner Jacket";
             productImage.Path = "products/Jackets/default/Winter/C1199_1";
@@ -71,6 +87,7 @@ namespace Catalog.ConsoleApp.DataAccess {
             product.AssignCateggory(productCategory);
 
             string productStr = JsonSerializer.Serialize(product);
+
             Console.WriteLine(productStr);
             return product;
         }

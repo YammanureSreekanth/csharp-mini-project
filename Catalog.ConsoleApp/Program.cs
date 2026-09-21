@@ -2,6 +2,7 @@
 using Catalog.ConsoleApp.CustomAttributes;
 using Catalog.ConsoleApp.DataAccess;
 using Catalog.ConsoleApp.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Catalog.ConsoleApp
 {
@@ -9,20 +10,43 @@ namespace Catalog.ConsoleApp
     {
         public static void Main()
         {
+            using ILoggerFactory factory = LoggerFactory.Create(builder =>
+            {
+                builder
+                .AddSimpleConsole(options => options.IncludeScopes = true)
+                .SetMinimumLevel(LogLevel.Debug);
+            });
+            
+            ILogger logger = factory.CreateLogger<Program>();
+
+            logger.LogInformation("Hello World! Logging is {Description}.", "fun");
+
             string DbCon = "Data Source=localhost;Initial Catalog=CatalogDb;User ID=sa;Password=PraticeApp@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
 
-            ICategoryRepository categoryRepository = new CategoryRepository(DbCon);
-            IProductRepository productRepository = new ProductRepository(DbCon);
+            ILogger<CategoryRepository> categoryRepoLogger = factory.CreateLogger<CategoryRepository>();
+
+            ILogger<ProductRepository> productRepoLogger = factory.CreateLogger<ProductRepository>();
+
+            ILogger<MySQLConnection> dbLogger = factory.CreateLogger<MySQLConnection>();
+
+            ICategoryRepository categoryRepository = new CategoryRepository(DbCon, categoryRepoLogger, dbLogger);
+            
+            IProductRepository productRepository = new ProductRepository(DbCon, productRepoLogger, dbLogger);
+            
             Type type = typeof (ProductRepository);
+            
             object[] attrs = type.GetCustomAttributes(typeof(InfoAttribute), false);
+            
             foreach (InfoAttribute attr in attrs)
             {
-                Console.WriteLine($"Author {attr.Author} and Version {attr.Version}");
+                logger.LogInformation("Author {Name} and Version {Version}", attr.Author, attr.Version);
             }
+            
             CatalogService catalogService = new CatalogService(categoryRepository, productRepository);
             // catalogService.GetProductById("D005");
-            catalogService.Catalog();
-            // catalogService.GetProductsByCategoryId("black-tie-collection");
+            
+            // catalogService.Catalog();
+            catalogService.GetProductsByCategoryId("black-tie-collection");
         }
     }
 }

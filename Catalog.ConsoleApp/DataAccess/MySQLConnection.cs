@@ -1,16 +1,17 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 
 public class MySQLConnection: IDisposable
 {
     private readonly SqlConnection _connection;
-    private bool _disposed;
-    private readonly static string connectionString =
-            "Data Source=localhost;Initial Catalog=CatalogDb;User ID=sa;Password=PraticeApp@2031;Pooling=False;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Authentication=SqlPassword;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
-    
-    public MySQLConnection(string connectionString)
+    private bool _disposed;    
+    private readonly ILogger<MySQLConnection> _logger;
+    public MySQLConnection(string connectionString, ILogger<MySQLConnection> logger)
     {
+        _logger = logger;
         _connection = new SqlConnection(connectionString);
         _connection.Open();
+        _logger.LogDebug("Connection opened");
     }
     public List<T> RunQuery<T>(string Query, Dictionary<string, string> ParamsPlaceholders, Func<SqlDataReader, T> SqlDataReaderProcessor)
     {
@@ -27,12 +28,17 @@ public class MySQLConnection: IDisposable
         try
         {
             using SqlDataReader reader = command.ExecuteReader();
+
+             _logger.LogInformation("Query returned {RowCount} rows", results.Count);
+
             while (reader.Read())
-                results.Add(SqlDataReaderProcessor(reader));
+            {
+                results.Add(SqlDataReaderProcessor(reader));   
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+             _logger.LogError(ex, "Query failed: {Query}", Query);
             throw;
         }
 
@@ -65,5 +71,6 @@ public class MySQLConnection: IDisposable
         if (_disposed) return;
         _connection.Dispose();
         _disposed = true;
+        _logger.LogDebug("Connection disposed");
     }
 }

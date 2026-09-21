@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-63_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1609-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-65_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1711-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `█████████████░░░░░░░` **67%**
+**Progress** `██████████████░░░░░░` **69%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -23,12 +23,12 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
 | List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✗ `IList<T>`<br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
 | Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
-| ILogger | 🔄 In progress | _none yet_ |
-| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress | _none yet_ |
+| ILogger | 🔄 In progress<br><sub>→ ready to mark complete</sub> | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
+| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress<br><sub>→ ready to mark complete</sub> | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
 | Service Bus | 🔄 In progress | _none yet_ |
-| IDisposable | 🔄 In progress<br><sub>→ ready to mark complete</sub> | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/MySQLConnection.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
+| IDisposable | 🔄 In progress<br><sub>→ ready to mark complete</sub> | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
 
-> **The code now covers an item still marked as unfinished:** IDisposable.
+> **The code now covers 3 items still marked as unfinished:** ILogger, Structured logging, IDisposable.
 > Status here is declared by hand — update `status` in `journey.json` to close them off.
 
 > **Marked complete, but the code does not fully show it yet:** List, IList and IEnumerable.
@@ -174,21 +174,21 @@ classDiagram
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
+| `Catalog.ConsoleApp` | 29 | 865 | 30 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
-| `Catalog.ConsoleApp` | 29 | 763 | 30 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 1287 of the 1287 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1324 of the 1324 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `Catalog.ConsoleApp` | 681 | 0 | 0 | `████████████████████` 100% |
+| `Catalog.ConsoleApp` | 718 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **1287** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1324** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -210,7 +210,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`████░░░░░░░░░░░░░░░░` **37 of 178 covered** across 14 areas
+`████░░░░░░░░░░░░░░░░` **38 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -227,7 +227,7 @@ _The ground I want to cover for my career in .NET._
 | Testing and code quality | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | CI/CD and DevOps basics | 3/12 | `█████░░░░░░░░░░░░░░░` 25% |
 | Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
-| Observability and production readiness | 1/13 | `██░░░░░░░░░░░░░░░░░░` 8% |
+| Observability and production readiness | 2/13 | `███░░░░░░░░░░░░░░░░░` 15% |
 | Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
@@ -245,7 +245,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Configuration** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Error handling** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
-- [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
+- [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Validation** <sub>`Ecom.MvcWebApp/Controllers/EmployeesController.cs` +3</sub>
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
@@ -445,9 +445,9 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Observability and production readiness</b> — 1/13 · <sub>“It works locally” is not enough.</sub></summary>
+<summary><b>Observability and production readiness</b> — 2/13 · <sub>“It works locally” is not enough.</sub></summary>
 
-- [ ] Structured logging
+- [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 - [x] **Correlation IDs** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [ ] Distributed tracing
 - [ ] Metrics
@@ -548,8 +548,8 @@ _The ground I want to cover for my career in .NET._
 - [x] **Expression-bodied members** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
 - [x] **Top-level statements** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
-- [ ] Target-typed new
-- [x] **Collection expressions** <sub>`Catalog.ConsoleApp/Services/CatalogService.cs`</sub>
+- [x] **Target-typed new** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs`</sub>
+- [ ] Collection expressions
 - [ ] Primary constructors
 - [ ] Tuples
 - [x] **Lambdas** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
@@ -573,20 +573,20 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Errors, resources & async</b> — 8/13</summary>
+<summary><b>Errors, resources & async</b> — 10/13</summary>
 
 - [x] **try / catch** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
 - [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Catalog.ConsoleApp/CustomExceptions/NoProductsFoundException.cs`</sub>
 - [ ] Exception filters
 - [ ] finally blocks
-- [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +1</sub>
+- [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Custom attributes** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
-- [x] **Logging** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
+- [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
 - [x] **async / await** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
 - [ ] Task / ValueTask
-- [ ] ILogger
-- [ ] Structured logging
+- [x] **ILogger** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 - [x] **IDisposable implemented** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 
 </details>
@@ -643,7 +643,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 17:55 UTC</sub>
+<sub>Last updated 2026-09-21 18:41 UTC</sub>
 
 <!-- JOURNEY:END -->
 

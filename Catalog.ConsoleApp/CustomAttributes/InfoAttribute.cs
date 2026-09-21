@@ -5,7 +5,6 @@ namespace Catalog.ConsoleApp.CustomAttributes
     {
         public string Author {get;}
         public string Version {get;}
-
         public InfoAttribute(string author, string version)
         {
             Author = author;
