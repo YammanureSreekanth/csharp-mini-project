@@ -57,7 +57,6 @@ namespace Catalog.ConsoleApp.DataAccess {
 
             for (var i = 0; i < reader.FieldCount; i++)
             {
-                // Console.WriteLine($"Prop Name {reader.GetName(i)} \t {reader[i]}");
                 rowData.Add(reader.GetName(i), reader[i]);
             }
 
@@ -80,6 +79,13 @@ namespace Catalog.ConsoleApp.DataAccess {
             productImage.Title = "Black Tailored Fit Lazio Dinner Jacket";
             productImage.Path = "products/Jackets/default/Winter/C1199_1";
             product.AddImages(productImage);
+
+            productImage.Alt = "Black Tailored Fit Lazio Dinner Jacket";
+            productImage.Title = "Black Tailored Fit Lazio Dinner Jacket";
+            productImage.Path = "products/Jackets/default/Winter/C1199_2";
+            product.AddImages(productImage);
+
+            product.SetPrimaryImage(1);
 
             ProductCategoryAssignment productCategory = new ProductCategoryAssignment();
             productCategory.Category = new Category("suits", "Suits", "");

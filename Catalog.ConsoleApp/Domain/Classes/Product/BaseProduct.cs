@@ -11,7 +11,7 @@ namespace Catalog.ConsoleApp.Domain.Classes.Product
         public string Name {get; set;}
         public bool IsOnline {get; set;}
         public bool IsSearchable {get; set;}
-        public string ShortDescription {get; set;}
+        public string? ShortDescription {get; set;}
         public SeoInfo SEO {get; set;}
         public ProductType Type {get; set;}
         private readonly List<ProductImage> _images = new List<ProductImage>();
@@ -28,6 +28,26 @@ namespace Catalog.ConsoleApp.Domain.Classes.Product
         public void AssignCateggory(ProductCategoryAssignment productCategory)
         {
             _categoryAssignment.Add(productCategory);
+        }
+
+        private static void MoveToFront<T>(IList<T> list, int index)
+        {
+            for (int i = index; i > 0; i--)
+            {
+                T temp = list[i];
+                list[i] = list[i - 1];
+                list[i - 1] = temp;
+            }
+        }
+
+        public void SetPrimaryImage(int index)
+        {
+            if (index < 0 || index >= _images.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            MoveToFront(_images, index);
         }
 
         public abstract string GetPriceDisplay();

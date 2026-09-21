@@ -43,10 +43,10 @@ namespace Catalog.ConsoleApp
             }
             
             CatalogService catalogService = new CatalogService(categoryRepository, productRepository);
-            // catalogService.GetProductById("D005");
+            catalogService.GetProductById("D005");
             
             // catalogService.Catalog();
-            catalogService.GetProductsByCategoryId("black-tie-collection");
+            // catalogService.GetProductsByCategoryId("black-tie-collection");
         }
     }
 }

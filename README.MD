@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-65_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1711-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-66_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1737-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `██████████████░░░░░░` **69%**
+**Progress** `██████████████░░░░░░` **70%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -21,7 +21,7 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
-| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✗ `IList<T>`<br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
+| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✓ `IList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
 | Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
 | ILogger | 🔄 In progress<br><sub>→ ready to mark complete</sub> | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
 | Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | 🔄 In progress<br><sub>→ ready to mark complete</sub> | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
@@ -30,9 +30,6 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 
 > **The code now covers 3 items still marked as unfinished:** ILogger, Structured logging, IDisposable.
 > Status here is declared by hand — update `status` in `journey.json` to close them off.
-
-> **Marked complete, but the code does not fully show it yet:** List, IList and IEnumerable.
-> Status above is my own; the evidence column is generated from the source, so the two can disagree.
 
 ### Domain model
 
@@ -66,7 +63,7 @@ classDiagram
         -List~ProductImage~ _images
         +AddImages() void
         +AssignCateggory() void
-        ...5 more
+        ...7 more
     }
     class Category {
         +string Id
@@ -174,21 +171,21 @@ classDiagram
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
-| `Catalog.ConsoleApp` | 29 | 865 | 30 |
+| `Catalog.ConsoleApp` | 29 | 891 | 30 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 1324 of the 1324 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1345 of the 1345 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `Catalog.ConsoleApp` | 718 | 0 | 0 | `████████████████████` 100% |
+| `Catalog.ConsoleApp` | 739 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **1324** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1345** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -526,7 +523,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Static classes** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +3</sub>
 - [ ] Sealed classes
 - [x] **Generics** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
-- [x] **Generic types of my own** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
+- [x] **Generic types of my own** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +1</sub>
 - [ ] Delegates
 - [ ] Events
 - [ ] Indexers
@@ -558,7 +555,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Collections & LINQ</b> — 6/9</summary>
+<summary><b>Collections & LINQ</b> — 7/9</summary>
 
 - [x] **Generic collections** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +4</sub>
@@ -567,7 +564,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Extension methods
 - [x] **Iterators (yield)** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
 - [x] **IEnumerable<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
-- [ ] IList<T>
+- [x] **IList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 - [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 
 </details>
@@ -643,7 +640,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 18:41 UTC</sub>
+<sub>Last updated 2026-09-21 18:55 UTC</sub>
 
 <!-- JOURNEY:END -->
 
