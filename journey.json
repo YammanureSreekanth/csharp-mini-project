@@ -884,62 +884,115 @@
     },
 
   "assignment": {
-    "title": "Current focus",
-    "source": "What I am working on right now",
-    "assignedOn": "2026-08-25",
-    "reviewOn": "2026-09-22",
-    "note": "Replaced with a new list at each review as priorities move on.",
-    "items": [
-      {
-        "label": "DI & IoC",
-        "status": "done",
-        "detect": [
-          "regex:Add(Scoped|Singleton|Transient)\\b",
-          "regex:\\b(IServiceProvider|IServiceCollection|GetRequiredService)\\b"
-        ]
-      },
-      {
-        "label": "List, IList and IEnumerable",
-        "status": "done",
-        "notes": "the trade-off between exposing a concrete list and an abstraction",
-        "parts": [
-          { "label": "List<T>",          "detect": "regex:\\bList<" },
-          { "label": "IReadOnlyList<T>", "detect": "regex:\\bIReadOnlyList[<\\s]" },
-          { "label": "IList<T>",         "detect": "regex:\\bIList[<\\s]" },
-          { "label": "IEnumerable<T>",   "detect": "regex:\\bIEnumerable[<\\s]" }
-        ]
-      },
-      {
-        "label": "Async",
-        "status": "done",
-        "detect": ["auto:async-await", "auto:task-based-async"]
-      },
-      {
-        "label": "ILogger",
-        "status": "done",
-        "detect": ["regex:\\bILogger\\b", "regex:Microsoft\\.Extensions\\.Logging"]
-      },
-      {
-        "label": "Structured logging",
-        "status": "done",
-        "notes": "message templates with named placeholders, not string interpolation",
-        "detect": "regex:\\.Log\\w+\\(\"[^\"]*\\{[A-Za-z]"
-      },
-      {
-        "label": "Service Bus",
-        "status": "not-started",
-        "detect": ["regex:ServiceBus", "regex:QueueClient", "regex:Azure\\.Messaging"]
-      },
-      {
-        "label": "IDisposable",
-        "status": "done",
-        "parts": [
-          { "label": "Consumed with using", "detect": "auto:using-idisposable" },
-          { "label": "Implemented myself",  "detect": ["regex:\\bvoid\\s+Dispose\\s*\\(", "regex:\\bIDisposable\\b"] }
-        ]
-      }
-    ]
-  },
+      "title": "Current focus",
+      "source": "What I am working on right now",
+      "assignedOn": "2026-09-22",
+      "reviewOn": "2026-10-20",
+      "note": "Replaced with a new list at each review as priorities move on.",
+      "items": [
+        {
+          "label": "DTOs and mapping services",
+          "status": "not-started",
+          "notes": "keeping the API contract separate from the domain model",
+          "parts": [
+            {
+              "label": "DTO types",
+              "detect": [
+                "regex:\\b(class|record)\\s+\\w*Dto\\b",
+                "path:Dtos/",
+                "path:DTOs/"
+              ]
+            },
+            {
+              "label": "Mapping service",
+              "detect": [
+                "regex:\\b(class|interface)\\s+I?\\w*Mapper\\b",
+                "path:Mapping/",
+                "grep:AutoMapper|Mapster"
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Bicep, deployments and Azure Functions",
+          "status": "not-started",
+          "notes": "one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL",
+          "parts": [
+            {
+              "label": "Bicep templates",
+              "detect": "path:.bicep"
+            },
+            {
+              "label": "Deploying from CI",
+              "detect": "grep:az deployment group create|azure/arm-deploy|azure/login"
+            },
+            {
+              "label": "Azure Function app",
+              "detect": [
+                "grep:Microsoft\\.Azure\\.Functions|\\[Function\\(|FunctionName",
+                "path:host.json"
+              ]
+            },
+            {
+              "label": "Redis",
+              "detect": "grep:StackExchange\\.Redis|AddStackExchangeRedisCache|Microsoft\\.Cache/Redis"
+            },
+            {
+              "label": "Azure SQL",
+              "detect": "grep:Microsoft\\.Sql/servers"
+            }
+          ]
+        },
+        {
+          "label": "Swagger",
+          "status": "not-started",
+          "notes": "the scaffold already emits an OpenAPI document; the rest is mine to add",
+          "parts": [
+            {
+              "label": "OpenAPI document",
+              "detect": "grep:AddOpenApi|MapOpenApi|AddSwaggerGen"
+            },
+            {
+              "label": "Swagger UI",
+              "detect": "grep:UseSwaggerUI|AddSwaggerGen|Scalar\\.AspNetCore"
+            },
+            {
+              "label": "Documented responses",
+              "detect": "grep:ProducesResponseType|WithOpenApi|WithSummary"
+            },
+            {
+              "label": "XML comments in the docs",
+              "detect": "grep:GenerateDocumentationFile|IncludeXmlComments"
+            }
+          ]
+        },
+        {
+          "label": "Unit testing",
+          "status": "not-started",
+          "parts": [
+            {
+              "label": "Test project",
+              "detect": [
+                "path:.Tests",
+                "path:Tests/"
+              ]
+            },
+            {
+              "label": "xUnit or NUnit",
+              "detect": "grep:xunit|NUnit|MSTest"
+            },
+            {
+              "label": "Mocking",
+              "detect": "grep:\\bMoq\\b|NSubstitute|FakeItEasy"
+            },
+            {
+              "label": "Running in CI",
+              "detect": "grep:dotnet test"
+            }
+          ]
+        }
+      ]
+    },
 
   "provenance": {
     "enabled": true,

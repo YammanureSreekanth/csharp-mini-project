@@ -14,19 +14,16 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 ### Current focus
 
-What I am working on right now · assigned 2026-08-25 · next review **2026-09-22**
+What I am working on right now · assigned 2026-09-22 · next review **2026-10-20**
 
-`█████████████████░░░` **6 of 7 complete** · 0 in progress · 1 not started
+`░░░░░░░░░░░░░░░░░░░░` **0 of 4 complete** · 0 in progress · 4 not started
 
 | Item | Status | Evidence in the code |
 |---|---|---|
-| DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
-| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
-| Async | ✅ Completed | `Catalog.ConsoleApp/AsyncProgram.cs` <sub>+5</sub> |
-| ILogger | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+4</sub> |
-| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
-| Service Bus | ⬜ Not started | _none yet_ |
-| IDisposable | ✅ Completed | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/AsyncProgram.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
+| DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ⬜ Not started | ✗ `DTO types`<br>✗ `Mapping service` |
+| Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL</sub> | ⬜ Not started | ✗ `Bicep templates`<br>✗ `Deploying from CI`<br>✗ `Azure Function app`<br>✗ `Redis`<br>✗ `Azure SQL` |
+| Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ⬜ Not started | ✓ `OpenAPI document` <sub>Ecom.WebApiApp/Program.cs</sub><br>✗ `Swagger UI`<br>✗ `Documented responses`<br>✗ `XML comments in the docs` |
+| Unit testing | ⬜ Not started | ✗ `Test project`<br>✗ `xUnit or NUnit`<br>✗ `Mocking`<br>✗ `Running in CI` |
 
 ### Domain model
 
@@ -637,7 +634,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-22 08:55 UTC</sub>
+<sub>Last updated 2026-09-22 09:58 UTC</sub>
 
 <!-- JOURNEY:END -->
 
