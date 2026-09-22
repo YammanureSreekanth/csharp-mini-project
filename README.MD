@@ -5,9 +5,9 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-67_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-52-0078D4) ![lines](https://img.shields.io/badge/lines-1737-0078D4) ![types](https://img.shields.io/badge/types-57-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-68_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-53-0078D4) ![lines](https://img.shields.io/badge/lines-1798-0078D4) ![types](https://img.shields.io/badge/types-58-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `██████████████░░░░░░` **71%**
+**Progress** `██████████████░░░░░░` **72%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -22,11 +22,11 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 |---|---|---|
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
 | List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✓ `IList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
-| Async | ✅ Completed | `Ecom.MvcWebApp/Middlewares/RequestLogging.cs` <sub>+1</sub> |
+| Async | ✅ Completed | `Catalog.ConsoleApp/AsyncProgram.cs` <sub>+2</sub> |
 | ILogger | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
 | Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
 | Service Bus | ⬜ Not started | _none yet_ |
-| IDisposable | ✅ Completed | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
+| IDisposable | ✅ Completed | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/AsyncProgram.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
 
 ### Domain model
 
@@ -168,21 +168,21 @@ classDiagram
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
-| `Catalog.ConsoleApp` | 29 | 891 | 30 |
+| `Catalog.ConsoleApp` | 30 | 952 | 31 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 1345 of the 1345 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1389 of the 1389 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `Catalog.ConsoleApp` | 739 | 0 | 0 | `████████████████████` 100% |
+| `Catalog.ConsoleApp` | 783 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **1345** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1389** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -204,13 +204,13 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`████░░░░░░░░░░░░░░░░` **38 of 178 covered** across 14 areas
+`████░░░░░░░░░░░░░░░░` **39 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
 | Area | Covered | |
 |---|---:|---|
-| C# and modern .NET depth | 15/22 | `██████████████░░░░░░` 68% |
+| C# and modern .NET depth | 16/22 | `███████████████░░░░░` 73% |
 | ASP.NET Core Web APIs | 6/14 | `█████████░░░░░░░░░░░` 43% |
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
@@ -226,25 +226,25 @@ _The ground I want to cover for my career in .NET._
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
 <details>
-<summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
+<summary><b>C# and modern .NET depth</b> — 16/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
-- [x] **Classes and interfaces** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
+- [x] **Classes and interfaces** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
 - [x] **Records** <sub>`Ecom.WebApiApp/Program.cs`</sub>
-- [x] **Generics** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Generics** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
 - [ ] Delegates and events
 - [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +3</sub>
-- [x] **async / await / Task** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
-- [ ] Cancellation tokens
+- [x] **async / await / Task** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +2</sub>
+- [x] **Cancellation tokens** <sub>`Catalog.ConsoleApp/AsyncProgram.cs`</sub>
 - [ ] Parallelism
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Configuration** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
-- [x] **Error handling** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
+- [x] **Error handling** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +1</sub>
 - [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Validation** <sub>`Ecom.MvcWebApp/Controllers/EmployeesController.cs` +3</sub>
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
-- [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +3</sub>
+- [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
 - [x] **IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 - [x] **.NET 8/9 app structure** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +2</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
@@ -492,18 +492,18 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>C# fundamentals</b> — 9/12</summary>
 
-- [x] **Classes** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
+- [x] **Classes** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **Structs** — value types <sub>`Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Catalog.ConsoleApp/Domain/Enums/AvailableStatus.cs` +2</sub>
 - [x] **Properties** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Controllers/LinqController.cs` +2</sub>
-- [x] **String interpolation** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
+- [x] **String interpolation** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +4</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
 - [x] **params arrays** <sub>`Catalog.ConsoleApp/Logging/Logger.cs`</sub>
-- [x] **Console I/O** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
+- [x] **Console I/O** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 
 </details>
 
@@ -519,7 +519,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Default interface methods
 - [x] **Static classes** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +3</sub>
 - [ ] Sealed classes
-- [x] **Generics** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
+- [x] **Generics** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **Generic types of my own** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +1</sub>
 - [ ] Delegates
 - [ ] Events
@@ -541,7 +541,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **?? and ??=** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [x] **Expression-bodied members** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
 - [x] **Top-level statements** <sub>`Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +5</sub>
+- [x] **File-scoped namespaces** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **Target-typed new** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs`</sub>
 - [ ] Collection expressions
 - [ ] Primary constructors
@@ -567,18 +567,18 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Errors, resources & async</b> — 10/13</summary>
+<summary><b>Errors, resources & async</b> — 11/13</summary>
 
-- [x] **try / catch** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
+- [x] **try / catch** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +1</sub>
 - [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Catalog.ConsoleApp/CustomExceptions/NoProductsFoundException.cs`</sub>
 - [ ] Exception filters
 - [ ] finally blocks
-- [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +4</sub>
 - [x] **Custom attributes** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
 - [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
-- [x] **async / await** <sub>`Ecom.MvcWebApp/Middlewares/RequestLogging.cs` +1</sub>
-- [ ] Task / ValueTask
+- [x] **async / await** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +2</sub>
+- [x] **Task / ValueTask** <sub>`Catalog.ConsoleApp/AsyncProgram.cs`</sub>
 - [x] **ILogger** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
 - [x] **IDisposable implemented** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
@@ -637,7 +637,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-21 19:06 UTC</sub>
+<sub>Last updated 2026-09-22 08:13 UTC</sub>
 
 <!-- JOURNEY:END -->
 
