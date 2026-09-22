@@ -8,7 +8,7 @@ namespace Catalog.ConsoleApp
 {
     public class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
             using ILoggerFactory factory = LoggerFactory.Create(builder =>
             {
@@ -42,10 +42,18 @@ namespace Catalog.ConsoleApp
                 logger.LogInformation("Author {Name} and Version {Version}", attr.Author, attr.Version);
             }
             
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+            CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+            cancellationTokenSource.CancelAfter(1000);
+
             CatalogService catalogService = new CatalogService(categoryRepository, productRepository);
-            catalogService.GetProductById("D005");
             
-            // catalogService.Catalog();
+            // catalogService.GetProductById("D005");
+            
+            await catalogService.Catalog(cancellationToken);
+
             // catalogService.GetProductsByCategoryId("black-tie-collection");
         }
     }

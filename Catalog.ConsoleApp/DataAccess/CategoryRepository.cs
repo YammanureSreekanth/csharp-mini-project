@@ -6,30 +6,30 @@ using Microsoft.Extensions.Logging;
 namespace Catalog.ConsoleApp.DataAccess {
     public class CategoryRepository : ICategoryRepository, IDisposable
     {
-        private readonly MySQLConnection _db;
+        private readonly MySQLAsyncConnection _db;
         private readonly ILogger<CategoryRepository> _logger;
         private static readonly EventId CategoryLoad = new(1001, nameof(CategoryLoad));
 
         public CategoryRepository(string connectionString, ILogger<CategoryRepository> logger, ILogger<MySQLConnection> dbLogger)
         {
-            _db = new MySQLConnection(connectionString, dbLogger);
+            _db = new MySQLAsyncConnection(connectionString, dbLogger);
             _logger = logger; 
         }
 
-        public List<Category> GetAll()
+        public async Task<IReadOnlyList<Category>> GetAll(CancellationToken cancellationToken)
         {
-            // _logger.LogInformation("Loading all categories");
+            _logger.LogInformation("Loading all categories");
 
             const string GET_CATEGORY_QUERY = "SELECT * FROM dbo.Categories";
 
-            List<Category> categories = _db.RunNonQuery<Category>(GET_CATEGORY_QUERY, SqlDataReaderProcessor);
+            List<Category> categories = await _db.RunNonQueryAsync<Category>(GET_CATEGORY_QUERY, SqlDataReaderProcessor, cancellationToken);
 
             _logger.LogInformation(CategoryLoad, "Query Successfull: {Query}", GET_CATEGORY_QUERY);
             
             return categories;
         }
 
-        public List<string> GetProductAssigegmentsByCategoryId(string categoryId)
+        public async Task<IReadOnlyList<string>> GetProductAssigegmentsByCategoryId(string categoryId, CancellationToken cancellationToken)
         {
             
             using (_logger.BeginScope("GetProductAssigegmentsByCategoryId for {categoryId} & {RequestId}", categoryId, Guid.NewGuid()))
@@ -48,7 +48,7 @@ namespace Catalog.ConsoleApp.DataAccess {
                     return reader["ProductId"]?.ToString();
                 };
 
-                List<string> productIds = _db.RunQuery<string>(GET_PRODUCTS_ID_QUERY,keyValuePairs, DataReader);
+                List<string> productIds = await _db.RunQueryAsync<string>(GET_PRODUCTS_ID_QUERY,keyValuePairs, DataReader, cancellationToken);
 
                  _logger.LogInformation("Loaded {Count} Products", productIds.Count);
 
@@ -81,5 +81,15 @@ namespace Catalog.ConsoleApp.DataAccess {
         }
 
         public void Dispose() => _db.Dispose();
+
+        public Task<Category> GetById(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Category>> SubCategories(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

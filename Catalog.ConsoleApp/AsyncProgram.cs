@@ -32,7 +32,7 @@ public class AsyncProgram
 
         Console.WriteLine("Work completed successfully.");
     }
-     public static async Task Main()
+     public static async Task Run()
     {
         using CancellationTokenSource cts = new CancellationTokenSource();
 

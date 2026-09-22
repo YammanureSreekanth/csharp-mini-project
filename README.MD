@@ -5,7 +5,7 @@
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-68_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-53-0078D4) ![lines](https://img.shields.io/badge/lines-1798-0078D4) ![types](https://img.shields.io/badge/types-58-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-68_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-54-0078D4) ![lines](https://img.shields.io/badge/lines-1905-0078D4) ![types](https://img.shields.io/badge/types-59-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `██████████████░░░░░░` **72%**
 
@@ -21,10 +21,10 @@ What I am working on right now · assigned 2026-08-25 · next review **2026-09-2
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DI & IoC | ✅ Completed | `Ecom.MvcWebApp/Program.cs` |
-| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub><br>✓ `IList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
-| Async | ✅ Completed | `Catalog.ConsoleApp/AsyncProgram.cs` <sub>+2</sub> |
-| ILogger | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
-| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+2</sub> |
+| List, IList and IEnumerable<br><sub>the trade-off between exposing a concrete list and an abstraction</sub> | ✅ Completed | ✓ `List<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IReadOnlyList<T>` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub><br>✓ `IList<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs</sub><br>✓ `IEnumerable<T>` <sub>Catalog.ConsoleApp/Domain/Classes/Category/Category.cs</sub> |
+| Async | ✅ Completed | `Catalog.ConsoleApp/AsyncProgram.cs` <sub>+5</sub> |
+| ILogger | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+4</sub> |
+| Structured logging<br><sub>message templates with named placeholders, not string interpolation</sub> | ✅ Completed | `Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` <sub>+3</sub> |
 | Service Bus | ⬜ Not started | _none yet_ |
 | IDisposable | ✅ Completed | ✓ `Consumed with using` <sub>Catalog.ConsoleApp/AsyncProgram.cs</sub><br>✓ `Implemented myself` <sub>Catalog.ConsoleApp/DataAccess/CategoryRepository.cs</sub> |
 
@@ -168,21 +168,21 @@ classDiagram
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
-| `Catalog.ConsoleApp` | 30 | 952 | 31 |
+| `Catalog.ConsoleApp` | 31 | 1059 | 32 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Ecom.WebApiApp` | 1 | 42 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 1389 of the 1389 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 1473 of the 1473 lines in it that anyone authored by hand.
 A further 79 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `Catalog.ConsoleApp` | 783 | 0 | 0 | `████████████████████` 100% |
+| `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 0 | 0 | 33 | — _template output only_ |
-| **Application total** | **1389** | **0** | **79** | `████████████████████` **100%** |
+| **Application total** | **1473** | **0** | **79** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -233,19 +233,19 @@ _The ground I want to cover for my career in .NET._
 - [x] **Generics** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
 - [ ] Delegates and events
 - [x] **LINQ** <sub>`Catalog.ConsoleApp/DataAccess/ProductRepository.cs` +3</sub>
-- [x] **async / await / Task** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +2</sub>
-- [x] **Cancellation tokens** <sub>`Catalog.ConsoleApp/AsyncProgram.cs`</sub>
+- [x] **async / await / Task** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
+- [x] **Cancellation tokens** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
 - [ ] Parallelism
 - [x] **Dependency injection** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
 - [x] **Configuration** <sub>`Ecom.MvcWebApp/Program.cs`</sub>
-- [x] **Error handling** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +1</sub>
+- [x] **Error handling** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +2</sub>
 - [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Validation** <sub>`Ecom.MvcWebApp/Controllers/EmployeesController.cs` +3</sub>
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [x] **Value vs reference types** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
-- [x] **IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
+- [x] **IDisposable** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **.NET 8/9 app structure** <sub>`Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +2</sub>
 - [x] **Minimal APIs** <sub>`Ecom.WebApiApp/Program.cs`</sub>
 - [x] **ASP.NET Core Web APIs** <sub>`Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
@@ -441,7 +441,7 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>Observability and production readiness</b> — 2/13 · <sub>“It works locally” is not enough.</sub></summary>
 
-- [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
+- [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Correlation IDs** <sub>`Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [ ] Distributed tracing
 - [ ] Metrics
@@ -498,7 +498,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Properties** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Ecom.MvcWebApp/Controllers/LinqController.cs` +2</sub>
 - [x] **String interpolation** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
-- [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +4</sub>
+- [x] **foreach** <sub>`Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +5</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
@@ -520,7 +520,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Static classes** <sub>`Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +3</sub>
 - [ ] Sealed classes
 - [x] **Generics** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
-- [x] **Generic types of my own** <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs` +1</sub>
+- [x] **Generic types of my own** <sub>`Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +2</sub>
 - [ ] Delegates
 - [ ] Events
 - [ ] Indexers
@@ -562,33 +562,33 @@ _The ground I want to cover for my career in .NET._
 - [x] **Iterators (yield)** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
 - [x] **IEnumerable<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [x] **IList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
-- [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
+- [x] **IReadOnlyList<T>** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
 
 </details>
 
 <details open>
 <summary><b>Errors, resources & async</b> — 11/13</summary>
 
-- [x] **try / catch** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +1</sub>
+- [x] **try / catch** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +2</sub>
 - [x] **Throwing exceptions** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Catalog.ConsoleApp/CustomExceptions/NoProductsFoundException.cs`</sub>
 - [ ] Exception filters
 - [ ] finally blocks
-- [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +4</sub>
+- [x] **using / IDisposable** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **Custom attributes** <sub>`Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
-- [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
-- [x] **async / await** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +2</sub>
-- [x] **Task / ValueTask** <sub>`Catalog.ConsoleApp/AsyncProgram.cs`</sub>
-- [x] **ILogger** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
-- [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
-- [x] **IDisposable implemented** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +2</sub>
+- [x] **Logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
+- [x] **async / await** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
+- [x] **Task / ValueTask** <sub>`Catalog.ConsoleApp/AsyncProgram.cs` +4</sub>
+- [x] **ILogger** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
+- [x] **Structured logging** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **IDisposable implemented** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 
 </details>
 
 <details open>
 <summary><b>Data access</b> — 7/7</summary>
 
-- [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLConnection.cs`</sub>
+- [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +1</sub>
 - [x] **Hand-written SQL** <sub>`Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factory pattern** <sub>`Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
@@ -637,7 +637,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-22 08:13 UTC</sub>
+<sub>Last updated 2026-09-22 08:55 UTC</sub>
 
 <!-- JOURNEY:END -->
 

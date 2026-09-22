@@ -5,9 +5,10 @@ namespace  Catalog.ConsoleApp.DataAccess
 {
     public interface ICategoryRepository
     {
-        public List<Category> GetAll();
-        public List<string> GetProductAssigegmentsByCategoryId(string categoryId);
-        public Category GetById();
-        public List<Category> SubCategories();
+        public Task<IReadOnlyList<Category>> GetAll(CancellationToken cancellationToken);
+        public Task<IReadOnlyList<string>> GetProductAssigegmentsByCategoryId(string categoryId, CancellationToken cancellationToken);
+        public Task<Category> GetById(CancellationToken cancellationToken);
+        public Task<List<Category>> SubCategories(CancellationToken cancellationToken);
+
     }
 }

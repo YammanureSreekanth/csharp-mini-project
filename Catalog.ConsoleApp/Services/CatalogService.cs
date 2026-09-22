@@ -14,11 +14,11 @@ namespace Catalog.ConsoleApp.Services
             _productRepo = productRepository;
         }
 
-        public void Catalog()
+        public async Task Catalog(CancellationToken cancellationToken)
         {
             Logger.Debug("Calling Method {0} from Service Class is {1}", "Catalog", "CatalogService");
 
-            List<Category> categories = _categoryRepo.GetAll();
+            IReadOnlyList<Category> categories = await _categoryRepo.GetAll(cancellationToken);
 
             Console.WriteLine("Welcome to Suitsupply");
 
@@ -30,11 +30,11 @@ namespace Catalog.ConsoleApp.Services
             }
         }
 
-        public List<string> GetProductsByCategoryId(string categoryId)
+        public async Task<IReadOnlyList<string>> GetProductsByCategoryId(string categoryId, CancellationToken cancellationToken)
         {
             Logger.Debug("Calling Method {0} from Service Class is {1}", "GetProductsByCategoryId", "CatalogService");
 
-            List<string> productIds = _categoryRepo.GetProductAssigegmentsByCategoryId(categoryId);
+            IReadOnlyList<string> productIds = await _categoryRepo.GetProductAssigegmentsByCategoryId(categoryId, cancellationToken);
 
             foreach (string productId in productIds)
             {
@@ -58,7 +58,7 @@ namespace Catalog.ConsoleApp.Services
             return baseProduct;
         }
 
-        public static Category? CatalogMenu(List<Category> rows)
+        public static Category? CatalogMenu(IReadOnlyList<Category> rows)
         {
             Dictionary<string, Category>? byId = rows.ToDictionary(r => r.Id, r => r);
 
