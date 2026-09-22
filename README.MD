@@ -14,7 +14,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 ### Current focus
 
-What I am working on right now · assigned 2026-09-22 · next review **2026-10-20**
+What I am working on right now · assigned 2026-09-22 · next review **2026-09-29**
 
 `░░░░░░░░░░░░░░░░░░░░` **0 of 4 complete** · 0 in progress · 4 not started
 
@@ -634,7 +634,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-22 09:58 UTC</sub>
+<sub>Last updated 2026-09-22 09:59 UTC</sub>
 
 <!-- JOURNEY:END -->
 
