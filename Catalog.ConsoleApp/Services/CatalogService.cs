@@ -2,6 +2,7 @@ using Catalog.ConsoleApp.DataAccess;
 using Catalog.ConsoleApp.Domain.Classes.Category;
 using Catalog.ConsoleApp.Domain.Classes.Product;
 using Catalog.ConsoleApp.Logging;
+
 namespace Catalog.ConsoleApp.Services
 {
     public class CatalogService
@@ -22,7 +23,7 @@ namespace Catalog.ConsoleApp.Services
 
             Console.WriteLine("Welcome to Suitsupply");
 
-            Category? rootCategory = CatalogMenu(categories);
+            Category? rootCategory = RootCategoryId(categories);
 
             foreach (Category c in rootCategory.Childs())
             {
@@ -58,7 +59,7 @@ namespace Catalog.ConsoleApp.Services
             return baseProduct;
         }
 
-        public static Category? CatalogMenu(IReadOnlyList<Category> rows)
+        public static Category? RootCategoryId(IReadOnlyList<Category> rows)
         {
             Dictionary<string, Category>? byId = rows.ToDictionary(r => r.Id, r => r);
 
