@@ -892,7 +892,7 @@
       "items": [
         {
           "label": "DTOs and mapping services",
-          "status": "not-started",
+          "status": "done",
           "notes": "keeping the API contract separate from the domain model",
           "parts": [
             {
@@ -945,7 +945,7 @@
         },
         {
           "label": "Swagger",
-          "status": "not-started",
+          "status": "done",
           "notes": "the scaffold already emits an OpenAPI document; the rest is mine to add",
           "parts": [
             {
@@ -954,7 +954,7 @@
             },
             {
               "label": "Swagger UI",
-              "detect": "grep:UseSwaggerUI|AddSwaggerGen|Scalar\\.AspNetCore"
+              "detect": "grep:UseSwaggerU[Ii]|AddSwaggerGen|AddSwaggerDocument|NSwag|Scalar\\.AspNetCore|MapScalarApiReference"
             },
             {
               "label": "Documented responses",

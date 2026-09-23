@@ -16,17 +16,14 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 What I am working on right now · assigned 2026-09-22 · next review **2026-09-29**
 
-`░░░░░░░░░░░░░░░░░░░░` **0 of 4 complete** · 0 in progress · 4 not started
+`██████████░░░░░░░░░░` **2 of 4 complete** · 0 in progress · 2 not started
 
 | Item | Status | Evidence in the code |
 |---|---|---|
-| DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | ✓ `DTO types` <sub>Ecom.WebApiApp/DTOMapper.cs/ProductDto.cs</sub><br>✓ `Mapping service` <sub>Ecom.WebApiApp/DTOMapper.cs/ProductDTOMapper.cs</sub> |
+| DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Ecom.WebApiApp/DTOMapper.cs/ProductDto.cs</sub><br>✓ `Mapping service` <sub>Ecom.WebApiApp/DTOMapper.cs/ProductDTOMapper.cs</sub> |
 | Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL</sub> | ⬜ Not started | ✗ `Bicep templates`<br>✗ `Deploying from CI`<br>✗ `Azure Function app`<br>✗ `Redis`<br>✗ `Azure SQL` |
-| Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ⬜ Not started | ✓ `OpenAPI document` <sub>Ecom.WebApiApp/Program.cs</sub><br>✗ `Swagger UI`<br>✓ `Documented responses` <sub>Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
+| Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
 | Unit testing | ⬜ Not started | ✗ `Test project`<br>✗ `xUnit or NUnit`<br>✗ `Mocking`<br>✗ `Running in CI` |
-
-> **The code now covers an item still marked as unfinished:** DTOs and mapping services.
-> Status here is declared by hand — update `status` in `journey.json` to close them off.
 
 ### Domain model
 
@@ -637,7 +634,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-23 14:03 UTC</sub>
+<sub>Last updated 2026-09-23 14:10 UTC</sub>
 
 <!-- JOURNEY:END -->
 
