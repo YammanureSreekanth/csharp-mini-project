@@ -6,7 +6,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        var productTag = document.Tags?.FirstOrDefault(t => t.Name == "Product");
+        if (productTag is not null)
+        {
+            productTag.Description = "This is Product API Group. Here you can perform GET, POST, PUT, DELETE";
+        }
+        return Task.CompletedTask;
+    });
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
