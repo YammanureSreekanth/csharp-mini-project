@@ -27,6 +27,13 @@ fi
 
 root=$(git rev-parse --show-toplevel)
 
+# Run the unit test suite and block the commit if any test fails.
+echo "pre-commit: running unit tests..."
+if ! dotnet test "$root/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj" --nologo; then
+    echo "pre-commit: unit tests failed, aborting commit"
+    exit 1
+fi
+
 # Run the compiled tool when it is already built — about 1.5s instead of 2.2s —
 # and fall back to `dotnet run` otherwise.
 dll="$root/tools/JourneyGen/bin/Debug/net10.0/JourneyGen.dll"

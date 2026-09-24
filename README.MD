@@ -23,7 +23,10 @@ What I am working on right now · assigned 2026-09-22 · next review **2026-09-2
 | DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Ecom.WebApiApp/DTOMapper.cs/ProductDto.cs</sub><br>✓ `Mapping service` <sub>Ecom.WebApiApp/DTOMapper.cs/ProductDTOMapper.cs</sub> |
 | Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL</sub> | ⬜ Not started | ✗ `Bicep templates`<br>✗ `Deploying from CI`<br>✗ `Azure Function app`<br>✗ `Redis`<br>✗ `Azure SQL` |
 | Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
-| Unit testing | ⬜ Not started | ✓ `Test project` <sub>Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `xUnit or NUnit` <sub>Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `Mocking` <sub>Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✗ `Running in CI` |
+| Unit testing | ⬜ Not started<br><sub>→ ready to mark complete</sub> | ✓ `Test project` <sub>Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `xUnit or NUnit` <sub>Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `Mocking` <sub>Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
+
+> **The code now covers an item still marked as unfinished:** Unit testing.
+> Status here is declared by hand — update `status` in `journey.json` to close them off.
 
 ### Domain model
 
@@ -203,7 +206,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`████░░░░░░░░░░░░░░░░` **40 of 178 covered** across 14 areas
+`█████░░░░░░░░░░░░░░░` **41 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -218,7 +221,7 @@ _The ground I want to cover for my career in .NET._
 | Infrastructure as Code (Bicep) | 0/20 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
 | Testing and code quality | 3/11 | `█████░░░░░░░░░░░░░░░` 27% |
-| CI/CD and DevOps basics | 3/12 | `█████░░░░░░░░░░░░░░░` 25% |
+| CI/CD and DevOps basics | 4/12 | `███████░░░░░░░░░░░░░` 33% |
 | Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Observability and production readiness | 2/13 | `███░░░░░░░░░░░░░░░░░` 15% |
 | Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
@@ -401,14 +404,14 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>CI/CD and DevOps basics</b> — 3/12 · <sub>They expect pipeline improvements.</sub></summary>
+<summary><b>CI/CD and DevOps basics</b> — 4/12 · <sub>They expect pipeline improvements.</sub></summary>
 
 - [x] **Git fundamentals** <sub>`.gitignore`</sub>
 - [ ] Branching strategies <sub>judgement — not code-detectable</sub>
 - [ ] Pull requests <sub>judgement — not code-detectable</sub>
 - [x] **Build pipelines** <sub>`.github/workflows/journey.yml`</sub>
 - [x] **GitHub Actions** <sub>`.github/workflows/journey.yml`</sub>
-- [ ] Automated tests in CI
+- [x] **Automated tests in CI** <sub>`.githooks/pre-commit`</sub>
 - [ ] Static analysis
 - [ ] Secrets management
 - [ ] Release pipelines <sub>judgement — not code-detectable</sub>
@@ -636,7 +639,7 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-24 16:17 UTC</sub>
+<sub>Last updated 2026-09-24 16:22 UTC</sub>
 
 <!-- JOURNEY:END -->
 
