@@ -409,9 +409,9 @@ _The ground I want to cover for my career in .NET._
 - [x] **Git fundamentals** <sub>`.gitignore`</sub>
 - [ ] Branching strategies <sub>judgement — not code-detectable</sub>
 - [ ] Pull requests <sub>judgement — not code-detectable</sub>
-- [x] **Build pipelines** <sub>`.github/workflows/journey.yml`</sub>
-- [x] **GitHub Actions** <sub>`.github/workflows/journey.yml`</sub>
-- [x] **Automated tests in CI** <sub>`.githooks/pre-commit`</sub>
+- [x] **Build pipelines** <sub>`.github/workflows/journey.yml` +1</sub>
+- [x] **GitHub Actions** <sub>`.github/workflows/journey.yml` +1</sub>
+- [x] **Automated tests in CI** <sub>`.githooks/pre-commit` +1</sub>
 - [ ] Static analysis
 - [ ] Secrets management
 - [ ] Release pipelines <sub>judgement — not code-detectable</sub>
@@ -632,14 +632,14 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Tooling & practice</b> — 3/5</summary>
 
 - [x] **Multi-project solution** <sub>`csharp-ecom-mini-app.slnx`</sub>
-- [x] **CI with GitHub Actions** <sub>`.github/workflows/journey.yml`</sub>
+- [x] **CI with GitHub Actions** <sub>`.github/workflows/journey.yml` +1</sub>
 - [x] **Unit tests** — roadmap <sub>`Ecom.WebApiApp.Tests/ProductControllerTests.cs`</sub>
 - [ ] Docker — roadmap
 - [ ] Deployment — roadmap <sub>planned</sub>
 
 </details>
 
-<sub>Last updated 2026-09-24 16:22 UTC</sub>
+<sub>Last updated 2026-09-24 16:25 UTC</sub>
 
 <!-- JOURNEY:END -->
 

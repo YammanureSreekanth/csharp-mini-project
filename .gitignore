@@ -10,3 +10,4 @@ obj/
 *log.txt
 # Generated journey dashboard (built in CI)
 artifacts/
+TestResults/
