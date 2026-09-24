@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Ecom.WebApiApp.Data;
+using Ecom.WebApiApp.Repos;
+using Microsoft.OpenApi;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Add services to the container.
@@ -10,7 +12,7 @@ builder.Services.AddOpenApi(options =>
 {
     options.AddDocumentTransformer((document, context, cancellationToken) =>
     {
-        var productTag = document.Tags?.FirstOrDefault(t => t.Name == "Product");
+        OpenApiTag? productTag = document.Tags?.FirstOrDefault(t => t.Name == "Product");
         if (productTag is not null)
         {
             productTag.Description = "This is Product API Group. Here you can perform GET, POST, PUT, DELETE";
@@ -19,12 +21,16 @@ builder.Services.AddOpenApi(options =>
     });
 });
 
+string? DbCon = builder.Configuration.GetConnectionString("DbCon");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-   options.UseInMemoryDatabase("Catalog"); 
+   options.UseSqlServer(DbCon);
 });
 
-var app = builder.Build();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+WebApplication? app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

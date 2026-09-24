@@ -1,5 +1,7 @@
 <Solution>
+  <Folder Name="/Ecom.WebApiApp/" />
   <Project Path="Catalog.ConsoleApp/Catalog.ConsoleApp.csproj" />
   <Project Path="Ecom.MvcWebApp/Ecom.MvcWebApp.csproj" />
+  <Project Path="Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj" />
   <Project Path="Ecom.WebApiApp/Ecom.WebApiApp.csproj" />
 </Solution>

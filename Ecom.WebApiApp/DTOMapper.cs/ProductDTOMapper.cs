@@ -1,9 +1,17 @@
 using Ecom.WebApiApp.DTOMapper;
 
-namespace Ecom.WebApiApp.Models.DTOMapper.cs;
+namespace Ecom.WebApiApp.Models.DTOMapper;
 
+/// <summary>
+/// ProductDtoMapper
+/// </summary>
 public static class ProductDtoMapper
 {
+    /// <summary>
+    /// This converts the model to dto
+    /// </summary>
+    /// <param name="product">Product Model</param>
+    /// <returns>Returns ProductDto</returns>
     public static ProductDto MapToDTO(Product product)
     {
         return new ProductDto

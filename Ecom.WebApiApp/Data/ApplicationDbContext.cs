@@ -3,11 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecom.WebApiApp.Data;
 
-public class ApplicationDbContext: DbContext
+public class ApplicationDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
 {
-    public ApplicationDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
-    {
-        
-    }
     public DbSet<Product> Products {set; get;}
 }

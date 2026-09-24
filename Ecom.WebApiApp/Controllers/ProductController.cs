@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Ecom.WebApiApp.Data;
-using Ecom.WebApiApp.Models.DTOMapper.cs;
+using Ecom.WebApiApp.Models.DTOMapper;
 using Ecom.WebApiApp.DTOMapper;
 using Ecom.WebApiApp.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Ecom.WebApiApp.Repos;
 
 namespace Ecom.WebApiApp.Controllers
 {
@@ -15,22 +13,21 @@ namespace Ecom.WebApiApp.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController(ApplicationDbContext context) : ControllerBase
+    public class ProductController(IProductRepository repository) : ControllerBase
     {
-        private readonly ApplicationDbContext _context = context;
+        private readonly IProductRepository _repository = repository;
 
-        // GET: api/Products
         /// <summary>Retrieves All products.</summary>
         /// <response code="200">Returns all products</response>
         [ProducesResponseType(typeof(ActionResult<IEnumerable<ProductDto>>), StatusCodes.Status200OK)]
         [HttpGet("/api/All-Products")]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
-        {
-            ActionResult<IEnumerable<ProductDto>> products = await _context.Products.Select(P => ProductDtoMapper.MapToDTO(P)).ToListAsync();
-            return products;
+        {   
+            IEnumerable<Product> dbResults = await _repository.GetAllAsync();  
+            IEnumerable<ProductDto> productDtos = dbResults.Select(ProductDtoMapper.MapToDTO);
+            return Ok(productDtos);
         }
 
-        // GET: api/Product/5
         /// <summary>Retrieves a single product by its ID.</summary>
         /// <param name="id">The product's primary key.</param>
         /// <response code="200">Product exists with the given ID.</response>
@@ -42,7 +39,7 @@ namespace Ecom.WebApiApp.Controllers
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ProductDto>> GetProduct(string id)
         {
-            Product? product = await _context.Products.FindAsync(id);
+            Product? product = await _repository.GetByIdAsync(id);
 
             if (product == null)
             {
@@ -52,7 +49,6 @@ namespace Ecom.WebApiApp.Controllers
             return Ok(ProductDtoMapper.MapToDTO(product));
         }
 
-        // PUT: api/Product/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
         /// Update the product by using ID and Product Patch Object
@@ -67,7 +63,7 @@ namespace Ecom.WebApiApp.Controllers
         public async Task<IActionResult> PutProduct(string id, ProductPatchDto dto)
         {
 
-            Product? product = await _context.Products.FindAsync(id);
+            Product? product = await _repository.GetByIdAsync(id);
 
             if (id != product?.Id)
             {
@@ -86,28 +82,23 @@ namespace Ecom.WebApiApp.Controllers
 
             product.LastModifiedTime = DateTime.Now;
 
-            _context.Entry(product).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
+                if (await _repository.UpdateAsync(product))
+                {
+                    return NoContent();
+                } else
                 {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                } 
+            } catch (Exception)
+            {
+                // @TODO: Send better Status
+                return NotFound();
             }
 
-            return NoContent();
         }
 
-        // POST: api/Product
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
         /// To create new product
@@ -119,27 +110,22 @@ namespace Ecom.WebApiApp.Controllers
         public async Task<ActionResult<ProductDto>> PostProduct(ProductDto productDTO)
         {
 
-            _context.Products.Add(ProductDtoMapper.MapDtoToModel(productDTO));
+            bool status = await _repository.AddAsync(ProductDtoMapper.MapDtoToModel(productDTO));
+            
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ProductExists(productDTO.Id))
+                if (!status)
                 {
                     return Conflict();
                 }
-                else
-                {
-                    throw;
-                }
+            } catch (Exception)
+            {
+                return Conflict();
             }
 
             return CreatedAtAction("GetProduct", new { id = productDTO.Id }, productDTO);
         }
 
-        // DELETE: api/Product/5
         /// <summary>
         /// To Delete the product
         /// </summary>
@@ -149,21 +135,16 @@ namespace Ecom.WebApiApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
-            var product = await _context.Products.FindAsync(id);
+            Product? product = await _repository.GetByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            await _repository.DeleteAsync(product);
 
             return NoContent();
         }
 
-        private bool ProductExists(string id)
-        {
-            return _context.Products.Any(e => e.Id == id);
-        }
     }
 }
