@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: read
+  checks: write
+  pull-requests: write
 
 jobs:
   test:
@@ -23,8 +25,19 @@ jobs:
         run: >
           dotnet test Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj
           --configuration Release
+          --logger "trx;LogFileName=test-results.trx"
           --logger "html;LogFileName=test-results.html"
           --results-directory ./TestResults
+
+      # Publishes results as a GitHub Check with a pass/fail breakdown,
+      # visible directly on the commit/PR — no download needed.
+      - name: Publish test results to GitHub
+        if: always()
+        uses: dorny/test-reporter@v2
+        with:
+          name: Unit test results
+          path: TestResults/test-results.trx
+          reporter: dotnet-trx
 
       - name: Upload HTML test report
         if: always()
