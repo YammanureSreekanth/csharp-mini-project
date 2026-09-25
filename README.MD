@@ -220,7 +220,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`██████░░░░░░░░░░░░░░` **54 of 178 covered** across 14 areas
+`█████░░░░░░░░░░░░░░░` **43 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -228,17 +228,17 @@ _The ground I want to cover for my career in .NET._
 |---|---:|---|
 | C# and modern .NET depth | 14/22 | `█████████████░░░░░░░` 64% |
 | ASP.NET Core Web APIs | 6/14 | `█████████░░░░░░░░░░░` 43% |
-| Domain-Driven Design | 5/10 | `██████████░░░░░░░░░░` 50% |
-| Microservices architecture | 2/11 | `████░░░░░░░░░░░░░░░░` 18% |
-| Event-driven architecture and messaging | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
+| Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
+| Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Azure cloud services | 1/10 | `██░░░░░░░░░░░░░░░░░░` 10% |
 | Infrastructure as Code (Bicep) | 0/20 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
-| Testing and code quality | 4/11 | `███████░░░░░░░░░░░░░` 36% |
+| Testing and code quality | 3/11 | `█████░░░░░░░░░░░░░░░` 27% |
 | CI/CD and DevOps basics | 4/12 | `███████░░░░░░░░░░░░░` 33% |
-| Integrations with external systems | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
+| Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Observability and production readiness | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
-| Security basics | 3/10 | `██████░░░░░░░░░░░░░░` 30% |
+| Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
 <details>
@@ -290,14 +290,14 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Domain-Driven Design</b> — 5/10 · <sub>Explicitly named in the role.</sub></summary>
+<summary><b>Domain-Driven Design</b> — 4/10 · <sub>Explicitly named in the role.</sub></summary>
 
 - [x] **Entities and value objects** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [ ] Aggregates and aggregate roots
 - [x] **Repositories** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Factories** <sub>`csharp-mini-project/Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [ ] Domain events
-- [x] **Specification pattern** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] Specification pattern
 - [ ] Bounded contexts <sub>judgement — not code-detectable</sub>
 - [ ] Ubiquitous language <sub>judgement — not code-detectable</sub>
 - [x] **Application vs domain layer** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
@@ -306,7 +306,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Microservices architecture</b> — 2/11 · <sub>Know when they help and when they cost.</sub></summary>
+<summary><b>Microservices architecture</b> — 0/11 · <sub>Know when they help and when they cost.</sub></summary>
 
 - [ ] Service boundaries <sub>judgement — not code-detectable</sub>
 - [ ] Database-per-service <sub>judgement — not code-detectable</sub>
@@ -314,8 +314,8 @@ _The ground I want to cover for my career in .NET._
 - [ ] Synchronous vs asynchronous communication <sub>judgement — not code-detectable</sub>
 - [ ] Service discovery <sub>judgement — not code-detectable</sub>
 - [ ] Distributed transactions <sub>judgement — not code-detectable</sub>
-- [x] **Saga pattern** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
-- [x] **Idempotency** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] Saga pattern
+- [ ] Idempotency
 - [ ] Eventual consistency <sub>judgement — not code-detectable</sub>
 - [ ] Observability across services <sub>judgement — not code-detectable</sub>
 - [ ] Knowing when not to split — the answer they want to hear in interviews <sub>judgement — not code-detectable</sub>
@@ -323,7 +323,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Event-driven architecture and messaging</b> — 3/13 · <sub>One of the biggest topics for the role.</sub></summary>
+<summary><b>Event-driven architecture and messaging</b> — 0/13 · <sub>One of the biggest topics for the role.</sub></summary>
 
 - [ ] Queues vs topics <sub>judgement — not code-detectable</sub>
 - [ ] Commands vs events <sub>judgement — not code-detectable</sub>
@@ -333,11 +333,11 @@ _The ground I want to cover for my career in .NET._
 - [ ] Dead-letter queues
 - [ ] Retries
 - [ ] Poison messages <sub>judgement — not code-detectable</sub>
-- [x] **Idempotent message handling** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
-- [x] **Outbox pattern** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] Idempotent message handling
+- [ ] Outbox pattern
 - [ ] Message ordering
 - [ ] Duplicate detection
-- [x] **OrderCreated fan-out scenario** — inventory, payments, warehouse, email, CRM react independently <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] OrderCreated fan-out scenario — inventory, payments, warehouse, email, CRM react independently
 
 </details>
 
@@ -401,16 +401,16 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Testing and code quality</b> — 4/11 · <sub>Called out in the job description.</sub></summary>
+<summary><b>Testing and code quality</b> — 3/11 · <sub>Called out in the job description.</sub></summary>
 
-- [x] **xUnit or NUnit** <sub>`csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj` +1</sub>
+- [x] **xUnit or NUnit** <sub>`csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj`</sub>
 - [x] **Unit tests** <sub>`csharp-mini-project/Ecom.WebApiApp.Tests/ProductControllerTests.cs`</sub>
 - [x] **Mocking** <sub>`csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj` +1</sub>
 - [ ] Integration testing
 - [ ] Testing APIs <sub>judgement — not code-detectable</sub>
 - [ ] Testing message handlers <sub>judgement — not code-detectable</sub>
 - [ ] Contract testing
-- [x] **Testcontainers** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] Testcontainers
 - [ ] Clean architecture testability <sub>judgement — not code-detectable</sub>
 - [ ] Code review principles <sub>judgement — not code-detectable</sub>
 - [ ] Explaining what you do not test, and why <sub>judgement — not code-detectable</sub>
@@ -436,13 +436,13 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Integrations with external systems</b> — 3/13 · <sub>Salesforce, Dynamics, WMS, POS, OMS, WeChat.</sub></summary>
+<summary><b>Integrations with external systems</b> — 0/13 · <sub>Salesforce, Dynamics, WMS, POS, OMS, WeChat.</sub></summary>
 
-- [x] **REST integrations** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] REST integrations
 - [ ] Typed API clients
-- [x] **Webhooks** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] Webhooks
 - [ ] Authenticating with external APIs <sub>judgement — not code-detectable</sub>
-- [x] **OAuth basics** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] OAuth basics
 - [ ] Retry policies
 - [ ] Circuit breakers
 - [ ] Rate limits
@@ -474,9 +474,9 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Security basics</b> — 3/10 · <sub>Production awareness, not specialism.</sub></summary>
+<summary><b>Security basics</b> — 2/10 · <sub>Production awareness, not specialism.</sub></summary>
 
-- [x] **OAuth2 / OpenID Connect** <sub>`csharp-mini-project/artifacts/site/journey.json`</sub>
+- [ ] OAuth2 / OpenID Connect
 - [ ] JWT tokens
 - [ ] Role-based authorization
 - [ ] Secrets in Key Vault
@@ -499,7 +499,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Generate infrastructure templates <sub>judgement — not code-detectable</sub>
 - [ ] Improve documentation <sub>judgement — not code-detectable</sub>
 - [ ] Validate AI output through tests and review <sub>judgement — not code-detectable</sub>
-- [x] **Declaring AI authorship honestly** — the provenance tracking in this repo <sub>`csharp-mini-project/artifacts/site/journey.json` +1</sub>
+- [x] **Declaring AI authorship honestly** — the provenance tracking in this repo <sub>`journey.json`</sub>
 
 </details>
 
@@ -653,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-25 09:17 UTC</sub>
+<sub>Last updated 2026-09-25 09:27 UTC</sub>
 
 <!-- JOURNEY:END -->

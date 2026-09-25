@@ -344,11 +344,15 @@ public sealed class JourneyConfig
     /// Paths no detector may look at. `artifacts/` matters most: it is this tool's own
     /// output directory, so leaving it in made results depend on whether the generator
     /// had been run before — the same commit produced different output on a machine
-    /// with a previous build than on a fresh CI checkout.
+    /// with a previous build than on a fresh CI checkout. Matched at any depth, not just
+    /// at the repo root: a monorepo restructure can leave a stale `artifacts/` behind
+    /// under an old root (e.g. `csharp-mini-project/artifacts/` from before the tool's
+    /// root moved up a level), and that leftover is just as self-referential as a fresh one.
     /// </summary>
     static bool IsExcluded(string rel) =>
         rel.StartsWith(".git/", StringComparison.Ordinal) ||
         rel.StartsWith("artifacts/", StringComparison.OrdinalIgnoreCase) ||
+        rel.Contains("/artifacts/", StringComparison.OrdinalIgnoreCase) ||
         rel.Contains("/bin/", StringComparison.Ordinal) ||
         rel.Contains("/obj/", StringComparison.Ordinal) ||
         rel.Contains("wwwroot/lib/", StringComparison.Ordinal);
