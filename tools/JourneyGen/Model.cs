@@ -32,6 +32,7 @@ public sealed class MemberDecl
 public sealed class ProjectStats
 {
     public string Name = "";
+    public string Dir = "";
     public int Files;
     public int Lines;
     public int Types;

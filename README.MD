@@ -16,9 +16,9 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-66_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-66-0078D4) ![lines](https://img.shields.io/badge/lines-2531-0078D4) ![types](https://img.shields.io/badge/types-70-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-68_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-66-0078D4) ![lines](https://img.shields.io/badge/lines-2531-0078D4) ![types](https://img.shields.io/badge/types-70-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `██████████████░░░░░░` **70%**
+**Progress** `██████████████░░░░░░` **72%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -176,7 +176,10 @@ classDiagram
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
-| `csharp-mini-project` | 66 | 2531 | 70 |
+| `Catalog.ConsoleApp` | 31 | 1060 | 32 |
+| `Ecom.MvcWebApp` | 22 | 804 | 26 |
+| `Ecom.WebApiApp` | 12 | 568 | 11 |
+| `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 
 ### Who wrote this code
 
@@ -185,7 +188,10 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `csharp-mini-project` | 2023 | 0 | 55 | `████████████████████` 100% |
+| `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
+| `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
+| `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
+| `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
 | **Application total** | **2023** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
@@ -603,14 +609,14 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>ASP.NET Core</b> — 9/13</summary>
+<summary><b>ASP.NET Core</b> — 11/13</summary>
 
 - [x] **Dependency injection** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Middleware pipeline** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **MVC controllers** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/CategoryController.cs` +5</sub>
 - [x] **MVC routing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
-- [ ] Razor views
-- [ ] Static files
+- [x] **Razor views** <sub>`csharp-mini-project/Ecom.MvcWebApp/Views`</sub>
+- [x] **Static files** <sub>`csharp-mini-project/Ecom.MvcWebApp/wwwroot`</sub>
 - [ ] Minimal APIs
 - [x] **OpenAPI / Swagger** <sub>`csharp-mini-project/Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Configuration binding** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
@@ -641,6 +647,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-25 09:01 UTC</sub>
+<sub>Last updated 2026-09-25 09:03 UTC</sub>
 
 <!-- JOURNEY:END -->

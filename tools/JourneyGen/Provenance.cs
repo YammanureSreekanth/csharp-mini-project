@@ -52,7 +52,7 @@ public sealed class Provenance
 
         foreach (var rel in files)
         {
-            var project = rel.Split('/')[0];
+            var project = ProjectResolver.Resolve(_root, rel).Name;
             var isTooling = _cfg.ExtraPaths.Any(t =>
                 rel.StartsWith(t.TrimEnd('/') + "/", StringComparison.OrdinalIgnoreCase));
 

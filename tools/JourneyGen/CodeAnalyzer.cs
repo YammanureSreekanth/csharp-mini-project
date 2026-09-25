@@ -40,7 +40,7 @@ public sealed class CodeAnalyzer
         foreach (var file in files)
         {
             var rel = Rel(file);
-            var project = rel.Split('/')[0];
+            var (projectDir, project) = ProjectResolver.Resolve(_root, rel);
             var text = File.ReadAllText(file);
             var lines = CountLines(text);
 
@@ -48,7 +48,7 @@ public sealed class CodeAnalyzer
             TotalLines += lines;
 
             if (!perProject.TryGetValue(project, out var stats))
-                perProject[project] = stats = new ProjectStats { Name = project };
+                perProject[project] = stats = new ProjectStats { Name = project, Dir = projectDir };
             stats.Files++;
             stats.Lines += lines;
 
@@ -199,9 +199,9 @@ public sealed class CodeAnalyzer
 
         foreach (var p in Projects)
         {
-            var dir = Path.Combine(_root, p.Name);
-            if (Directory.Exists(Path.Combine(dir, "Views"))) Add("razor-views", p.Name + "/Views");
-            if (Directory.Exists(Path.Combine(dir, "wwwroot"))) Add("static-files", p.Name + "/wwwroot");
+            var dir = Path.Combine(_root, p.Dir);
+            if (Directory.Exists(Path.Combine(dir, "Views"))) Add("razor-views", p.Dir + "/Views");
+            if (Directory.Exists(Path.Combine(dir, "wwwroot"))) Add("static-files", p.Dir + "/wwwroot");
         }
     }
 
