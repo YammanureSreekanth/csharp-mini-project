@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Wishlist.Core/Wishlist.Core.csproj" />
+    <Project Path="src/Wishlist.Functions/Wishlist.Functions.csproj" />
+    <Project Path="src/Wishlist.Persistence/Wishlist.Persistence.csproj" />
+  </Folder>
+</Solution>

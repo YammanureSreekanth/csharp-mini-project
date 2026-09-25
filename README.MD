@@ -16,7 +16,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-68_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-66-0078D4) ![lines](https://img.shields.io/badge/lines-2531-0078D4) ![types](https://img.shields.io/badge/types-70-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-68_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-69-0078D4) ![lines](https://img.shields.io/badge/lines-2566-0078D4) ![types](https://img.shields.io/badge/types-72-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `██████████████░░░░░░` **72%**
 
@@ -32,7 +32,7 @@ What I am working on right now · assigned 2026-09-22 · next review **2026-09-2
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>csharp-mini-project/Ecom.WebApiApp/DTOMapper.cs/ProductDto.cs</sub><br>✓ `Mapping service` <sub>csharp-mini-project/Ecom.WebApiApp/DTOMapper.cs/ProductDTOMapper.cs</sub> |
-| Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL</sub> | ⬜ Not started | ✗ `Bicep templates`<br>✗ `Deploying from CI`<br>✗ `Azure Function app`<br>✗ `Redis`<br>✗ `Azure SQL` |
+| Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL</sub> | ⬜ Not started | ✗ `Bicep templates`<br>✗ `Deploying from CI`<br>✓ `Azure Function app` <sub>Wishlist/src/Wishlist.Functions/Program.cs</sub><br>✗ `Redis`<br>✗ `Azure SQL` |
 | Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>csharp-mini-project/Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>csharp-mini-project/Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
 | Unit testing | ✅ Completed | ✓ `Test project` <sub>csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `xUnit or NUnit` <sub>csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `Mocking` <sub>csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
 
@@ -180,10 +180,13 @@ classDiagram
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
+| `Wishlist.Functions` | 1 | 21 | 0 |
+| `Wishlist.Core` | 1 | 7 | 1 |
+| `Wishlist.Persistence` | 1 | 7 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 2023 of the 2023 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 2047 of the 2047 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -192,7 +195,10 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **2023** | **0** | **55** | `████████████████████` **100%** |
+| `Wishlist.Functions` | 16 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Core` | 4 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Persistence` | 4 | 0 | 0 | `████████████████████` 100% |
+| **Application total** | **2047** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -214,7 +220,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`██████░░░░░░░░░░░░░░` **52 of 178 covered** across 14 areas
+`██████░░░░░░░░░░░░░░` **54 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -225,20 +231,20 @@ _The ground I want to cover for my career in .NET._
 | Domain-Driven Design | 5/10 | `██████████░░░░░░░░░░` 50% |
 | Microservices architecture | 2/11 | `████░░░░░░░░░░░░░░░░` 18% |
 | Event-driven architecture and messaging | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
-| Azure cloud services | 0/10 | `░░░░░░░░░░░░░░░░░░░░` 0% |
+| Azure cloud services | 1/10 | `██░░░░░░░░░░░░░░░░░░` 10% |
 | Infrastructure as Code (Bicep) | 0/20 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
 | Testing and code quality | 4/11 | `███████░░░░░░░░░░░░░` 36% |
 | CI/CD and DevOps basics | 4/12 | `███████░░░░░░░░░░░░░` 33% |
 | Integrations with external systems | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
-| Observability and production readiness | 2/13 | `███░░░░░░░░░░░░░░░░░` 15% |
+| Observability and production readiness | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
 | Security basics | 3/10 | `██████░░░░░░░░░░░░░░` 30% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
 <details>
 <summary><b>C# and modern .NET depth</b> — 14/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
-- [x] **Classes and interfaces** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
+- [x] **Classes and interfaces** <sub>`Wishlist/src/Wishlist.Core/Class1.cs` +3</sub>
 - [ ] Records
 - [x] **Generics** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
 - [ ] Delegates and events
@@ -254,9 +260,9 @@ _The ground I want to cover for my career in .NET._
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
-- [x] **Value vs reference types** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +3</sub>
+- [x] **Value vs reference types** <sub>`Wishlist/src/Wishlist.Core/Class1.cs` +3</sub>
 - [x] **IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
-- [x] **.NET 8/9 app structure** <sub>`csharp-mini-project/Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +3</sub>
+- [x] **.NET 8/9 app structure** <sub>`Wishlist/src/Wishlist.Core/Wishlist.Core.csproj` +3</sub>
 - [ ] Minimal APIs
 - [x] **ASP.NET Core Web APIs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
 - [ ] Build and explain a production-style API — the real bar for this area <sub>judgement — not code-detectable</sub>
@@ -336,10 +342,10 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Azure cloud services</b> — 0/10 · <sub>The services named on the profile.</sub></summary>
+<summary><b>Azure cloud services</b> — 1/10 · <sub>The services named on the profile.</sub></summary>
 
 - [ ] Azure App Service
-- [ ] Azure Functions
+- [x] **Azure Functions** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +1</sub>
 - [ ] Azure Service Bus
 - [ ] Azure Cosmos DB
 - [ ] Azure Table Storage
@@ -382,7 +388,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **SQL Server basics** <sub>`csharp-mini-project/Catalog.ConsoleApp/Catalog.ConsoleApp.csproj` +3</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
-- [x] **Entity Framework Core** <sub>`csharp-mini-project/Ecom.MvcWebApp/Data/ApplicationDbContext.cs` +3</sub>
+- [x] **Entity Framework Core** <sub>`Wishlist/src/Wishlist.Persistence/Wishlist.Persistence.csproj` +3</sub>
 - [x] **Migrations** <sub>`csharp-mini-project/Ecom.MvcWebApp/Migrations/20260920132203_InitialCreate.Designer.cs` +3</sub>
 - [x] **Indexing** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +1</sub>
 - [ ] Transactions
@@ -414,7 +420,7 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>CI/CD and DevOps basics</b> — 4/12 · <sub>They expect pipeline improvements.</sub></summary>
 
-- [x] **Git fundamentals** <sub>`.gitignore` +1</sub>
+- [x] **Git fundamentals** <sub>`.gitignore` +2</sub>
 - [ ] Branching strategies <sub>judgement — not code-detectable</sub>
 - [ ] Pull requests <sub>judgement — not code-detectable</sub>
 - [x] **Build pipelines** <sub>`.github/workflows/journey.yml` +1</sub>
@@ -449,11 +455,11 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Observability and production readiness</b> — 2/13 · <sub>“It works locally” is not enough.</sub></summary>
+<summary><b>Observability and production readiness</b> — 3/13 · <sub>“It works locally” is not enough.</sub></summary>
 
 - [x] **Structured logging** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **Correlation IDs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
-- [ ] Distributed tracing
+- [x] **Distributed tracing** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [ ] Metrics
 - [ ] Application Insights
 - [ ] Health checks
@@ -502,11 +508,11 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>C# fundamentals</b> — 9/12</summary>
 
-- [x] **Classes** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
+- [x] **Classes** <sub>`Wishlist/src/Wishlist.Core/Class1.cs` +5</sub>
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Enums/AvailableStatus.cs` +2</sub>
 - [x] **Properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
-- [x] **var / implicit typing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/LinqController.cs` +1</sub>
+- [x] **var / implicit typing** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [x] **String interpolation** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **foreach** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +5</sub>
 - [ ] switch
@@ -550,8 +556,8 @@ _The ground I want to cover for my career in .NET._
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
 - [x] **?? and ??=** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [x] **Expression-bodied members** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
-- [x] **Top-level statements** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
-- [x] **File-scoped namespaces** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
+- [x] **Top-level statements** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
+- [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Class1.cs` +5</sub>
 - [x] **Target-typed new** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +1</sub>
 - [ ] Collection expressions
 - [x] **Primary constructors** <sub>`csharp-mini-project/Ecom.WebApiApp/Controllers/ProductController.cs` +2</sub>
@@ -639,7 +645,7 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Tooling & practice</b> — 3/5</summary>
 
-- [x] **Multi-project solution** <sub>`csharp-mini-project/csharp-ecom-mini-app.slnx`</sub>
+- [x] **Multi-project solution** <sub>`Wishlist/Wishlist.slnx` +1</sub>
 - [x] **CI with GitHub Actions** <sub>`.github/workflows/journey.yml` +1</sub>
 - [x] **Unit tests** — roadmap <sub>`csharp-mini-project/Ecom.WebApiApp.Tests/ProductControllerTests.cs`</sub>
 - [ ] Docker — roadmap
@@ -647,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-25 09:03 UTC</sub>
+<sub>Last updated 2026-09-25 09:04 UTC</sub>
 
 <!-- JOURNEY:END -->
