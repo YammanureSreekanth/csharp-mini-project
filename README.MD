@@ -186,7 +186,7 @@ classDiagram
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 2047 of the 2047 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 2048 of the 2048 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -196,9 +196,9 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Functions` | 16 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Persistence` | 5 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Core` | 4 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Persistence` | 4 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **2047** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **2048** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -511,7 +511,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Classes** <sub>`Wishlist/src/Wishlist.Core/Class1.cs` +5</sub>
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Enums/AvailableStatus.cs` +2</sub>
-- [x] **Properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs` +5</sub>
+- [x] **Properties** <sub>`Wishlist/src/Wishlist.Persistence/Class1.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [x] **String interpolation** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **foreach** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +5</sub>
@@ -653,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-25 09:04 UTC</sub>
+<sub>Last updated 2026-09-25 09:17 UTC</sub>
 
 <!-- JOURNEY:END -->
