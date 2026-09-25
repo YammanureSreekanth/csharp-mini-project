@@ -1,0 +1,86 @@
+# csharp-mini-project
+
+An e-commerce catalog domain modelled and built across a console app, an MVC web app, and a Web API, with unit tests.
+
+> This solution is part of the [my-apps](../README.MD) monorepo. The generated **.NET Journey** dashboard — skills tracked, code stats, commit history — now lives at the repo root and covers this solution together with the others under `my-apps/`.
+
+## Structure
+
+- `Catalog.ConsoleApp/` — domain model, data access, and the original console entry point
+- `Ecom.MvcWebApp/` — MVC web app
+- `Ecom.WebApiApp/` — Web API
+- `Ecom.WebApiApp.Tests/` — unit tests
+- `csharp-ecom-mini-app.slnx` — solution file
+
+See `Domain_Def.md` and `Setup.md` for the domain definition and setup notes.
+
+---
+
+# Catalog Console App - Domain & Database Diagrams
+
+This document collects the diagrams for each table/class in the catalog model,
+plus one diagram showing how they all map together end to end.
+
+---
+
+## Overall Mapping
+
+_The full picture - how `Category`, `Product` (and its subtypes), and their
+supporting tables relate to one another._
+
+![alt text](Catalog.ConsoleApp/diagrams/overallFlow.png)
+---
+
+## Category
+
+_`Categories` table - self-referencing tree via `ParentCategoryId`._
+
+![alt text](Catalog.ConsoleApp/diagrams/categories.png)
+---
+
+## Products (BaseProduct / MasterProduct / StandardProduct / VariationProduct)
+
+_`Products` table - single table with a `Type` discriminator, plus the
+self-referencing `MasterProductId` for variations._
+
+![alt text](Catalog.ConsoleApp/diagrams/products.png)
+
+---
+
+## MasterProduct.VariationAttributes
+
+_`MasterProductVariationAttributes` table - one row per attribute name a
+master varies by (e.g. "Size")._
+
+![alt text](Catalog.ConsoleApp/diagrams/products.png)
+---
+
+## VariationProduct.AttributeValues
+
+_`VariationProductAttributeValues` table - one row per attribute name/value
+pair for a given variation (e.g. "Size" → "48")._
+
+![alt text](Catalog.ConsoleApp/diagrams/products.png)
+
+---
+
+## ProductImages
+
+_`ProductImages` table - one product to many images._
+
+![alt text](Catalog.ConsoleApp/diagrams/productImages.png)
+
+---
+
+## ProductCategoryAssignments
+
+_`ProductCategoryAssignments` table - many-to-many join between products and
+categories, with one `IsPrimary` flag per product._
+
+![Catalog.ConsoleApp/diagrams/productCategoryAssignments.png](Catalog.ConsoleApp/diagrams/productCategoryAssignments.png)
+
+---
+
+## Notes / Open Questions
+
+_

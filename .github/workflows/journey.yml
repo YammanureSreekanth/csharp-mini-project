@@ -32,7 +32,10 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Build the solution
-        run: dotnet build csharp-ecom-mini-app.slnx --configuration Release
+        run: dotnet build csharp-mini-project/csharp-ecom-mini-app.slnx --configuration Release
+
+      - name: Build the Wishlist solution
+        run: dotnet build Wishlist/Wishlist.slnx --configuration Release
 
       # CI verifies, it does not write. The .githooks/pre-commit hook keeps the
       # README current locally; committing it from here produced a bot commit after

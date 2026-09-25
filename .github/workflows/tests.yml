@@ -23,7 +23,7 @@ jobs:
 
       - name: Run tests
         run: >
-          dotnet test Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj
+          dotnet test csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj
           --configuration Release
           --logger "trx;LogFileName=test-results.trx"
           --logger "html;LogFileName=test-results.html"

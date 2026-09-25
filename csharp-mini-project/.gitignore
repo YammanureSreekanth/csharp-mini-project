@@ -8,8 +8,6 @@ obj/
 *.userosscache
 *.sln.docstates
 *log.txt
-local.settings.json
-
 # Generated journey dashboard (built in CI)
 artifacts/
 TestResults/

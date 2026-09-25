@@ -29,7 +29,7 @@ root=$(git rev-parse --show-toplevel)
 
 # Run the unit test suite and block the commit if any test fails.
 echo "pre-commit: running unit tests..."
-if ! dotnet test "$root/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj" --nologo; then
+if ! dotnet test "$root/csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj" --nologo; then
     echo "pre-commit: unit tests failed, aborting commit"
     exit 1
 fi
