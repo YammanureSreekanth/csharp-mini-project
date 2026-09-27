@@ -9,5 +9,10 @@ public record CreateListRequest(
     [property: JsonPropertyName("type")] ProductListType Type,
     [property: JsonPropertyName("isPublic")] bool IsPublic = false);
 
-public record AddProductRequest(string ProductId);
-public record UpdateVisibilityRequest(bool IsPublic);
+public record CreateProductListItemRequest(
+    [property: JsonPropertyName("productId")] string ProductId,
+    [property: JsonPropertyName("isPublic")] bool IsPublic = false,
+    [property: JsonPropertyName("quantity")] int Quantity = 1);
+
+public record UpdateVisibilityRequest(
+    [property: JsonPropertyName("isPublic")] bool IsPublic);

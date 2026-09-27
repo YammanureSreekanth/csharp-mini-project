@@ -1,4 +1,3 @@
-
 using Wishlist.Core.Enums;
 
 namespace Wishlist.Core.Entities;

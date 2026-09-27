@@ -16,7 +16,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-88-0078D4) ![lines](https://img.shields.io/badge/lines-3288-0078D4) ![types](https://img.shields.io/badge/types-95-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-89-0078D4) ![lines](https://img.shields.io/badge/lines-3505-0078D4) ![types](https://img.shields.io/badge/types-96-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `███████████████░░░░░` **76%**
 
@@ -178,27 +178,27 @@ classDiagram
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
+| `Wishlist.Functions` | 9 | 651 | 8 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
-| `Wishlist.Functions` | 9 | 513 | 8 |
-| `Wishlist.Core` | 10 | 152 | 14 |
+| `Wishlist.Core` | 11 | 191 | 15 |
+| `Wishlist.Tests` | 3 | 132 | 3 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
-| `Wishlist.Tests` | 3 | 92 | 3 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 2645 of the 2645 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 2828 of the 2828 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
+| `Wishlist.Functions` | 535 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
-| `Wishlist.Functions` | 419 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Core` | 129 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Core` | 164 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Tests` | 106 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Tests` | 74 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **2645** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **2828** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -246,7 +246,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Classes and interfaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +3</sub>
 - [x] **Records** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs`</sub>
-- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +3</sub>
+- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +3</sub>
 - [ ] Delegates and events
 - [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +3</sub>
 - [x] **async / await / Task** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
@@ -527,7 +527,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Object-oriented design</b> — 8/15</summary>
 
 - [x] **Interfaces** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
-- [x] **Inheritance** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/MasterProduct.cs` +2</sub>
+- [x] **Inheritance** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +3</sub>
 - [x] **Abstract classes** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 - [x] **Abstract members** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 - [x] **Overriding** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +5</sub>
@@ -535,7 +535,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Default interface methods
 - [x] **Static classes** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
 - [ ] Sealed classes
-- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
+- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +5</sub>
 - [x] **Generic types of my own** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +2</sub>
 - [ ] Delegates
 - [ ] Events
@@ -558,7 +558,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Expression-bodied members** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
 - [x] **Top-level statements** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
-- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +2</sub>
+- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +2</sub>
 - [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +1</sub>
 - [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListNotFoundException.cs` +5</sub>
 - [ ] Tuples
@@ -570,7 +570,7 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Collections & LINQ</b> — 7/9</summary>
 
-- [x] **Generic collections** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
+- [x] **Generic collections** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +5</sub>
 - [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +5</sub>
 - [x] **LINQ method syntax** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +5</sub>
 - [ ] LINQ query syntax
@@ -586,7 +586,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Errors, resources & async</b> — 11/13</summary>
 
 - [x] **try / catch** <sub>`Wishlist/src/Wishlist.Functions/Functions/Http.cs` +5</sub>
-- [x] **Throwing exceptions** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +5</sub>
+- [x] **Throwing exceptions** <sub>`Wishlist/tests/Wishlist.Tests/FakeProductListRepository.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListNotFoundException.cs` +1</sub>
 - [ ] Exception filters
 - [ ] finally blocks
@@ -653,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-27 12:36 UTC</sub>
+<sub>Last updated 2026-09-27 19:07 UTC</sub>
 
 <!-- JOURNEY:END -->

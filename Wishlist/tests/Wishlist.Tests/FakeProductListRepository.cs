@@ -29,4 +29,44 @@ public class FakeProductListRepository : IProductListRepository
         SaveCount++;
         return Task.CompletedTask;
     }
+
+    public Task AddProductAsync(ProductListItem productListItem, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task SetItemVisibilityAsync(ProductList productList, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task SetListVisibilityAsync(ProductList productList, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task RemoveItemsByListId(Guid listId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ProductListItem> GetListItemByIdAsync(Guid Id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task SetItemVisibilityAsync(ProductListItem productListItem, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RemoveListItem(ProductListItem listItem, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<ProductListItem>> GetListItemsByListId(Guid Id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

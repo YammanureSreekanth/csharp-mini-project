@@ -10,5 +10,4 @@ public class ProductListDto
     public ProductListType Type {get; set;}
     public bool IsPublic { get; set; }
     public DateTime ModifiedDate { get; set; }
-    public List<ProductListItemDto> Items { get; set; } = new();
 }

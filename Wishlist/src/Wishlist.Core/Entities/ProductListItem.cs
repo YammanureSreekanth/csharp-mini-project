@@ -1,4 +1,3 @@
-
 namespace Wishlist.Core.Entities;
 public class ProductListItem
 {
