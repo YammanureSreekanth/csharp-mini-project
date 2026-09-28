@@ -14,4 +14,5 @@ public class ProductList
     public DateTime CreationDate { get; set; }
     public DateTime ModifiedDate { get; set; }
     public List<ProductListItem> Items { get; set; } = [];
+
 }

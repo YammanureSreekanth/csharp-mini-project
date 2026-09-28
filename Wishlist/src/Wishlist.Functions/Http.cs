@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Wishlist.Core.Contracts;
 using Wishlist.Core.Exceptions;
 
-namespace Wishlist.Functions.Functions;
+namespace Wishlist.Functions;
 
 /// <summary>
 /// This Returns delegates for Functions
@@ -16,8 +17,8 @@ public static class Http
     public static async Task<IActionResult> RunAsync(Func<Task<IActionResult>> action)
     {
         try { return await action(); }
-        catch (ProductListNotFoundException ex) { return new NotFoundObjectResult(new { error = ex.Message }); }
-        catch (DuplicateProductException ex) { return new ConflictObjectResult(new { error = ex.Message }); }
-        catch (ValidationException ex)       { return new BadRequestObjectResult(new { error = ex.Message }); }
+        catch (NotFoundException ex)            { return new NotFoundObjectResult(new ErrorResponse(ex.Message)); }
+        catch (ConflictProductException ex)     { return new ConflictObjectResult(new ErrorResponse(ex.Message)); }
+        catch (ValidationException ex)          { return new BadRequestObjectResult(new ErrorResponse(ex.Message)); }
     }
 }

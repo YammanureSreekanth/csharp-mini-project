@@ -16,7 +16,8 @@ public interface IProductListRepository
     void Remove(ProductList list);
     Task AddProductAsync(ProductListItem productListItem, CancellationToken cancellationToken);
     Task<List<ProductListItem>> GetListItemsByListId(Guid Id, CancellationToken cancellationToken);
-    Task<ProductListItem> GetListItemByIdAsync(Guid Id, CancellationToken cancellationToken);
+    Task<ProductListItem?> GetListItemByIdAsync(Guid Id, CancellationToken cancellationToken);
+    Task<bool> ExistProductIdByListId(Guid listId, string productId, CancellationToken cancellationToken);
     Task SetItemVisibilityAsync(ProductListItem productListItem, CancellationToken cancellationToken);
     void RemoveListItem(ProductListItem listItem, CancellationToken cancellationToken);
     Task SaveChangesAsync(CancellationToken cancellationToken);

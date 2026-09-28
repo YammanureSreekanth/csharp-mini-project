@@ -1,5 +1,6 @@
 using Wishlist.Core.Contracts;
 using Wishlist.Core.Entities;
+using Wishlist.Core.Exceptions;
 using Wishlist.Core.Interfaces;
 
 namespace Wishlist.Functions.Services;
@@ -55,6 +56,11 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     public async Task<ProductList?> GetListAsync(Guid listId, CancellationToken cancellationToken)
     {
         ProductList? list = await repo.GetByIdAsync(listId, cancellationToken);
+
+        if (list is null)
+        {
+            throw new NotFoundException(nameof(ProductList), listId);
+        }
         
         List<ProductListItem>? items = await repo.GetListItemsByListId(listId, cancellationToken);
         
@@ -72,6 +78,11 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     public async Task DeleteListAsync(Guid listId, CancellationToken cancellationToken)
     {
         ProductList? list = await repo.GetByIdAsync(listId, cancellationToken);
+
+        if (list is null)
+        {
+            throw new NotFoundException(nameof(ProductList), listId);
+        }
         
         repo.Remove(list);
         
@@ -90,7 +101,12 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     public async Task<ProductList> SetListVisibilityAsync(Guid productListId, bool isPublic, CancellationToken cancellationToken)
     {
         
-        ProductList productList = await repo.GetByIdAsync(productListId, cancellationToken);
+        ProductList? productList = await repo.GetByIdAsync(productListId, cancellationToken);
+
+        if (productList is null)
+        {
+            throw new NotFoundException(nameof(ProductList), productListId);
+        }
 
         productList.IsPublic = isPublic;
         
@@ -113,6 +129,16 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     public async Task AddProductAsync(Guid listId, CreateProductListItemRequest req, CancellationToken cancellationToken)
     {
         ProductList? productList = await repo.GetByIdAsync(listId, cancellationToken);
+
+        if (productList is null)
+        {
+            throw new NotFoundException(nameof(ProductList), listId);
+        }
+
+        if (await repo.ExistProductIdByListId(productList.Id, req.ProductId, cancellationToken))
+        {
+            throw new ConflictProductException(req.ProductId);
+        }
 
         ProductListItem productListItem = new ProductListItem {
             Id = Guid.NewGuid(),
@@ -138,11 +164,18 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="isPublic"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ProductListItem> SetItemVisibilityAsync(Guid listItemId,  bool isPublic, CancellationToken cancellationToken)
+    public async Task<ProductListItem?> SetItemVisibilityAsync(Guid listItemId,  bool isPublic, CancellationToken cancellationToken)
     {
-        ProductListItem listItem = await repo.GetListItemByIdAsync(listItemId, cancellationToken);
-        
+        ProductListItem? listItem = await repo.GetListItemByIdAsync(listItemId, cancellationToken);
+
+        if (listItem is null)
+        {
+            throw new NotFoundException(nameof(ProductListItem), listItemId);
+        }
+
         listItem.IsPublic = isPublic;
+
+        listItem.ModifiedDate = DateTime.Now;
         
         await repo.SetItemVisibilityAsync(listItem, cancellationToken);
         
@@ -159,7 +192,12 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <returns></returns>
     public async Task RemoveListItemAsync(Guid itemId, CancellationToken cancellationToken)
     {
-        ProductListItem productListItem = await repo.GetListItemByIdAsync(itemId, cancellationToken);
+        ProductListItem? productListItem = await repo.GetListItemByIdAsync(itemId, cancellationToken);
+
+        if (productListItem is null)
+        {
+            throw new NotFoundException(nameof(ProductListItem), itemId);
+        }
         
         repo.RemoveListItem(productListItem, cancellationToken);
     }

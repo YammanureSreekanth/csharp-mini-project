@@ -117,9 +117,21 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <param name="Id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ProductListItem> GetListItemByIdAsync(Guid Id, CancellationToken cancellationToken)
+    public async Task<ProductListItem?> GetListItemByIdAsync(Guid Id, CancellationToken cancellationToken)
     {
        return await _dbContext.ProductListItem.FindAsync(Id);
+    }
+
+    /// <summary>
+    /// Tells about if same product is already added into given listId
+    /// </summary>
+    /// <param name="listId"></param>
+    /// <param name="productId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<bool> ExistProductIdByListId(Guid listId, string productId, CancellationToken cancellationToken)
+    {
+       return await _dbContext.ProductListItem.AnyAsync(i => i.ProductListId == listId && i.ProductId == productId, cancellationToken);
     }
 
     /// <summary>

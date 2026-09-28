@@ -1,17 +1,17 @@
 namespace Wishlist.Core.Exceptions;
 
 /// <summary>
-/// This is expection when ProductList is not found by ListId
+/// This is expection when ProductList or ListItem is not found by Id
 /// </summary>
-/// <param name="listId"></param>
-public class ProductListNotFoundException(Guid listId)
-    : Exception($"List {listId} was not found.");
+/// <param name="entityName"></param>
+/// <param name="key"></param>
+public class NotFoundException(string entityName, object key) : Exception($"No {entityName} found for id '{key}'.");
 
 /// <summary>
 /// This is exception when customer is trying to add same product
 /// </summary>
 /// <param name="productId"></param>
-public class DuplicateProductException(string productId)
+public class ConflictProductException(string productId)
     : Exception($"Product '{productId}' is already in this list.");
 
 /// <summary>

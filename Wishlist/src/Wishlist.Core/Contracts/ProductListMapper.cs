@@ -88,7 +88,9 @@ public static class ProductListMapper
             
             IsPublic = listItem.IsPublic,
             
-            Quantity = listItem.Quantity
+            Quantity = listItem.Quantity,
+
+            ModifiedDate = listItem.ModifiedDate
         };
 
         return itemDto;
