@@ -915,7 +915,7 @@
         },
         {
           "label": "Bicep, deployments and Azure Functions",
-          "status": "not-started",
+          "status": "done",
           "notes": "one deployable slice: a Function provisioned with Bicep, using Azure SQL",
           "parts": [
             {
