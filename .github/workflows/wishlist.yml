@@ -1,0 +1,28 @@
+name: wishlist
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Wishlist/**'
+      - '.github/workflows/wishlist.yml'
+      - '.github/workflows/_dotnet-functions.yml'
+  pull_request:
+    paths:
+      - 'Wishlist/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write        # test reporter
+  id-token: write      # OIDC login (only used by the deploy job)
+
+jobs:
+  ci-cd:
+    uses: ./.github/workflows/_dotnet-functions.yml
+    with:
+      app-path: Wishlist
+      solution: Wishlist.slnx
+      functions-project: src/Wishlist.Functions
+      environment: wishlist-dev
+    secrets: inherit

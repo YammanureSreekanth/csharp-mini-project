@@ -1,0 +1,83 @@
+name: dotnet-functions-ci-cd
+
+on:
+  workflow_call:
+    inputs:
+      app-path:
+        description: Folder of the app inside the repo, e.g. Wishlist
+        required: true
+        type: string
+      solution:
+        description: Solution file inside app-path
+        required: true
+        type: string
+      functions-project:
+        description: Functions project folder, relative to app-path
+        required: true
+        type: string
+      environment:
+        description: GitHub environment holding the Azure settings, e.g. wishlist-dev
+        required: true
+        type: string
+      dotnet-version:
+        type: string
+        default: '10.0.x'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+
+      - run: dotnet restore ${{ inputs.app-path }}/${{ inputs.solution }}
+      - run: dotnet build ${{ inputs.app-path }}/${{ inputs.solution }} --no-restore -c Release
+      - run: >
+          dotnet test ${{ inputs.app-path }}/${{ inputs.solution }} --no-build -c Release
+          --logger "trx;LogFileName=test-results.trx"
+          --results-directory ${{ inputs.app-path }}/TestResults
+
+      - name: Publish test results
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: ${{ inputs.app-path }} tests
+          path: ${{ inputs.app-path }}/TestResults/*.trx
+          reporter: dotnet-trx
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ inputs.app-path }}-test-results
+          path: ${{ inputs.app-path }}/TestResults
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}     # gives this job that environment's secrets and variables
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+
+      - run: >
+          dotnet publish ${{ inputs.app-path }}/${{ inputs.functions-project }}
+          -c Release -o ${{ inputs.app-path }}/publish
+
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ vars.AZURE_FUNCTIONAPP_NAME }}
+          package: ${{ inputs.app-path }}/publish
+          sku: flexconsumption

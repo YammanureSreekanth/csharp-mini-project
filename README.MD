@@ -223,7 +223,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`██████░░░░░░░░░░░░░░` **56 of 178 covered** across 14 areas
+`███████░░░░░░░░░░░░░` **58 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -235,10 +235,10 @@ _The ground I want to cover for my career in .NET._
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Azure cloud services | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
-| Infrastructure as Code (Bicep) | 11/20 | `███████████░░░░░░░░░` 55% |
+| Infrastructure as Code (Bicep) | 12/20 | `████████████░░░░░░░░` 60% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
 | Testing and code quality | 3/11 | `█████░░░░░░░░░░░░░░░` 27% |
-| CI/CD and DevOps basics | 4/12 | `███████░░░░░░░░░░░░░` 33% |
+| CI/CD and DevOps basics | 5/12 | `████████░░░░░░░░░░░░` 42% |
 | Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Observability and production readiness | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
 | Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
@@ -361,7 +361,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Infrastructure as Code (Bicep)</b> — 11/20 · <sub>Declaring the whole backend, not clicking it together in the portal.</sub></summary>
+<summary><b>Infrastructure as Code (Bicep)</b> — 12/20 · <sub>Declaring the whole backend, not clicking it together in the portal.</sub></summary>
 
 - [x] **Bicep templates** <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [x] **Resource declarations** <sub>`Wishlist/Infra/main.bicep` +3</sub>
@@ -382,7 +382,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Environment-specific configuration** — one template, parameterised per environment <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [ ] Linting and bicep build
 - [ ] Previewing with what-if — see the change before it lands
-- [ ] Deploying from CI
+- [x] **Deploying from CI** <sub>`.github/workflows/_dotnet-functions.yml`</sub>
 
 </details>
 
@@ -421,16 +421,16 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>CI/CD and DevOps basics</b> — 4/12 · <sub>They expect pipeline improvements.</sub></summary>
+<summary><b>CI/CD and DevOps basics</b> — 5/12 · <sub>They expect pipeline improvements.</sub></summary>
 
 - [x] **Git fundamentals** <sub>`.gitignore` +2</sub>
 - [ ] Branching strategies <sub>judgement — not code-detectable</sub>
 - [ ] Pull requests <sub>judgement — not code-detectable</sub>
-- [x] **Build pipelines** <sub>`.github/workflows/journey.yml` +1</sub>
-- [x] **GitHub Actions** <sub>`.github/workflows/journey.yml` +1</sub>
-- [x] **Automated tests in CI** <sub>`.githooks/pre-commit` +1</sub>
+- [x] **Build pipelines** <sub>`.github/workflows/_dotnet-functions.yml` +3</sub>
+- [x] **GitHub Actions** <sub>`.github/workflows/_dotnet-functions.yml` +3</sub>
+- [x] **Automated tests in CI** <sub>`.githooks/pre-commit` +2</sub>
 - [ ] Static analysis
-- [ ] Secrets management
+- [x] **Secrets management** <sub>`.github/workflows/_dotnet-functions.yml`</sub>
 - [ ] Release pipelines <sub>judgement — not code-detectable</sub>
 - [ ] Environment promotion — dev, test, staging, production <sub>judgement — not code-detectable</sub>
 - [ ] Rollback strategies <sub>judgement — not code-detectable</sub>
@@ -649,13 +649,13 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Tooling & practice</b> — 3/5</summary>
 
 - [x] **Multi-project solution** <sub>`Wishlist/Wishlist.slnx` +1</sub>
-- [x] **CI with GitHub Actions** <sub>`.github/workflows/journey.yml` +1</sub>
+- [x] **CI with GitHub Actions** <sub>`.github/workflows/_dotnet-functions.yml` +3</sub>
 - [x] **Unit tests** — roadmap <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +1</sub>
 - [ ] Docker — roadmap
 - [ ] Deployment — roadmap <sub>planned</sub>
 
 </details>
 
-<sub>Last updated 2026-09-28 13:04 UTC</sub>
+<sub>Last updated 2026-09-28 13:14 UTC</sub>
 
 <!-- JOURNEY:END -->
