@@ -28,7 +28,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiParameter("customerId", In = ParameterLocation.Path, Required = true, Type = typeof(string))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(List<ProductListDto>))]
     public Task<IActionResult> GetAllListsByCustomerIdAsync(
-        [HttpTrigger("GET", Route = "customers/{customerId}/lists")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "GET", Route = "customers/{customerId}/lists")] HttpRequest req,
         string customerId, FunctionContext context, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
             logger.LogInformation("Function {FunctionName} started for customerId {CustomerId}", context.FunctionDefinition.Name, customerId);
@@ -56,7 +56,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiRequestBody(contentType: "application/json", typeof(CreateListRequest))]
     [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(ProductListDto))]
     public Task<IActionResult> CreateCustomerProductListAsync(
-        [HttpTrigger("POST", Route = "customer/list")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous,"POST", Route = "customer/list")] HttpRequest req,
         FunctionContext context,
         CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
@@ -85,7 +85,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, contentType: "application/json", typeof(ProductListDto))]
     public Task<IActionResult> UpdateProductListVisibilityAsync(
-        [HttpTrigger("PATCH", Route = "list/{listId}/visibility")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "PATCH", Route = "list/{listId}/visibility")] HttpRequest req,
         FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
@@ -111,7 +111,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithoutBody(HttpStatusCode.NoContent)]
     public Task<IActionResult> RemoveProductListAsync(
-        [HttpTrigger("DELETE", Route = "list/{listId}")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "DELETE", Route = "list/{listId}")] HttpRequest req,
         FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
@@ -134,7 +134,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListWithItemsDto))]
     public Task<IActionResult> GetProductListByListIdAsync(
-        [HttpTrigger("GET", Route = "list/{listId}")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "GET", Route = "list/{listId}")] HttpRequest req,
         FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
@@ -160,7 +160,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(string))]
     public Task<IActionResult> AddProductToListAsync(
-        [HttpTrigger("POST", Route = "list/{listId}/items")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = "list/{listId}/items")] HttpRequest req,
         FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
@@ -183,19 +183,19 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <returns></returns>
     [Function("UpdateProductListItemVisibility")]
     [OpenApiOperation("UpdateProductListItemVisibility", tags: ["ProductListItem"])]
-    [OpenApiRequestBody(contentType: "application/json", typeof(UpdateVisibilityRequest))]
+    [OpenApiRequestBody(contentType: "application/json", typeof(UpdateItemVisibilityRequest))]
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListItemDto))]
     public Task<IActionResult> UpdateProductListItemVisibilityAsync(
-        [HttpTrigger("PATCH", Route = "items/{itemId}/visibility")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "PATCH", Route = "items/{itemId}/visibility")] HttpRequest req,
         FunctionContext context,
         Guid itemId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
             logger.LogInformation("Function {FunctionName} started for ItemID {itemId}", context.FunctionDefinition.Name, itemId);
 
-            UpdateVisibilityRequest updateProductListVisibility = await req.ReadFromJsonAsync<UpdateVisibilityRequest>(cancellationToken);
+            UpdateItemVisibilityRequest updateItemVisibilityRequest = await req.ReadFromJsonAsync<UpdateItemVisibilityRequest>(cancellationToken);
 
-            ProductListItem listItem = await productListService.SetItemVisibilityAsync(itemId, updateProductListVisibility.IsPublic, cancellationToken);
+            ProductListItem listItem = await productListService.SetItemVisibilityAsync(itemId, updateItemVisibilityRequest.IsPublic, cancellationToken);
 
             return new OkObjectResult(value: ProductListMapper.ToItemDto(listItem));
         });
@@ -212,16 +212,14 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [OpenApiParameter("itemId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithoutBody(HttpStatusCode.NoContent)]
     public Task<IActionResult> DeleteProductListItemByIdAsync(
-        [HttpTrigger("DELETE", Route = "items/{itemId}/")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "DELETE", Route = "items/{itemId}/")] HttpRequest req,
         FunctionContext context,
         Guid itemId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
-            logger.LogInformation("Function {FunctionName} started for ItemID {itemId}", context.FunctionDefinition.Name, itemId);
-            
-            UpdateVisibilityRequest updateProductListVisibility = await req.ReadFromJsonAsync<UpdateVisibilityRequest>(cancellationToken);
+            logger.LogInformation("Function {FunctionName} started for itemId {itemId}", context.FunctionDefinition.Name, itemId);
 
-            ProductListItem listItem = await productListService.SetItemVisibilityAsync(itemId, updateProductListVisibility.IsPublic, cancellationToken);
+            await productListService.RemoveListItemAsync(itemId, cancellationToken);
 
-            return new OkObjectResult(value: ProductListMapper.ToItemDto(listItem));
+            return new NoContentResult();
         });
 }

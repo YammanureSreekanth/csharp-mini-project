@@ -13,3 +13,21 @@ local.settings.json
 # Generated journey dashboard (built in CI)
 artifacts/
 TestResults/
+
+# Bicep: generated ARM template
+Wishlist/infra/main.json
+Wishlist/infra/modules/*.json
+
+# Bicep: parameter file with your real login and object id
+Wishlist/infra/main.bicepparam
+
+# EF: generated SQL script (regenerated on each deploy)
+Wishlist/infra/sql/migrations.sql
+
+# Azure Functions local settings (connection strings, secrets)
+local.settings.json
+**/local.settings.json
+
+# Publish and zip output
+Wishlist/publish/
+Wishlist/app.zip

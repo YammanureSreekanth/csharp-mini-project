@@ -116,8 +116,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
 
         ProductListItem productListItem = new ProductListItem { 
             Id = Guid.NewGuid(),
-            ProductId = req.ProductId,
-            List = productList
+            ProductId = req.ProductId
         };
 
         productListItem.IsPublic = req.IsPublic;
@@ -154,12 +153,12 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <summary>
     /// Removes the listItem from List
     /// </summary>
-    /// <param name="listId"></param>
+    /// <param name="itemId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task RemoveListItemAsync(Guid listId, CancellationToken cancellationToken)
+    public async Task RemoveListItemAsync(Guid itemId, CancellationToken cancellationToken)
     {
-        ProductListItem productListItem = await repo.GetListItemByIdAsync(listId, cancellationToken);
+        ProductListItem productListItem = await repo.GetListItemByIdAsync(itemId, cancellationToken);
         
         repo.RemoveListItem(productListItem, cancellationToken);
     }

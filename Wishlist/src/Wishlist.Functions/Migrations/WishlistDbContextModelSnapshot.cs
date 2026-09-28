@@ -50,7 +50,7 @@ namespace Wishlist.Functions.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductList");
+                    b.ToTable("ProductList", (string)null);
                 });
 
             modelBuilder.Entity("Wishlist.Core.Entities.ProductListItem", b =>
@@ -82,7 +82,7 @@ namespace Wishlist.Functions.Migrations
 
                     b.HasIndex("ProductListId");
 
-                    b.ToTable("ProductListItem");
+                    b.ToTable("ProductListItem", (string)null);
                 });
 
             modelBuilder.Entity("Wishlist.Core.Entities.ProductListItem", b =>

@@ -28,8 +28,15 @@ public record CreateProductListItemRequest(
     [property: JsonPropertyName("quantity")] int Quantity = 1);
 
 /// <summary>
-/// Request body for updating the visibility
+/// Request body for updating the list visibility
 /// </summary>
 /// <param name="IsPublic"></param>
 public record UpdateVisibilityRequest(
+    [property: JsonPropertyName("isPublic")] bool IsPublic);
+
+/// <summary>
+/// Request body for updating the listitem visibility
+/// </summary>
+/// <param name="IsPublic"></param>
+public record UpdateItemVisibilityRequest(
     [property: JsonPropertyName("isPublic")] bool IsPublic);
