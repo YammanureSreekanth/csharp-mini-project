@@ -114,8 +114,9 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     {
         ProductList? productList = await repo.GetByIdAsync(listId, cancellationToken);
 
-        ProductListItem productListItem = new ProductListItem { 
+        ProductListItem productListItem = new ProductListItem {
             Id = Guid.NewGuid(),
+            ProductListId = productList.Id,
             ProductId = req.ProductId
         };
 
