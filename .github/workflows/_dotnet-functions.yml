@@ -69,6 +69,16 @@ jobs:
       - run: >
           dotnet publish ${{ inputs.app-path }}/${{ inputs.functions-project }}
           -c Release -o ${{ inputs.app-path }}/publish
+    
+      - name: debug secret hashes          # ← add this step here
+        run: |
+          echo -n "$AZURE_CLIENT_ID" | sha256sum
+          echo -n "$AZURE_TENANT_ID" | sha256sum
+          echo -n "$AZURE_SUBSCRIPTION_ID" | sha256sum
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}   
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
 
       - uses: azure/login@v2
         with:
