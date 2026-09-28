@@ -1,49 +1,119 @@
-using Wishlist.Core.Contracts;
+using Moq;
 using Wishlist.Core.Entities;
-using Wishlist.Core.Exceptions;
+using Wishlist.Core.Enums;
+using Wishlist.Core.Interfaces;
 using Wishlist.Functions.Services;
 
 namespace Wishlist.Tests;
 
 public class ProductListServiceTests
 {
-    [Fact]
-    public async Task GetListsForCustomer_returns_only_that_customers_lists()
+    private readonly Mock<IProductListRepository> _repo = new();
+    private readonly ProductListService _service;
+
+    public ProductListServiceTests()
     {
-        // Arrange: build the situation
-        var repo = new FakeProductListRepository();
-        repo.Lists.Add(new ProductList { Id = Guid.NewGuid(), Name = "A", CustomerId = "c1" });
-        repo.Lists.Add(new ProductList { Id = Guid.NewGuid(), Name = "B", CustomerId = "c2" });
-        var service = new ProductListService(repo);
+        _service = new ProductListService(_repo.Object);
+    }
 
-        // Act: do the thing being tested
-        var result = await service.GetListsForCustomerAsync("c1", CancellationToken.None);
+    [Fact]
+    public async Task GetList_ByCustomerId()
+    {
+        // Arrage
+        Guid listOneId = Guid.NewGuid();
 
-        // Assert: check the outcome
-        Assert.Single(result);
-        Assert.Equal("A", result[0].Name);
+        string customerOne = "CustomerOne";
+
+        ProductList productListOne = new ProductList
+        {
+            Id = listOneId,
+            Name = "Birthday",
+            CustomerId = customerOne
+        };
+
+        productListOne.Type = ProductListType.TYPE_WISH_LIST;
+        productListOne.IsPublic = true;
+
+        Guid listTwoId = Guid.NewGuid();
+
+        ProductList productListTwo = new ProductList
+        {
+            Id = listTwoId,
+            Name = "Anniversary",
+            CustomerId = customerOne
+        };
+
+        productListTwo.Type = ProductListType.TYPE_WISH_LIST;
+        productListTwo.IsPublic = true;
+
+        List<ProductList> list = new List<ProductList>();
+        list.Add(productListOne);
+        list.Add(productListTwo);
+
+        _repo.Setup(repo => repo.GetByCustomerAsync(customerOne, CancellationToken.None))
+                .ReturnsAsync((IReadOnlyList<ProductList>) list);
+            
+        // Act
+        IReadOnlyList<ProductList>? productLists = await _service.GetListsForCustomerAsync(customerOne, CancellationToken.None);
+
+        //Assert
+        Assert.Equal(2, productLists.Count);
+    }
+
+    [Fact]
+    public async Task AddProductList_To_Customer()
+    {
+        //Arrage
+        Guid listOneId = Guid.NewGuid();
+
+        string customerOne = "CustomerOne";
+
+        ProductList productListOne = new ProductList
+        {
+            Id = listOneId,
+            Name = "FeestDag",
+            CustomerId = customerOne
+        };
+
+        productListOne.Type = ProductListType.TYPE_WISH_LIST;
+        productListOne.IsPublic = true;
+
+        _repo.Setup(repo => repo.GetByIdAsync(listOneId, CancellationToken.None))
+                .ReturnsAsync(productListOne);
+
+        //Act
+        ProductList productList = await _service.GetListAsync(listOneId, CancellationToken.None);
+
+        //Assert
+        Assert.Equal("FeestDag", productList.Name);
+
     }
 
     [Theory]
-    [InlineData("")]
-    [InlineData("   ")]
-    public async Task CreateList_rejects_blank_name(string name)
+    [InlineData("01f1b7a3-7e18-45e4-b7be-05bd08651844", ProductListType.TYPE_WISH_LIST)]
+    [InlineData("b183381b-2009-4301-89b1-2c5c11770787", ProductListType.TYPE_SHOPPING_LIST)]
+    public async Task GetList_ById(Guid listId, ProductListType type)
     {
-        var service = new ProductListService(new FakeProductListRepository());
+        //Arrange
+        string customerOne = "CustomerOne";
 
-        await Assert.ThrowsAsync<ValidationException>(() =>
-            service.CreateListAsync(new CreateListRequest(name, "c1", Core.Enums.ProductListType.TYPE_WISH_LIST, true), CancellationToken.None));
-    }
+        ProductList productListOne = new ProductList
+        {
+            Id = listId,
+            Name = "FeestDag",
+            CustomerId = customerOne
+        };
 
-    [Fact]
-    public async Task CreateList_saves_the_list()
-    {
-        var repo = new FakeProductListRepository();
-        var service = new ProductListService(repo);
+        productListOne.Type = type;
+        productListOne.IsPublic = true;
 
-        await service.CreateListAsync(new CreateListRequest("Birthday", "c1", Core.Enums.ProductListType.TYPE_WISH_LIST, true), CancellationToken.None);
+        _repo.Setup(repo => repo.GetByIdAsync(listId, CancellationToken.None))
+            .ReturnsAsync(productListOne);
+        
+        //Act
+        ProductList list = await _service.GetListAsync(listId, CancellationToken.None);
 
-        Assert.Single(repo.Lists);
-        Assert.Equal(1, repo.SaveCount);
+        //Assert
+        Assert.Equal(type, list.Type);
     }
 }

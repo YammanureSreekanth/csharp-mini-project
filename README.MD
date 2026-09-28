@@ -16,7 +16,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-89-0078D4) ![lines](https://img.shields.io/badge/lines-3505-0078D4) ![types](https://img.shields.io/badge/types-96-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-87-0078D4) ![lines](https://img.shields.io/badge/lines-3492-0078D4) ![types](https://img.shields.io/badge/types-94-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `███████████████░░░░░` **76%**
 
@@ -34,7 +34,7 @@ What I am working on right now · assigned 2026-09-22 · next review **2026-09-2
 | DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs</sub><br>✓ `Mapping service` <sub>Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs</sub> |
 | Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL</sub> | ⬜ Not started | ✗ `Bicep templates`<br>✗ `Deploying from CI`<br>✓ `Azure Function app` <sub>Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs</sub><br>✗ `Redis`<br>✗ `Azure SQL` |
 | Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>csharp-mini-project/Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>csharp-mini-project/Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
-| Unit testing | ✅ Completed | ✓ `Test project` <sub>Wishlist/tests/Wishlist.Tests/FakeProductListRepository.cs</sub><br>✓ `xUnit or NUnit` <sub>Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj</sub><br>✓ `Mocking` <sub>csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
+| Unit testing | ✅ Completed | ✓ `Test project` <sub>Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs</sub><br>✓ `xUnit or NUnit` <sub>Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj</sub><br>✓ `Mocking` <sub>Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
 
 ### Domain model
 
@@ -181,12 +181,12 @@ classDiagram
 | `Wishlist.Functions` | 9 | 651 | 8 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
 | `Wishlist.Core` | 11 | 191 | 15 |
-| `Wishlist.Tests` | 3 | 132 | 3 |
+| `Wishlist.Tests` | 1 | 119 | 1 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 2828 of the 2828 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 2813 of the 2813 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -196,9 +196,9 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Wishlist.Functions` | 535 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Wishlist.Core` | 164 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Tests` | 106 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Tests` | 91 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **2828** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **2813** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -404,8 +404,8 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Testing and code quality</b> — 3/11 · <sub>Called out in the job description.</sub></summary>
 
 - [x] **xUnit or NUnit** <sub>`Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj` +1</sub>
-- [x] **Unit tests** <sub>`Wishlist/tests/Wishlist.Tests/FakeProductListRepository.cs` +3</sub>
-- [x] **Mocking** <sub>`csharp-mini-project/Ecom.WebApiApp.Tests/Ecom.WebApiApp.Tests.csproj` +1</sub>
+- [x] **Unit tests** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +1</sub>
+- [x] **Mocking** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +3</sub>
 - [ ] Integration testing
 - [ ] Testing APIs <sub>judgement — not code-detectable</sub>
 - [ ] Testing message handlers <sub>judgement — not code-detectable</sub>
@@ -512,7 +512,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
 - [x] **Properties** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
-- [x] **var / implicit typing** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +2</sub>
+- [x] **var / implicit typing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/LinqController.cs` +1</sub>
 - [x] **String interpolation** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListNotFoundException.cs` +5</sub>
 - [x] **foreach** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
 - [ ] switch
@@ -555,10 +555,10 @@ _The ground I want to cover for my career in .NET._
 - [x] **Nullable reference types** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
 - [x] **?? and ??=** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
-- [x] **Expression-bodied members** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
+- [x] **Expression-bodied members** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +4</sub>
 - [x] **Top-level statements** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
-- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +2</sub>
+- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +3</sub>
 - [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +1</sub>
 - [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListNotFoundException.cs` +5</sub>
 - [ ] Tuples
@@ -586,7 +586,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Errors, resources & async</b> — 11/13</summary>
 
 - [x] **try / catch** <sub>`Wishlist/src/Wishlist.Functions/Functions/Http.cs` +5</sub>
-- [x] **Throwing exceptions** <sub>`Wishlist/tests/Wishlist.Tests/FakeProductListRepository.cs` +5</sub>
+- [x] **Throwing exceptions** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListNotFoundException.cs` +1</sub>
 - [ ] Exception filters
 - [ ] finally blocks
@@ -647,12 +647,12 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Multi-project solution** <sub>`Wishlist/Wishlist.slnx` +1</sub>
 - [x] **CI with GitHub Actions** <sub>`.github/workflows/journey.yml` +1</sub>
-- [x] **Unit tests** — roadmap <sub>`Wishlist/tests/Wishlist.Tests/FakeProductListRepository.cs` +3</sub>
+- [x] **Unit tests** — roadmap <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +1</sub>
 - [ ] Docker — roadmap
 - [ ] Deployment — roadmap <sub>planned</sub>
 
 </details>
 
-<sub>Last updated 2026-09-27 19:07 UTC</sub>
+<sub>Last updated 2026-09-28 08:33 UTC</sub>
 
 <!-- JOURNEY:END -->
