@@ -916,7 +916,7 @@
         {
           "label": "Bicep, deployments and Azure Functions",
           "status": "not-started",
-          "notes": "one deployable slice: a Function provisioned with Bicep, using Redis and Azure SQL",
+          "notes": "one deployable slice: a Function provisioned with Bicep, using Azure SQL",
           "parts": [
             {
               "label": "Bicep templates",
@@ -932,10 +932,6 @@
                 "grep:Microsoft\\.Azure\\.Functions|\\[Function\\(|FunctionName",
                 "path:host.json"
               ]
-            },
-            {
-              "label": "Redis",
-              "detect": "grep:StackExchange\\.Redis|AddStackExchangeRedisCache|Microsoft\\.Cache/Redis"
             },
             {
               "label": "Azure SQL",
