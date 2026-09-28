@@ -16,7 +16,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-87-0078D4) ![lines](https://img.shields.io/badge/lines-3824-0078D4) ![types](https://img.shields.io/badge/types-94-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-87-0078D4) ![lines](https://img.shields.io/badge/lines-3848-0078D4) ![types](https://img.shields.io/badge/types-94-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `███████████████░░░░░` **76%**
 
@@ -177,7 +177,7 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
-| `Wishlist.Functions` | 9 | 887 | 8 |
+| `Wishlist.Functions` | 9 | 911 | 8 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
 | `Wishlist.Core` | 11 | 287 | 15 |
@@ -186,19 +186,19 @@ classDiagram
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 3088 of the 3088 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 3104 of the 3104 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Functions` | 735 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Functions` | 751 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Wishlist.Core` | 239 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 91 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **3088** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **3104** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -255,7 +255,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [x] **Configuration** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Error handling** <sub>`Wishlist/src/Wishlist.Functions/Functions/Http.cs` +3</sub>
-- [x] **Logging** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
 - [x] **Validation** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/EmployeesController.cs` +3</sub>
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
@@ -457,7 +457,7 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>Observability and production readiness</b> — 3/13 · <sub>“It works locally” is not enough.</sub></summary>
 
-- [x] **Structured logging** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
 - [x] **Correlation IDs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [x] **Distributed tracing** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [ ] Metrics
@@ -592,11 +592,11 @@ _The ground I want to cover for my career in .NET._
 - [ ] finally blocks
 - [x] **using / IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **Custom attributes** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
-- [x] **Logging** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +5</sub>
+- [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
 - [x] **async / await** <sub>`Wishlist/src/Wishlist.Functions/Functions/Http.cs` +5</sub>
 - [x] **Task / ValueTask** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
-- [x] **ILogger** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +4</sub>
-- [x] **Structured logging** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **ILogger** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
+- [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +4</sub>
 - [x] **IDisposable implemented** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 
 </details>
@@ -653,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-28 09:08 UTC</sub>
+<sub>Last updated 2026-09-28 09:53 UTC</sub>
 
 <!-- JOURNEY:END -->

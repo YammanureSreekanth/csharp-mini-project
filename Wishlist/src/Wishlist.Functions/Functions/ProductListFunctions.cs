@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Wishlist.Core.Contracts;
 using Wishlist.Core.Entities;
@@ -13,7 +14,7 @@ namespace Wishlist.Functions.Functions;
 /// The ProductList Function App
 /// </summary>
 /// <param name="productListService"></param>
-public class ProductListFunctions(IProductListService productListService)
+public class ProductListFunctions(IProductListService productListService, ILogger<ProductListFunctions> logger)
 {   
     /// <summary>
     /// This Gets all lists by CustomerId
@@ -28,8 +29,10 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(List<ProductListDto>))]
     public Task<IActionResult> GetAllListsByCustomerIdAsync(
         [HttpTrigger("GET", Route = "customers/{customerId}/lists")] HttpRequest req,
-        string customerId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
+        string customerId, FunctionContext context, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for customerId {CustomerId}", context.FunctionDefinition.Name, customerId);
+
             IReadOnlyList<ProductList>? result = await productListService.GetListsForCustomerAsync(customerId, cancellationToken);
             
             List<ProductListDto>? dtos = new List<ProductListDto>();
@@ -54,11 +57,14 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(ProductListDto))]
     public Task<IActionResult> CreateCustomerProductListAsync(
         [HttpTrigger("POST", Route = "customer/list")] HttpRequest req,
+        FunctionContext context,
         CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
 
             CreateListRequest? createListRequest = await req.ReadFromJsonAsync<CreateListRequest>(cancellationToken);
 
+            logger.LogInformation("Function {FunctionName} started for customerId {CustomerId}", context.FunctionDefinition.Name, createListRequest.CustomerId);
+            
             ProductList list = await productListService.CreateListAsync(createListRequest, cancellationToken);
 
             return new CreatedResult($"list/{list.Id}", ProductListMapper.ToDto(list));
@@ -80,8 +86,11 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithBody(HttpStatusCode.OK, contentType: "application/json", typeof(ProductListDto))]
     public Task<IActionResult> UpdateProductListVisibilityAsync(
         [HttpTrigger("PATCH", Route = "list/{listId}/visibility")] HttpRequest req,
+        FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for ListId {listId}", context.FunctionDefinition.Name, listId);
+
             UpdateVisibilityRequest updateProductListVisibility = await req.ReadFromJsonAsync<UpdateVisibilityRequest>(cancellationToken);
 
             ProductList productList = await productListService.SetListVisibilityAsync(listId, updateProductListVisibility.IsPublic, cancellationToken);
@@ -103,8 +112,11 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithoutBody(HttpStatusCode.NoContent)]
     public Task<IActionResult> RemoveProductListAsync(
         [HttpTrigger("DELETE", Route = "list/{listId}")] HttpRequest req,
+        FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for ListId {listId}", context.FunctionDefinition.Name, listId);
+
             await productListService.DeleteListAsync(listId, cancellationToken);
 
             return new NoContentResult();
@@ -123,8 +135,11 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListWithItemsDto))]
     public Task<IActionResult> GetProductListByListIdAsync(
         [HttpTrigger("GET", Route = "list/{listId}")] HttpRequest req,
+        FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for ListId {listId}", context.FunctionDefinition.Name, listId);
+
             ProductList list = await productListService.GetListAsync(listId, cancellationToken);
         
             ProductListWithItemsDto listDto = ProductListMapper.ToDto(list);
@@ -146,8 +161,11 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(string))]
     public Task<IActionResult> AddProductToListAsync(
         [HttpTrigger("POST", Route = "list/{listId}/items")] HttpRequest req,
+        FunctionContext context,
         Guid listId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for ListId {listId}", context.FunctionDefinition.Name, listId);
+
             CreateProductListItemRequest? createListItemRequest = await req.ReadFromJsonAsync<CreateProductListItemRequest>(cancellationToken);
 
             await productListService.AddProductAsync(listId, createListItemRequest, cancellationToken);
@@ -170,8 +188,11 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListItemDto))]
     public Task<IActionResult> UpdateProductListItemVisibilityAsync(
         [HttpTrigger("PATCH", Route = "items/{itemId}/visibility")] HttpRequest req,
+        FunctionContext context,
         Guid itemId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for ItemID {itemId}", context.FunctionDefinition.Name, itemId);
+
             UpdateVisibilityRequest updateProductListVisibility = await req.ReadFromJsonAsync<UpdateVisibilityRequest>(cancellationToken);
 
             ProductListItem listItem = await productListService.SetItemVisibilityAsync(itemId, updateProductListVisibility.IsPublic, cancellationToken);
@@ -192,8 +213,11 @@ public class ProductListFunctions(IProductListService productListService)
     [OpenApiResponseWithoutBody(HttpStatusCode.NoContent)]
     public Task<IActionResult> DeleteProductListItemByIdAsync(
         [HttpTrigger("DELETE", Route = "items/{itemId}/")] HttpRequest req,
+        FunctionContext context,
         Guid itemId, CancellationToken cancellationToken) => Http.RunAsync(async () =>
         {
+            logger.LogInformation("Function {FunctionName} started for ItemID {itemId}", context.FunctionDefinition.Name, itemId);
+            
             UpdateVisibilityRequest updateProductListVisibility = await req.ReadFromJsonAsync<UpdateVisibilityRequest>(cancellationToken);
 
             ProductListItem listItem = await productListService.SetItemVisibilityAsync(itemId, updateProductListVisibility.IsPublic, cancellationToken);
