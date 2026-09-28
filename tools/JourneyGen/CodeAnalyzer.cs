@@ -40,6 +40,7 @@ public sealed class CodeAnalyzer
         foreach (var file in files)
         {
             var rel = Rel(file);
+            if (!GitTrackedFiles.IsTracked(_root, rel)) continue;
             var (projectDir, project) = ProjectResolver.Resolve(_root, rel);
             var text = File.ReadAllText(file);
             var lines = CountLines(text);

@@ -32,7 +32,7 @@ What I am working on right now · assigned 2026-09-22 · next review **2026-09-2
 | Item | Status | Evidence in the code |
 |---|---|---|
 | DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs</sub><br>✓ `Mapping service` <sub>Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs</sub> |
-| Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Azure SQL</sub> | ⬜ Not started | ✓ `Bicep templates` <sub>Wishlist/Infra/main.bicep</sub><br>✗ `Deploying from CI`<br>✓ `Azure Function app` <sub>Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs</sub><br>✓ `Azure SQL` <sub>Wishlist/Infra/main.json</sub> |
+| Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Azure SQL</sub> | ⬜ Not started | ✓ `Bicep templates` <sub>Wishlist/Infra/main.bicep</sub><br>✗ `Deploying from CI`<br>✓ `Azure Function app` <sub>Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs</sub><br>✓ `Azure SQL` <sub>Wishlist/Infra/modules/sql.bicep</sub> |
 | Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>csharp-mini-project/Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>csharp-mini-project/Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
 | Unit testing | ✅ Completed | ✓ `Test project` <sub>Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs</sub><br>✓ `xUnit or NUnit` <sub>Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj</sub><br>✓ `Mocking` <sub>Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
 
@@ -220,7 +220,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`██████░░░░░░░░░░░░░░` **57 of 178 covered** across 14 areas
+`██████░░░░░░░░░░░░░░` **56 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -232,7 +232,7 @@ _The ground I want to cover for my career in .NET._
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Azure cloud services | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
-| Infrastructure as Code (Bicep) | 12/20 | `████████████░░░░░░░░` 60% |
+| Infrastructure as Code (Bicep) | 11/20 | `███████████░░░░░░░░░` 55% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
 | Testing and code quality | 3/11 | `█████░░░░░░░░░░░░░░░` 27% |
 | CI/CD and DevOps basics | 4/12 | `███████░░░░░░░░░░░░░` 33% |
@@ -344,7 +344,7 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>Azure cloud services</b> — 2/10 · <sub>The services named on the profile.</sub></summary>
 
-- [x] **Azure App Service** <sub>`Wishlist/Infra/main.json` +1</sub>
+- [x] **Azure App Service** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
 - [x] **Azure Functions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
 - [ ] Azure Service Bus
 - [ ] Azure Cosmos DB
@@ -358,24 +358,24 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Infrastructure as Code (Bicep)</b> — 12/20 · <sub>Declaring the whole backend, not clicking it together in the portal.</sub></summary>
+<summary><b>Infrastructure as Code (Bicep)</b> — 11/20 · <sub>Declaring the whole backend, not clicking it together in the portal.</sub></summary>
 
 - [x] **Bicep templates** <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [x] **Resource declarations** <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [x] **targetScope and resource groups** <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [x] **Parameters** <sub>`Wishlist/Infra/main.bicep` +3</sub>
-- [x] **Parameter files (.bicepparam)** <sub>`Wishlist/Infra/main.bicepparam`</sub>
+- [ ] Parameter files (.bicepparam)
 - [ ] Decorators — @description, @allowed, @secure
 - [ ] Variables and expressions
 - [x] **Modules** — composing templates instead of one long file <sub>`Wishlist/Infra/main.bicep`</sub>
 - [x] **Outputs** <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [x] **Referencing existing resources** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
-- [x] **Deploying App Service** <sub>`Wishlist/Infra/main.json` +1</sub>
-- [x] **Deploying Azure Functions** <sub>`Wishlist/Infra/main.json` +1</sub>
+- [x] **Deploying App Service** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
+- [x] **Deploying Azure Functions** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
 - [ ] Deploying Service Bus
 - [ ] Deploying Cosmos DB
 - [ ] Deploying Key Vault and secrets
-- [x] **Managed identity and RBAC in Bicep** <sub>`Wishlist/Infra/main.json` +1</sub>
+- [x] **Managed identity and RBAC in Bicep** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
 - [x] **Environment-specific configuration** — one template, parameterised per environment <sub>`Wishlist/Infra/main.bicep` +3</sub>
 - [ ] Linting and bicep build
 - [ ] Previewing with what-if — see the change before it lands
@@ -386,11 +386,11 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>Databases and data modeling</b> — 5/11 · <sub>Relational and NoSQL thinking.</sub></summary>
 
-- [x] **SQL Server basics** <sub>`Wishlist/Infra/main.json` +3</sub>
-- [x] **Hand-written SQL** <sub>`Wishlist/Infra/sql/migrations.sql` +3</sub>
+- [x] **SQL Server basics** <sub>`Wishlist/Infra/modules/functionapp.bicep` +3</sub>
+- [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
 - [x] **Entity Framework Core** <sub>`Wishlist/src/Wishlist.Functions/Data/WishlistDbContext.cs` +3</sub>
 - [x] **Migrations** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +3</sub>
-- [x] **Indexing** <sub>`Wishlist/Infra/sql/migrations.sql` +3</sub>
+- [x] **Indexing** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +3</sub>
 - [ ] Transactions
 - [ ] Optimistic concurrency
 - [ ] Cosmos DB partition keys — poor choices are expensive and hard to undo
@@ -605,7 +605,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Data access</b> — 7/7</summary>
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +1</sub>
-- [x] **Hand-written SQL** <sub>`Wishlist/Infra/sql/migrations.sql` +5</sub>
+- [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
 - [x] **Factory pattern** <sub>`csharp-mini-project/Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
 - [x] **Service layer** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListService.cs` +3</sub>
@@ -653,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-28 12:44 UTC</sub>
+<sub>Last updated 2026-09-28 12:57 UTC</sub>
 
 <!-- JOURNEY:END -->

@@ -40,7 +40,8 @@ if (config.Provenance.Enabled)
         .Where(Directory.Exists)
         .SelectMany(dir => Directory.EnumerateFiles(dir, "*.cs", SearchOption.AllDirectories))
         .Select(f => Path.GetRelativePath(root, f).Replace('\\', '/'))
-        .Where(f => !f.Contains("/bin/") && !f.Contains("/obj/"));
+        .Where(f => !f.Contains("/bin/") && !f.Contains("/obj/"))
+        .Where(f => GitTrackedFiles.IsTracked(root, f));
 
     provenance.Run(analyzer.SourceFiles.Concat(extra).Distinct(StringComparer.Ordinal));
 

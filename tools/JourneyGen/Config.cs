@@ -327,7 +327,7 @@ public sealed class JourneyConfig
                                                .OrderBy(x => x, StringComparer.Ordinal))
                     {
                         var rel = Path.GetRelativePath(root, f).Replace('\\', '/');
-                        if (IsExcluded(rel)) continue;
+                        if (IsExcluded(rel) || !GitTrackedFiles.IsTracked(root, rel)) continue;
                         if (rel.Contains(arg, StringComparison.OrdinalIgnoreCase)) { matched = true; evidence.Add(rel); }
                     }
                     break;
@@ -382,7 +382,7 @@ public sealed class JourneyConfig
                                           .OrderBy(f => f, StringComparer.Ordinal))
             {
                 var rel = Path.GetRelativePath(root, full).Replace('\\', '/');
-                if (IsExcluded(rel)) continue;
+                if (IsExcluded(rel) || !GitTrackedFiles.IsTracked(root, rel)) continue;
 
                 // Never let the search find the thing that describes the search.
                 // journey.json holds every detector pattern, the generated README
