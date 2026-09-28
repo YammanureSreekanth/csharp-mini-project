@@ -2,6 +2,10 @@ using Wishlist.Core.Entities;
 
 namespace Wishlist.Core.Interfaces;
 
+/// <summary>
+/// This is ProductList Repository to perform all DB CURD operations
+/// This performs both ProductList & ProductListItem
+/// </summary>
 public interface IProductListRepository
 {
     Task<ProductList?> GetByIdAsync(Guid listId, CancellationToken cancellationToken);

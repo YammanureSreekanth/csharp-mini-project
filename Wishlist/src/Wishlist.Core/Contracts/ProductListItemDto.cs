@@ -1,7 +1,9 @@
-using Wishlist.Core.Entities;
-
 namespace Wishlist.Core.Contracts;
 
+/// <summary>
+/// A product list item as returned by the API
+/// Exposes only what are needed and internal fields such as CreationDate are left out.
+/// </summary>
 public class ProductListItemDto
 {
     public required Guid Id { get; set; }

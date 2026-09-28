@@ -1,6 +1,9 @@
 using Wishlist.Core.Enums;
-
 namespace Wishlist.Core.Entities;
+
+/// <summary>
+/// This is ProductList Class which can have ProductListItems 
+/// </summary>
 public class ProductList
 {
     public Guid Id { get; set; }

@@ -1,4 +1,8 @@
 namespace Wishlist.Core.Entities;
+
+/// <summary>
+/// This is ProductListItem Class which can have product assigned along with visibility
+/// </summary>
 public class ProductListItem
 {
     public Guid Id { get; set; }

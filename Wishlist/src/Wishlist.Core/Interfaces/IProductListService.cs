@@ -3,6 +3,9 @@ using Wishlist.Core.Entities;
 
 namespace Wishlist.Core.Interfaces;
 
+/// <summary>
+/// This is Interface
+/// </summary>
 public interface IProductListService
 {
     Task<ProductList> CreateListAsync(CreateListRequest req, CancellationToken cancellationToken);

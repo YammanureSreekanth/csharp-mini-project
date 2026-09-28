@@ -16,7 +16,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-87-0078D4) ![lines](https://img.shields.io/badge/lines-3492-0078D4) ![types](https://img.shields.io/badge/types-94-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-87-0078D4) ![lines](https://img.shields.io/badge/lines-3824-0078D4) ![types](https://img.shields.io/badge/types-94-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `███████████████░░░░░` **76%**
 
@@ -177,28 +177,28 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
+| `Wishlist.Functions` | 9 | 887 | 8 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
-| `Wishlist.Functions` | 9 | 651 | 8 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
-| `Wishlist.Core` | 11 | 191 | 15 |
+| `Wishlist.Core` | 11 | 287 | 15 |
 | `Wishlist.Tests` | 1 | 119 | 1 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 2813 of the 2813 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 3088 of the 3088 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Functions` | 735 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
-| `Wishlist.Functions` | 535 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
-| `Wishlist.Core` | 164 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Core` | 239 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 91 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **2813** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **3088** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -653,6 +653,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-28 08:33 UTC</sub>
+<sub>Last updated 2026-09-28 09:05 UTC</sub>
 
 <!-- JOURNEY:END -->
