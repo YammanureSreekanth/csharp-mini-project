@@ -923,10 +923,6 @@
               "detect": "path:.bicep"
             },
             {
-              "label": "Deploying from CI",
-              "detect": "grep:az deployment group create|azure/arm-deploy|azure/login"
-            },
-            {
               "label": "Azure Function app",
               "detect": [
                 "grep:Microsoft\\.Azure\\.Functions|\\[Function\\(|FunctionName",
