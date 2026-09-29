@@ -207,7 +207,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     [Function("UpdateProductListItemVisibility")]
     [OpenApiOperation("UpdateProductListItemVisibility", tags: ["ProductListItem"])]
     [OpenApiRequestBody(contentType: "application/json", typeof(UpdateItemVisibilityRequest))]
-    [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
+    [OpenApiParameter("itemId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListItemDto))]
     [OpenApiResponseWithBody(HttpStatusCode.BadRequest, "application/json", typeof(ErrorResponse))]
     public Task<IActionResult> UpdateProductListItemVisibilityAsync(
