@@ -126,7 +126,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="req"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task AddProductAsync(Guid listId, CreateProductListItemRequest req, CancellationToken cancellationToken)
+    public async Task<ProductListItem>? AddProductAsync(Guid listId, CreateProductListItemRequest req, CancellationToken cancellationToken)
     {
         ProductList? productList = await repo.GetByIdAsync(listId, cancellationToken);
 
@@ -155,6 +155,8 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
         await repo.AddProductAsync(productListItem, cancellationToken);
 
         await repo.SaveChangesAsync(cancellationToken);
+
+        return productListItem;
     }
 
     /// <summary>

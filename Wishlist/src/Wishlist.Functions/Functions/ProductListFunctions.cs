@@ -188,7 +188,9 @@ public class ProductListFunctions(IProductListService productListService, ILogge
 
             CreateProductListItemRequest? createListItemRequest = await HttpReadValidatedJson.ReadValidatedJsonAsync<CreateProductListItemRequest>(req, cancellationToken);
 
-            await productListService.AddProductAsync(listId, createListItemRequest, cancellationToken);
+            ProductListItem? productListItem = await productListService.AddProductAsync(listId, createListItemRequest, cancellationToken);
+
+            logger.LogInformation("Function {FunctionName} product has been added to list {listId} and itemId {itemId} ", context.FunctionDefinition.Name, listId, productListItem.Id); 
 
             return new CreatedResult($"list/{listId}", "OK");
         });

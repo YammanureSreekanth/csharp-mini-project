@@ -13,7 +13,7 @@ public interface IProductListService
     Task<ProductList?> GetListAsync(Guid listId, CancellationToken cancellationToken);
     Task DeleteListAsync(Guid listId, CancellationToken cancellationToken);
     Task<ProductList> SetListVisibilityAsync(Guid productListId, bool isPublic, CancellationToken cancellationToken);
-    Task AddProductAsync(Guid Id, CreateProductListItemRequest req, CancellationToken cancellationToken);
+    Task<ProductListItem>? AddProductAsync(Guid Id, CreateProductListItemRequest req, CancellationToken cancellationToken);
     Task RemoveListItemAsync(Guid listId, CancellationToken cancellationToken);
     Task<ProductListItem?> SetItemVisibilityAsync(Guid itemId, bool isPublic, CancellationToken cancellationToken);
 }

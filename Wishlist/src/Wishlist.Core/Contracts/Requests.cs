@@ -25,7 +25,7 @@ public record CreateListRequest(
 public record CreateProductListItemRequest(
     [property: JsonPropertyName("productId")] string ProductId,
     [property: JsonPropertyName("isPublic")] bool IsPublic = false,
-    [property: JsonPropertyName("quantity")] int Quantity = 1);
+    [property: JsonPropertyName("quantity")] short Quantity = 1);
 
 /// <summary>
 /// Request body for updating the list visibility

@@ -1,4 +1,6 @@
+using System.Linq.Expressions;
 using Moq;
+using Wishlist.Core.Contracts;
 using Wishlist.Core.Entities;
 using Wishlist.Core.Enums;
 using Wishlist.Core.Interfaces;
@@ -115,5 +117,82 @@ public class ProductListServiceTests
 
         //Assert
         Assert.Equal(type, list.Type);
+    }
+
+    [Theory]
+    [InlineData("b183381b-2009-4301-89b1-2c5c11770787", true)]
+    [InlineData("b183381b-2009-4301-89b1-2c5c11770788", false)]
+    public async Task Set_ProductList_Visibility(Guid productListId, bool isPublic)
+    {
+
+        //Arrange
+        string customerOne = "CustomerOne";
+
+        ProductList productList = new ProductList
+        {
+            Id = productListId,
+            Name = "Wedding",
+            CustomerId = customerOne
+        };
+
+        productList.Type = ProductListType.TYPE_WISH_LIST;
+        productList.IsPublic = isPublic;
+
+        _repo.Setup(repo => repo.GetByIdAsync(productListId, CancellationToken.None))
+            .ReturnsAsync(productList);
+
+        _repo.Setup(r => r.SetListVisibilityAsync(productList,CancellationToken.None));
+
+        _repo.Setup(r => r.SaveChangesAsync(CancellationToken.None));
+        
+        //Act
+        ProductList? list = await _service.SetListVisibilityAsync(productListId, isPublic, CancellationToken.None);
+
+        //Assert
+        Assert.Equal(isPublic, productList.IsPublic);
+    }
+
+    public static IEnumerable<object[]> ItemRequests =[
+            new object[] { "b183381b-2009-4301-89b1-2c5c11770788", new CreateProductListItemRequest("SN12323", true, 1) },
+            new object[] { "c2f4a1de-77aa-4c9b-9d10-1a2b3c4d5e6f", new CreateProductListItemRequest("SN99999", false, 3) },
+    ];
+
+    [Theory]
+    [MemberData(nameof(ItemRequests))]
+    public async Task AddProduct_To_List(Guid listId, CreateProductListItemRequest req)
+    {
+        //Arrange
+        ProductList productList = new ProductList
+        {
+            Id = listId,
+            Name = "Wedding",
+            CustomerId = "Customer-12"
+        };
+
+        Guid itemId = Guid.NewGuid();
+        ProductListItem productListItem = new ProductListItem
+        {
+            Id = itemId,
+            ProductId = req.ProductId,
+            ProductListId = listId,
+            IsPublic = req.IsPublic,
+            Quantity = req.Quantity
+        };
+
+        _repo.Setup(repo => repo.GetByIdAsync(listId, CancellationToken.None))
+            .ReturnsAsync(productList);
+
+        _repo.Setup(repo => repo.ExistProductIdByListId(listId, req.ProductId, CancellationToken.None))
+            .ReturnsAsync(value: false);
+        
+        _repo.Setup(repo => repo.AddProductAsync(productListItem, CancellationToken.None));
+
+        _repo.Setup(r => r.SaveChangesAsync(CancellationToken.None));
+
+        //Act
+        ProductListItem listItem = await _service.AddProductAsync(listId, req, CancellationToken.None);
+
+        //Assert
+        Assert.Equal(req.ProductId, listItem.ProductId);
     }
 }
