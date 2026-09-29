@@ -24,7 +24,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Function("GetAllListsByCustomerId")]
-    [OpenApiOperation("GetAllListsByCustomerId", tags: ["CustomerRegistry"])]
+    [OpenApiOperation("GetAllListsByCustomerId", tags: ["CustomerRegistry"], Description = "This Gets all lists by CustomerId")]
     [OpenApiParameter("customerId", In = ParameterLocation.Path, Required = true, Type = typeof(string))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(List<ProductListDto>))]
     public Task<IActionResult> GetAllListsByCustomerIdAsync(
@@ -55,7 +55,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Function("CreateCustomerProductList")]
-    [OpenApiOperation("CreateCustomerProductList", tags: ["CustomerRegistry"])]
+    [OpenApiOperation("CreateCustomerProductList", tags: ["CustomerRegistry"], Description = "This creates the ProductList by CustomerId")]
     [OpenApiRequestBody(contentType: "application/json", typeof(CreateListRequest))]
     [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(ProductListDto))]
     [OpenApiResponseWithBody(HttpStatusCode.BadRequest, "application/json", typeof(ErrorResponse))]
@@ -143,7 +143,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Function("GetProductListByListId")]
-    [OpenApiOperation("GetProductListByListId", tags: ["ProductList"])]
+    [OpenApiOperation("GetProductListByListId", tags: ["ProductList"], Description = "Gets the ProductList along with listItems")]
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListWithItemsDto))]
     [OpenApiResponseWithBody(HttpStatusCode.NotFound, contentType: "application/json", typeof(ErrorResponse))]
@@ -171,7 +171,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Function("AddProductToList")]
-    [OpenApiOperation("AddProductToWishlist", tags: ["ProductListItem"])]
+    [OpenApiOperation("AddProductToWishlist", tags: ["ProductListItem"], Description = "Adds the product to ProductList")]
     [OpenApiRequestBody(contentType: "application/json", typeof(CreateProductListItemRequest))]
     [OpenApiParameter("listId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.Created, "application/json", typeof(string))]
@@ -205,7 +205,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Function("UpdateProductListItemVisibility")]
-    [OpenApiOperation("UpdateProductListItemVisibility", tags: ["ProductListItem"])]
+    [OpenApiOperation("UpdateProductListItemVisibility", tags: ["ProductListItem"], Description = "Updates the ProductListItem visibility")]
     [OpenApiRequestBody(contentType: "application/json", typeof(UpdateItemVisibilityRequest))]
     [OpenApiParameter("itemId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(ProductListItemDto))]
@@ -234,7 +234,7 @@ public class ProductListFunctions(IProductListService productListService, ILogge
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Function("DeleteProductListItemById")]
-    [OpenApiOperation("DeleteProductListItemById", tags: ["ProductListItem"])]
+    [OpenApiOperation("DeleteProductListItemById", tags: ["ProductListItem"], Description = "Deletes the ProductListItem from List")]
     [OpenApiParameter("itemId", In = ParameterLocation.Path, Required = true, Type = typeof(Guid))]
     [OpenApiResponseWithoutBody(HttpStatusCode.NoContent)]
     [OpenApiResponseWithBody(HttpStatusCode.NotFound, "application/json", typeof(ErrorResponse))]
