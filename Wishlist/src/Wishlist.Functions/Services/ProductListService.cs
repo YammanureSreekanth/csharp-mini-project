@@ -1,7 +1,9 @@
 using Wishlist.Core.Contracts;
+using Wishlist.Core.DTOs;
 using Wishlist.Core.Entities;
 using Wishlist.Core.Exceptions;
 using Wishlist.Core.Interfaces;
+using Wishlist.Core.Mapping;
 
 namespace Wishlist.Functions.Services;
 
@@ -17,9 +19,11 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="customerId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IReadOnlyList<ProductList>> GetListsForCustomerAsync(string customerId, CancellationToken cancellationToken)
-    {
-        return await repo.GetByCustomerAsync(customerId, cancellationToken);
+    public async Task<IReadOnlyList<ProductListDto>> GetListsForCustomerAsync(string customerId, CancellationToken cancellationToken)
+    {   
+        IReadOnlyList<ProductList> lists = await repo.GetByCustomerAsync(customerId, cancellationToken);
+        
+        return lists.Select(ProductListMapper.ToJustListDto).ToList();
     }
 
     /// <summary>
@@ -28,9 +32,9 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="req"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ProductList> CreateListAsync(CreateListRequest req, CancellationToken cancellationToken)
+    public async Task<ProductListDto> CreateListAsync(string customerId, CreateListRequest req, CancellationToken cancellationToken)
     {
-        ProductList list = new ProductList { Id = Guid.NewGuid(), Name = req.Name, CustomerId = req.CustomerId };
+        ProductList list = new ProductList { Id = Guid.NewGuid(), Name = req.Name, CustomerId = customerId };
         
         list.IsPublic = req.IsPublic;
         
@@ -44,29 +48,9 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
         
         await repo.SaveChangesAsync(cancellationToken);
 
-        return list;
-    }
+        ProductListDto listDto = ProductListMapper.ToJustListDto(list);
 
-    /// <summary>
-    /// Gets the list along with items
-    /// </summary>
-    /// <param name="listId"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async Task<ProductList?> GetListAsync(Guid listId, CancellationToken cancellationToken)
-    {
-        ProductList? list = await repo.GetByIdAsync(listId, cancellationToken);
-
-        if (list is null)
-        {
-            throw new NotFoundException(nameof(ProductList), listId);
-        }
-        
-        List<ProductListItem>? items = await repo.GetListItemsByListId(listId, cancellationToken);
-        
-        list.Items = items;
-        
-        return list;
+        return listDto;
     }
 
     /// <summary>
@@ -84,11 +68,10 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
             throw new NotFoundException(nameof(ProductList), listId);
         }
         
-        repo.Remove(list);
+        repo.RemoveList(list);
         
         await repo.SaveChangesAsync(cancellationToken);
         
-        await repo.RemoveItemsByListId(listId, cancellationToken);
     }
 
     /// <summary>
@@ -98,7 +81,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="isPublic"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ProductList> SetListVisibilityAsync(Guid productListId, bool isPublic, CancellationToken cancellationToken)
+    public async Task<ProductListDto> UpdateListAsync(Guid productListId, UpdateListVisibilityRequest request, CancellationToken cancellationToken)
     {
         
         ProductList? productList = await repo.GetByIdAsync(productListId, cancellationToken);
@@ -108,15 +91,42 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
             throw new NotFoundException(nameof(ProductList), productListId);
         }
 
-        productList.IsPublic = isPublic;
+        if (request.IsPublic.HasValue)
+        {
+            productList.IsPublic = request.IsPublic.Value;            
+        }
         
         productList.ModifiedDate = DateTime.UtcNow;
 
-        await repo.SetListVisibilityAsync(productList, cancellationToken);
+        await repo.UpdateListAsync(productList, cancellationToken);
 
         await repo.SaveChangesAsync(cancellationToken);
 
-        return productList;
+        return ProductListMapper.ToJustListDto(productList);
+    }
+
+    /// <summary>
+    /// Gets the list along with items
+    /// </summary>
+    /// <param name="listId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<ProductListWithItemsDto>? GetListAsync(Guid listId, CancellationToken cancellationToken)
+    {
+        ProductList? list = await repo.GetByIdAsync(listId, cancellationToken);
+
+        if (list is null)
+        {
+            throw new NotFoundException(nameof(ProductList), listId);
+        }
+        
+        List<ProductListItem>? items = await repo.GetListItemsByListId(listId, cancellationToken);
+        
+        list.Items = items ?? [];
+        
+        ProductListWithItemsDto productListWithItemsDto = ProductListMapper.ToDto(list);
+
+        return productListWithItemsDto;
     }
 
     /// <summary>
@@ -126,7 +136,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="req"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ProductListItem>? AddProductAsync(Guid listId, CreateProductListItemRequest req, CancellationToken cancellationToken)
+    public async Task<ProductListItemDto>? AddProductAsync(Guid listId, CreateProductListItemRequest req, CancellationToken cancellationToken)
     {
         ProductList? productList = await repo.GetByIdAsync(listId, cancellationToken);
 
@@ -146,6 +156,8 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
             ProductId = req.ProductId
         };
 
+        productListItem.Quantity = req.Quantity;
+
         productListItem.IsPublic = req.IsPublic;
         
         productListItem.CreatedDate = DateTime.UtcNow;
@@ -156,7 +168,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
 
         await repo.SaveChangesAsync(cancellationToken);
 
-        return productListItem;
+        return ProductListMapper.ToItemDto(productListItem);
     }
 
     /// <summary>
@@ -166,8 +178,16 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="isPublic"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ProductListItem?> SetItemVisibilityAsync(Guid listItemId,  bool isPublic, CancellationToken cancellationToken)
-    {
+    public async Task<ProductListItemDto>? UpdateListItemAsync(Guid listId, Guid listItemId,  UpdateItemVisibilityRequest request, CancellationToken cancellationToken)
+    {   
+
+        ProductList? productList = await repo.GetByIdAsync(listId, cancellationToken);
+
+        if (productList is null)
+        {
+            throw new NotFoundException(nameof(ProductList), listId);
+        }
+
         ProductListItem? listItem = await repo.GetListItemByIdAsync(listItemId, cancellationToken);
 
         if (listItem is null)
@@ -175,15 +195,23 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
             throw new NotFoundException(nameof(ProductListItem), listItemId);
         }
 
-        listItem.IsPublic = isPublic;
+        if (request.IsPublic.HasValue)
+        {
+            listItem.IsPublic = request.IsPublic.HasValue;   
+        }
 
-        listItem.ModifiedDate = DateTime.Now;
+         if (request.Quantity.HasValue)
+        {
+            listItem.Quantity = request.Quantity.Value;
+        }
+
+        listItem.ModifiedDate = DateTime.UtcNow;
         
-        await repo.SetItemVisibilityAsync(listItem, cancellationToken);
+        await repo.UpdateListItemAsync(listItem, cancellationToken);
         
         await repo.SaveChangesAsync(cancellationToken);
 
-        return listItem;
+        return ProductListMapper.ToItemDto(listItem);
     }
 
     /// <summary>
@@ -192,8 +220,15 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
     /// <param name="itemId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task RemoveListItemAsync(Guid itemId, CancellationToken cancellationToken)
-    {
+    public async Task RemoveListItemAsync(Guid listId, Guid itemId, CancellationToken cancellationToken)
+    {   
+        ProductList? productList = await repo.GetByIdAsync(listId, cancellationToken);
+        
+        if (productList is null)
+        {
+            throw new NotFoundException(nameof(productList), listId);
+        }
+
         ProductListItem? productListItem = await repo.GetListItemByIdAsync(itemId, cancellationToken);
 
         if (productListItem is null)
@@ -202,5 +237,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
         }
         
         repo.RemoveListItem(productListItem, cancellationToken);
+
+        await repo.SaveChangesAsync(cancellationToken);
     }
 }

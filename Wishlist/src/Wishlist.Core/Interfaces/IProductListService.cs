@@ -1,6 +1,5 @@
 using Wishlist.Core.Contracts;
-using Wishlist.Core.Entities;
-
+using Wishlist.Core.DTOs;
 namespace Wishlist.Core.Interfaces;
 
 /// <summary>
@@ -8,12 +7,12 @@ namespace Wishlist.Core.Interfaces;
 /// </summary>
 public interface IProductListService
 {
-    Task<ProductList> CreateListAsync(CreateListRequest req, CancellationToken cancellationToken);
-    Task<IReadOnlyList<ProductList>> GetListsForCustomerAsync(string customerId, CancellationToken cancellationToken);
-    Task<ProductList?> GetListAsync(Guid listId, CancellationToken cancellationToken);
+    Task<ProductListDto> CreateListAsync(string customerId, CreateListRequest req, CancellationToken cancellationToken);
+    Task<IReadOnlyList<ProductListDto>> GetListsForCustomerAsync(string customerId, CancellationToken cancellationToken);
+    Task<ProductListWithItemsDto>? GetListAsync(Guid listId, CancellationToken cancellationToken);
     Task DeleteListAsync(Guid listId, CancellationToken cancellationToken);
-    Task<ProductList> SetListVisibilityAsync(Guid productListId, bool isPublic, CancellationToken cancellationToken);
-    Task<ProductListItem>? AddProductAsync(Guid Id, CreateProductListItemRequest req, CancellationToken cancellationToken);
-    Task RemoveListItemAsync(Guid listId, CancellationToken cancellationToken);
-    Task<ProductListItem?> SetItemVisibilityAsync(Guid itemId, bool isPublic, CancellationToken cancellationToken);
+    Task<ProductListDto> UpdateListAsync(Guid productListId, UpdateListVisibilityRequest request, CancellationToken cancellationToken);
+    Task<ProductListItemDto>? AddProductAsync(Guid Id, CreateProductListItemRequest req, CancellationToken cancellationToken);
+    Task RemoveListItemAsync(Guid listId, Guid itemId, CancellationToken cancellationToken);
+    Task<ProductListItemDto> UpdateListItemAsync(Guid listId, Guid itemId, UpdateItemVisibilityRequest request, CancellationToken cancellationToken);
 }

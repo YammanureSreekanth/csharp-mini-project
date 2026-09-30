@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Wishlist.Core.Entities;
 using Wishlist.Core.Interfaces;
-using Wishlist.Functions.Data;
+using Wishlist.Infrastructure.Persistence;
 
-namespace Wishlist.Functions.Repositories;
+namespace Wishlist.Infrastructure.Repositories;
 
 /// <summary>
 /// This is repository class which get the dbContext object via DI
@@ -21,7 +21,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task<IReadOnlyList<ProductList>> GetByCustomerAsync(string customerId, CancellationToken cancellationToken)
     {
-        List<ProductList>? results = await _dbContext.ProductList
+        List<ProductList>? results = await _dbContext.ProductLists
             .Where(l => l.CustomerId == customerId)
             .OrderBy(l => l.CreationDate)
             .ToListAsync(cancellationToken);
@@ -37,7 +37,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task AddAsync(ProductList list, CancellationToken cancellationToken)
     {
-        await _dbContext.ProductList.AddAsync(list, cancellationToken: cancellationToken);
+        await _dbContext.ProductLists.AddAsync(list, cancellationToken: cancellationToken);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task<ProductList?> GetByIdAsync(Guid listId, CancellationToken cancellationToken)
     {
-       ProductList? list = await _dbContext.ProductList.FindAsync(listId);
+       ProductList? list = await _dbContext.ProductLists.FindAsync(listId);
 
        return list;
     }
@@ -59,30 +59,18 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <param name="productList"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task SetListVisibilityAsync(ProductList productList, CancellationToken cancellationToken)
+    public async Task UpdateListAsync(ProductList productList, CancellationToken cancellationToken)
     {
-        _dbContext.ProductList.Update(productList);
+        _dbContext.ProductLists.Update(productList);
     }
 
     /// <summary>
     /// Removes the ProductList
     /// </summary>
     /// <param name="list"></param>
-    public void Remove(ProductList list)
+    public void RemoveList(ProductList list)
     {
-       _dbContext.ProductList.Remove(list);
-    }
-
-    /// <summary>
-    /// Removes the items by ListId
-    /// </summary>
-    /// <param name="listId"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public async Task RemoveItemsByListId(Guid listId, CancellationToken cancellationToken)
-    {
-       await _dbContext.ProductListItem
-                    .Where(item => item.ProductListId == listId).ExecuteDeleteAsync(cancellationToken);
+       _dbContext.ProductLists.Remove(list);
     }
 
     /// <summary>
@@ -93,7 +81,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task AddProductAsync(ProductListItem productListItem, CancellationToken cancellationToken)
     {
-       await _dbContext.ProductListItem.AddAsync(productListItem, cancellationToken);
+       await _dbContext.ProductListItems.AddAsync(productListItem, cancellationToken);
     }
 
     /// <summary>
@@ -104,7 +92,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task<List<ProductListItem>> GetListItemsByListId(Guid Id, CancellationToken cancellationToken)
     {
-        List<ProductListItem>? listItems = await _dbContext.ProductListItem
+        List<ProductListItem>? listItems = await _dbContext.ProductListItems
                         .Where<ProductListItem>(item => item.ProductListId == Id)
                         .ToListAsync(cancellationToken);
 
@@ -119,7 +107,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task<ProductListItem?> GetListItemByIdAsync(Guid Id, CancellationToken cancellationToken)
     {
-       return await _dbContext.ProductListItem.FindAsync(Id);
+       return await _dbContext.ProductListItems.FindAsync(Id);
     }
 
     /// <summary>
@@ -131,7 +119,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <returns></returns>
     public async Task<bool> ExistProductIdByListId(Guid listId, string productId, CancellationToken cancellationToken)
     {
-       return await _dbContext.ProductListItem.AnyAsync(i => i.ProductListId == listId && i.ProductId == productId, cancellationToken);
+       return await _dbContext.ProductListItems.AnyAsync(i => i.ProductListId == listId && i.ProductId == productId, cancellationToken);
     }
 
     /// <summary>
@@ -140,9 +128,9 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <param name="productListItem"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task SetItemVisibilityAsync(ProductListItem productListItem, CancellationToken cancellationToken)
+    public async Task UpdateListItemAsync(ProductListItem productListItem, CancellationToken cancellationToken)
     {
-        _dbContext.ProductListItem.Update(productListItem);
+        _dbContext.ProductListItems.Update(productListItem);
     }
 
     /// <summary>
@@ -152,7 +140,7 @@ public class ProductListRepository(WishlistDbContext dbContext) : IProductListRe
     /// <param name="cancellationToken"></param>
     public void RemoveListItem(ProductListItem listItem, CancellationToken cancellationToken)
     {
-        _dbContext.ProductListItem.Remove(listItem);
+        _dbContext.ProductListItems.Remove(listItem);
     }
 
     /// <summary>

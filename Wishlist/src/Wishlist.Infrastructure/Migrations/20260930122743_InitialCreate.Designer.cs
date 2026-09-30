@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Wishlist.Functions.Data;
+using Wishlist.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Wishlist.Functions.Migrations
+namespace Wishlist.Infrastructure.Migrations
 {
     [DbContext(typeof(WishlistDbContext))]
-    [Migration("20260926135834_InitialCreate")]
+    [Migration("20260930122743_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,7 +36,8 @@ namespace Wishlist.Functions.Migrations
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
@@ -46,14 +47,17 @@ namespace Wishlist.Functions.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductList");
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("ProductLists");
                 });
 
             modelBuilder.Entity("Wishlist.Core.Entities.ProductListItem", b =>
@@ -73,30 +77,31 @@ namespace Wishlist.Functions.Migrations
 
                     b.Property<string>("ProductId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("ProductListId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<short>("Quantity")
-                        .HasColumnType("smallint");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValue((short)1);
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductListId");
 
-                    b.ToTable("ProductListItem");
+                    b.ToTable("ProductListItems");
                 });
 
             modelBuilder.Entity("Wishlist.Core.Entities.ProductListItem", b =>
                 {
-                    b.HasOne("Wishlist.Core.Entities.ProductList", "List")
+                    b.HasOne("Wishlist.Core.Entities.ProductList", null)
                         .WithMany("Items")
                         .HasForeignKey("ProductListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("List");
                 });
 
             modelBuilder.Entity("Wishlist.Core.Entities.ProductList", b =>

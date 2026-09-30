@@ -2,6 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/Wishlist.Core/Wishlist.Core.csproj" />
     <Project Path="src/Wishlist.Functions/Wishlist.Functions.csproj" />
+    <Project Path="src/Wishlist.Infrastructure/Wishlist.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Wishlist.Tests/Wishlist.Tests.csproj" />

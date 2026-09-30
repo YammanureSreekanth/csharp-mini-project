@@ -1,6 +1,6 @@
-using System.Linq.Expressions;
 using Moq;
 using Wishlist.Core.Contracts;
+using Wishlist.Core.DTOs;
 using Wishlist.Core.Entities;
 using Wishlist.Core.Enums;
 using Wishlist.Core.Interfaces;
@@ -56,7 +56,7 @@ public class ProductListServiceTests
                 .ReturnsAsync((IReadOnlyList<ProductList>) list);
             
         // Act
-        IReadOnlyList<ProductList>? productLists = await _service.GetListsForCustomerAsync(customerOne, CancellationToken.None);
+        IReadOnlyList<ProductListDto>? productLists = await _service.GetListsForCustomerAsync(customerOne, CancellationToken.None);
 
         //Assert
         Assert.Equal(2, productLists.Count);
@@ -84,10 +84,10 @@ public class ProductListServiceTests
                 .ReturnsAsync(productListOne);
 
         //Act
-        ProductList productList = await _service.GetListAsync(listOneId, CancellationToken.None);
+        ProductListDto productListDto = await _service.GetListAsync(listOneId, CancellationToken.None);
 
         //Assert
-        Assert.Equal("FeestDag", productList.Name);
+        Assert.Equal("FeestDag", productListDto.Name);
 
     }
 
@@ -113,10 +113,10 @@ public class ProductListServiceTests
             .ReturnsAsync(productListOne);
         
         //Act
-        ProductList list = await _service.GetListAsync(listId, CancellationToken.None);
+        ProductListDto listDto = await _service.GetListAsync(listId, CancellationToken.None);
 
         //Assert
-        Assert.Equal(type, list.Type);
+        Assert.Equal(type, listDto.Type);
     }
 
     [Theory]
@@ -141,15 +141,15 @@ public class ProductListServiceTests
         _repo.Setup(repo => repo.GetByIdAsync(productListId, CancellationToken.None))
             .ReturnsAsync(productList);
 
-        _repo.Setup(r => r.SetListVisibilityAsync(productList,CancellationToken.None));
+        _repo.Setup(r => r.UpdateListAsync(productList,CancellationToken.None));
 
         _repo.Setup(r => r.SaveChangesAsync(CancellationToken.None));
         
         //Act
-        ProductList? list = await _service.SetListVisibilityAsync(productListId, isPublic, CancellationToken.None);
+        ProductListDto? listDto = await _service.UpdateListAsync(productListId, new UpdateListVisibilityRequest(isPublic), CancellationToken.None);
 
         //Assert
-        Assert.Equal(isPublic, productList.IsPublic);
+        Assert.Equal(isPublic, listDto.IsPublic);
     }
 
     public static IEnumerable<object[]> ItemRequests =[
@@ -162,11 +162,12 @@ public class ProductListServiceTests
     public async Task AddProduct_To_List(Guid listId, CreateProductListItemRequest req)
     {
         //Arrange
+        string customerId = "Customer-12";
         ProductList productList = new ProductList
         {
             Id = listId,
             Name = "Wedding",
-            CustomerId = "Customer-12"
+            CustomerId = customerId
         };
 
         Guid itemId = Guid.NewGuid();
@@ -190,9 +191,9 @@ public class ProductListServiceTests
         _repo.Setup(r => r.SaveChangesAsync(CancellationToken.None));
 
         //Act
-        ProductListItem listItem = await _service.AddProductAsync(listId, req, CancellationToken.None);
+        ProductListItemDto listItemDto = await _service.AddProductAsync(listId, req, CancellationToken.None);
 
         //Assert
-        Assert.Equal(req.ProductId, listItem.ProductId);
+        Assert.Equal(req.ProductId, listItemDto.ProductId);
     }
 }

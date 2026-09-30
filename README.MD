@@ -16,9 +16,9 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 _A running record of the C# and .NET ground I have actually covered, generated from this repository on every push._
 
-![concepts](https://img.shields.io/badge/concepts-71_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-89-0078D4) ![lines](https://img.shields.io/badge/lines-4045-0078D4) ![types](https://img.shields.io/badge/types-97-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-72_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-93-0078D4) ![lines](https://img.shields.io/badge/lines-4137-0078D4) ![types](https://img.shields.io/badge/types-101-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `███████████████░░░░░` **76%**
+**Progress** `███████████████░░░░░` **77%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -31,7 +31,7 @@ What I am working on right now · assigned 2026-09-22 · next review **2026-09-2
 
 | Item | Status | Evidence in the code |
 |---|---|---|
-| DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs</sub><br>✓ `Mapping service` <sub>Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs</sub> |
+| DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Wishlist/src/Wishlist.Core/DTOs/ProductListDto.cs</sub><br>✓ `Mapping service` <sub>Wishlist/src/Wishlist.Core/Mapping/ProductListMapper.cs</sub> |
 | Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Azure SQL</sub> | ✅ Completed | ✓ `Bicep templates` <sub>Wishlist/Infra/main.bicep</sub><br>✓ `Azure Function app` <sub>Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs</sub><br>✓ `Azure SQL` <sub>Wishlist/Infra/modules/sql.bicep</sub> |
 | Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>csharp-mini-project/Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>csharp-mini-project/Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
 | Unit testing | ✅ Completed | ✓ `Test project` <sub>Wishlist/tests/Wishlist.Tests/Dummy.json</sub><br>✓ `xUnit or NUnit` <sub>Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj</sub><br>✓ `Mocking` <sub>Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
@@ -177,28 +177,30 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
-| `Wishlist.Functions` | 10 | 1011 | 9 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
-| `Wishlist.Core` | 12 | 305 | 17 |
-| `Wishlist.Tests` | 1 | 198 | 1 |
+| `Wishlist.Infrastructure` | 9 | 566 | 9 |
+| `Wishlist.Functions` | 5 | 561 | 4 |
+| `Wishlist.Core` | 12 | 280 | 17 |
+| `Wishlist.Tests` | 1 | 199 | 1 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 3264 of the 3264 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 3338 of the 3338 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Functions` | 837 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
-| `Wishlist.Core` | 252 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Tests` | 152 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Infrastructure` | 465 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Functions` | 460 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Core` | 237 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **3264** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **3338** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -244,23 +246,23 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
-- [x] **Classes and interfaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +3</sub>
+- [x] **Classes and interfaces** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListDto.cs` +3</sub>
 - [x] **Records** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +1</sub>
-- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +3</sub>
+- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListWithItemsDto.cs` +3</sub>
 - [ ] Delegates and events
-- [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +3</sub>
+- [x] **LINQ** <sub>`Wishlist/src/Wishlist.Core/Mapping/ProductListMapper.cs` +3</sub>
 - [x] **async / await / Task** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
 - [x] **Cancellation tokens** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
 - [ ] Parallelism
-- [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
-- [x] **Configuration** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
+- [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
+- [x] **Configuration** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +2</sub>
 - [x] **Error handling** <sub>`Wishlist/src/Wishlist.Functions/Http.cs` +3</sub>
 - [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
 - [x] **Validation** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/EmployeesController.cs` +3</sub>
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
-- [x] **Value vs reference types** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +3</sub>
+- [x] **Value vs reference types** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListDto.cs` +3</sub>
 - [x] **IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
 - [x] **.NET 8/9 app structure** <sub>`Wishlist/src/Wishlist.Core/Wishlist.Core.csproj` +3</sub>
 - [ ] Minimal APIs
@@ -295,7 +297,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Entities and value objects** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [ ] Aggregates and aggregate roots
 - [x] **Repositories** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
-- [x] **Factories** <sub>`csharp-mini-project/Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
+- [x] **Factories** <sub>`Wishlist/src/Wishlist.Infrastructure/Persistance/DesignTimeDbContextFactory.cs` +2</sub>
 - [ ] Domain events
 - [ ] Specification pattern
 - [ ] Bounded contexts <sub>judgement — not code-detectable</sub>
@@ -388,9 +390,9 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **SQL Server basics** <sub>`Wishlist/Infra/modules/functionapp.bicep` +3</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
-- [x] **Entity Framework Core** <sub>`Wishlist/src/Wishlist.Functions/Data/WishlistDbContext.cs` +3</sub>
-- [x] **Migrations** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +3</sub>
-- [x] **Indexing** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +3</sub>
+- [x] **Entity Framework Core** <sub>`Wishlist/src/Wishlist.Functions/Wishlist.Functions.csproj` +3</sub>
+- [x] **Migrations** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +3</sub>
+- [x] **Indexing** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +3</sub>
 - [ ] Transactions
 - [ ] Optimistic concurrency
 - [ ] Cosmos DB partition keys — poor choices are expensive and hard to undo
@@ -508,13 +510,13 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>C# fundamentals</b> — 9/12</summary>
 
-- [x] **Classes** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
+- [x] **Classes** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListDto.cs` +5</sub>
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
-- [x] **Properties** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
-- [x] **var / implicit typing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/LinqController.cs` +1</sub>
+- [x] **Properties** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListDto.cs` +5</sub>
+- [x] **var / implicit typing** <sub>`Wishlist/src/Wishlist.Infrastructure/Persistance/DesignTimeDbContextFactory.cs` +2</sub>
 - [x] **String interpolation** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
-- [x] **foreach** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
+- [x] **foreach** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +5</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
@@ -527,15 +529,15 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Object-oriented design</b> — 8/15</summary>
 
 - [x] **Interfaces** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
-- [x] **Inheritance** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +3</sub>
+- [x] **Inheritance** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListWithItemsDto.cs` +3</sub>
 - [x] **Abstract classes** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
 - [x] **Abstract members** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
-- [x] **Overriding** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +5</sub>
+- [x] **Overriding** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +5</sub>
 - [ ] virtual members
 - [ ] Default interface methods
-- [x] **Static classes** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
+- [x] **Static classes** <sub>`Wishlist/src/Wishlist.Core/Mapping/ProductListMapper.cs` +5</sub>
 - [ ] Sealed classes
-- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +5</sub>
+- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListWithItemsDto.cs` +5</sub>
 - [x] **Generic types of my own** <sub>`Wishlist/src/Wishlist.Functions/HttpReadValidatedJson.cs` +3</sub>
 - [ ] Delegates
 - [ ] Events
@@ -549,32 +551,32 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Records** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +1</sub>
 - [x] **init-only properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
-- [x] **required members** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListItemDto.cs` +2</sub>
+- [x] **required members** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListItemDto.cs` +2</sub>
 - [x] **Pattern matching** <sub>`Wishlist/src/Wishlist.Functions/HttpReadValidatedJson.cs` +5</sub>
 - [ ] switch expressions
-- [x] **Nullable reference types** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
+- [x] **Nullable reference types** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
-- [x] **?? and ??=** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
-- [x] **Expression-bodied members** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **?? and ??=** <sub>`Wishlist/src/Wishlist.Functions/Services/ProductListService.cs` +2</sub>
+- [x] **Expression-bodied members** <sub>`Wishlist/src/Wishlist.Core/Mapping/ProductListMapper.cs` +5</sub>
 - [x] **Top-level statements** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
-- [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListDto.cs` +5</sub>
-- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +3</sub>
-- [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +2</sub>
+- [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +5</sub>
+- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListWithItemsDto.cs` +5</sub>
+- [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
 - [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
 - [ ] Tuples
 - [x] **Lambdas** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
-- [x] **Object initializers** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListMapper.cs` +5</sub>
+- [x] **Object initializers** <sub>`Wishlist/src/Wishlist.Functions/Services/ProductListService.cs` +5</sub>
 
 </details>
 
 <details open>
-<summary><b>Collections & LINQ</b> — 7/9</summary>
+<summary><b>Collections & LINQ</b> — 8/9</summary>
 
-- [x] **Generic collections** <sub>`Wishlist/src/Wishlist.Core/Contracts/ProductListWithItemsDto.cs` +5</sub>
-- [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +5</sub>
-- [x] **LINQ method syntax** <sub>`Wishlist/src/Wishlist.Functions/Repositories/ProductListRepository.cs` +5</sub>
+- [x] **Generic collections** <sub>`Wishlist/src/Wishlist.Core/DTOs/ProductListWithItemsDto.cs` +5</sub>
+- [x] **LINQ** <sub>`Wishlist/src/Wishlist.Core/Mapping/ProductListMapper.cs` +5</sub>
+- [x] **LINQ method syntax** <sub>`Wishlist/src/Wishlist.Core/Mapping/ProductListMapper.cs` +5</sub>
 - [ ] LINQ query syntax
-- [ ] Extension methods
+- [x] **Extension methods** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs`</sub>
 - [x] **Iterators (yield)** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
 - [x] **IEnumerable<T>** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +5</sub>
 - [x] **IList<T>** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
@@ -607,17 +609,17 @@ _The ground I want to cover for my career in .NET._
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +1</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
-- [x] **Factory pattern** <sub>`csharp-mini-project/Catalog.ConsoleApp/Factories/CategoryFactory.cs` +1</sub>
+- [x] **Factory pattern** <sub>`Wishlist/src/Wishlist.Infrastructure/Persistance/DesignTimeDbContextFactory.cs` +2</sub>
 - [x] **Service layer** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListService.cs` +3</sub>
-- [x] **EF Core** — next up <sub>`Wishlist/src/Wishlist.Functions/Data/WishlistDbContext.cs` +5</sub>
-- [x] **EF migrations** <sub>`Wishlist/src/Wishlist.Functions/Migrations/20260926135834_InitialCreate.Designer.cs` +5</sub>
+- [x] **EF Core** — next up <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +5</sub>
+- [x] **EF migrations** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +5</sub>
 
 </details>
 
 <details open>
 <summary><b>ASP.NET Core</b> — 11/13</summary>
 
-- [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
+- [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
 - [x] **Middleware pipeline** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **MVC controllers** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/CategoryController.cs` +5</sub>
 - [x] **MVC routing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
@@ -625,10 +627,10 @@ _The ground I want to cover for my career in .NET._
 - [x] **Static files** <sub>`csharp-mini-project/Ecom.MvcWebApp/wwwroot`</sub>
 - [ ] Minimal APIs
 - [x] **OpenAPI / Swagger** <sub>`csharp-mini-project/Ecom.WebApiApp/Program.cs`</sub>
-- [x] **Configuration binding** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
+- [x] **Configuration binding** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +2</sub>
 - [ ] Authentication
-- [x] **IoC container** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs`</sub>
-- [x] **DI lifetimes** — scoped / singleton / transient <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
+- [x] **IoC container** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +1</sub>
+- [x] **DI lifetimes** — scoped / singleton / transient <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
 - [x] **Custom middleware** <sub>`csharp-mini-project/Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
 
 </details>
@@ -653,6 +655,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-29 08:30 UTC</sub>
+<sub>Last updated 2026-09-30 13:46 UTC</sub>
 
 <!-- JOURNEY:END -->

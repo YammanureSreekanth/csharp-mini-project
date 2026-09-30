@@ -13,6 +13,6 @@ public class ProductList
     public bool IsPublic { get; set; } = true;
     public DateTime CreationDate { get; set; }
     public DateTime ModifiedDate { get; set; }
-    public List<ProductListItem> Items { get; set; } = [];
+    public List<ProductListItem> Items { get; set; } = new();
 
 }

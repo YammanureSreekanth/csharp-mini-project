@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Wishlist.Core.Enums;
 
 namespace Wishlist.Core.Contracts;
@@ -11,10 +10,9 @@ namespace Wishlist.Core.Contracts;
 /// <param name="Type"></param>
 /// <param name="IsPublic"></param>
 public record CreateListRequest(
-    [property: JsonPropertyName("name")] string Name,
-    [property: JsonPropertyName("customerId")] string CustomerId,
-    [property: JsonPropertyName("type")] ProductListType Type,
-    [property: JsonPropertyName("isPublic")] bool IsPublic = false);
+    string Name,
+    ProductListType Type,
+    bool IsPublic = false);
 
 /// <summary>
 /// Request body for creating a new product listitem.
@@ -23,20 +21,23 @@ public record CreateListRequest(
 /// <param name="IsPublic"></param>
 /// <param name="Quantity"></param>
 public record CreateProductListItemRequest(
-    [property: JsonPropertyName("productId")] string ProductId,
-    [property: JsonPropertyName("isPublic")] bool IsPublic = false,
-    [property: JsonPropertyName("quantity")] short Quantity = 1);
+    string ProductId,
+    bool IsPublic = false,
+    short Quantity = 1);
 
 /// <summary>
 /// Request body for updating the list visibility
 /// </summary>
 /// <param name="IsPublic"></param>
-public record UpdateVisibilityRequest(
-    [property: JsonPropertyName("isPublic")] bool IsPublic);
+/// <param name="Quantity"></param>
+public record UpdateListVisibilityRequest(
+    bool? IsPublic);
 
 /// <summary>
 /// Request body for updating the listitem visibility
 /// </summary>
 /// <param name="IsPublic"></param>
+/// <param name="Quantity"></param>
 public record UpdateItemVisibilityRequest(
-    [property: JsonPropertyName("isPublic")] bool IsPublic);
+    bool? IsPublic,
+    short? Quantity);

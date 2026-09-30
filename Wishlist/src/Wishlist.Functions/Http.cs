@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Wishlist.Core.Contracts;
 using Wishlist.Core.Exceptions;
+using Wishlist.Core.Contracts;
 
 namespace Wishlist.Functions;
 

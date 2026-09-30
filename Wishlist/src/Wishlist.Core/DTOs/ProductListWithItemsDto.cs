@@ -1,4 +1,4 @@
-namespace Wishlist.Core.Contracts;
+namespace Wishlist.Core.DTOs;
 
 /// <summary>
 /// A product list together with its items.
