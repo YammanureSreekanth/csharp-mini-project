@@ -255,7 +255,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Cancellation tokens** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
 - [ ] Parallelism
 - [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
-- [x] **Configuration** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +2</sub>
+- [x] **Configuration** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Error handling** <sub>`Wishlist/src/Wishlist.Functions/Http.cs` +3</sub>
 - [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
 - [x] **Validation** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/EmployeesController.cs` +3</sub>
@@ -627,7 +627,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Static files** <sub>`csharp-mini-project/Ecom.MvcWebApp/wwwroot`</sub>
 - [ ] Minimal APIs
 - [x] **OpenAPI / Swagger** <sub>`csharp-mini-project/Ecom.WebApiApp/Program.cs`</sub>
-- [x] **Configuration binding** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +2</sub>
+- [x] **Configuration binding** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [ ] Authentication
 - [x] **IoC container** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +1</sub>
 - [x] **DI lifetimes** — scoped / singleton / transient <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
@@ -655,6 +655,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-30 13:46 UTC</sub>
+<sub>Last updated 2026-09-30 14:09 UTC</sub>
 
 <!-- JOURNEY:END -->
