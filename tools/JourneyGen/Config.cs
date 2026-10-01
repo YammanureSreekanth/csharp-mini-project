@@ -307,15 +307,18 @@ public sealed class JourneyConfig
                     if (sep <= 0) break;
                     var where = arg[..sep];
                     var pattern = arg[(sep + 1)..];
-                    var irx = new Regex(pattern, RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    var irx = new Regex(pattern, RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
                     foreach (var (rel, text) in AllTextFiles(root).Value)
                         if (rel.Contains(where, StringComparison.OrdinalIgnoreCase) && irx.IsMatch(text))
                         { matched = true; evidence.Add(rel); }
                     break;
                 }
 
+                // Case-insensitive: Azure resource types and env vars don't share one casing
+                // convention (Microsoft.Insights/components vs APPLICATIONINSIGHTS_CONNECTION_STRING),
+                // so a detector written against one casing silently missed the other.
                 case "grep":
-                    var grx = new Regex(arg, RegexOptions.Multiline | RegexOptions.CultureInvariant);
+                    var grx = new Regex(arg, RegexOptions.Multiline | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
                     foreach (var (rel, text) in AllTextFiles(root).Value)
                         if (grx.IsMatch(text)) { matched = true; evidence.Add(rel); }
                     break;

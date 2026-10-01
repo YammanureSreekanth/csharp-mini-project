@@ -222,7 +222,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`███████░░░░░░░░░░░░░` **58 of 178 covered** across 14 areas
+`███████░░░░░░░░░░░░░` **60 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -233,13 +233,13 @@ _The ground I want to cover for my career in .NET._
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
-| Azure cloud services | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
+| Azure cloud services | 3/10 | `██████░░░░░░░░░░░░░░` 30% |
 | Infrastructure as Code (Bicep) | 12/20 | `████████████░░░░░░░░` 60% |
 | Databases and data modeling | 5/11 | `█████████░░░░░░░░░░░` 45% |
 | Testing and code quality | 3/11 | `█████░░░░░░░░░░░░░░░` 27% |
 | CI/CD and DevOps basics | 5/12 | `████████░░░░░░░░░░░░` 42% |
 | Integrations with external systems | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
-| Observability and production readiness | 3/13 | `█████░░░░░░░░░░░░░░░` 23% |
+| Observability and production readiness | 4/13 | `██████░░░░░░░░░░░░░░` 31% |
 | Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
@@ -344,7 +344,7 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Azure cloud services</b> — 2/10 · <sub>The services named on the profile.</sub></summary>
+<summary><b>Azure cloud services</b> — 3/10 · <sub>The services named on the profile.</sub></summary>
 
 - [x] **Azure App Service** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
 - [x] **Azure Functions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
@@ -352,7 +352,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Azure Cosmos DB
 - [ ] Azure Table Storage
 - [ ] Azure Storage Accounts
-- [ ] Application Insights
+- [x] **Application Insights** <sub>`Wishlist/Infra/modules/functionapp.bicep` +1</sub>
 - [ ] Azure Key Vault
 - [ ] Azure Monitor <sub>judgement — not code-detectable</sub>
 - [ ] Managed identities
@@ -457,13 +457,13 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details>
-<summary><b>Observability and production readiness</b> — 3/13 · <sub>“It works locally” is not enough.</sub></summary>
+<summary><b>Observability and production readiness</b> — 4/13 · <sub>“It works locally” is not enough.</sub></summary>
 
 - [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
 - [x] **Correlation IDs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
 - [x] **Distributed tracing** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
 - [ ] Metrics
-- [ ] Application Insights
+- [x] **Application Insights** <sub>`Wishlist/Infra/modules/functionapp.bicep` +1</sub>
 - [ ] Health checks
 - [ ] Dashboards <sub>judgement — not code-detectable</sub>
 - [ ] Alerts <sub>judgement — not code-detectable</sub>
@@ -655,6 +655,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-09-30 15:48 UTC</sub>
+<sub>Last updated 2026-10-01 09:04 UTC</sub>
 
 <!-- JOURNEY:END -->
