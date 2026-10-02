@@ -20,7 +20,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-72_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-93-0078D4) ![lines](https://img.shields.io/badge/lines-4141-0078D4) ![types](https://img.shields.io/badge/types-101-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-72_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-93-0078D4) ![lines](https://img.shields.io/badge/lines-4140-0078D4) ![types](https://img.shields.io/badge/types-101-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `███████████████░░░░░` **77%**
 
@@ -182,12 +182,12 @@ classDiagram
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
-| `Wishlist.Functions` | 10 | 697 | 9 |
+| `Wishlist.Functions` | 12 | 747 | 14 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
 | `Wishlist.Infrastructure` | 9 | 566 | 9 |
 | `Wishlist.Tests` | 1 | 199 | 1 |
-| `Wishlist.Core` | 7 | 148 | 12 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
+| `Wishlist.Core` | 5 | 97 | 7 |
 
 ### Who wrote this code
 
@@ -198,11 +198,11 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
-| `Wishlist.Functions` | 570 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Wishlist.Infrastructure` | 465 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
-| `Wishlist.Core` | 130 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Core` | 86 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
 | **Application total** | **3341** | **0** | **55** | `████████████████████` **100%** |
 
@@ -251,7 +251,7 @@ _The ground I want to cover for my career in .NET._
 <summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
 - [x] **Classes and interfaces** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +3</sub>
-- [x] **Records** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +1</sub>
+- [x] **Records** <sub>`Wishlist/src/Wishlist.Functions/Contracts/Requests.cs` +1</sub>
 - [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +3</sub>
 - [ ] Delegates and events
 - [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +3</sub>
@@ -553,17 +553,17 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Modern C#</b> — 15/17</summary>
 
-- [x] **Records** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +1</sub>
+- [x] **Records** <sub>`Wishlist/src/Wishlist.Functions/Contracts/Requests.cs` +1</sub>
 - [x] **init-only properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [x] **required members** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +2</sub>
 - [x] **Pattern matching** <sub>`Wishlist/src/Wishlist.Functions/HttpReadValidatedJson.cs` +5</sub>
 - [ ] switch expressions
-- [x] **Nullable reference types** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +5</sub>
+- [x] **Nullable reference types** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
 - [x] **?? and ??=** <sub>`Wishlist/src/Wishlist.Functions/Services/ProductListService.cs` +2</sub>
 - [x] **Expression-bodied members** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +5</sub>
 - [x] **Top-level statements** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
-- [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Contracts/Requests.cs` +5</sub>
+- [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
 - [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
 - [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
 - [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
@@ -659,6 +659,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-02 09:28 UTC</sub>
+<sub>Last updated 2026-10-02 09:37 UTC</sub>
 
 <!-- JOURNEY:END -->

@@ -5,7 +5,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Wishlist.Core.Contracts;
+using Wishlist.Functions.Contracts;
 using Wishlist.Functions.DTOs;
 using Wishlist.Functions.Interfaces;
 

@@ -1,4 +1,4 @@
-using Wishlist.Core.Contracts;
+using Wishlist.Functions.Contracts;
 using Wishlist.Functions.DTOs;
 
 namespace Wishlist.Functions.Interfaces;

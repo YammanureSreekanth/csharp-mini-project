@@ -20,10 +20,10 @@ flowchart TB
             direction TB
             E["Entities + Enums<br/>ProductList, ProductListItem"]
             I["Port: IProductListRepository"]
-            D["Request/Response contracts, Exceptions"]
+            D["Exceptions"]
         end
     end
-    F["Wishlist.Functions<br/>HTTP triggers, IProductListService + ProductListService,<br/>DTOs, Mapper, Program.cs"] -->|depends on| Inner
+    F["Wishlist.Functions<br/>HTTP triggers, IProductListService + ProductListService,<br/>DTOs, Contracts, Mapper, Program.cs"] -->|depends on| Inner
     INF["Wishlist.Infrastructure<br/>EF Core, DbContext, Repository, Migrations"] -->|depends on| Inner
 ```
 
@@ -31,16 +31,16 @@ flowchart TB
 
 | Project | Role | References |
 |---|---|---|
-| `Wishlist.Core` | Entities, enums, `IProductListRepository`, request/response contracts, exceptions. **No NuGet packages, no project references.** | nothing |
+| `Wishlist.Core` | Entities, enums, `IProductListRepository`, exceptions. **No NuGet packages, no project references.** | nothing |
 | `Wishlist.Infrastructure` | EF Core `WishlistDbContext`, entity configurations, `ProductListRepository`, migrations, `AddInfrastructure()` | Core |
-| `Wishlist.Functions` | Azure Functions HTTP endpoints, `IProductListService` + `ProductListService`, DTOs, `ProductListMapper`, `Program.cs` (composition root) | Core, Infrastructure |
+| `Wishlist.Functions` | Azure Functions HTTP endpoints, `IProductListService` + `ProductListService`, DTOs, request/response contracts, `ProductListMapper`, `Program.cs` (composition root) | Core, Infrastructure |
 | `Wishlist.Tests` | xUnit + Moq tests | all three |
 
 ### What is correct
 
 - **Core has zero dependencies.** It is the only project that can be understood in isolation.
 - **Dependency inversion is done properly where it matters.** Core *defines* `IProductListRepository`; Infrastructure *implements* it. The service depends on the interface, never on EF Core.
-- **Core is now a pure domain core.** DTOs, the mapper and `IProductListService` moved out to Functions, so Core only holds the domain model and the persistence port.
+- **Core is now a pure domain core.** DTOs, request/response contracts, the mapper and `IProductListService` moved out to Functions, so Core only holds the domain model and the persistence port.
 - **EF Core is hidden in Infrastructure.** Entities are plain C# classes; mapping lives in `IEntityTypeConfiguration` classes, not attributes on entities.
 - **`Program.cs` is the composition root.** It is the one place that knows which concrete class backs which interface.
 
@@ -48,17 +48,11 @@ flowchart TB
 
 | # | Observation | Why it matters |
 |---|---|---|
-| 1 | `ProductListService` (business logic), `IProductListService`, DTOs and the mapper all live in **`Wishlist.Functions`**, the outermost ring. | Moving them out made Core cleaner, but strictly speaking the *use-case/application layer* now sits in the host. In classic Onion/Clean Architecture it would sit in its own ring between Core and the outside (e.g. `Wishlist.Application`). Trade-off: simple, fewer projects, but logic can't be reused by another host (worker, console) without referencing Functions. Fine for a single-host app. |
-| 2 | `Core/Contracts/Requests.cs` and `Responses.cs` are still in Core. | They are HTTP-shaped types (request bodies, `ErrorResponse`), and the service in Functions is their only real consumer. They fit better next to the DTOs in Functions. Not a rule break, but the inner ring knows about the API's shape. |
-| 3 | `Wishlist.Functions` also references **EF Core packages** (`SqlServer`, `Design`, `Tools`) directly. | Needed so `dotnet ef` can use Functions as the *startup project*. Harmless, but the Functions layer can now "see" EF types. |
-| 4 | `Functions` → `Infrastructure` is a **direct project reference**. | Acceptable for a composition root (it must call `AddInfrastructure`). Just keep endpoints/services from using Infrastructure types. |
-| 5 | Small naming slips: folder `Persistance` vs namespace `Persistence`; `DesignTimeDbContextFactory` lives in Infrastructure but its namespace is `Wishlist.Functions`. | Cosmetic, but confusing when searching. |
-
----|---|---|
-| 1 | `ProductListService` (business logic) lives in **`Wishlist.Functions/Services`**, not in Core or an Application project. | In classic Onion, use-case logic sits in an inner ring. Here it sits in the outermost ring, so it can't be reused by another host (a worker, a console tool) without referencing the Functions project. Moving it to Core (or a new `Wishlist.Application`) would fix it. |
+| 1 | `ProductListService` (business logic), `IProductListService`, DTOs, request/response contracts and the mapper all live in **`Wishlist.Functions`**, the outermost ring. | Moving them out made Core cleaner, but strictly speaking the *use-case/application layer* now sits in the host. In classic Onion/Clean Architecture it would sit in its own ring between Core and the outside (e.g. `Wishlist.Application`). Trade-off: simple, fewer projects, but logic can't be reused by another host (worker, console) without referencing Functions. Fine for a single-host app. |
 | 2 | `Wishlist.Functions` also references **EF Core packages** (`SqlServer`, `Design`, `Tools`) directly. | Needed so `dotnet ef` can use Functions as the *startup project*. Harmless, but the Functions layer can now "see" EF types. |
 | 3 | `Functions` → `Infrastructure` is a **direct project reference**. | Acceptable for a composition root (it must call `AddInfrastructure`). Just keep endpoints/services from using Infrastructure types. |
 | 4 | Small naming slips: folder `Persistance` vs namespace `Persistence`; `DesignTimeDbContextFactory` lives in Infrastructure but its namespace is `Wishlist.Functions`. | Cosmetic, but confusing when searching. |
+
 
 ---
 
@@ -86,7 +80,7 @@ flowchart TB
         direction LR
         c1["IProductListRepository (interface)"]
         c3["ProductList / ProductListItem"]
-        c4["Requests / Responses / Exceptions"]
+        c4["Exceptions"]
     end
     subgraph Infra["Wishlist.Infrastructure"]
         direction LR
@@ -97,7 +91,7 @@ flowchart TB
         direction LR
         f1["ProductListFunctions → IProductListService"]
         f2["ProductListService : IProductListService<br/>uses IProductListRepository"]
-        f3["DTOs + ProductListMapper"]
+        f3["DTOs + Contracts + ProductListMapper"]
     end
     i1 -.implements.-> c1
     f2 -.uses.-> c1
@@ -265,6 +259,6 @@ flowchart TB
 
 - **Where do I add a business rule?** `ProductListService` (Functions).
 - **Where do I add a new DB column?** Entity in Core → config in Infrastructure → `dotnet ef migrations add` → generate script → run it on SQL.
-- **Where do I add a new endpoint?** `ProductListFunctions` + a method on `IProductListService` (in `Functions/Interfaces`), plus a DTO in `Functions/DTOs` if needed.
+- **Where do I add a new endpoint?** `ProductListFunctions` + a method on `IProductListService` (in `Functions/Interfaces`), plus a DTO in `Functions/DTOs` or a request/response in `Functions/Contracts` if needed.
 - **Where is the interface ↔ class wiring?** `Program.cs` and `Infrastructure/DependencyInjection.cs`.
 - **Why did my compile succeed but the API returns 500?** Database not migrated or app identity not granted – those are run-time/deploy-time, not compile-time, concerns.

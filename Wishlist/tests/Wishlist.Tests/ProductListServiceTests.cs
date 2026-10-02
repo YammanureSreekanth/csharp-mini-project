@@ -1,5 +1,5 @@
 using Moq;
-using Wishlist.Core.Contracts;
+using Wishlist.Functions.Contracts;
 using Wishlist.Functions.DTOs;
 using Wishlist.Core.Entities;
 using Wishlist.Core.Enums;

@@ -1,5 +1,4 @@
-
-namespace Wishlist.Core.Contracts;
+namespace Wishlist.Functions.Contracts;
 
 /// <summary>
 /// This sends the error message

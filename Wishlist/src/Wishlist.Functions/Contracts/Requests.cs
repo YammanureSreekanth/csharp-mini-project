@@ -1,6 +1,6 @@
 using Wishlist.Core.Enums;
 
-namespace Wishlist.Core.Contracts;
+namespace Wishlist.Functions.Contracts;
 
 /// <summary>
 /// Request body for creating a new product list.
