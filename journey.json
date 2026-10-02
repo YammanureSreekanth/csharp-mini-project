@@ -24,6 +24,18 @@
   "title": "My .NET Journey",
   "tagline": "A running record of the C# and .NET ground I have actually covered, generated from this repository on every push.",
 
+  // "Have I made it yet" is a judgement call no detector can make — declared by hand,
+  // same as SOLID or clean code below. Flip "achieved" to true the day it's true, and
+  // it stays that way for good. Paste real GIF URLs in; leave either blank to show the
+  // caption on its own with no image.
+  "milestone": {
+    "achieved": false,
+    "askingGif": "",
+    "askingCaption": "Mr. Stark, am I an Avenger yet?",
+    "achievedGif": "",
+    "achievedCaption": "You're an Avenger now, kid."
+  },
+
   // Who actually wrote each surviving line, counted with `git blame`.
   //
   // Default is "you": a line only counts as AI or scaffold when something below

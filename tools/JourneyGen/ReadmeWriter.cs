@@ -26,6 +26,8 @@ public static class ReadmeWriter
         sb.AppendLine();
         if (cfg.Tagline.Length > 0) { sb.AppendLine($"_{cfg.Tagline}_"); sb.AppendLine(); }
 
+        AppendMilestone(sb, cfg.Milestone);
+
         sb.Append(Badge("concepts", $"{done} of {total}", "512BD4")).Append(' ');
         sb.Append(Badge("C# files", analyzer.SourceFiles.Count.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
         sb.Append(Badge("lines", analyzer.TotalLines.ToString(CultureInfo.InvariantCulture), "0078D4")).Append(' ');
@@ -142,6 +144,28 @@ public static class ReadmeWriter
             sb.AppendLine("</details>");
             sb.AppendLine();
         }
+    }
+
+    /// <summary>
+    /// "Am I a professional .NET developer yet" is exactly the kind of judgement call
+    /// nothing in this repo can code-detect, so — like SOLID or clean code elsewhere —
+    /// it's declared by hand in journey.json. Skipped entirely if never configured.
+    /// </summary>
+    static void AppendMilestone(StringBuilder sb, MilestoneConfig m)
+    {
+        if (!m.Enabled) return;
+
+        var gif = m.Achieved ? m.AchievedGif : m.AskingGif;
+        var caption = m.Achieved ? m.AchievedCaption : m.AskingCaption;
+        if (gif.Length == 0 && caption.Length == 0) return;
+
+        sb.AppendLine("<p align=\"center\">");
+        if (gif.Length > 0)
+            sb.AppendLine($"  <img src=\"{gif}\" alt=\"{caption.Replace("\"", "&quot;")}\" width=\"420\">");
+        if (caption.Length > 0)
+            sb.AppendLine($"  <br><sub>{Escape(caption)}</sub>");
+        sb.AppendLine("</p>");
+        sb.AppendLine();
     }
 
     static void AppendAssignment(StringBuilder sb, Assignment a)

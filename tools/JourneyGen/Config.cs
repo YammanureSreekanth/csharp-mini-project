@@ -10,12 +10,29 @@ public sealed class DiagramOptions
     public int MaxMembers = 10;
 }
 
+/// <summary>
+/// "Have I made it yet" is a judgement call no detector can make, same as SOLID or
+/// clean code elsewhere in this tool — so it's declared by hand, not inferred. Until
+/// `achieved` flips to true, the README shows `askingGif`; once it does, `achievedGif`
+/// and stays that way for good.
+/// </summary>
+public sealed class MilestoneConfig
+{
+    public bool Enabled;
+    public bool Achieved;
+    public string AskingGif = "";
+    public string AskingCaption = "";
+    public string AchievedGif = "";
+    public string AchievedCaption = "";
+}
+
 public sealed class JourneyConfig
 {
     public string Title = "My .NET Journey";
     public string Tagline = "";
     public DiagramOptions Diagram = new();
     public ProvenanceConfig Provenance = new();
+    public MilestoneConfig Milestone = new();
     public Assignment Assignment = new();
     public Roadmap Roadmap = new();
     public List<Concept> Concepts = new();
@@ -46,6 +63,17 @@ public sealed class JourneyConfig
             if (d.TryGetProperty("namespaceContains", out var nc)) cfg.Diagram.NamespaceContains = nc.GetString() ?? "";
             if (d.TryGetProperty("showMembers", out var sm)) cfg.Diagram.ShowMembers = sm.GetBoolean();
             if (d.TryGetProperty("maxMembers", out var mm)) cfg.Diagram.MaxMembers = mm.GetInt32();
+        }
+
+        if (root.TryGetProperty("milestone", out var ms))
+        {
+            var m = cfg.Milestone;
+            m.Enabled = true;
+            if (ms.TryGetProperty("achieved", out var ach)) m.Achieved = ach.GetBoolean();
+            if (ms.TryGetProperty("askingGif", out var ag)) m.AskingGif = ag.GetString() ?? "";
+            if (ms.TryGetProperty("askingCaption", out var ac)) m.AskingCaption = ac.GetString() ?? "";
+            if (ms.TryGetProperty("achievedGif", out var hg)) m.AchievedGif = hg.GetString() ?? "";
+            if (ms.TryGetProperty("achievedCaption", out var hc)) m.AchievedCaption = hc.GetString() ?? "";
         }
 
         if (root.TryGetProperty("provenance", out var pv))
