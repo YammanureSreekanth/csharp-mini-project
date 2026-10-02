@@ -1,4 +1,4 @@
-name: Tests
+name: Mini-Project-Tests
 
 on:
   push:
