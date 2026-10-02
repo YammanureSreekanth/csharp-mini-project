@@ -198,7 +198,7 @@ public class ProductListService(IProductListRepository repo) : IProductListServi
 
         if (request.IsPublic.HasValue)
         {
-            listItem.IsPublic = request.IsPublic.HasValue;   
+            listItem.IsPublic = request.IsPublic.Value;   
         }
 
          if (request.Quantity.HasValue)
