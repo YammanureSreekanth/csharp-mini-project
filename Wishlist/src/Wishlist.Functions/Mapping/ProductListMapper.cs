@@ -1,7 +1,7 @@
-using Wishlist.Core.DTOs;
+using Wishlist.Functions.DTOs;
 using Wishlist.Core.Entities;
 
-namespace Wishlist.Core.Mapping;
+namespace Wishlist.Functions.Mapping;
 
 /// <summary>
 /// Maps ProductList/ProductListItem entities to their DTO shapes.

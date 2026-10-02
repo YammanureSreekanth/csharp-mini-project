@@ -1,6 +1,7 @@
 using Wishlist.Core.Contracts;
-using Wishlist.Core.DTOs;
-namespace Wishlist.Core.Interfaces;
+using Wishlist.Functions.DTOs;
+
+namespace Wishlist.Functions.Interfaces;
 
 /// <summary>
 /// This is Interface

@@ -3,7 +3,7 @@ using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Azure.Functions.Worker.OpenTelemetry;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wishlist.Core.Interfaces;
+using Wishlist.Functions.Interfaces;
 using Wishlist.Functions.Services;
 using Wishlist.Infrastructure;
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;

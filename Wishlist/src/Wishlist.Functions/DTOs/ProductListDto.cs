@@ -1,6 +1,6 @@
 using Wishlist.Core.Enums;
 
-namespace Wishlist.Core.DTOs;
+namespace Wishlist.Functions.DTOs;
 
 /// <summary>
 /// A product list as returned by the API, without its items.

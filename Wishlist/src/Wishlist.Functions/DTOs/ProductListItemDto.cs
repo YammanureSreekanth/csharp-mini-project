@@ -1,4 +1,4 @@
-namespace Wishlist.Core.DTOs;
+namespace Wishlist.Functions.DTOs;
 
 /// <summary>
 /// A product list item as returned by the API

@@ -1,9 +1,10 @@
 using Wishlist.Core.Contracts;
-using Wishlist.Core.DTOs;
+using Wishlist.Functions.DTOs;
 using Wishlist.Core.Entities;
 using Wishlist.Core.Exceptions;
 using Wishlist.Core.Interfaces;
-using Wishlist.Core.Mapping;
+using Wishlist.Functions.Mapping;
+using Wishlist.Functions.Interfaces;
 
 namespace Wishlist.Functions.Services;
 
