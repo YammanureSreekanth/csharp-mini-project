@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Behavioral/Behavioral.csproj" />
+    <Project Path="src/Creational/Creational.csproj" />
+    <Project Path="src/Structural/Structural.csproj" />
+  </Folder>
+</Solution>

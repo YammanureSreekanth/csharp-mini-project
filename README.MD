@@ -20,9 +20,9 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-72_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-93-0078D4) ![lines](https://img.shields.io/badge/lines-4140-0078D4) ![types](https://img.shields.io/badge/types-101-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-73_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-103-0078D4) ![lines](https://img.shields.io/badge/lines-4359-0078D4) ![types](https://img.shields.io/badge/types-109-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `███████████████░░░░░` **77%**
+**Progress** `████████████████░░░░` **78%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -185,13 +185,16 @@ classDiagram
 | `Wishlist.Functions` | 12 | 747 | 14 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
 | `Wishlist.Infrastructure` | 9 | 566 | 9 |
+| `Creational` | 8 | 215 | 8 |
 | `Wishlist.Tests` | 1 | 199 | 1 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 | `Wishlist.Core` | 5 | 97 | 7 |
+| `Behavioral` | 1 | 2 | 0 |
+| `Structural` | 1 | 2 | 0 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 3341 of the 3341 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 3513 of the 3513 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -201,10 +204,13 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Wishlist.Infrastructure` | 465 | 0 | 0 | `████████████████████` 100% |
+| `Creational` | 170 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Core` | 86 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **3341** | **0** | **55** | `████████████████████` **100%** |
+| `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
+| `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
+| **Application total** | **3513** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -250,9 +256,9 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
-- [x] **Classes and interfaces** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +3</sub>
+- [x] **Classes and interfaces** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
 - [x] **Records** <sub>`Wishlist/src/Wishlist.Functions/Contracts/Requests.cs` +1</sub>
-- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +3</sub>
+- [x] **Generics** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +3</sub>
 - [ ] Delegates and events
 - [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +3</sub>
 - [x] **async / await / Task** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
@@ -266,9 +272,9 @@ _The ground I want to cover for my career in .NET._
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
-- [x] **Value vs reference types** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +3</sub>
-- [x] **IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
-- [x] **.NET 8/9 app structure** <sub>`Wishlist/src/Wishlist.Core/Wishlist.Core.csproj` +3</sub>
+- [x] **Value vs reference types** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
+- [x] **IDisposable** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +3</sub>
+- [x] **.NET 8/9 app structure** <sub>`DesignPatterns/src/Behavioral/Behavioral.csproj` +3</sub>
 - [ ] Minimal APIs
 - [x] **ASP.NET Core Web APIs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
 - [ ] Build and explain a production-style API — the real bar for this area <sub>judgement — not code-detectable</sub>
@@ -514,23 +520,23 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>C# fundamentals</b> — 9/12</summary>
 
-- [x] **Classes** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
+- [x] **Classes** <sub>`DesignPatterns/src/Creational/Program.cs` +5</sub>
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
-- [x] **Properties** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
+- [x] **Properties** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Wishlist/src/Wishlist.Infrastructure/Persistance/DesignTimeDbContextFactory.cs` +2</sub>
-- [x] **String interpolation** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
+- [x] **String interpolation** <sub>`DesignPatterns/src/Creational/Program.cs` +5</sub>
 - [x] **foreach** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +5</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
 - [x] **params arrays** <sub>`csharp-mini-project/Catalog.ConsoleApp/Logging/Logger.cs`</sub>
-- [x] **Console I/O** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
+- [x] **Console I/O** <sub>`DesignPatterns/src/Behavioral/Program.cs` +5</sub>
 
 </details>
 
 <details open>
-<summary><b>Object-oriented design</b> — 8/15</summary>
+<summary><b>Object-oriented design</b> — 9/15</summary>
 
 - [x] **Interfaces** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
 - [x] **Inheritance** <sub>`Wishlist/src/Wishlist.Functions/DTOs/ProductListWithItemsDto.cs` +3</sub>
@@ -540,8 +546,8 @@ _The ground I want to cover for my career in .NET._
 - [ ] virtual members
 - [ ] Default interface methods
 - [x] **Static classes** <sub>`Wishlist/src/Wishlist.Functions/Http.cs` +5</sub>
-- [ ] Sealed classes
-- [x] **Generics** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
+- [x] **Sealed classes** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +3</sub>
+- [x] **Generics** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +5</sub>
 - [x] **Generic types of my own** <sub>`Wishlist/src/Wishlist.Functions/HttpReadValidatedJson.cs` +3</sub>
 - [ ] Delegates
 - [ ] Events
@@ -556,19 +562,19 @@ _The ground I want to cover for my career in .NET._
 - [x] **Records** <sub>`Wishlist/src/Wishlist.Functions/Contracts/Requests.cs` +1</sub>
 - [x] **init-only properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [x] **required members** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +2</sub>
-- [x] **Pattern matching** <sub>`Wishlist/src/Wishlist.Functions/HttpReadValidatedJson.cs` +5</sub>
+- [x] **Pattern matching** <sub>`DesignPatterns/src/Creational/Singleton/LockedSettings.cs` +5</sub>
 - [ ] switch expressions
-- [x] **Nullable reference types** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
+- [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/Singleton/LockedSettings.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
-- [x] **?? and ??=** <sub>`Wishlist/src/Wishlist.Functions/Services/ProductListService.cs` +2</sub>
-- [x] **Expression-bodied members** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +5</sub>
-- [x] **Top-level statements** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
-- [x] **File-scoped namespaces** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
-- [x] **Target-typed new** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
+- [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +3</sub>
+- [x] **Expression-bodied members** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +5</sub>
+- [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +4</sub>
+- [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/Program.cs` +5</sub>
+- [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +5</sub>
 - [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
 - [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
 - [ ] Tuples
-- [x] **Lambdas** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
+- [x] **Lambdas** <sub>`DesignPatterns/src/Creational/Singleton/LazySettings.cs` +5</sub>
 - [x] **Object initializers** <sub>`Wishlist/src/Wishlist.Functions/Services/ProductListService.cs` +5</sub>
 
 </details>
@@ -576,7 +582,7 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Collections & LINQ</b> — 8/9</summary>
 
-- [x] **Generic collections** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +5</sub>
+- [x] **Generic collections** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +5</sub>
 - [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +5</sub>
 - [x] **LINQ method syntax** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +5</sub>
 - [ ] LINQ query syntax
@@ -596,14 +602,14 @@ _The ground I want to cover for my career in .NET._
 - [x] **Custom exceptions** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +1</sub>
 - [ ] Exception filters
 - [ ] finally blocks
-- [x] **using / IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
+- [x] **using / IDisposable** <sub>`DesignPatterns/src/Creational/Program.cs` +5</sub>
 - [x] **Custom attributes** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
 - [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
 - [x] **async / await** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
 - [x] **Task / ValueTask** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
 - [x] **ILogger** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
 - [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +4</sub>
-- [x] **IDisposable implemented** <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/CategoryRepository.cs` +3</sub>
+- [x] **IDisposable implemented** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +4</sub>
 
 </details>
 
@@ -651,7 +657,7 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Tooling & practice</b> — 3/5</summary>
 
-- [x] **Multi-project solution** <sub>`Wishlist/Wishlist.slnx` +1</sub>
+- [x] **Multi-project solution** <sub>`DesignPatterns/DesignPatterns.slnx` +2</sub>
 - [x] **CI with GitHub Actions** <sub>`.github/workflows/_dotnet-functions.yml` +3</sub>
 - [x] **Unit tests** — roadmap <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +1</sub>
 - [ ] Docker — roadmap
@@ -659,6 +665,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-02 10:47 UTC</sub>
+<sub>Last updated 2026-10-05 13:46 UTC</sub>
 
 <!-- JOURNEY:END -->
