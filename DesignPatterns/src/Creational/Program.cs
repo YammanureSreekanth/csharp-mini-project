@@ -1,10 +1,11 @@
-﻿using Creational.Singleton;
+﻿using Creational.Factory;
+using Creational.Singleton;
 
 namespace Creational;
 
 public class Program
 {
-    public static void Main()
+    public static async Task Main()
     {
         // Task<NaiveSettings>[] tasks = Enumerable
         //     .Range(start: 0, 8)
@@ -50,17 +51,59 @@ public class Program
         // thread.Join();
         // Console.WriteLine(ReferenceEquals(mine, other)); // other thread, own object
 
-        Console.WriteLine(value: $"Checking {nameof(AmbientContext)} singleton");
-        Console.WriteLine($"Current TaxRate: {AmbientContext.CurrentRate}");
-        using (new AmbientContext(1.5m))
-        {
-            Console.WriteLine($"Inside First USING Current TaxRate: {AmbientContext.CurrentRate}");
-            using (new AmbientContext(2.5m))
-            {
-                Console.WriteLine($"Nested USING Current TaxRate: {AmbientContext.CurrentRate}");
-            }
-            Console.WriteLine($"After Nested USING Current TaxRate: {AmbientContext.CurrentRate}");
-        }
-        Console.WriteLine($"Outside USING Current TaxRate: {AmbientContext.CurrentRate}");
+        // Console.WriteLine(value: $"Checking {nameof(AmbientContext)} singleton");
+        // Console.WriteLine($"Current TaxRate: {AmbientContext.CurrentRate}");
+        // using (new AmbientContext(1.5m))
+        // {
+        //     Console.WriteLine($"Inside First USING Current TaxRate: {AmbientContext.CurrentRate}");
+        //     using (new AmbientContext(2.5m))
+        //     {
+        //         Console.WriteLine($"Nested USING Current TaxRate: {AmbientContext.CurrentRate}");
+        //     }
+        //     Console.WriteLine($"After Nested USING Current TaxRate: {AmbientContext.CurrentRate}");
+        // }
+        // Console.WriteLine($"Outside USING Current TaxRate: {AmbientContext.CurrentRate}");
+
+        Console.WriteLine("Factory Design Patterns");
+        Console.WriteLine("================================================");
+        // Console.WriteLine(Price.FromGross(10, 2));
+        // Console.WriteLine(Price.FromNet(3.33m, 2));
+        // NotificationFactory.Create("EMAIL").Send("Sreekanth", "Your order is placed");
+
+        // OrderFactory orderFactory = new OrderFactory(() => new DateOnly(2026, 10, 4));
+        // List<string> customers = ["Sreekanth", "Aravind"];
+        // foreach (string customer in customers)
+        // {
+        //     Order order = orderFactory.Create("Sreekanth");
+        //     Console.WriteLine($"{order.Id} {order.Customer} {order.PlacedOn}");
+        // }
+        // Console.WriteLine(Coupon.CouponFactory.Welcome());
+        // Console.WriteLine(Coupon.CouponFactory.Custom("SREEKANTH", 50));
+        // CatalogClient catalogClient = await CatalogClient.CreateAsync();
+        // Console.WriteLine(string.Join(", ", catalogClient.Catagories));
+        // ReportJob[] reportJobs = { new FinanceReportJob(), new WarehouseReportJob() };
+        // foreach (ReportJob job in reportJobs)
+        // {
+        //     Console.WriteLine(job.Run("Sreekanth"));
+        // }
+        // NotifierRegistry? registry = new NotifierRegistry()
+        //     .Register("email", () => new EmailNotifierRegistry())
+        //     .Register("sms", () => new SMSNotifierRegistry());
+
+        // Console.WriteLine(registry.Create("sms").Send("+31 123456789", "Shipped"));
+
+        // //Let's register one more channel now
+        // registry.Register("push", () => new PushNotifierRegistry());
+
+        // Console.WriteLine(registry.Create("push").Send("iPhone", "Shipped"));
+
+        // BadgeFactory badgeFactory = new BadgeFactory();
+        // Badge shirt = badgeFactory.Create("GREEN", "SHIRT");
+        // Badge trouser = badgeFactory.Create("BLUE", "TROUSER");
+        // Console.WriteLine($"[SHIRT] Color: {shirt.Color} Label {shirt.Label}");
+        // Console.WriteLine($"[TROUSER] Color: {trouser.Color} Label {trouser.Label}");
+        // badgeFactory.ReColorAll("YELLOW");
+        // Console.WriteLine($"After changing [SHIRT] Color: {shirt.Color} Label {shirt.Label}");
+        // Console.WriteLine($"After changing [TROUSER] Color: {trouser.Color} Label {trouser.Label}");
     }
 }
