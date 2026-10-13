@@ -1,5 +1,8 @@
-﻿using Creational.Factory;
+﻿using Creational.AbstractFactory;
+using Creational.Builder;
+using Creational.Factory;
 using Creational.Singleton;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Creational;
 
@@ -64,8 +67,8 @@ public class Program
         // }
         // Console.WriteLine($"Outside USING Current TaxRate: {AmbientContext.CurrentRate}");
 
-        Console.WriteLine("Factory Design Patterns");
-        Console.WriteLine("================================================");
+        // Console.WriteLine("Factory Design Patterns");
+        // Console.WriteLine("================================================");
         // Console.WriteLine(Price.FromGross(10, 2));
         // Console.WriteLine(Price.FromNet(3.33m, 2));
         // NotificationFactory.Create("EMAIL").Send("Sreekanth", "Your order is placed");
@@ -105,5 +108,76 @@ public class Program
         // badgeFactory.ReColorAll("YELLOW");
         // Console.WriteLine($"After changing [SHIRT] Color: {shirt.Color} Label {shirt.Label}");
         // Console.WriteLine($"After changing [TROUSER] Color: {trouser.Color} Label {trouser.Label}");
+
+        // Console.WriteLine("Abstract Factory Design Patterns");
+        // Console.WriteLine("================================================");
+
+        // Console.WriteLine(new Checkout(new EUFactory()).Run(100m));
+        // Console.WriteLine(new Checkout(new USFactory()).Run(100m));
+        // IRegionFactory? region = RegionFactories.For("EU");
+        // Console.WriteLine(region.TaxCalculator().TaxFor(10m));
+
+        // Dictionary<string, IRegionFactory>? regions = RegionFactoryLocator.Discover();
+        // Console.WriteLine(string.Join(", ", regions.Keys.OrderBy(k => k)));
+        // Console.WriteLine(regions["US"].PaymentGateway().Pay(50m));
+
+        // string configuredRegion = "EU";
+        // ServiceCollection? services = new ServiceCollection();
+        // if (configuredRegion == "EU")
+        // {
+        //     services.AddSingleton<IRegionFactory, EUFactory>();
+        // }
+        // else
+        // {
+        //     services.AddSingleton<IRegionFactory, USFactory>();
+        // }
+        // services.AddScoped<RegionalCheckout>();
+        // using ServiceProvider? provider = services.BuildServiceProvider();
+        // Console.WriteLine(provider.GetRequiredService<RegionalCheckout>().Run(100m));
+
+        // HTMLBuilder hTMLBuilder = new HTMLBuilder();
+        // hTMLBuilder.AddItem("Sreekanth");
+        // hTMLBuilder.AddItem("Aravind");
+        // string rawHtml = hTMLBuilder.Build();
+        // Console.WriteLine(rawHtml);
+
+        // Builder.Order? order = new OrderBuilder()
+        //     .ForCustomer("Sreekanth")
+        //     .AddItem("S1234")
+        //     .AddItem("S23456")
+        //     .AddCoupon("WELCOME10")
+        //     .CreateAddress("Almere")
+        //     .ApplyGiftWrap(true)
+        //     .Build();
+
+        // Console.WriteLine($"{order.Customer}: {string.Join(", ", order.Items)} -> {order.Address}");
+
+        // Product? suit = new SuitBuilder().Named("Suit").SetPrice(99m).AddFabric("wool").Build();
+        // Console.WriteLine(suit);
+
+        // Parcel parcel = ParcelBuilder
+        //     .Create()
+        //     .UseCarrier("UPS")
+        //     .WithWeight(2.5)
+        //     .DeliverTo("Almere")
+        //     .Build();
+        // Console.WriteLine(parcel);
+
+        // var customer = new CustomerBuilder()
+        //     .Called("Sreekanth")
+        //     .WithEmail("sreekanth@email.com")
+        //     .InTier("None")
+        //     .Build();
+
+        // Console.WriteLine(customer);
+
+        CustomerOrder order = new CustomerOrderBuilder()
+            .Customer.Named("Sreekanth")
+            .WithEmail("sreekanth@email.com")
+            .Shipping.Street("Jan 56")
+            .InCity("Almere")
+            .WithPostcode("1211 RP");
+
+        Console.WriteLine(order);
     }
 }

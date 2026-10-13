@@ -20,7 +20,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-74_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-111-0078D4) ![lines](https://img.shields.io/badge/lines-4636-0078D4) ![types](https://img.shields.io/badge/types-133-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-74_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-122-0078D4) ![lines](https://img.shields.io/badge/lines-5140-0078D4) ![types](https://img.shields.io/badge/types-167-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████████░░░░` **79%**
 
@@ -181,11 +181,11 @@ classDiagram
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
+| `Creational` | 27 | 996 | 66 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Wishlist.Functions` | 12 | 747 | 14 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
 | `Wishlist.Infrastructure` | 9 | 566 | 9 |
-| `Creational` | 16 | 492 | 32 |
 | `Wishlist.Tests` | 1 | 199 | 1 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 | `Wishlist.Core` | 5 | 97 | 7 |
@@ -194,23 +194,23 @@ classDiagram
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 3731 of the 3731 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 4136 of the 4136 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
+| `Creational` | 793 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Wishlist.Infrastructure` | 465 | 0 | 0 | `████████████████████` 100% |
-| `Creational` | 388 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Core` | 86 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **3731** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **4136** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -256,15 +256,15 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
-- [x] **Classes and interfaces** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +3</sub>
-- [x] **Records** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodClass.cs` +2</sub>
-- [x] **Generics** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +3</sub>
+- [x] **Classes and interfaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
+- [x] **Records** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +3</sub>
+- [x] **Generics** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
 - [ ] Delegates and events
-- [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +3</sub>
-- [x] **async / await / Task** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +3</sub>
+- [x] **LINQ** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +3</sub>
+- [x] **async / await / Task** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +3</sub>
 - [x] **Cancellation tokens** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
 - [ ] Parallelism
-- [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
+- [x] **Dependency injection** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
 - [x] **Configuration** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Error handling** <sub>`Wishlist/src/Wishlist.Functions/Http.cs` +3</sub>
 - [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
@@ -272,8 +272,8 @@ _The ground I want to cover for my career in .NET._
 - [ ] SOLID principles — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Clean code — judgement, not detectable <sub>judgement — not code-detectable</sub>
 - [ ] Garbage collection basics — judgement, not detectable <sub>judgement — not code-detectable</sub>
-- [x] **Value vs reference types** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +3</sub>
-- [x] **IDisposable** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +3</sub>
+- [x] **Value vs reference types** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
+- [x] **IDisposable** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
 - [x] **.NET 8/9 app structure** <sub>`DesignPatterns/src/Behavioral/Behavioral.csproj` +3</sub>
 - [ ] Minimal APIs
 - [x] **ASP.NET Core Web APIs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Ecom.MvcWebApp.csproj` +1</sub>
@@ -307,7 +307,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Entities and value objects** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [ ] Aggregates and aggregate roots
 - [x] **Repositories** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
-- [x] **Factories** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodClass.cs` +3</sub>
+- [x] **Factories** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +3</sub>
 - [ ] Domain events
 - [ ] Specification pattern
 - [ ] Bounded contexts <sub>judgement — not code-detectable</sub>
@@ -520,13 +520,13 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>C# fundamentals</b> — 9/12</summary>
 
-- [x] **Classes** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **Classes** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
-- [x] **Properties** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **Properties** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`Wishlist/src/Wishlist.Infrastructure/Persistance/DesignTimeDbContextFactory.cs` +2</sub>
-- [x] **String interpolation** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodGoF.cs` +5</sub>
-- [x] **foreach** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodTracking.cs` +5</sub>
+- [x] **String interpolation** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
+- [x] **foreach** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodTracking.cs` +5</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
@@ -538,17 +538,17 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Object-oriented design</b> — 9/15</summary>
 
-- [x] **Interfaces** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodGoF.cs` +5</sub>
-- [x] **Inheritance** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodGoF.cs` +4</sub>
-- [x] **Abstract classes** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodGoF.cs` +1</sub>
-- [x] **Abstract members** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodGoF.cs` +1</sub>
-- [x] **Overriding** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodGoF.cs` +5</sub>
+- [x] **Interfaces** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
+- [x] **Inheritance** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
+- [x] **Abstract classes** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +3</sub>
+- [x] **Abstract members** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +1</sub>
+- [x] **Overriding** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
 - [ ] virtual members
 - [ ] Default interface methods
-- [x] **Static classes** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodInner.cs` +5</sub>
-- [x] **Sealed classes** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodStatic.cs` +4</sub>
-- [x] **Generics** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
-- [x] **Generic types of my own** <sub>`Wishlist/src/Wishlist.Functions/HttpReadValidatedJson.cs` +3</sub>
+- [x] **Static classes** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodInner.cs` +5</sub>
+- [x] **Sealed classes** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
+- [x] **Generics** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
+- [x] **Generic types of my own** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderCRTP.cs` +5</sub>
 - [ ] Delegates
 - [ ] Events
 - [ ] Indexers
@@ -559,38 +559,38 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Modern C#</b> — 16/17</summary>
 
-- [x] **Records** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodClass.cs` +2</sub>
+- [x] **Records** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +3</sub>
 - [x] **init-only properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [x] **required members** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +2</sub>
-- [x] **Pattern matching** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodSimple.cs` +5</sub>
-- [x] **switch expressions** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodSimple.cs`</sub>
-- [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodRegistry.cs` +5</sub>
+- [x] **Pattern matching** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
+- [x] **switch expressions** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodSimple.cs`</sub>
+- [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
-- [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +3</sub>
-- [x] **Expression-bodied members** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
+- [x] **Expression-bodied members** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +4</sub>
-- [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
-- [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodInner.cs` +5</sub>
+- [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
+- [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
 - [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
 - [ ] Tuples
-- [x] **Lambdas** <sub>`DesignPatterns/src/Creational/Singleton/LazySettings.cs` +5</sub>
-- [x] **Object initializers** <sub>`Wishlist/src/Wishlist.Functions/Services/ProductListService.cs` +5</sub>
+- [x] **Lambdas** <sub>`DesignPatterns/src/Creational/1_Singleton/LazySettings.cs` +5</sub>
+- [x] **Object initializers** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryProvider.cs` +5</sub>
 
 </details>
 
 <details open>
 <summary><b>Collections & LINQ</b> — 8/9</summary>
 
-- [x] **Generic collections** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
-- [x] **LINQ** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +5</sub>
-- [x] **LINQ method syntax** <sub>`Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs` +5</sub>
+- [x] **Generic collections** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
+- [x] **LINQ** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +5</sub>
+- [x] **LINQ method syntax** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +5</sub>
 - [ ] LINQ query syntax
-- [x] **Extension methods** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs`</sub>
+- [x] **Extension methods** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderFunctional.cs` +1</sub>
 - [x] **Iterators (yield)** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
 - [x] **IEnumerable<T>** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +5</sub>
 - [x] **IList<T>** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
-- [x] **IReadOnlyList<T>** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **IReadOnlyList<T>** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +5</sub>
 
 </details>
 
@@ -598,18 +598,18 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Errors, resources & async</b> — 11/13</summary>
 
 - [x] **try / catch** <sub>`Wishlist/src/Wishlist.Functions/Http.cs` +5</sub>
-- [x] **Throwing exceptions** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodRegistry.cs` +5</sub>
+- [x] **Throwing exceptions** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodRegistry.cs` +5</sub>
 - [x] **Custom exceptions** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +1</sub>
 - [ ] Exception filters
 - [ ] finally blocks
 - [x] **using / IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
 - [x] **Custom attributes** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
 - [x] **Logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
-- [x] **async / await** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
-- [x] **Task / ValueTask** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **async / await** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **Task / ValueTask** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +5</sub>
 - [x] **ILogger** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +5</sub>
 - [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +4</sub>
-- [x] **IDisposable implemented** <sub>`DesignPatterns/src/Creational/Singleton/AmbientContext.cs` +4</sub>
+- [x] **IDisposable implemented** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +4</sub>
 
 </details>
 
@@ -619,7 +619,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +1</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
 - [x] **Repository pattern** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
-- [x] **Factory pattern** <sub>`DesignPatterns/src/Creational/Factory/FactoryMethodClass.cs` +5</sub>
+- [x] **Factory pattern** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +5</sub>
 - [x] **Service layer** <sub>`Wishlist/src/Wishlist.Functions/Interfaces/IProductListService.cs` +3</sub>
 - [x] **EF Core** — next up <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +5</sub>
 - [x] **EF migrations** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +5</sub>
@@ -639,8 +639,8 @@ _The ground I want to cover for my career in .NET._
 - [x] **OpenAPI / Swagger** <sub>`csharp-mini-project/Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Configuration binding** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [ ] Authentication
-- [x] **IoC container** <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +1</sub>
-- [x] **DI lifetimes** — scoped / singleton / transient <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
+- [x] **IoC container** <sub>`DesignPatterns/src/Creational/Program.cs` +2</sub>
+- [x] **DI lifetimes** — scoped / singleton / transient <sub>`DesignPatterns/src/Creational/Program.cs` +4</sub>
 - [x] **Custom middleware** <sub>`csharp-mini-project/Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
 
 </details>
@@ -665,6 +665,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-10 18:47 UTC</sub>
+<sub>Last updated 2026-10-13 08:11 UTC</sub>
 
 <!-- JOURNEY:END -->
