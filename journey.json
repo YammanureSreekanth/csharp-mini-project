@@ -898,102 +898,51 @@
   "assignment": {
       "title": "Current focus",
       "source": "What I am working on right now",
-      "assignedOn": "2026-09-22",
-      "reviewOn": "2026-09-29",
-      "note": "Replaced with a new list at each review as priorities move on.",
+      "assignedOn": "2026-10-13",
+      "reviewOn": "2026-10-16",
+      "note": "Onion architecture for ProductCatalog, per Niels's review feedback: Product as the aggregate (not ProductList), and the four model responsibilities kept separate. Replaced with a new list at each review as priorities move on.",
       "items": [
         {
-          "label": "DTOs and mapping services",
-          "status": "done",
-          "notes": "keeping the API contract separate from the domain model",
-          "parts": [
-            {
-              "label": "DTO types",
-              "detect": [
-                "regex:\\b(class|record)\\s+\\w*Dto\\b",
-                "path:Dtos/",
-                "path:DTOs/"
-              ]
-            },
-            {
-              "label": "Mapping service",
-              "detect": [
-                "regex:\\b(class|interface)\\s+I?\\w*Mapper\\b",
-                "path:Mapping/",
-                "grep:AutoMapper|Mapster"
-              ]
-            }
+          "label": "Domain layer: Product as the aggregate root",
+          "status": "not-started",
+          "notes": "the innermost ring — entities and business rules only, no outward dependencies",
+          "detect": [
+            "path:ProductCatalog/Domain/",
+            "grepin:ProductCatalog/Domain:\\bclass\\s+Product\\b"
           ]
         },
         {
-          "label": "Bicep, deployments and Azure Functions",
-          "status": "done",
-          "notes": "one deployable slice: a Function provisioned with Bicep, using Azure SQL",
-          "parts": [
-            {
-              "label": "Bicep templates",
-              "detect": "path:.bicep"
-            },
-            {
-              "label": "Azure Function app",
-              "detect": [
-                "grep:Microsoft\\.Azure\\.Functions|\\[Function\\(|FunctionName",
-                "path:host.json"
-              ]
-            },
-            {
-              "label": "Azure SQL",
-              "detect": "grep:Microsoft\\.Sql/servers"
-            }
+          "label": "Data-layer entities, separate from the aggregate",
+          "status": "not-started",
+          "notes": "ProductList and ProductListItem as plain related entities with real foreign keys, not folded into one aggregate",
+          "detect": [
+            "grepin:ProductCatalog/Infrastructure:DbSet<",
+            "grepin:ProductCatalog/Persistence:DbSet<"
           ]
         },
         {
-          "label": "Swagger",
-          "status": "done",
-          "notes": "the scaffold already emits an OpenAPI document; the rest is mine to add",
-          "parts": [
-            {
-              "label": "OpenAPI document",
-              "detect": "grep:AddOpenApi|MapOpenApi|AddSwaggerGen"
-            },
-            {
-              "label": "Swagger UI",
-              "detect": "grep:UseSwaggerU[Ii]|AddSwaggerGen|AddSwaggerDocument|NSwag|Scalar\\.AspNetCore|MapScalarApiReference"
-            },
-            {
-              "label": "Documented responses",
-              "detect": "grep:ProducesResponseType|WithOpenApi|WithSummary"
-            },
-            {
-              "label": "XML comments in the docs",
-              "detect": "grep:GenerateDocumentationFile|IncludeXmlComments"
-            }
+          "label": "Request/response contracts isolated from the domain model",
+          "status": "not-started",
+          "notes": "the external API shape is allowed to diverge from the database and domain types",
+          "detect": [
+            "path:ProductCatalog/Contracts/",
+            "grepin:ProductCatalog:\\b(class|record)\\s+\\w*(Request|Response)\\b"
           ]
         },
         {
-          "label": "Unit testing",
-          "status": "done",
-          "parts": [
-            {
-              "label": "Test project",
-              "detect": [
-                "path:.Tests",
-                "path:Tests/"
-              ]
-            },
-            {
-              "label": "xUnit or NUnit",
-              "detect": "grep:xunit|NUnit|MSTest"
-            },
-            {
-              "label": "Mocking",
-              "detect": "grep:\\bMoq\\b|NSubstitute|FakeItEasy"
-            },
-            {
-              "label": "Running in CI",
-              "detect": "grep:dotnet test"
-            }
+          "label": "Service layer combines data, applies business rules, protects contracts",
+          "status": "not-started",
+          "notes": "e.g. merging database product data with external image data behind one service boundary",
+          "detect": [
+            "path:ProductCatalog/Services/",
+            "grepin:ProductCatalog:\\bclass\\s+I?\\w*Service\\b"
           ]
+        },
+        {
+          "label": "Dependencies point inward only",
+          "status": "not-started",
+          "notes": "domain has no reference to infrastructure or the API layer — judgement, not detectable",
+          "detect": "manual"
         }
       ]
     },

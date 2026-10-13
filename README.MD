@@ -29,16 +29,17 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 ### Current focus
 
-What I am working on right now · assigned 2026-09-22 · next review **2026-09-29**
+What I am working on right now · assigned 2026-10-13 · next review **2026-10-16**
 
-`████████████████████` **4 of 4 complete** · 0 in progress
+`░░░░░░░░░░░░░░░░░░░░` **0 of 5 complete** · 0 in progress · 5 not started
 
 | Item | Status | Evidence in the code |
 |---|---|---|
-| DTOs and mapping services<br><sub>keeping the API contract separate from the domain model</sub> | ✅ Completed | ✓ `DTO types` <sub>Wishlist/src/Wishlist.Functions/DTOs/ProductListDto.cs</sub><br>✓ `Mapping service` <sub>Wishlist/src/Wishlist.Functions/Mapping/ProductListMapper.cs</sub> |
-| Bicep, deployments and Azure Functions<br><sub>one deployable slice: a Function provisioned with Bicep, using Azure SQL</sub> | ✅ Completed | ✓ `Bicep templates` <sub>Wishlist/Infra/main.bicep</sub><br>✓ `Azure Function app` <sub>Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs</sub><br>✓ `Azure SQL` <sub>Wishlist/Infra/modules/sql.bicep</sub> |
-| Swagger<br><sub>the scaffold already emits an OpenAPI document; the rest is mine to add</sub> | ✅ Completed | ✓ `OpenAPI document` <sub>csharp-mini-project/Ecom.WebApiApp/Program.cs</sub><br>✓ `Swagger UI` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub><br>✓ `Documented responses` <sub>csharp-mini-project/Ecom.WebApiApp/Controllers/ProductController.cs</sub><br>✓ `XML comments in the docs` <sub>csharp-mini-project/Ecom.WebApiApp/Ecom.WebApiApp.csproj</sub> |
-| Unit testing | ✅ Completed | ✓ `Test project` <sub>Wishlist/tests/Wishlist.Tests/Dummy.json</sub><br>✓ `xUnit or NUnit` <sub>Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj</sub><br>✓ `Mocking` <sub>Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs</sub><br>✓ `Running in CI` <sub>.githooks/pre-commit</sub> |
+| Domain layer: Product as the aggregate root<br><sub>the innermost ring — entities and business rules only, no outward dependencies</sub> | ⬜ Not started | _none yet_ |
+| Data-layer entities, separate from the aggregate<br><sub>ProductList and ProductListItem as plain related entities with real foreign keys, not folded into one aggregate</sub> | ⬜ Not started | _none yet_ |
+| Request/response contracts isolated from the domain model<br><sub>the external API shape is allowed to diverge from the database and domain types</sub> | ⬜ Not started | _none yet_ |
+| Service layer combines data, applies business rules, protects contracts<br><sub>e.g. merging database product data with external image data behind one service boundary</sub> | ⬜ Not started | _none yet_ |
+| Dependencies point inward only<br><sub>domain has no reference to infrastructure or the API layer — judgement, not detectable</sub> | ⬜ Not started | _none yet_ |
 
 ### Projects
 
@@ -529,6 +530,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-13 10:43 UTC</sub>
+<sub>Last updated 2026-10-13 10:49 UTC</sub>
 
 <!-- JOURNEY:END -->
