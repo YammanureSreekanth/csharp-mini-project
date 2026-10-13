@@ -21,7 +21,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-74_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-122-0078D4) ![lines](https://img.shields.io/badge/lines-5140-0078D4) ![types](https://img.shields.io/badge/types-167-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-74_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-130-0078D4) ![lines](https://img.shields.io/badge/lines-5237-0078D4) ![types](https://img.shields.io/badge/types-174-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████████░░░░` **79%**
 
@@ -55,12 +55,20 @@ What I am working on right now · next review **2026-10-16**
 | `Wishlist.Tests` | 1 | 199 | 1 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 | `Wishlist.Core` | 5 | 97 | 7 |
+| `ProductCatalog.Api` | 1 | 21 | 0 |
+| `ProductCatalog.ComponentTests` | 1 | 16 | 1 |
+| `ProductCatalog.IntegrationTests` | 1 | 16 | 1 |
+| `ProductCatalog.UnitTests` | 1 | 16 | 1 |
+| `ProductCatalog.Api.Models` | 1 | 7 | 1 |
+| `ProductCatalog.App.Models` | 1 | 7 | 1 |
+| `ProductCatalog.App` | 1 | 7 | 1 |
+| `ProductCatalog.Infra` | 1 | 7 | 1 |
 | `Behavioral` | 1 | 2 | 0 |
 | `Structural` | 1 | 2 | 0 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 4136 of the 4136 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 4207 of the 4207 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -74,9 +82,17 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Core` | 86 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Api` | 16 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.ComponentTests` | 13 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.IntegrationTests` | 13 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.UnitTests` | 13 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Api.Models` | 4 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.App.Models` | 4 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.App` | 4 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Infra` | 4 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **4136** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **4207** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -223,12 +239,12 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Azure cloud services</b> — 3/10 · <sub>The services named on the profile.</sub></summary>
 
 - [x] **Azure App Service** <sub>`Wishlist/Infra/modules/functionapp.bicep`</sub>
-- [x] **Azure Functions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
+- [x] **Azure Functions** <sub>`ProductCatalog/src/ProductCatalog.Api/ProductCatalog.Api.csproj` +3</sub>
 - [ ] Azure Service Bus
 - [ ] Azure Cosmos DB
 - [ ] Azure Table Storage
 - [ ] Azure Storage Accounts
-- [x] **Application Insights** <sub>`Wishlist/Infra/modules/functionapp.bicep` +1</sub>
+- [x] **Application Insights** <sub>`ProductCatalog/src/ProductCatalog.Api/Program.cs` +2</sub>
 - [ ] Azure Key Vault
 - [ ] Azure Monitor <sub>judgement — not code-detectable</sub>
 - [ ] Managed identities
@@ -266,7 +282,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **SQL Server basics** <sub>`Wishlist/Infra/modules/functionapp.bicep` +3</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
-- [x] **Entity Framework Core** <sub>`Wishlist/src/Wishlist.Functions/Wishlist.Functions.csproj` +3</sub>
+- [x] **Entity Framework Core** <sub>`ProductCatalog/src/ProductCatalog.Infra/ProductCatalog.Infra.csproj` +3</sub>
 - [x] **Migrations** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +3</sub>
 - [x] **Indexing** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +3</sub>
 - [ ] Transactions
@@ -281,8 +297,8 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>Testing and code quality</b> — 3/11 · <sub>Called out in the job description.</sub></summary>
 
-- [x] **xUnit or NUnit** <sub>`Wishlist/tests/Wishlist.Tests/Wishlist.Tests.csproj` +1</sub>
-- [x] **Unit tests** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +1</sub>
+- [x] **xUnit or NUnit** <sub>`ProductCatalog/test/ProductCatalog.ComponentTests/ProductCatalog.ComponentTests.csproj` +3</sub>
+- [x] **Unit tests** <sub>`ProductCatalog/test/ProductCatalog.ComponentTests/UnitTest1.cs` +3</sub>
 - [x] **Mocking** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +3</sub>
 - [ ] Integration testing
 - [ ] Testing APIs <sub>judgement — not code-detectable</sub>
@@ -298,7 +314,7 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>CI/CD and DevOps basics</b> — 5/12 · <sub>They expect pipeline improvements.</sub></summary>
 
-- [x] **Git fundamentals** <sub>`.gitignore` +2</sub>
+- [x] **Git fundamentals** <sub>`.gitignore` +3</sub>
 - [ ] Branching strategies <sub>judgement — not code-detectable</sub>
 - [ ] Pull requests <sub>judgement — not code-detectable</sub>
 - [x] **Build pipelines** <sub>`.github/workflows/_dotnet-functions.yml` +3</sub>
@@ -337,9 +353,9 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +3</sub>
 - [x] **Correlation IDs** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/HomeController.cs`</sub>
-- [x] **Distributed tracing** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +2</sub>
+- [x] **Distributed tracing** <sub>`ProductCatalog/src/ProductCatalog.Api/ProductCatalog.Api.csproj` +3</sub>
 - [ ] Metrics
-- [x] **Application Insights** <sub>`Wishlist/Infra/modules/functionapp.bicep` +1</sub>
+- [x] **Application Insights** <sub>`ProductCatalog/src/ProductCatalog.Api/Program.cs` +2</sub>
 - [ ] Health checks
 - [ ] Dashboards <sub>judgement — not code-detectable</sub>
 - [ ] Alerts <sub>judgement — not code-detectable</sub>
@@ -390,7 +406,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
 - [x] **Properties** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **var / implicit typing** <sub>`Wishlist/src/Wishlist.Infrastructure/Persistance/DesignTimeDbContextFactory.cs` +2</sub>
+- [x] **var / implicit typing** <sub>`ProductCatalog/src/ProductCatalog.Api/Program.cs` +3</sub>
 - [x] **String interpolation** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
 - [x] **foreach** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodTracking.cs` +5</sub>
 - [ ] switch
@@ -434,7 +450,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
 - [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
 - [x] **Expression-bodied members** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +4</sub>
+- [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +5</sub>
 - [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
@@ -523,14 +539,14 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Tooling & practice</b> — 3/5</summary>
 
-- [x] **Multi-project solution** <sub>`DesignPatterns/DesignPatterns.slnx` +2</sub>
+- [x] **Multi-project solution** <sub>`DesignPatterns/DesignPatterns.slnx` +3</sub>
 - [x] **CI with GitHub Actions** <sub>`.github/workflows/_dotnet-functions.yml` +3</sub>
-- [x] **Unit tests** — roadmap <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +1</sub>
+- [x] **Unit tests** — roadmap <sub>`ProductCatalog/test/ProductCatalog.ComponentTests/UnitTest1.cs` +4</sub>
 - [ ] Docker — roadmap
 - [ ] Deployment — roadmap <sub>planned</sub>
 
 </details>
 
-<sub>Last updated 2026-10-13 13:47 UTC</sub>
+<sub>Last updated 2026-10-13 14:11 UTC</sub>
 
 <!-- JOURNEY:END -->
