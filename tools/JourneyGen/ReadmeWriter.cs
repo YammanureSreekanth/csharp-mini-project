@@ -51,14 +51,17 @@ public static class ReadmeWriter
 
         if (cfg.Assignment.Items.Count > 0) AppendAssignment(sb, cfg.Assignment);
 
-        sb.AppendLine("### Domain model");
-        sb.AppendLine();
-        sb.AppendLine("_Generated from the source on every push — this diagram cannot drift from the code._");
-        sb.AppendLine();
-        sb.AppendLine("```mermaid");
-        sb.AppendLine(MermaidRenderer.ClassDiagram(analyzer.Types, cfg.Diagram));
-        sb.AppendLine("```");
-        sb.AppendLine();
+        if (cfg.Diagram.Enabled)
+        {
+            sb.AppendLine("### Domain model");
+            sb.AppendLine();
+            sb.AppendLine("_Generated from the source on every push — this diagram cannot drift from the code._");
+            sb.AppendLine();
+            sb.AppendLine("```mermaid");
+            sb.AppendLine(MermaidRenderer.ClassDiagram(analyzer.Types, cfg.Diagram));
+            sb.AppendLine("```");
+            sb.AppendLine();
+        }
 
         sb.AppendLine("### Projects");
         sb.AppendLine();

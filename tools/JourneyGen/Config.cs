@@ -5,6 +5,7 @@ namespace JourneyGen;
 
 public sealed class DiagramOptions
 {
+    public bool Enabled = true;
     public string NamespaceContains = "Domain";
     public bool ShowMembers = true;
     public int MaxMembers = 10;
@@ -60,6 +61,7 @@ public sealed class JourneyConfig
 
         if (root.TryGetProperty("diagram", out var d))
         {
+            if (d.TryGetProperty("enabled", out var en)) cfg.Diagram.Enabled = en.GetBoolean();
             if (d.TryGetProperty("namespaceContains", out var nc)) cfg.Diagram.NamespaceContains = nc.GetString() ?? "";
             if (d.TryGetProperty("showMembers", out var sm)) cfg.Diagram.ShowMembers = sm.GetBoolean();
             if (d.TryGetProperty("maxMembers", out var mm)) cfg.Diagram.MaxMembers = mm.GetInt32();

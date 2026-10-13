@@ -1028,6 +1028,7 @@
   },
 
   "diagram": {
+    "enabled": false,
     "namespaceContains": "Domain",
     "showMembers": true,
     "maxMembers": 8
