@@ -341,12 +341,14 @@
   <h2 class="section">Concepts</h2>
   <div class="areas" id="areas"></div>
 
-  <h2 class="section">Domain model</h2>
-  <section class="card">
-    <h2>Class diagram</h2>
-    <p class="sub">Parsed from the source with Roslyn on every push, so it cannot drift from the code.</p>
-    <div class="diagram"><pre class="mermaid" id="diagram"></pre></div>
-  </section>
+  <div id="domain-model-section">
+    <h2 class="section">Domain model</h2>
+    <section class="card">
+      <h2>Class diagram</h2>
+      <p class="sub">Parsed from the source with Roslyn on every push, so it cannot drift from the code.</p>
+      <div class="diagram"><pre class="mermaid" id="diagram"></pre></div>
+    </section>
+  </div>
 
   <details class="data">
     <summary>View the underlying data as tables</summary>
@@ -832,6 +834,10 @@
 
   /* ---------- mermaid ---------- */
   function renderDiagram() {
+    var section = document.getElementById("domain-model-section");
+    if (!D.mermaid) { section.style.display = "none"; return; }
+    section.style.display = "";
+
     var el = document.getElementById("diagram");
     el.removeAttribute("data-processed");
     el.textContent = D.mermaid;

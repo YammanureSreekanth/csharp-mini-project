@@ -6,6 +6,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 
 - [`csharp-mini-project/`](csharp-mini-project/README.MD) — e-commerce catalog domain: console app, MVC web app, Web API, tests
 - [`Wishlist/`](Wishlist/) — wishlist service: Azure Functions, Core, Persistence
+- [`DesignPatterns/`](DesignPatterns/) — GoF pattern implementations by category: Creational, Structural, Behavioral
 
 ---
 
@@ -29,7 +30,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 ### Current focus
 
-What I am working on right now · assigned 2026-10-13 · next review **2026-10-16**
+What I am working on right now · next review **2026-10-16**
 
 `░░░░░░░░░░░░░░░░░░░░` **0 of 5 complete** · 0 in progress · 5 not started
 
@@ -530,6 +531,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-13 10:49 UTC</sub>
+<sub>Last updated 2026-10-13 10:56 UTC</sub>
 
 <!-- JOURNEY:END -->

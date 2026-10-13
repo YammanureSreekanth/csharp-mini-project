@@ -178,7 +178,7 @@ public static class ReadmeWriter
 
         var meta = new List<string>();
         if (a.Source.Length > 0) meta.Add(Escape(a.Source));
-        if (a.AssignedOn.Length > 0) meta.Add($"assigned {a.AssignedOn}");
+        if (a.ShowAssignedOn && a.AssignedOn.Length > 0) meta.Add($"assigned {a.AssignedOn}");
         if (a.ReviewOn.Length > 0)
         {
             // The countdown belongs on the dashboard only: it moves every day, and a

@@ -69,7 +69,7 @@ public static class SiteWriter
             {
                 title = cfg.Assignment.Title,
                 source = cfg.Assignment.Source,
-                assignedOn = cfg.Assignment.AssignedOn,
+                assignedOn = cfg.Assignment.ShowAssignedOn ? cfg.Assignment.AssignedOn : "",
                 reviewOn = cfg.Assignment.ReviewOn,
                 note = cfg.Assignment.Note,
                 done = cfg.Assignment.Done,
@@ -133,7 +133,7 @@ public static class SiteWriter
                     source = d.Source == Provenance.Source.Ai ? "AI" : "scaffold",
                 }),
             },
-            mermaid = MermaidRenderer.ClassDiagram(analyzer.Types, cfg.Diagram),
+            mermaid = cfg.Diagram.Enabled ? MermaidRenderer.ClassDiagram(analyzer.Types, cfg.Diagram) : "",
         };
     }
 

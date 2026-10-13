@@ -127,6 +127,7 @@ public sealed class Assignment
     public string Title = "Learning plan";
     public string Source = "";              // who set it
     public string AssignedOn = "";           // ISO date
+    public bool ShowAssignedOn = true;       // hide the date without losing it from the data
     public string ReviewOn = "";             // ISO date of the next check-in
     public string Note = "";
     public List<AssignmentItem> Items = new();

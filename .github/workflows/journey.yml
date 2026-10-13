@@ -37,6 +37,9 @@ jobs:
       - name: Build the Wishlist solution
         run: dotnet build Wishlist/Wishlist.slnx --configuration Release
 
+      - name: Build the DesignPatterns solution
+        run: dotnet build DesignPatterns/DesignPatterns.slnx --configuration Release
+
       # CI verifies, it does not write. The .githooks/pre-commit hook keeps the
       # README current locally; committing it from here produced a bot commit after
       # every push, which left every local branch divergent.

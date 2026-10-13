@@ -899,6 +899,7 @@
       "title": "Current focus",
       "source": "What I am working on right now",
       "assignedOn": "2026-10-13",
+      "showAssignedOn": false,
       "reviewOn": "2026-10-16",
       "note": "Onion architecture for ProductCatalog, per Niels's review feedback: Product as the aggregate (not ProductList), and the four model responsibilities kept separate. Replaced with a new list at each review as priorities move on.",
       "items": [
@@ -906,37 +907,25 @@
           "label": "Domain layer: Product as the aggregate root",
           "status": "not-started",
           "notes": "the innermost ring — entities and business rules only, no outward dependencies",
-          "detect": [
-            "path:ProductCatalog/Domain/",
-            "grepin:ProductCatalog/Domain:\\bclass\\s+Product\\b"
-          ]
+          "detect": "grepin:ProductCatalog:\\bclass\\s+Product\\b"
         },
         {
           "label": "Data-layer entities, separate from the aggregate",
           "status": "not-started",
           "notes": "ProductList and ProductListItem as plain related entities with real foreign keys, not folded into one aggregate",
-          "detect": [
-            "grepin:ProductCatalog/Infrastructure:DbSet<",
-            "grepin:ProductCatalog/Persistence:DbSet<"
-          ]
+          "detect": "grepin:ProductCatalog:DbSet<"
         },
         {
           "label": "Request/response contracts isolated from the domain model",
           "status": "not-started",
           "notes": "the external API shape is allowed to diverge from the database and domain types",
-          "detect": [
-            "path:ProductCatalog/Contracts/",
-            "grepin:ProductCatalog:\\b(class|record)\\s+\\w*(Request|Response)\\b"
-          ]
+          "detect": "grepin:ProductCatalog:\\b(class|record)\\s+\\w*(Request|Response)\\b"
         },
         {
           "label": "Service layer combines data, applies business rules, protects contracts",
           "status": "not-started",
           "notes": "e.g. merging database product data with external image data behind one service boundary",
-          "detect": [
-            "path:ProductCatalog/Services/",
-            "grepin:ProductCatalog:\\bclass\\s+I?\\w*Service\\b"
-          ]
+          "detect": "grepin:ProductCatalog:\\bclass\\s+I?\\w*Service\\b"
         },
         {
           "label": "Dependencies point inward only",

@@ -97,6 +97,7 @@ public sealed class JourneyConfig
             if (asg.TryGetProperty("title", out var at)) a.Title = at.GetString() ?? a.Title;
             if (asg.TryGetProperty("source", out var asrc)) a.Source = asrc.GetString() ?? "";
             if (asg.TryGetProperty("assignedOn", out var ao)) a.AssignedOn = ao.GetString() ?? "";
+            if (asg.TryGetProperty("showAssignedOn", out var sao)) a.ShowAssignedOn = sao.GetBoolean();
             if (asg.TryGetProperty("reviewOn", out var ro)) a.ReviewOn = ro.GetString() ?? "";
             if (asg.TryGetProperty("note", out var an)) a.Note = an.GetString() ?? "";
 
