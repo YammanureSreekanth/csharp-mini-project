@@ -21,7 +21,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-74_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-130-0078D4) ![lines](https://img.shields.io/badge/lines-5237-0078D4) ![types](https://img.shields.io/badge/types-174-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-74_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-153-0078D4) ![lines](https://img.shields.io/badge/lines-5697-0078D4) ![types](https://img.shields.io/badge/types-198-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████████░░░░` **79%**
 
@@ -36,11 +36,14 @@ What I am working on right now · next review **2026-10-16**
 
 | Item | Status | Evidence in the code |
 |---|---|---|
-| Domain layer: Product as the aggregate root<br><sub>the innermost ring — entities and business rules only, no outward dependencies</sub> | ⬜ Not started | _none yet_ |
-| Data-layer entities, separate from the aggregate<br><sub>ProductList and ProductListItem as plain related entities with real foreign keys, not folded into one aggregate</sub> | ⬜ Not started | _none yet_ |
+| Domain layer: Product as the aggregate root<br><sub>the innermost ring — entities and business rules only, no outward dependencies</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.App.Models/Entities/Product.cs` |
+| Data-layer entities, separate from the aggregate<br><sub>ProductList and ProductListItem as plain related entities with real foreign keys, not folded into one aggregate</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.Infra/Persistance/ProductDbContext.cs` |
 | Request/response contracts isolated from the domain model<br><sub>the external API shape is allowed to diverge from the database and domain types</sub> | ⬜ Not started | _none yet_ |
-| Service layer combines data, applies business rules, protects contracts<br><sub>e.g. merging database product data with external image data behind one service boundary</sub> | ⬜ Not started | _none yet_ |
+| Service layer combines data, applies business rules, protects contracts<br><sub>e.g. merging database product data with external image data behind one service boundary</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.App/Services/ProductService.cs` |
 | Dependencies point inward only<br><sub>domain has no reference to infrastructure or the API layer — judgement, not detectable</sub> | ⬜ Not started | _none yet_ |
+
+> **The code now covers 3 items still marked as unfinished:** Domain layer: Product as the aggregate root, Data-layer entities, separate from the aggregate, Service layer combines data, applies business rules, protects contracts.
+> Status here is declared by hand — update `status` in `journey.json` to close them off.
 
 ### Projects
 
@@ -50,25 +53,24 @@ What I am working on right now · next review **2026-10-16**
 | `Creational` | 27 | 996 | 66 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Wishlist.Functions` | 12 | 747 | 14 |
+| `Wishlist.Infrastructure` | 9 | 572 | 9 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
-| `Wishlist.Infrastructure` | 9 | 566 | 9 |
+| `ProductCatalog.Infra` | 11 | 232 | 11 |
 | `Wishlist.Tests` | 1 | 199 | 1 |
+| `ProductCatalog.App.Models` | 11 | 189 | 12 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 | `Wishlist.Core` | 5 | 97 | 7 |
-| `ProductCatalog.Api` | 1 | 21 | 0 |
+| `ProductCatalog.App` | 5 | 59 | 5 |
+| `ProductCatalog.Api` | 1 | 23 | 0 |
 | `ProductCatalog.ComponentTests` | 1 | 16 | 1 |
 | `ProductCatalog.IntegrationTests` | 1 | 16 | 1 |
 | `ProductCatalog.UnitTests` | 1 | 16 | 1 |
-| `ProductCatalog.Api.Models` | 1 | 7 | 1 |
-| `ProductCatalog.App.Models` | 1 | 7 | 1 |
-| `ProductCatalog.App` | 1 | 7 | 1 |
-| `ProductCatalog.Infra` | 1 | 7 | 1 |
 | `Behavioral` | 1 | 2 | 0 |
 | `Structural` | 1 | 2 | 0 |
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 4207 of the 4207 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 4569 of the 4569 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -78,21 +80,20 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
-| `Wishlist.Infrastructure` | 465 | 0 | 0 | `████████████████████` 100% |
+| `Wishlist.Infrastructure` | 469 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Infra` | 173 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.App.Models` | 154 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Core` | 86 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.Api` | 16 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.App` | 45 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Api` | 18 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.ComponentTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.IntegrationTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.UnitTests` | 13 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.Api.Models` | 4 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.App.Models` | 4 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.App` | 4 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.Infra` | 4 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **4207** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **4569** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -144,7 +145,7 @@ _The ground I want to cover for my career in .NET._
 - [ ] Delegates and events
 - [x] **LINQ** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +3</sub>
 - [x] **async / await / Task** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +3</sub>
-- [x] **Cancellation tokens** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
+- [x] **Cancellation tokens** <sub>`ProductCatalog/src/ProductCatalog.App/Repositories/Interfaces/IProductRepository.cs` +3</sub>
 - [ ] Parallelism
 - [x] **Dependency injection** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
 - [x] **Configuration** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
@@ -188,7 +189,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Entities and value objects** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [ ] Aggregates and aggregate roots
-- [x] **Repositories** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +3</sub>
+- [x] **Repositories** <sub>`ProductCatalog/src/ProductCatalog.App/Repositories/Interfaces/IProductRepository.cs` +3</sub>
 - [x] **Factories** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +3</sub>
 - [ ] Domain events
 - [ ] Specification pattern
@@ -280,11 +281,11 @@ _The ground I want to cover for my career in .NET._
 <details>
 <summary><b>Databases and data modeling</b> — 5/11 · <sub>Relational and NoSQL thinking.</sub></summary>
 
-- [x] **SQL Server basics** <sub>`Wishlist/Infra/modules/functionapp.bicep` +3</sub>
+- [x] **SQL Server basics** <sub>`ProductCatalog/src/ProductCatalog.Infra/DependencyInjection.cs` +3</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +3</sub>
-- [x] **Entity Framework Core** <sub>`ProductCatalog/src/ProductCatalog.Infra/ProductCatalog.Infra.csproj` +3</sub>
+- [x] **Entity Framework Core** <sub>`ProductCatalog/src/ProductCatalog.Infra/DependencyInjection.cs` +3</sub>
 - [x] **Migrations** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +3</sub>
-- [x] **Indexing** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +3</sub>
+- [x] **Indexing** <sub>`ProductCatalog/src/ProductCatalog.Infra/Persistance/Configurator/ProductConfigurator.cs` +3</sub>
 - [ ] Transactions
 - [ ] Optimistic concurrency
 - [ ] Cosmos DB partition keys — poor choices are expensive and hard to undo
@@ -404,7 +405,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **Classes** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
-- [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
+- [x] **Enums** <sub>`ProductCatalog/src/ProductCatalog.App.Models/Entities/Money.cs` +5</sub>
 - [x] **Properties** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **var / implicit typing** <sub>`ProductCatalog/src/ProductCatalog.Api/Program.cs` +3</sub>
 - [x] **String interpolation** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
@@ -441,20 +442,20 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>Modern C#</b> — 16/17</summary>
 
-- [x] **Records** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +3</sub>
+- [x] **Records** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +5</sub>
 - [x] **init-only properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
 - [x] **required members** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +2</sub>
 - [x] **Pattern matching** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
 - [x] **switch expressions** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodSimple.cs`</sub>
 - [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
 - [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
-- [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
+- [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +4</sub>
 - [x] **Expression-bodied members** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +5</sub>
 - [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
-- [x] **Primary constructors** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +5</sub>
+- [x] **Collection expressions** <sub>`ProductCatalog/src/ProductCatalog.App.Models/Entities/Product.cs` +3</sub>
+- [x] **Primary constructors** <sub>`ProductCatalog/src/ProductCatalog.App.Models/Exceptions/ProductNotFoundException.cs` +5</sub>
 - [ ] Tuples
 - [x] **Lambdas** <sub>`DesignPatterns/src/Creational/1_Singleton/LazySettings.cs` +5</sub>
 - [x] **Object initializers** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryProvider.cs` +5</sub>
@@ -468,7 +469,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **LINQ** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +5</sub>
 - [x] **LINQ method syntax** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +5</sub>
 - [ ] LINQ query syntax
-- [x] **Extension methods** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderFunctional.cs` +1</sub>
+- [x] **Extension methods** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderFunctional.cs` +2</sub>
 - [x] **Iterators (yield)** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
 - [x] **IEnumerable<T>** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +5</sub>
 - [x] **IList<T>** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
@@ -481,7 +482,7 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **try / catch** <sub>`Wishlist/src/Wishlist.Functions/Http.cs` +5</sub>
 - [x] **Throwing exceptions** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodRegistry.cs` +5</sub>
-- [x] **Custom exceptions** <sub>`Wishlist/src/Wishlist.Core/Exceptions/ProductListExceptions.cs` +1</sub>
+- [x] **Custom exceptions** <sub>`ProductCatalog/src/ProductCatalog.App.Models/Exceptions/ProductNotFoundException.cs` +3</sub>
 - [ ] Exception filters
 - [ ] finally blocks
 - [x] **using / IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
@@ -500,10 +501,10 @@ _The ground I want to cover for my career in .NET._
 
 - [x] **ADO.NET** — raw SqlConnection / SqlDataReader <sub>`csharp-mini-project/Catalog.ConsoleApp/DataAccess/MySQLAsyncConnection.cs` +1</sub>
 - [x] **Hand-written SQL** <sub>`csharp-mini-project/Catalog.ConsoleApp/Computation/Reset catalog schema.SQL` +4</sub>
-- [x] **Repository pattern** <sub>`Wishlist/src/Wishlist.Core/Interfaces/IProductListRepository.cs` +5</sub>
+- [x] **Repository pattern** <sub>`ProductCatalog/src/ProductCatalog.App/Repositories/Interfaces/IProductRepository.cs` +5</sub>
 - [x] **Factory pattern** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +5</sub>
-- [x] **Service layer** <sub>`Wishlist/src/Wishlist.Functions/Interfaces/IProductListService.cs` +3</sub>
-- [x] **EF Core** — next up <sub>`Wishlist/src/Wishlist.Infrastructure/DependencyInjection.cs` +5</sub>
+- [x] **Service layer** <sub>`ProductCatalog/src/ProductCatalog.App/Services/Interfaces/IProductService.cs` +5</sub>
+- [x] **EF Core** — next up <sub>`ProductCatalog/src/ProductCatalog.Infra/DependencyInjection.cs` +5</sub>
 - [x] **EF migrations** <sub>`Wishlist/src/Wishlist.Infrastructure/Migrations/20260930122743_InitialCreate.Designer.cs` +5</sub>
 
 </details>
@@ -511,7 +512,7 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>ASP.NET Core</b> — 11/13</summary>
 
-- [x] **Dependency injection** <sub>`Wishlist/src/Wishlist.Functions/Program.cs` +3</sub>
+- [x] **Dependency injection** <sub>`ProductCatalog/src/ProductCatalog.Infra/DependencyInjection.cs` +4</sub>
 - [x] **Middleware pipeline** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **MVC controllers** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/CategoryController.cs` +5</sub>
 - [x] **MVC routing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
@@ -521,8 +522,8 @@ _The ground I want to cover for my career in .NET._
 - [x] **OpenAPI / Swagger** <sub>`csharp-mini-project/Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Configuration binding** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [ ] Authentication
-- [x] **IoC container** <sub>`DesignPatterns/src/Creational/Program.cs` +2</sub>
-- [x] **DI lifetimes** — scoped / singleton / transient <sub>`DesignPatterns/src/Creational/Program.cs` +4</sub>
+- [x] **IoC container** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
+- [x] **DI lifetimes** — scoped / singleton / transient <sub>`DesignPatterns/src/Creational/Program.cs` +5</sub>
 - [x] **Custom middleware** <sub>`csharp-mini-project/Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
 
 </details>
@@ -547,6 +548,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-13 14:11 UTC</sub>
+<sub>Last updated 2026-10-14 19:12 UTC</sub>
 
 <!-- JOURNEY:END -->

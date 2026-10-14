@@ -9,10 +9,14 @@ namespace Wishlist.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
     {
-        string connectionString = configuration["SqlConnectionString"]
-    ?? throw new InvalidOperationException("Missing DB connection string.");
+        string connectionString =
+            configuration["SqlConnectionString"]
+            ?? throw new InvalidOperationException("Missing DB connection string.");
 
         services.AddDbContext<WishlistDbContext>(options => options.UseSqlServer(connectionString));
         services.AddScoped<IProductListRepository, ProductListRepository>();
