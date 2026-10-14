@@ -7,6 +7,7 @@ Personal .NET solutions workspace, tracked as one repo so the **.NET Journey** d
 - [`csharp-mini-project/`](csharp-mini-project/README.MD) — e-commerce catalog domain: console app, MVC web app, Web API, tests
 - [`Wishlist/`](Wishlist/) — wishlist service: Azure Functions, Core, Persistence
 - [`DesignPatterns/`](DesignPatterns/) — GoF pattern implementations by category: Creational, Structural, Behavioral
+- [`ProductCatalog/`](ProductCatalog/) — onion-architecture rework from the Oct 2026 design review: Api, App, App.Models, Infra
 
 ---
 
@@ -548,6 +549,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-14 19:12 UTC</sub>
+<sub>Last updated 2026-10-14 19:17 UTC</sub>
 
 <!-- JOURNEY:END -->
