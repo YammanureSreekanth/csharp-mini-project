@@ -1,3 +1,4 @@
+using ProductCatalog.App.Models;
 using ProductCatalog.App.Models.Commands;
 using ProductCatalog.App.Models.Entities;
 
@@ -10,7 +11,7 @@ public interface IProductService
         CancellationToken cancellationToken
     );
 
-     Task<Product> GetProductAsync(
+     Task<ProductWithImage> GetProductAsync(
         string id,
         CancellationToken cancellationToken
     );

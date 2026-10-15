@@ -7,4 +7,4 @@ public sealed record UpdateProductRequest(
     bool Searchable,
     bool Online,
     decimal Price,
-    int ATS);
+    int Ats);

@@ -8,5 +8,5 @@ public sealed record UpdateProductCommand(
     bool Searchable,
     bool Online,
     decimal Price,
-    int ATS
+    int Ats
 );

@@ -8,5 +8,5 @@ public sealed record CreateProductCommand(
     bool Searchable,
     bool Online,
     decimal Price,
-    int ATS
+    int Ats
 );

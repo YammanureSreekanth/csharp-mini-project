@@ -55,7 +55,7 @@ public class ProductBuilder
         return this;
     }
 
-    public ProductBuilder ATS(int ats)
+    public ProductBuilder Ats(int ats)
     {
         _ats = ats;
         return this;

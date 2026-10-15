@@ -22,6 +22,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.Property(l => l.Price);
 
-        builder.Property(l => l.ATS);
+        builder.Property(l => l.Ats);
     }
 }

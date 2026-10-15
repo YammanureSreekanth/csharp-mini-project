@@ -8,4 +8,4 @@ public sealed record CreateProductRequest(
     bool Searchable,
     bool Online,
     decimal Price,
-    int ATS);
+    int Ats);

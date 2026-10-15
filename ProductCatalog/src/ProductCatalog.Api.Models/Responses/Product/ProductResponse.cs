@@ -8,4 +8,5 @@ public sealed record ProductResponse(
     bool Searchable,
     bool Online,
     decimal Price,
-    int ATS);
+    int Ats,
+    ProductImageResponse? Image);

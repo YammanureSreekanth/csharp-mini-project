@@ -9,7 +9,7 @@ public class Product
     public bool Searchable { get; private set; } = false;
     public bool Online { get; private set; } = false;
     public decimal Price { get; private set; }
-    public int ATS {get; private set; }
+    public int Ats {get; private set; }
 
     public Product(
         string id,
@@ -29,6 +29,6 @@ public class Product
         Searchable = searchable;
         Online = online;
         Price = price;
-        ATS = ats;
+        Ats = ats;
     }
 }
