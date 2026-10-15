@@ -43,6 +43,12 @@ public class ProductBuilder
         return this;
     }
 
+    public ProductBuilder Online(bool online)
+    {
+        _online = online;
+        return this;
+    }
+
     public ProductBuilder Price(decimal price)
     {
         _price = price;

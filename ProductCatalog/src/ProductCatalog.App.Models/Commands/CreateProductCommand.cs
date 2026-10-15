@@ -6,5 +6,7 @@ public sealed record CreateProductCommand(
     string Description,
     string CategoryId,
     bool Searchable,
-    bool Online
+    bool Online,
+    decimal Price,
+    int ATS
 );
