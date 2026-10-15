@@ -9,4 +9,19 @@ public interface IProductService
         CreateProductCommand command,
         CancellationToken cancellationToken
     );
+
+     Task<Product> GetProductAsync(
+        string id,
+        CancellationToken cancellationToken
+    );
+
+    Task<Product> UpdateProductAsync(
+        UpdateProductCommand command,
+        CancellationToken cancellationToken
+    );
+
+    Task<Product> DeleteProductAsync(
+        string id,
+        CancellationToken cancellationToken
+    );
 }

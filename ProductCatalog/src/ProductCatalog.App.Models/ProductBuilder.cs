@@ -10,7 +10,8 @@ public class ProductBuilder
     private string _categoryId = "";
     private bool _searchable = true;
     private bool _online = true;
-    private readonly List<Tuple<string, string, string>> _variants = new();
+    private decimal _price;
+    private int _ats;
 
     public ProductBuilder Id(string id)
     {
@@ -42,25 +43,22 @@ public class ProductBuilder
         return this;
     }
 
-    public ProductBuilder AddVariant(string id, string attributeId, string attributeValue)
+    public ProductBuilder Price(decimal price)
     {
-        Tuple<string, string, string>? variant = new Tuple<string, string, string>(
-            id,
-            attributeId,
-            attributeValue
-        );
-        _variants.Add(variant);
+        _price = price;
+        return this;
+    }
+
+    public ProductBuilder ATS(int ats)
+    {
+        _ats = ats;
         return this;
     }
 
     public Product Build()
     {
-        Product product = new Product(_id, _name, _description, _categoryId, _searchable, _online);
-        foreach (var (id, attributeId, attributeValue) in _variants)
-        {
-            product.Variants.Add(new Variant(id, attributeId, attributeValue, product));
-        }
-
+        Product product = new Product(_id, _name, _description, _categoryId, _searchable, _online, _price, _ats);
+        
         return product;
     }
 }

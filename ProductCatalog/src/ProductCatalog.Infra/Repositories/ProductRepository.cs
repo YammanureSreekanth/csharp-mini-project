@@ -10,7 +10,17 @@ public class ProductRepository : IProductRepository
         throw new NotImplementedException();
     }
 
+    public Task DeleteAsync(Product product, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<Product?> GetByIdAsync(string id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Product> UpdateAsync(Product product, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

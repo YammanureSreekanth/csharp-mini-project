@@ -8,7 +8,8 @@ public class Product
     public string CategoryId { get; private set; }
     public bool Searchable { get; private set; } = false;
     public bool Online { get; private set; } = false;
-    public List<Variant> Variants { get; private set; }
+    public decimal Price { get; private set; }
+    public int ATS {get; private set; }
 
     public Product(
         string id,
@@ -16,7 +17,9 @@ public class Product
         string description,
         string categoryId,
         bool searchable,
-        bool online
+        bool online,
+        decimal price,
+        int ats
     )
     {
         Id = id;
@@ -25,6 +28,7 @@ public class Product
         CategoryId = categoryId;
         Searchable = searchable;
         Online = online;
-        Variants = [];
+        Price = price;
+        ATS = ats;
     }
 }

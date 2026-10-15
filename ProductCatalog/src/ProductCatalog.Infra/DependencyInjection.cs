@@ -22,10 +22,6 @@ public static class DependencyInjection
 
         services.AddScoped<IProductRepository, ProductRepository>();
 
-        services.AddScoped<ISkuInventoryRepository, SkuInventoryRepository>();
-
-        services.AddScoped<ISkuPriceRepository, SkuPriceRepository>();
-
         return services;
     }
 }

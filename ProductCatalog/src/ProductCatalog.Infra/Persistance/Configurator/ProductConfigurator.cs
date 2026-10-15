@@ -18,12 +18,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.Property(l => l.Searchable).HasDefaultValue(false);
 
-        builder.HasIndex(l => l.CategoryId);
+        builder.Property(l => l.CategoryId);
 
-        builder
-            .HasMany(l => l.Variants)
-            .WithOne(l => l.BaseProduct)
-            .HasForeignKey(l => l.BaseProductId)
-            .OnDelete(DeleteBehavior.NoAction);
+        builder.Property(l => l.Price);
+
+        builder.Property(l => l.ATS);
     }
 }
