@@ -18,7 +18,7 @@ public sealed class ProductService(
         CancellationToken cancellationToken
     )
     {
-        var product = new ProductBuilder()
+        Product? product = new ProductBuilder()
             .Id(command.Id)
             .Name(command.Name)
             .Description(command.Description)
