@@ -20,6 +20,13 @@ for state in rebase-merge rebase-apply MERGE_HEAD CHERRY_PICK_HEAD; do
     fi
 done
 
+# GUI git clients (VS Code's Source Control panel, Fork, Tower, ...) spawn hooks
+# with a minimal PATH that skips ~/.zshrc, so Homebrew's /opt/homebrew/bin never
+# makes it in even though an interactive terminal finds dotnet just fine. Add the
+# common install locations ourselves rather than silently skipping regeneration
+# every time a commit isn't made from a terminal.
+export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin:/usr/local/share/dotnet:$HOME/.dotnet"
+
 if ! command -v dotnet >/dev/null 2>&1; then
     echo "journeygen: dotnet not found, skipping (CI will flag a stale README)"
     exit 0

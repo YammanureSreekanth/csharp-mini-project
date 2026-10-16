@@ -22,7 +22,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-75_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-164-0078D4) ![lines](https://img.shields.io/badge/lines-6062-0078D4) ![types](https://img.shields.io/badge/types-205-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-75_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-163-0078D4) ![lines](https://img.shields.io/badge/lines-6202-0078D4) ![types](https://img.shields.io/badge/types-207-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████████░░░░` **80%**
 
@@ -56,11 +56,11 @@ What I am working on right now · next review **2026-10-16**
 | `Wishlist.Functions` | 12 | 747 | 14 |
 | `Wishlist.Infrastructure` | 9 | 572 | 9 |
 | `Ecom.WebApiApp` | 12 | 568 | 11 |
-| `ProductCatalog.Infra` | 13 | 384 | 13 |
+| `ProductCatalog.Infra` | 13 | 390 | 13 |
+| `ProductCatalog.Api` | 7 | 271 | 6 |
 | `Wishlist.Tests` | 1 | 199 | 1 |
-| `ProductCatalog.Api` | 8 | 187 | 4 |
-| `ProductCatalog.App.Models` | 8 | 149 | 8 |
-| `ProductCatalog.App` | 5 | 104 | 5 |
+| `ProductCatalog.App.Models` | 8 | 168 | 8 |
+| `ProductCatalog.App` | 5 | 135 | 5 |
 | `Ecom.WebApiApp.Tests` | 1 | 99 | 1 |
 | `Wishlist.Core` | 5 | 97 | 7 |
 | `ProductCatalog.Api.Models` | 5 | 44 | 5 |
@@ -72,7 +72,7 @@ What I am working on right now · next review **2026-10-16**
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 4878 of the 4878 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 5002 of the 5002 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
@@ -83,20 +83,20 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
 | `Wishlist.Infrastructure` | 469 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.Infra` | 301 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.Api` | 163 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Infra` | 306 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.Api` | 239 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Tests` | 153 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.App.Models` | 121 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.App.Models` | 139 | 0 | 0 | `████████████████████` 100% |
+| `ProductCatalog.App` | 104 | 0 | 0 | `████████████████████` 100% |
 | `Wishlist.Core` | 86 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp.Tests` | 80 | 0 | 0 | `████████████████████` 100% |
-| `ProductCatalog.App` | 79 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.Api.Models` | 35 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.ComponentTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.IntegrationTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `ProductCatalog.UnitTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **4878** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **5002** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -457,7 +457,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +5</sub>
 - [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **Collection expressions** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +2</sub>
+- [x] **Collection expressions** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
 - [x] **Primary constructors** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
 - [ ] Tuples
 - [x] **Lambdas** <sub>`DesignPatterns/src/Creational/1_Singleton/LazySettings.cs` +5</sub>
@@ -551,6 +551,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-15 19:56 UTC</sub>
+<sub>Last updated 2026-10-16 08:32 UTC</sub>
 
 <!-- JOURNEY:END -->
