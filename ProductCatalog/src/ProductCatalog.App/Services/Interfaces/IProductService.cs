@@ -16,10 +16,6 @@ public interface IProductService
         CancellationToken cancellationToken
     );
 
-    Task<IReadOnlyCollection<Product>> GetAllProductsAsync(
-        CancellationToken cancellationToken
-    );
-
     Task<Product> UpdateProductAsync(
         UpdateProductCommand command,
         CancellationToken cancellationToken

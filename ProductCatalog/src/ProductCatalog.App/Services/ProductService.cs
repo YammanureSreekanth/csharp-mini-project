@@ -54,11 +54,6 @@ public sealed class ProductService(
         return new ProductWithImage(product, image);
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetAllProductsAsync(CancellationToken cancellationToken)
-    {
-        return await productRepository.GetAllAsync(cancellationToken);
-    }
-
     public async Task<Product> UpdateProductAsync(UpdateProductCommand command, CancellationToken cancellationToken)
     {
         Product product = await productRepository.GetByIdAsync(command.Id, cancellationToken)

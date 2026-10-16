@@ -12,11 +12,6 @@ public class ProductRepository(ProductDbContext dbContext) : IProductRepository
         return await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetAllAsync(CancellationToken cancellationToken)
-    {
-        return await dbContext.Products.ToListAsync(cancellationToken);
-    }
-
     public async Task AddAsync(Product product, CancellationToken cancellationToken)
     {
         dbContext.Products.Add(product);
