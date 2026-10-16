@@ -18,12 +18,30 @@ public sealed class ProductService(
         CancellationToken cancellationToken
     )
     {
-        throw new NotImplementedException();
+        var product = new ProductBuilder()
+            .Id(command.Id)
+            .Name(command.Name)
+            .Description(command.Description)
+            .CategoryId(command.CategoryId)
+            .Searchable(command.Searchable)
+            .Online(command.Online)
+            .Price(command.Price)
+            .Ats(command.Ats)
+            .Build();
+
+        await productRepository.AddAsync(product, cancellationToken);
+
+        return product;
     }
 
-    public Task<Product> DeleteProductAsync(string id, CancellationToken cancellationToken)
+    public async Task<Product> DeleteProductAsync(string id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        Product product = await productRepository.GetByIdAsync(id, cancellationToken)
+            ?? throw new ProductNotFoundException(id);
+
+        await productRepository.DeleteAsync(product, cancellationToken);
+
+        return product;
     }
 
     public async Task<ProductWithImage> GetProductAsync(string id, CancellationToken cancellationToken)
@@ -36,8 +54,26 @@ public sealed class ProductService(
         return new ProductWithImage(product, image);
     }
 
-    public Task<Product> UpdateProductAsync(UpdateProductCommand command, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<Product>> GetAllProductsAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await productRepository.GetAllAsync(cancellationToken);
+    }
+
+    public async Task<Product> UpdateProductAsync(UpdateProductCommand command, CancellationToken cancellationToken)
+    {
+        Product product = await productRepository.GetByIdAsync(command.Id, cancellationToken)
+            ?? throw new ProductNotFoundException(command.Id);
+
+        product.UpdateDetails(
+            command.Name,
+            command.Description,
+            command.CategoryId,
+            command.Searchable,
+            command.Online,
+            command.Price,
+            command.Ats
+        );
+
+        return await productRepository.UpdateAsync(product, cancellationToken);
     }
 }

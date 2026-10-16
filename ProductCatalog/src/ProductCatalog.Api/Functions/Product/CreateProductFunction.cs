@@ -1,12 +1,12 @@
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using ProductCatalog.Api;
 using ProductCatalog.Api.Mappers;
 using ProductCatalog.Api.Models.Requests.Product;
 using ProductCatalog.App.Services.Interfaces;
+
+namespace ProductCatalog.Api.Functions.Product;
 
 public sealed class CreateProductFunction(IProductService productService, ILogger<CreateProductFunction> logger)
 {

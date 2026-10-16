@@ -11,7 +11,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ProductDbC
             new DbContextOptionsBuilder<ProductDbContext>();
 
         optionsBuilder.UseSqlServer(
-            "Server=localhost;Database=FuncApp;User ID=sa;Password=PraticeApp@2031;TrustServerCertificate=True;Encrypt=False;"
+            "Server=localhost;Database=ProductCatalog;User ID=sa;Password=PraticeApp@2031;TrustServerCertificate=True;Encrypt=False;"
         );
 
         return new ProductDbContext(optionsBuilder.Options);

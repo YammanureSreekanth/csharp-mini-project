@@ -31,4 +31,23 @@ public class Product
         Price = price;
         Ats = ats;
     }
+
+    public void UpdateDetails(
+        string name,
+        string description,
+        string categoryId,
+        bool searchable,
+        bool online,
+        decimal price,
+        int ats
+    )
+    {
+        Name = name;
+        Description = description;
+        CategoryId = categoryId;
+        Searchable = searchable;
+        Online = online;
+        Price = price;
+        Ats = ats;
+    }
 }

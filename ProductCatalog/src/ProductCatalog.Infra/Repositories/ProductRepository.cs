@@ -1,27 +1,38 @@
+using Microsoft.EntityFrameworkCore;
 using ProductCatalog.App.Models.Entities;
 using ProductCatalog.App.Repositories.Interfaces;
+using ProductCatalog.Infra.Persistance;
 
 namespace ProductCatalog.Infra.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductRepository(ProductDbContext dbContext) : IProductRepository
 {
-    public Task AddAsync(Product product, CancellationToken cancellationToken)
+    public async Task<Product?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
 
-    public Task DeleteAsync(Product product, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<Product>> GetAllAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await dbContext.Products.ToListAsync(cancellationToken);
     }
 
-    public Task<Product?> GetByIdAsync(string id, CancellationToken cancellationToken)
+    public async Task AddAsync(Product product, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        dbContext.Products.Add(product);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<Product> UpdateAsync(Product product, CancellationToken cancellationToken)
+    public async Task<Product> UpdateAsync(Product product, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return product;
+    }
+
+    public async Task DeleteAsync(Product product, CancellationToken cancellationToken)
+    {
+        dbContext.Products.Remove(product);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

@@ -11,8 +11,12 @@ public interface IProductService
         CancellationToken cancellationToken
     );
 
-     Task<ProductWithImage> GetProductAsync(
+    Task<ProductWithImage> GetProductAsync(
         string id,
+        CancellationToken cancellationToken
+    );
+
+    Task<IReadOnlyCollection<Product>> GetAllProductsAsync(
         CancellationToken cancellationToken
     );
 

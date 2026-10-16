@@ -1,25 +1,23 @@
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using ProductCatalog.Api;
 using ProductCatalog.Api.Mappers;
-using ProductCatalog.Api.Models.Requests.Product;
 using ProductCatalog.App.Services.Interfaces;
 
-public sealed class GetProductFunction(IProductService productService, ILogger<CreateProductFunction> logger)
+namespace ProductCatalog.Api.Functions.Product;
+
+public sealed class GetProductFunction(IProductService productService, ILogger<GetProductFunction> logger)
 {
-    [Function("CreateProduct")]
+    [Function("GetProduct")]
     public Task<IActionResult> RunAsync(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "products")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "products/{id}")] HttpRequest req,
+        string id,
         CancellationToken cancellationToken) =>
         Http.RunAsync(logger, async () =>
         {
-            var request = await req.ReadFromJsonAsync<CreateProductRequest>(cancellationToken);
-            var command = ProductApiMapper.ToCommand(request!);
-            var product = await productService.CreateProductAsync(command, cancellationToken);
+            var details = await productService.GetProductAsync(id, cancellationToken);
 
-            return new CreatedResult($"/products/{product.Id}", ProductApiMapper.ToResponse(product));
+            return new OkObjectResult(ProductApiMapper.ToResponse(details));
         });
 }
