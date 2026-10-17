@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>__TITLE__</title>
 <meta name="description" content="__TAGLINE__">
+
+<!-- Link-preview metadata: this page is meant to be shared (resume, LinkedIn, a
+     Slack message to a reviewer), so it should look intentional when pasted
+     somewhere rather than showing up as a bare, title-less URL. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="__TITLE__">
+<meta property="og:description" content="__TAGLINE__">
+<meta property="og:url" content="__REPO__">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="__TITLE__">
+<meta name="twitter:description" content="__TAGLINE__">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cpath d='M9 17.5l4.5 4.5L23 11' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
   :root {
     color-scheme: light;
@@ -77,6 +90,11 @@
   header.page { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
   header.page h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.02em; }
   header.page p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+  .trust {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+    font-size: 12.5px; color: var(--ink-2);
+  }
+  .trust .mark { color: var(--good); font-size: 13px; }
   .meta { margin-top: 10px; font-size: 13px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: 6px 14px; }
   .meta a { color: var(--series-1); text-decoration: none; }
   .meta a:hover { text-decoration: underline; }
@@ -90,7 +108,11 @@
   .card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 18px 20px;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
   }
+  .card:hover { border-color: var(--axis); box-shadow: 0 2px 14px rgba(0,0,0,0.05); }
+  @media (prefers-color-scheme: dark) { .card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.3); } }
+  :root[data-theme="dark"] .card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.3); }
   .card h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: -0.01em; }
   .card .sub { margin: 0 0 14px; font-size: 13px; color: var(--ink-muted); }
 
@@ -154,12 +176,12 @@
   .chip.ready .mark { color: var(--series-1); }
 
   /* ---- provenance ---- */
-  .prov { display: grid; grid-template-columns: minmax(230px, 300px) 1fr; gap: 16px; }
-  .prov .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
-  .prov .headline small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
-  .prov .split { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
-  .prov .split div { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
-  .prov .split b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .prov-card { max-width: 440px; }
+  .prov-card .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
+  .prov-card .headline small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
+  .prov-card .split { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+  .prov-card .split div { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
+  .prov-card .split b { color: var(--ink); font-variant-numeric: tabular-nums; }
   .note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; }
   .note code { font-size: 12px; }
 
@@ -209,7 +231,7 @@
   @media (max-width: 720px) {
     /* Every two-column grid collapses; a fixed min column would force the page
        wider than the screen. */
-    .hero, .plan, .prov { grid-template-columns: 1fr; }
+    .hero, .plan { grid-template-columns: 1fr; }
     .item { grid-template-columns: 1fr; gap: 5px; }
     .wrap { padding: 22px 16px 56px; }
   }
@@ -227,6 +249,7 @@
     <div>
       <h1>__TITLE__</h1>
       <p>__TAGLINE__</p>
+      <p class="trust"><span class="mark">&#10003;</span> Every number below is generated from the source and git history &mdash; nothing on this page is self-reported.</p>
       <div class="meta">
         <a href="__REPO__">__REPO_NAME__</a>
         <span>Updated __UPDATED__</span>
@@ -269,62 +292,8 @@
     </div>
   </div>
 
-  <h2 class="section">Activity</h2>
-  <div class="charts">
-    <div class="card">
-      <h2>Commits per week</h2>
-      <p class="sub">When the work actually happened.</p>
-      <div class="chartbox"><canvas id="commitsChart"></canvas></div>
-    </div>
-    <div class="card">
-      <h2>Lines changed per week</h2>
-      <p class="sub">Added above the line, removed below.</p>
-      <div class="legend">
-        <span><i class="swatch" style="background:var(--series-1)"></i>Added</span>
-        <span><i class="swatch" style="background:var(--series-2)"></i>Removed</span>
-      </div>
-      <div class="chartbox" style="height:206px"><canvas id="churnChart"></canvas></div>
-    </div>
-  </div>
-
-  <h2 class="section">Codebase</h2>
-  <div class="charts">
-    <div class="card">
-      <h2>Lines of C# per project</h2>
-      <p class="sub">Excludes generated and library files.</p>
-      <div class="chartbox" id="projBox"><canvas id="projectChart"></canvas></div>
-    </div>
-    <div class="card">
-      <h2>Types by kind</h2>
-      <p class="sub">Every type declared in the solution.</p>
-      <div class="chartbox" id="kindBox"><canvas id="kindChart"></canvas></div>
-    </div>
-  </div>
-
-  <h2 class="section">Provenance</h2>
-  <div class="prov" id="provSection" hidden>
-    <div class="card">
-      <h2>Written by me</h2>
-      <p class="sub">Application code, by line.</p>
-      <div class="headline" id="provPct">—<small id="provCap"></small></div>
-      <div class="split" id="provSplit"></div>
-    </div>
-    <div class="card">
-      <h2>Per project</h2>
-      <p class="sub">Application projects. Every non-blank line, attributed with <code>git blame</code>.</p>
-      <div class="legend">
-        <span><i class="swatch" style="background:var(--prov-you)"></i>Mine</span>
-        <span><i class="swatch" style="background:var(--prov-ai)"></i>AI-written</span>
-        <span><i class="swatch" style="background:var(--prov-scaffold)"></i><code>dotnet new</code> scaffold</span>
-      </div>
-      <div class="chartbox" id="provBox"><canvas id="provChart"></canvas></div>
-      <details class="data" id="provAudit">
-        <summary>How this is measured, and which commits are declared</summary>
-        <div id="provAuditBody"></div>
-      </details>
-    </div>
-  </div>
-
+  <!-- The skill map comes right after what I'm doing today: it's the part worth
+       a reader's time, so it leads rather than coming after process charts. -->
   <h2 class="section" id="roadHeading" hidden>Roadmap</h2>
   <section class="card" id="roadSummary" hidden style="margin-bottom:16px">
     <h2 id="roadTitle">Roadmap</h2>
@@ -349,6 +318,36 @@
       <div class="diagram"><pre class="mermaid" id="diagram"></pre></div>
     </section>
   </div>
+
+  <h2 class="section">Activity</h2>
+  <div class="charts">
+    <div class="card">
+      <h2>Commits per week</h2>
+      <p class="sub">When the work actually happened.</p>
+      <div class="chartbox"><canvas id="commitsChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Lines changed per week</h2>
+      <p class="sub">Added above the line, removed below.</p>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--series-1)"></i>Added</span>
+        <span><i class="swatch" style="background:var(--series-2)"></i>Removed</span>
+      </div>
+      <div class="chartbox" style="height:206px"><canvas id="churnChart"></canvas></div>
+    </div>
+  </div>
+
+  <h2 class="section">Provenance</h2>
+  <section class="card prov-card" id="provSection" hidden>
+    <h2>Written by me</h2>
+    <p class="sub">Application code, by line &mdash; every non-blank line attributed with <code>git blame</code>.</p>
+    <div class="headline" id="provPct">—<small id="provCap"></small></div>
+    <div class="split" id="provSplit"></div>
+    <details class="data" id="provAudit">
+      <summary>How this is measured, and which commits are declared</summary>
+      <div id="provAuditBody"></div>
+    </details>
+  </section>
 
   <details class="data">
     <summary>View the underlying data as tables</summary>
@@ -595,52 +594,6 @@
   }
 
   /* ---------- charts ---------- */
-  var valueLabels = {
-    id: "valueLabels",
-    afterDatasetsDraw: function (chart, args, opts) {
-      var ctx = chart.ctx;
-      chart.data.datasets.forEach(function (ds, i) {
-        var meta = chart.getDatasetMeta(i);
-        if (meta.hidden) return;
-        meta.data.forEach(function (el, idx) {
-          var v = ds.data[idx];
-          if (v == null) return;
-          ctx.save();
-          ctx.fillStyle = opts.color;
-          ctx.font = '600 12px system-ui, -apple-system, "Segoe UI", sans-serif';
-          ctx.textBaseline = "middle";
-          ctx.textAlign = "left";
-          ctx.fillText(num(v), el.x + 8, el.y);
-          ctx.restore();
-        });
-      });
-    }
-  };
-
-  var segmentLabels = {
-    id: "segmentLabels",
-    afterDatasetsDraw: function (chart, args, opts) {
-      var ctx = chart.ctx;
-      chart.data.datasets.forEach(function (dset, i) {
-        var meta = chart.getDatasetMeta(i);
-        if (meta.hidden) return;
-        meta.data.forEach(function (el, idx) {
-          var v = dset.data[idx];
-          if (!v) return;
-          var w = Math.abs(el.x - el.base);
-          if (w < 36) return;                     // too narrow to hold a number
-          ctx.save();
-          ctx.fillStyle = opts.color;
-          ctx.font = '600 11.5px system-ui, -apple-system, "Segoe UI", sans-serif';
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(num(v), (el.x + el.base) / 2, el.y);
-          ctx.restore();
-        });
-      });
-    }
-  };
-
   function baseOptions(muted, grid) {
     return {
       responsive: true,
@@ -674,7 +627,7 @@
     charts = [];
 
     var s1 = css("--series-1"), s2 = css("--series-2");
-    var muted = css("--ink-muted"), grid = css("--grid"), surface = css("--surface");
+    var muted = css("--ink-muted"), grid = css("--grid");
 
     Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", sans-serif';
 
@@ -723,84 +676,6 @@
       options: o2
     }));
 
-    /* Same measure across categories -> one hue, direct labels, no legend. */
-    function horizontal(canvasId, boxId, labels, values) {
-      var o = baseOptions(muted, grid);
-      o.indexAxis = "y";
-      o.interaction = { mode: "nearest", intersect: true };
-      o.layout = { padding: { right: 54 } };
-      o.scales = {
-        x: { display: false, grid: { display: false }, beginAtZero: true,
-             grace: "8%", border: { display: false } },
-        y: { grid: { display: false }, border: { color: css("--axis") },
-             ticks: { color: css("--ink-2"), font: { size: 12 } } }
-      };
-      o.plugins.valueLabels = { color: css("--ink-2") };
-      o.plugins.tooltip.callbacks = { label: function (i) { return num(i.parsed.x); } };
-
-      document.getElementById(boxId).style.height = Math.max(150, labels.length * 34 + 28) + "px";
-      charts.push(new Chart(document.getElementById(canvasId), {
-        type: "bar",
-        data: { labels: labels, datasets: [{
-          data: values, backgroundColor: s1, borderRadius: 4, borderSkipped: false,
-          categoryPercentage: 0.78, barPercentage: 0.9,
-          borderColor: surface, borderWidth: { top: 0, bottom: 0, left: 0, right: 0 }
-        }] },
-        options: o,
-        plugins: [valueLabels]
-      }));
-    }
-
-    horizontal("projectChart", "projBox",
-      D.code.projects.map(function (p) { return p.name; }),
-      D.code.projects.map(function (p) { return p.lines; }));
-
-    horizontal("kindChart", "kindBox",
-      D.code.kinds.map(function (k) { return k.kind; }),
-      D.code.kinds.map(function (k) { return k.count; }));
-
-    /* Provenance: stacked by line count, 2px surface gap between segments. */
-    if (P && P.available) {
-      var pr = P.projects.filter(function (r) { return !r.isTooling; });
-      var o = baseOptions(muted, grid);
-      o.indexAxis = "y";
-      o.interaction = { mode: "index", intersect: false };
-      o.scales = {
-        x: { stacked: true, display: false, grid: { display: false }, beginAtZero: true, border: { display: false } },
-        y: { stacked: true, grid: { display: false }, border: { color: css("--axis") },
-             ticks: { color: css("--ink-2"), font: { size: 12 } } }
-      };
-      o.plugins.segmentLabels = { color: "#ffffff" };
-      o.plugins.tooltip.callbacks = {
-        label: function (i) {
-          if (!i.parsed.x) return null;
-          return i.dataset.label + ": " + num(i.parsed.x) + " lines";
-        }
-      };
-
-      function ds(label, color, pick) {
-        return {
-          label: label, data: pr.map(pick), backgroundColor: color,
-          borderColor: surface, borderWidth: 2, borderSkipped: false, borderRadius: 4,
-          categoryPercentage: 0.74, barPercentage: 0.9
-        };
-      }
-
-      document.getElementById("provBox").style.height = Math.max(150, pr.length * 38 + 26) + "px";
-      charts.push(new Chart(document.getElementById("provChart"), {
-        type: "bar",
-        data: {
-          labels: pr.map(function (r) { return r.project; }),
-          datasets: [
-            ds("Mine", css("--prov-you"), function (r) { return r.you; }),
-            ds("AI-written", css("--prov-ai"), function (r) { return r.ai; }),
-            ds("Scaffold", css("--prov-scaffold"), function (r) { return r.scaffold; })
-          ]
-        },
-        options: o,
-        plugins: [segmentLabels]
-      }));
-    }
   }
 
   /* ---------- tables (accessible fallback for every chart) ---------- */
