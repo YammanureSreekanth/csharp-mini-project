@@ -891,6 +891,39 @@
               "notes": "the provenance tracking in this repo"
             }
           ]
+        },
+        {
+          "name": "Design Patterns in C#",
+          "summary": "Working through the GoF catalog by hand, one pattern at a time, in its own solution.",
+          "items": [
+            { "label": "SOLID Principles", "group": "Principles", "detect": "manual" },
+            { "label": "Singleton", "group": "Creational", "detect": "path:DesignPatterns/src/Creational/1_Singleton/" },
+            { "label": "Factory Method", "group": "Creational", "detect": "path:DesignPatterns/src/Creational/2_Factory/" },
+            { "label": "Abstract Factory", "group": "Creational", "detect": "path:DesignPatterns/src/Creational/3_AbstractFactory/" },
+            { "label": "Builder", "group": "Creational", "detect": "path:DesignPatterns/src/Creational/4_Builder/" },
+            { "label": "Prototype", "group": "Creational", "detect": "path:DesignPatterns/src/Creational/5_Prototype/" },
+            { "label": "Adapter", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Adapter\\b" },
+            { "label": "Bridge", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Bridge\\b" },
+            { "label": "Composite", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Composite\\b" },
+            { "label": "Decorator", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Decorator\\b" },
+            { "label": "Facade", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Facade\\b" },
+            { "label": "Flyweight", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Flyweight\\b" },
+            { "label": "Proxy", "group": "Structural", "detect": "grepin:DesignPatterns/src/Structural:\\bclass\\s+\\w*Proxy\\b" },
+            { "label": "Strategy", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Strategy\\b|\\binterface\\s+I\\w*Strategy\\b" },
+            { "label": "Null Object", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+Null\\w+\\b" },
+            { "label": "State", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*State\\b" },
+            { "label": "Template Method", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Template\\w*\\b" },
+            { "label": "Chain of Responsibility", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Handler\\b|\\bclass\\s+\\w*Chain\\w*\\b" },
+            { "label": "Command", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Command\\b|\\binterface\\s+I\\w*Command\\b" },
+            { "label": "Memento", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Memento\\b" },
+            { "label": "Observer", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Observer\\b|\\binterface\\s+I\\w*Observer\\b" },
+            { "label": "Mediator", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Mediator\\b" },
+            { "label": "Iterator", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Iterator\\b|\\binterface\\s+I\\w*Iterator\\b" },
+            { "label": "Visitor", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Visitor\\b|\\binterface\\s+I\\w*Visitor\\b" },
+            { "label": "Interpreter", "group": "Behavioral", "detect": "grepin:DesignPatterns/src/Behavioral:\\bclass\\s+\\w*Interpreter\\b" },
+            { "label": "Repository", "group": "Practices", "detect": "grepin:DesignPatterns:\\bclass\\s+\\w*Repository\\b|\\binterface\\s+I\\w*Repository\\b" },
+            { "label": "Dependency Injection", "group": "Practices", "detect": "grepin:DesignPatterns:AddScoped\\(|AddTransient\\(|AddSingleton\\(|IServiceCollection" }
+          ]
         }
       ]
     },

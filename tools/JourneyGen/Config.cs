@@ -188,6 +188,7 @@ public sealed class JourneyConfig
         var item = new AssignmentItem
         {
             Label = it.TryGetProperty("label", out var il) ? il.GetString() ?? "" : "",
+            Group = it.TryGetProperty("group", out var igr) ? igr.GetString() ?? "" : "",
             Status = it.TryGetProperty("status", out var ist) ? (ist.GetString() ?? "not-started") : "not-started",
             StatusDeclared = it.TryGetProperty("status", out _),
             Notes = it.TryGetProperty("notes", out var inn) ? inn.GetString() ?? "" : "",

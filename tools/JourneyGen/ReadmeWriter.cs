@@ -128,8 +128,17 @@ public static class ReadmeWriter
             sb.AppendLine($"<summary><b>{Escape(a.Name)}</b> — {a.Done}/{a.Items.Count}" +
                           (a.Summary.Length > 0 ? $" · <sub>{Escape(a.Summary)}</sub>" : "") + "</summary>");
             sb.AppendLine();
+            var lastGroup = "";
             foreach (var i in a.Items)
             {
+                if (i.Group.Length > 0 && i.Group != lastGroup)
+                {
+                    if (lastGroup.Length > 0) sb.AppendLine();
+                    sb.AppendLine($"**{Escape(i.Group)}**");
+                    sb.AppendLine();
+                    lastGroup = i.Group;
+                }
+
                 var st = i.EffectiveStatus;
                 var box = st == "done" ? "[x]" : "[ ]";
                 var label = st == "done" ? $"**{Escape(i.Label)}**" : Escape(i.Label);

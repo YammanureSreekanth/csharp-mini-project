@@ -118,7 +118,7 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`███████░░░░░░░░░░░░░` **63 of 178 covered** across 14 areas
+`███████░░░░░░░░░░░░░` **68 of 205 covered** across 15 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
@@ -138,6 +138,7 @@ _The ground I want to cover for my career in .NET._
 | Observability and production readiness | 4/13 | `██████░░░░░░░░░░░░░░` 31% |
 | Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
+| Design Patterns in C# | 5/27 | `████░░░░░░░░░░░░░░░░` 19% |
 
 <details>
 <summary><b>C# and modern .NET depth</b> — 16/22 · <sub>Strong enough that C# feels natural.</sub></summary>
@@ -401,6 +402,53 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
+<details>
+<summary><b>Design Patterns in C#</b> — 5/27 · <sub>Working through the GoF catalog by hand, one pattern at a time, in its own solution.</sub></summary>
+
+**Principles**
+
+- [ ] SOLID Principles <sub>judgement — not code-detectable</sub>
+
+**Creational**
+
+- [x] **Singleton** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
+- [x] **Factory Method** <sub>`DesignPatterns/src/Creational/2_Factory/Demos/BadgeFactoryDemo.cs` +3</sub>
+- [x] **Abstract Factory** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryClassic.cs` +3</sub>
+- [x] **Builder** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderCRTP.cs` +3</sub>
+- [x] **Prototype** <sub>`DesignPatterns/src/Creational/5_Prototype/Demos/PrototypeCopyCtorDemo.cs` +3</sub>
+
+**Structural**
+
+- [ ] Adapter
+- [ ] Bridge
+- [ ] Composite
+- [ ] Decorator
+- [ ] Facade
+- [ ] Flyweight
+- [ ] Proxy
+
+**Behavioral**
+
+- [ ] Strategy
+- [ ] Null Object
+- [ ] State
+- [ ] Template Method
+- [ ] Chain of Responsibility
+- [ ] Command
+- [ ] Memento
+- [ ] Observer
+- [ ] Mediator
+- [ ] Iterator
+- [ ] Visitor
+- [ ] Interpreter
+
+**Practices**
+
+- [ ] Repository
+- [ ] Dependency Injection
+
+</details>
+
 ### Concepts covered
 
 <details open>
@@ -551,6 +599,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-17 18:41 UTC</sub>
+<sub>Last updated 2026-10-17 18:54 UTC</sub>
 
 <!-- JOURNEY:END -->

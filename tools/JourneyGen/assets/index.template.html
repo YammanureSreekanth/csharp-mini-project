@@ -259,6 +259,13 @@
   .chip.todo { border-style: dashed; color: var(--ink-muted); }
   .chip .mark { font-size: 11px; }
   .chip.done .mark { color: var(--good); }
+  .chip-group + .chip-group { margin-top: 12px; }
+  .chip-group-label {
+    display: flex; justify-content: space-between; font-size: 11.5px;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted);
+    margin-bottom: 7px; font-weight: 600;
+  }
+  .chip-group-label span { font-variant-numeric: tabular-nums; }
 
   /* ---- diagram ---- */
   .diagram { overflow-x: auto; padding-bottom: 6px; }
@@ -681,28 +688,50 @@
       rn.hidden = false;
     }
 
+    function chipFor(i) {
+      var done = i.status === "done";
+      var wip = i.status === "in-progress";
+      var cls = done ? "chip done" : i.ready ? "chip ready" : "chip todo";
+      var mark = done ? "\u2713" : i.ready ? "\u2713" : wip ? "\u25D0" : "\u25CB";
+      var tip = i.ready ? "the code covers this \u2014 ready to mark complete"
+              : done && i.evidence.length ? i.evidence.join(", ")
+              : !i.detectable ? "judgement topic \u2014 no detector can prove this"
+              : (i.notes || "");
+      return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +
+             "</i>" + esc(i.label) + "</span>";
+    }
+
     document.getElementById("roadAreas").innerHTML = R.areas.map(function (a, idx) {
       var accent = "var(--accent-" + (idx % 7) + ")";
-      var chips = a.items.map(function (i) {
-        var done = i.status === "done";
-        var wip = i.status === "in-progress";
-        var cls = done ? "chip done" : i.ready ? "chip ready" : "chip todo";
-        var mark = done ? "\u2713" : i.ready ? "\u2713" : wip ? "\u25D0" : "\u25CB";
-        var tip = i.ready ? "the code covers this \u2014 ready to mark complete"
-                : done && i.evidence.length ? i.evidence.join(", ")
-                : !i.detectable ? "judgement topic \u2014 no detector can prove this"
-                : (i.notes || "");
-        return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +
-               "</i>" + esc(i.label) + "</span>";
-      }).join("");
+
+      // A curriculum-style area (e.g. GoF patterns by category) sets `group` on
+      // its items; everything else stays a flat chip cloud, unchanged.
+      var hasGroups = a.items.some(function (i) { return i.group; });
+      var chipsHtml;
+      if (hasGroups) {
+        var order = [], byGroup = {};
+        a.items.forEach(function (i) {
+          var g = i.group || "Other";
+          if (!byGroup[g]) { byGroup[g] = []; order.push(g); }
+          byGroup[g].push(i);
+        });
+        chipsHtml = order.map(function (g) {
+          var gDone = byGroup[g].filter(function (i) { return i.status === "done"; }).length;
+          return '<div class="chip-group"><div class="chip-group-label">' + esc(g) +
+            '<span>' + gDone + "/" + byGroup[g].length + "</span></div>" +
+            '<div class="chips">' + byGroup[g].map(chipFor).join("") + "</div></div>";
+        }).join("");
+      } else {
+        chipsHtml = '<div class="chips">' + a.items.map(chipFor).join("") + "</div>";
+      }
 
       return '<div class="card" style="border-top:3px solid ' + accent + '">' +
         "<h3><i class=\"area-dot\" style=\"background:" + accent + "\"></i>" + esc(a.name) + "</h3>" +
         '<p class="sum">' + esc(a.summary || "") + "</p>" +
         '<div class="bar" style="margin:10px 0 8px"><i style="width:' + a.percent + '%;background:' + accent + '"></i></div>' +
         '<span class="frac">' + a.done + " of " + a.total + " \u00b7 " + a.percent + "%</span>" +
-        "<details><summary>Show topics</summary><div class=\"chips\" style=\"margin-top:8px\">" +
-        chips + "</div></details></div>";
+        "<details><summary>Show topics</summary><div style=\"margin-top:8px\">" +
+        chipsHtml + "</div></details></div>";
     }).join("");
   }
 

@@ -57,6 +57,7 @@ public static class SiteWriter
                     items = a.Items.Select(i => new
                     {
                         label = i.Label,
+                        group = i.Group,
                         status = i.EffectiveStatus,
                         ready = i.ReadyToAdvance,
                         notes = i.Notes,

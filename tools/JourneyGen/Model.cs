@@ -153,6 +153,9 @@ public sealed class Assignment
 public sealed class AssignmentItem
 {
     public string Label = "";
+    /// <summary>Optional sub-heading a roadmap area groups its items under (e.g. "Creational",
+    /// "Structural"). Empty for areas that don't use grouping, which render as a flat list.</summary>
+    public string Group = "";
     /// <summary>Declared by the learner, not inferred: done | in-progress | not-started.</summary>
     public string Status = "not-started";
 
