@@ -22,7 +22,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-76_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-193-0078D4) ![lines](https://img.shields.io/badge/lines-6640-0078D4) ![types](https://img.shields.io/badge/types-240-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-76_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-205-0078D4) ![lines](https://img.shields.io/badge/lines-6918-0078D4) ![types](https://img.shields.io/badge/types-259-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████████░░░░` **81%**
 
@@ -50,7 +50,7 @@ What I am working on right now · next review **2026-10-16**
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
-| `Creational` | 57 | 1434 | 99 |
+| `Creational` | 69 | 1712 | 118 |
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Wishlist.Functions` | 12 | 747 | 14 |
@@ -72,12 +72,12 @@ What I am working on right now · next review **2026-10-16**
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 5358 of the 5358 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 5571 of the 5571 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
-| `Creational` | 1149 | 0 | 0 | `████████████████████` 100% |
+| `Creational` | 1362 | 0 | 0 | `████████████████████` 100% |
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
@@ -96,7 +96,7 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `ProductCatalog.UnitTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **5358** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **5571** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -472,7 +472,7 @@ _The ground I want to cover for my career in .NET._
 - [x] **LINQ** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
 - [x] **LINQ method syntax** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
 - [ ] LINQ query syntax
-- [x] **Extension methods** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderFunctional.cs` +2</sub>
+- [x] **Extension methods** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderFunctional.cs` +3</sub>
 - [x] **Iterators (yield)** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
 - [x] **IEnumerable<T>** <sub>`Wishlist/tests/Wishlist.Tests/ProductListServiceTests.cs` +5</sub>
 - [x] **IList<T>** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Product/BaseProduct.cs`</sub>
@@ -551,6 +551,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-17 15:46 UTC</sub>
+<sub>Last updated 2026-10-17 18:41 UTC</sub>
 
 <!-- JOURNEY:END -->
