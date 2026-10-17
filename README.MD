@@ -22,9 +22,9 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-75_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-163-0078D4) ![lines](https://img.shields.io/badge/lines-6202-0078D4) ![types](https://img.shields.io/badge/types-207-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-76_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-165-0078D4) ![lines](https://img.shields.io/badge/lines-6287-0078D4) ![types](https://img.shields.io/badge/types-213-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
-**Progress** `████████████████░░░░` **80%**
+**Progress** `████████████████░░░░` **81%**
 
 
 📊 **[Full dashboard with charts and timeline](https://yammanuresreekanth.github.io/csharp-mini-project/)**
@@ -50,8 +50,8 @@ What I am working on right now · next review **2026-10-16**
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
+| `Creational` | 29 | 1081 | 72 |
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
-| `Creational` | 27 | 996 | 66 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Wishlist.Functions` | 12 | 747 | 14 |
 | `Wishlist.Infrastructure` | 9 | 572 | 9 |
@@ -72,13 +72,13 @@ What I am working on right now · next review **2026-10-16**
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 5002 of the 5002 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 5070 of the 5070 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
-| `Creational` | 793 | 0 | 0 | `████████████████████` 100% |
+| `Creational` | 861 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
@@ -96,7 +96,7 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `ProductCatalog.UnitTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **5002** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **5070** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -443,11 +443,11 @@ _The ground I want to cover for my career in .NET._
 </details>
 
 <details open>
-<summary><b>Modern C#</b> — 16/17</summary>
+<summary><b>Modern C#</b> — 17/17</summary>
 
 - [x] **Records** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +5</sub>
-- [x] **init-only properties** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +1</sub>
-- [x] **required members** <sub>`Wishlist/src/Wishlist.Core/Entities/ProductList.cs` +2</sub>
+- [x] **init-only properties** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderModern.cs` +2</sub>
+- [x] **required members** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderModern.cs` +3</sub>
 - [x] **Pattern matching** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
 - [x] **switch expressions** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodSimple.cs`</sub>
 - [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
@@ -458,8 +458,8 @@ _The ground I want to cover for my career in .NET._
 - [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Collection expressions** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
-- [x] **Primary constructors** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
-- [ ] Tuples
+- [x] **Primary constructors** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderDirectorGoF.cs` +5</sub>
+- [x] **Tuples** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderDirectorGoF.cs`</sub>
 - [x] **Lambdas** <sub>`DesignPatterns/src/Creational/1_Singleton/LazySettings.cs` +5</sub>
 - [x] **Object initializers** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryProvider.cs` +5</sub>
 
@@ -551,6 +551,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-17 15:16 UTC</sub>
+<sub>Last updated 2026-10-17 15:27 UTC</sub>
 
 <!-- JOURNEY:END -->

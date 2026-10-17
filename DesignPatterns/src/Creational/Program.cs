@@ -171,13 +171,24 @@ public class Program
 
         // Console.WriteLine(customer);
 
-        CustomerOrder order = new CustomerOrderBuilder()
-            .Customer.Named("Sreekanth")
-            .WithEmail("sreekanth@email.com")
-            .Shipping.Street("Jan 56")
-            .InCity("Almere")
-            .WithPostcode("1211 RP");
+        // CustomerOrder order = new CustomerOrderBuilder()
+        //     .Customer.Named("Sreekanth")
+        //     .WithEmail("sreekanth@email.com")
+        //     .Shipping.Street("Jan 56")
+        //     .InCity("Almere")
+        //     .WithPostcode("1211 RP");
 
-        Console.WriteLine(order);
+        // Console.WriteLine(order);
+
+        // List<(string, decimal)>? lines = new List<(string, decimal)> { ("Navy Suit", 499m), ("Tie", 60m) };
+        // IInvoiceBuilder textInvoiceBuilder = new TextInvoiceBuilder();
+        // IInvoiceBuilder htmlInvoiceBuilder = new HtmlInvoiceBuilder();
+        // Console.WriteLine(new InvoiceDirector(textInvoiceBuilder).Construct("Sreekanth", lines));
+        // Console.WriteLine(new InvoiceDirector(htmlInvoiceBuilder).Construct("Kranthi", lines));
+
+        CustomerRecord? sreekanth = new CustomerRecord {Name = "Sreekanth", Email = "test@gmail.com", Tier = "None"};
+        CustomerRecord? moved = sreekanth with { Shipping = new Address("JAN", "AMS", "1121PP") };
+        Console.WriteLine(sreekanth.Shipping is null);
+        Console.WriteLine(moved.Shipping.City);
     }
 }
