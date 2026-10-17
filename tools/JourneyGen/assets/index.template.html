@@ -97,6 +97,10 @@
   }
 
   * { box-sizing: border-box; }
+  /* A class setting its own `display` (.due, h2.section, ...) otherwise beats the
+     browser's default `[hidden] { display: none }` rule, so an element can carry
+     `hidden` and still render as an empty box. This makes `hidden` win outright. */
+  [hidden] { display: none !important; }
   body {
     margin: 0;
     background:

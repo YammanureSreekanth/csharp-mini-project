@@ -127,6 +127,7 @@ _The ground I want to cover for my career in .NET._
 | C# and modern .NET depth | 16/22 | `███████████████░░░░░` 73% |
 | ASP.NET Core Web APIs | 6/14 | `█████████░░░░░░░░░░░` 43% |
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
+| Design Patterns in C# | 5/27 | `████░░░░░░░░░░░░░░░░` 19% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Event-driven architecture and messaging | 0/13 | `░░░░░░░░░░░░░░░░░░░░` 0% |
 | Azure cloud services | 3/10 | `██████░░░░░░░░░░░░░░` 30% |
@@ -138,7 +139,6 @@ _The ground I want to cover for my career in .NET._
 | Observability and production readiness | 4/13 | `██████░░░░░░░░░░░░░░` 31% |
 | Security basics | 2/10 | `████░░░░░░░░░░░░░░░░` 20% |
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
-| Design Patterns in C# | 5/27 | `████░░░░░░░░░░░░░░░░` 19% |
 
 <details>
 <summary><b>C# and modern .NET depth</b> — 16/22 · <sub>Strong enough that C# feels natural.</sub></summary>
@@ -201,6 +201,53 @@ _The ground I want to cover for my career in .NET._
 - [ ] Ubiquitous language <sub>judgement — not code-detectable</sub>
 - [x] **Application vs domain layer** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs` +3</sub>
 - [ ] Practice project: tailoring order management — orders, measurements, alterations, payments, shipping <sub>judgement — not code-detectable</sub>
+
+</details>
+
+<details>
+<summary><b>Design Patterns in C#</b> — 5/27 · <sub>Working through the GoF catalog by hand, one pattern at a time, in its own solution.</sub></summary>
+
+**Principles**
+
+- [ ] SOLID Principles <sub>judgement — not code-detectable</sub>
+
+**Creational**
+
+- [x] **Singleton** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
+- [x] **Factory Method** <sub>`DesignPatterns/src/Creational/2_Factory/Demos/BadgeFactoryDemo.cs` +3</sub>
+- [x] **Abstract Factory** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryClassic.cs` +3</sub>
+- [x] **Builder** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderCRTP.cs` +3</sub>
+- [x] **Prototype** <sub>`DesignPatterns/src/Creational/5_Prototype/Demos/PrototypeCopyCtorDemo.cs` +3</sub>
+
+**Structural**
+
+- [ ] Adapter
+- [ ] Bridge
+- [ ] Composite
+- [ ] Decorator
+- [ ] Facade
+- [ ] Flyweight
+- [ ] Proxy
+
+**Behavioral**
+
+- [ ] Strategy
+- [ ] Null Object
+- [ ] State
+- [ ] Template Method
+- [ ] Chain of Responsibility
+- [ ] Command
+- [ ] Memento
+- [ ] Observer
+- [ ] Mediator
+- [ ] Iterator
+- [ ] Visitor
+- [ ] Interpreter
+
+**Practices**
+
+- [ ] Repository
+- [ ] Dependency Injection
 
 </details>
 
@@ -402,53 +449,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<details>
-<summary><b>Design Patterns in C#</b> — 5/27 · <sub>Working through the GoF catalog by hand, one pattern at a time, in its own solution.</sub></summary>
-
-**Principles**
-
-- [ ] SOLID Principles <sub>judgement — not code-detectable</sub>
-
-**Creational**
-
-- [x] **Singleton** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
-- [x] **Factory Method** <sub>`DesignPatterns/src/Creational/2_Factory/Demos/BadgeFactoryDemo.cs` +3</sub>
-- [x] **Abstract Factory** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryClassic.cs` +3</sub>
-- [x] **Builder** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderCRTP.cs` +3</sub>
-- [x] **Prototype** <sub>`DesignPatterns/src/Creational/5_Prototype/Demos/PrototypeCopyCtorDemo.cs` +3</sub>
-
-**Structural**
-
-- [ ] Adapter
-- [ ] Bridge
-- [ ] Composite
-- [ ] Decorator
-- [ ] Facade
-- [ ] Flyweight
-- [ ] Proxy
-
-**Behavioral**
-
-- [ ] Strategy
-- [ ] Null Object
-- [ ] State
-- [ ] Template Method
-- [ ] Chain of Responsibility
-- [ ] Command
-- [ ] Memento
-- [ ] Observer
-- [ ] Mediator
-- [ ] Iterator
-- [ ] Visitor
-- [ ] Interpreter
-
-**Practices**
-
-- [ ] Repository
-- [ ] Dependency Injection
-
-</details>
-
 ### Concepts covered
 
 <details open>
@@ -599,6 +599,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-17 18:54 UTC</sub>
+<sub>Last updated 2026-10-17 19:07 UTC</sub>
 
 <!-- JOURNEY:END -->
