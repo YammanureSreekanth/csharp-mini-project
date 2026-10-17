@@ -22,7 +22,7 @@ _A running record of the C# and .NET ground I have actually covered, generated f
   <br><sub>Mr. Stark, am I an Avenger yet?</sub>
 </p>
 
-![concepts](https://img.shields.io/badge/concepts-76_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-165-0078D4) ![lines](https://img.shields.io/badge/lines-6287-0078D4) ![types](https://img.shields.io/badge/types-213-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
+![concepts](https://img.shields.io/badge/concepts-76_of_94-512BD4) ![C# files](https://img.shields.io/badge/C%23_files-193-0078D4) ![lines](https://img.shields.io/badge/lines-6640-0078D4) ![types](https://img.shields.io/badge/types-240-0078D4) ![app code by me](https://img.shields.io/badge/app_code_by_me-100%25-1BAF7A)
 
 **Progress** `████████████████░░░░` **81%**
 
@@ -50,7 +50,7 @@ What I am working on right now · next review **2026-10-16**
 
 | Project | Files | Lines | Types |
 |---|---:|---:|---:|
-| `Creational` | 29 | 1081 | 72 |
+| `Creational` | 57 | 1434 | 99 |
 | `Catalog.ConsoleApp` | 31 | 1060 | 32 |
 | `Ecom.MvcWebApp` | 22 | 804 | 26 |
 | `Wishlist.Functions` | 12 | 747 | 14 |
@@ -72,13 +72,13 @@ What I am working on right now · next review **2026-10-16**
 
 ### Who wrote this code
 
-**100% of the application code is mine** — 5070 of the 5070 lines in it that anyone authored by hand.
+**100% of the application code is mine** — 5358 of the 5358 lines in it that anyone authored by hand.
 A further 55 lines are `dotnet new` template output, which neither I nor an AI wrote.
 
 | Project | Mine | AI | Scaffold | Share authored by me |
 |---|---:|---:|---:|---|
+| `Creational` | 1149 | 0 | 0 | `████████████████████` 100% |
 | `Catalog.ConsoleApp` | 867 | 0 | 0 | `████████████████████` 100% |
-| `Creational` | 861 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.MvcWebApp` | 606 | 0 | 46 | `████████████████████` 100% |
 | `Wishlist.Functions` | 614 | 0 | 0 | `████████████████████` 100% |
 | `Ecom.WebApiApp` | 470 | 0 | 9 | `████████████████████` 100% |
@@ -96,7 +96,7 @@ A further 55 lines are `dotnet new` template output, which neither I nor an AI w
 | `ProductCatalog.UnitTests` | 13 | 0 | 0 | `████████████████████` 100% |
 | `Behavioral` | 1 | 0 | 0 | `████████████████████` 100% |
 | `Structural` | 1 | 0 | 0 | `████████████████████` 100% |
-| **Application total** | **5070** | **0** | **55** | `████████████████████` **100%** |
+| **Application total** | **5358** | **0** | **55** | `████████████████████` **100%** |
 
 <details>
 <summary>How this is measured, and what is declared</summary>
@@ -118,13 +118,13 @@ each declared commit, are on the dashboard under **How this is measured**.
 
 _The ground I want to cover for my career in .NET._
 
-`███████░░░░░░░░░░░░░` **62 of 178 covered** across 14 areas
+`███████░░░░░░░░░░░░░` **63 of 178 covered** across 14 areas
 
 <sub>The long-range picture. Most of it is untouched, which is the point — it shows the scope and where I am in it. Items marked not code-detectable are judgement topics no detector can honestly prove.</sub>
 
 | Area | Covered | |
 |---|---:|---|
-| C# and modern .NET depth | 15/22 | `██████████████░░░░░░` 68% |
+| C# and modern .NET depth | 16/22 | `███████████████░░░░░` 73% |
 | ASP.NET Core Web APIs | 6/14 | `█████████░░░░░░░░░░░` 43% |
 | Domain-Driven Design | 4/10 | `████████░░░░░░░░░░░░` 40% |
 | Microservices architecture | 0/11 | `░░░░░░░░░░░░░░░░░░░░` 0% |
@@ -140,17 +140,17 @@ _The ground I want to cover for my career in .NET._
 | AI-assisted development | 1/8 | `██░░░░░░░░░░░░░░░░░░` 12% |
 
 <details>
-<summary><b>C# and modern .NET depth</b> — 15/22 · <sub>Strong enough that C# feels natural.</sub></summary>
+<summary><b>C# and modern .NET depth</b> — 16/22 · <sub>Strong enough that C# feels natural.</sub></summary>
 
 - [x] **Classes and interfaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
 - [x] **Records** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodClass.cs` +3</sub>
 - [x] **Generics** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +3</sub>
 - [ ] Delegates and events
-- [x] **LINQ** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +3</sub>
-- [x] **async / await / Task** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +3</sub>
+- [x] **LINQ** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +3</sub>
+- [x] **async / await / Task** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +3</sub>
 - [x] **Cancellation tokens** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +3</sub>
-- [ ] Parallelism
-- [x] **Dependency injection** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
+- [x] **Parallelism** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +1</sub>
+- [x] **Dependency injection** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/Demos/AbstractFactoryDIDemo.cs` +3</sub>
 - [x] **Configuration** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **Error handling** <sub>`ProductCatalog/src/ProductCatalog.Api/Http.cs` +3</sub>
 - [x] **Logging** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +3</sub>
@@ -410,9 +410,9 @@ _The ground I want to cover for my career in .NET._
 - [x] **Structs** — value types <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Structs/Money.cs` +3</sub>
 - [x] **Enums** <sub>`Wishlist/src/Wishlist.Core/Enums/ProductListType.cs` +3</sub>
 - [x] **Properties** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **var / implicit typing** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
-- [x] **String interpolation** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodGoF.cs` +5</sub>
-- [x] **foreach** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodTracking.cs` +5</sub>
+- [x] **var / implicit typing** <sub>`DesignPatterns/src/Creational/4_Builder/Demos/CustomerRecordDemo.cs` +5</sub>
+- [x] **String interpolation** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/AmbientContextDemo.cs` +5</sub>
+- [x] **foreach** <sub>`DesignPatterns/src/Creational/2_Factory/Demos/OrderFactoryDemo.cs` +5</sub>
 - [ ] switch
 - [ ] Optional parameters
 - [ ] out parameters
@@ -450,17 +450,17 @@ _The ground I want to cover for my career in .NET._
 - [x] **required members** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderModern.cs` +3</sub>
 - [x] **Pattern matching** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
 - [x] **switch expressions** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodSimple.cs`</sub>
-- [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/1_Singleton/LockedSettings.cs` +5</sub>
-- [x] **?. and ?[]** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomExtensions/SqlDataReaderExtensions.cs` +4</sub>
+- [x] **Nullable reference types** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/RequestTracerDemo.cs` +5</sub>
+- [x] **?. and ?[]** <sub>`DesignPatterns/src/Creational/4_Builder/Demos/CustomerRecordDemo.cs` +5</sub>
 - [x] **?? and ??=** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Expression-bodied members** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Top-level statements** <sub>`DesignPatterns/src/Behavioral/Program.cs` +5</sub>
 - [x] **File-scoped namespaces** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
 - [x] **Target-typed new** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **Collection expressions** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
+- [x] **Collection expressions** <sub>`DesignPatterns/src/Creational/2_Factory/Demos/OrderFactoryDemo.cs` +5</sub>
 - [x] **Primary constructors** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderDirectorGoF.cs` +5</sub>
-- [x] **Tuples** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderDirectorGoF.cs`</sub>
-- [x] **Lambdas** <sub>`DesignPatterns/src/Creational/1_Singleton/LazySettings.cs` +5</sub>
+- [x] **Tuples** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderDirectorGoF.cs` +1</sub>
+- [x] **Lambdas** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
 - [x] **Object initializers** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryProvider.cs` +5</sub>
 
 </details>
@@ -469,8 +469,8 @@ _The ground I want to cover for my career in .NET._
 <summary><b>Collections & LINQ</b> — 8/9</summary>
 
 - [x] **Generic collections** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +5</sub>
-- [x] **LINQ** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +5</sub>
-- [x] **LINQ method syntax** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/AbstractFactoryReflection.cs` +5</sub>
+- [x] **LINQ** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
+- [x] **LINQ method syntax** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
 - [ ] LINQ query syntax
 - [x] **Extension methods** <sub>`DesignPatterns/src/Creational/4_Builder/BuilderFunctional.cs` +2</sub>
 - [x] **Iterators (yield)** <sub>`csharp-mini-project/Catalog.ConsoleApp/Domain/Classes/Category/Category.cs`</sub>
@@ -488,11 +488,11 @@ _The ground I want to cover for my career in .NET._
 - [x] **Custom exceptions** <sub>`ProductCatalog/src/ProductCatalog.App.Models/Exceptions/ProductNotFoundException.cs` +3</sub>
 - [ ] Exception filters
 - [ ] finally blocks
-- [x] **using / IDisposable** <sub>`csharp-mini-project/Catalog.ConsoleApp/AsyncProgram.cs` +5</sub>
+- [x] **using / IDisposable** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/AmbientContextDemo.cs` +5</sub>
 - [x] **Custom attributes** <sub>`csharp-mini-project/Catalog.ConsoleApp/CustomAttributes/InfoAttribute.cs`</sub>
 - [x] **Logging** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
-- [x] **async / await** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +5</sub>
-- [x] **Task / ValueTask** <sub>`DesignPatterns/src/Creational/2_Factory/FactoryMethodAsync.cs` +5</sub>
+- [x] **async / await** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
+- [x] **Task / ValueTask** <sub>`DesignPatterns/src/Creational/1_Singleton/Demos/LockedSettingsDemo.cs` +5</sub>
 - [x] **ILogger** <sub>`ProductCatalog/src/ProductCatalog.Api/Functions/Product/CreateProductFunction.cs` +5</sub>
 - [x] **Structured logging** <sub>`Wishlist/src/Wishlist.Functions/Functions/ProductListFunctions.cs` +4</sub>
 - [x] **IDisposable implemented** <sub>`DesignPatterns/src/Creational/1_Singleton/AmbientContext.cs` +4</sub>
@@ -515,7 +515,7 @@ _The ground I want to cover for my career in .NET._
 <details open>
 <summary><b>ASP.NET Core</b> — 11/13</summary>
 
-- [x] **Dependency injection** <sub>`ProductCatalog/src/ProductCatalog.Api/Program.cs` +5</sub>
+- [x] **Dependency injection** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/Demos/AbstractFactoryDIDemo.cs` +5</sub>
 - [x] **Middleware pipeline** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [x] **MVC controllers** <sub>`csharp-mini-project/Ecom.MvcWebApp/Controllers/CategoryController.cs` +5</sub>
 - [x] **MVC routing** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
@@ -525,8 +525,8 @@ _The ground I want to cover for my career in .NET._
 - [x] **OpenAPI / Swagger** <sub>`csharp-mini-project/Ecom.WebApiApp/Program.cs`</sub>
 - [x] **Configuration binding** <sub>`csharp-mini-project/Ecom.MvcWebApp/Program.cs` +1</sub>
 - [ ] Authentication
-- [x] **IoC container** <sub>`DesignPatterns/src/Creational/Program.cs` +3</sub>
-- [x] **DI lifetimes** — scoped / singleton / transient <sub>`DesignPatterns/src/Creational/Program.cs` +5</sub>
+- [x] **IoC container** <sub>`DesignPatterns/src/Creational/3_AbstractFactory/Demos/AbstractFactoryDIDemo.cs` +3</sub>
+- [x] **DI lifetimes** — scoped / singleton / transient <sub>`DesignPatterns/src/Creational/3_AbstractFactory/Demos/AbstractFactoryDIDemo.cs` +5</sub>
 - [x] **Custom middleware** <sub>`csharp-mini-project/Ecom.MvcWebApp/Middlewares/RequestLogging.cs`</sub>
 
 </details>
@@ -551,6 +551,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-17 15:27 UTC</sub>
+<sub>Last updated 2026-10-17 15:46 UTC</sub>
 
 <!-- JOURNEY:END -->
