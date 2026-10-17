@@ -212,11 +212,24 @@
 
   /* ---- provenance ---- */
   .prov-card { max-width: 440px; }
+  .prov-top { display: flex; align-items: center; gap: 18px; }
+  .prov-top svg { flex: none; }
   .prov-card .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
   .prov-card .headline small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
-  .prov-card .split { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+  .comp-bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: var(--grid); margin: 18px 0 14px; }
+  .comp-bar i { display: block; height: 100%; }
+  .comp-bar i:not(:last-child) { margin-right: 2px; }
+  .prov-card .split { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
   .prov-card .split div { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
   .prov-card .split b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .seal {
+    display: flex; align-items: center; gap: 10px; margin-top: 16px;
+    padding: 10px 14px; border-radius: 10px;
+    background: rgba(12,163,12,0.10);
+    border: 1px solid rgba(12,163,12,0.22);
+  }
+  .seal b { display: block; font-size: 13px; color: var(--ink); }
+  .seal span { font-size: 12px; color: var(--ink-2); }
   .note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; }
   .note code { font-size: 12px; }
 
@@ -407,8 +420,33 @@
   <section class="card prov-card" id="provSection" hidden>
     <h2>Written by me</h2>
     <p class="sub">Application code, by line &mdash; every non-blank line attributed with <code>git blame</code>.</p>
-    <div class="headline" id="provPct">—<small id="provCap"></small></div>
+
+    <div class="prov-top">
+      <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+        <defs>
+          <linearGradient id="provRingGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--prov-you)"></stop>
+            <stop offset="100%" stop-color="var(--accent-3)"></stop>
+          </linearGradient>
+        </defs>
+        <circle cx="36" cy="36" r="30" fill="none" stroke="var(--grid)" stroke-width="8"></circle>
+        <circle id="provRingArc" cx="36" cy="36" r="30" fill="none" stroke="url(#provRingGrad)" stroke-width="8"
+                stroke-linecap="round" transform="rotate(-90 36 36)"></circle>
+      </svg>
+      <div class="headline" id="provPct">—<small id="provCap"></small></div>
+    </div>
+
+    <div class="comp-bar" id="provBar" role="img" aria-label="Line authorship breakdown"></div>
     <div class="split" id="provSplit"></div>
+
+    <div class="seal" id="provSeal" hidden>
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14.5" fill="none" stroke="var(--good)" stroke-width="2"></circle>
+        <path d="M9 17.5l4.5 4.5L23 11" stroke="var(--good)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <div><b>Zero AI-authored lines</b><span>Every line in the application was written by hand</span></div>
+    </div>
+
     <details class="data" id="provAudit">
       <summary>How this is measured, and which commits are declared</summary>
       <div id="provAuditBody"></div>
@@ -566,15 +604,29 @@
     document.getElementById("provCap").textContent =
       P.app.you + " of " + P.app.authored + " hand-authored lines in the application";
 
+    var provArc = document.getElementById("provRingArc");
+    var provCirc = 2 * Math.PI * 30;
+    provArc.setAttribute("stroke-dasharray", provCirc.toFixed(1));
+    provArc.setAttribute("stroke-dashoffset", (provCirc * (1 - P.app.youPercent / 100)).toFixed(1));
+
+    var provTotal = P.app.total || 1;
     var rows = [
       ["var(--prov-you)", "Mine", P.app.you],
       ["var(--prov-ai)", "AI-written", P.app.ai],
       ["var(--prov-scaffold)", "Scaffold", P.app.scaffold]
     ];
+    document.getElementById("provBar").innerHTML = rows.map(function (r) {
+      var w = (100 * r[2] / provTotal).toFixed(2);
+      return w > 0
+        ? '<i style="width:' + w + '%;background:' + r[0] + '" title="' + r[1] + ': ' + num(r[2]) + ' lines"></i>'
+        : "";
+    }).join("");
     document.getElementById("provSplit").innerHTML = rows.map(function (r) {
       return '<div><i class="swatch" style="background:' + r[0] + '"></i>' +
              r[1] + " &middot; <b>" + num(r[2]) + "</b> lines</div>";
     }).join("");
+
+    if (P.app.ai === 0) document.getElementById("provSeal").hidden = false;
 
     var method =
       "<p class='note'>Every non-blank line is attributed with <code>git blame -w -M</code> to the " +
