@@ -18,6 +18,10 @@
 <meta name="twitter:description" content="__TAGLINE__">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232a78d6'/%3E%3Cpath d='M9 17.5l4.5 4.5L23 11' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light;
@@ -37,6 +41,13 @@
     --prov-scaffold:  #1baf7a;
     --good:           #0ca30c;
     --radius:         14px;
+    --font-display:   "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* A curated rotation for roadmap areas, so the skill map reads as a
+       varied map rather than N identical blue cards. */
+    --accent-0: #2a78d6; --accent-1: #0f9d8a; --accent-2: #c9820f;
+    --accent-3: #7c5cff; --accent-4: #d84f8a; --accent-5: #1aa7c9;
+    --accent-6: #4f9d3a;
+    --dots: rgba(11,11,11,0.05);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -56,6 +67,10 @@
       --prov-ai:       #d95926;
       --prov-scaffold: #199e70;
       --good:          #0ca30c;
+      --accent-0: #4f97e8; --accent-1: #2bb8a3; --accent-2: #e0a53e;
+      --accent-3: #9b84ff; --accent-4: #e876ab; --accent-5: #3fc2e0;
+      --accent-6: #74c158;
+      --dots: rgba(255,255,255,0.055);
     }
   }
   :root[data-theme="dark"] {
@@ -75,17 +90,30 @@
     --prov-ai:       #d95926;
     --prov-scaffold: #199e70;
     --good:          #0ca30c;
+    --accent-0: #4f97e8; --accent-1: #2bb8a3; --accent-2: #e0a53e;
+    --accent-3: #9b84ff; --accent-4: #e876ab; --accent-5: #3fc2e0;
+    --accent-6: #74c158;
+    --dots: rgba(255,255,255,0.055);
   }
 
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--plane);
+    background:
+      radial-gradient(var(--dots) 1px, transparent 1px) 0 0 / 22px 22px,
+      var(--plane);
     color: var(--ink);
     font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 72px; }
+
+  /* Display type carries the page's personality; body copy stays in system-ui
+     for readability. Applied once here rather than repeated per selector. */
+  h1, h2, h3,
+  .ring .pct, .tile .v, .plan .count, .prov-card .headline, .topline .big {
+    font-family: var(--font-display);
+  }
 
   header.page { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
   header.page h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.02em; }
@@ -113,7 +141,7 @@
   .card:hover { border-color: var(--axis); box-shadow: 0 2px 14px rgba(0,0,0,0.05); }
   @media (prefers-color-scheme: dark) { .card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.3); } }
   :root[data-theme="dark"] .card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.3); }
-  .card h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: -0.01em; }
+  .card h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
   .card .sub { margin: 0 0 14px; font-size: 13px; color: var(--ink-muted); }
 
   /* ---- hero ---- */
@@ -122,6 +150,13 @@
   .ring svg { flex: none; }
   .ring .pct { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
   .ring .cap { font-size: 13px; color: var(--ink-2); }
+
+  .now {
+    margin: 0 0 12px; font-size: 13.5px; color: var(--ink-2);
+    padding: 10px 14px; border-radius: 10px;
+    background: var(--series-1-soft); border: 1px solid transparent;
+  }
+  .now b { color: var(--ink); font-weight: 600; }
 
   .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(122px, 1fr)); gap: 12px; }
   .tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
@@ -188,7 +223,8 @@
   /* ---- roadmap ---- */
   .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px; }
   .roadmap .card { display: flex; flex-direction: column; }
-  .roadmap h3 { margin: 0 0 3px; font-size: 14.5px; font-weight: 600; }
+  .roadmap h3 { margin: 0 0 3px; font-size: 14.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .area-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
   .roadmap .sum { margin: 0; font-size: 12.5px; color: var(--ink-muted); }
   .roadmap .frac { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
   .roadmap details { margin-top: 4px; }
@@ -226,7 +262,28 @@
   footer.page { margin-top: 34px; font-size: 12.5px; color: var(--ink-muted); }
 
   section { margin-bottom: 16px; }
-  h2.section { font-size: 13px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-muted); margin: 30px 0 12px; font-weight: 600; }
+
+  /* Numbered like chapters, since this whole page is framed as a journey.
+     counter-increment only fires on boxes that actually render, so a section
+     still hidden (no learning plan, no roadmap configured) is skipped rather
+     than leaving a gap in the sequence. */
+  .wrap { counter-reset: chapter; }
+  h2.section {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--ink-muted); margin: 34px 0 14px; font-weight: 600;
+  }
+  h2.section::before {
+    counter-increment: chapter;
+    content: counter(chapter, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-size: 15px; font-weight: 600; letter-spacing: 0;
+    color: var(--series-1);
+  }
+  h2.section::after {
+    content: ""; flex: 1 1 auto; height: 1px; background: var(--grid);
+    transform: translateY(1px);
+  }
 
   @media (max-width: 720px) {
     /* Every two-column grid collapses; a fixed min column would force the page
@@ -261,17 +318,26 @@
 
   <div class="hero">
     <div class="card ring">
-      <svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true">
-        <circle cx="44" cy="44" r="38" fill="none" stroke="var(--grid)" stroke-width="9"></circle>
-        <circle id="ringArc" cx="44" cy="44" r="38" fill="none" stroke="var(--series-1)" stroke-width="9"
-                stroke-linecap="round" transform="rotate(-90 44 44)"></circle>
+      <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--series-1)"></stop>
+            <stop offset="100%" stop-color="var(--accent-3)"></stop>
+          </linearGradient>
+        </defs>
+        <circle cx="52" cy="52" r="44" fill="none" stroke="var(--grid)" stroke-width="10"></circle>
+        <circle id="ringArc" cx="52" cy="52" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+                stroke-linecap="round" transform="rotate(-90 52 52)"></circle>
       </svg>
       <div>
         <div class="pct" id="pctText">0%</div>
         <div class="cap" id="pctCap">of tracked concepts</div>
       </div>
     </div>
-    <div class="tiles" id="tiles"></div>
+    <div>
+      <p class="now" id="nowLine" hidden></p>
+      <div class="tiles" id="tiles"></div>
+    </div>
   </div>
 
   <h2 class="section" id="planHeading" hidden>Learning plan</h2>
@@ -389,16 +455,30 @@
   document.getElementById("pctCap").textContent =
     D.concepts.done + " of " + D.concepts.total + " tracked concepts";
   var arc = document.getElementById("ringArc");
-  var circ = 2 * Math.PI * 38;
+  var circ = 2 * Math.PI * 44;
   arc.setAttribute("stroke-dasharray", circ.toFixed(1));
   arc.setAttribute("stroke-dashoffset", (circ * (1 - pct / 100)).toFixed(1));
 
+  if (D.assignment && D.assignment.note) {
+    var now = document.getElementById("nowLine");
+    now.innerHTML = "<b>Right now &mdash;</b> " + esc(D.assignment.note);
+    now.hidden = false;
+  }
+
+  /* Consecutive most-recent weeks with at least one commit — a streak says
+     more about consistency than a raw commit count does. */
+  var weeksList = D.git.weeks || [];
+  var streak = 0;
+  for (var wi = weeksList.length - 1; wi >= 0; wi--) {
+    if (weeksList[wi].commits > 0) streak++; else break;
+  }
+
   var tiles = [
-    ["C# files", num(D.code.files)],
-    ["Lines of C#", num(D.code.lines)],
-    ["Types", num(D.code.types)],
+    ["Weekly streak", streak ? streak + (streak === 1 ? " week" : " weeks") : "—"],
     ["Commits", num(D.git.totalCommits)],
-    ["Active days", num(D.git.activeDays)]
+    ["Active days", num(D.git.activeDays)],
+    ["Lines of C#", num(D.code.lines)],
+    ["Types", num(D.code.types)]
   ];
   document.getElementById("tiles").innerHTML = tiles.map(function (t) {
     return '<div class="tile"><div class="v">' + t[1] + '</div><div class="k">' + t[0] + "</div></div>";
@@ -549,7 +629,8 @@
       rn.hidden = false;
     }
 
-    document.getElementById("roadAreas").innerHTML = R.areas.map(function (a) {
+    document.getElementById("roadAreas").innerHTML = R.areas.map(function (a, idx) {
+      var accent = "var(--accent-" + (idx % 7) + ")";
       var chips = a.items.map(function (i) {
         var done = i.status === "done";
         var wip = i.status === "in-progress";
@@ -563,10 +644,10 @@
                "</i>" + esc(i.label) + "</span>";
       }).join("");
 
-      return '<div class="card">' +
-        "<h3>" + esc(a.name) + "</h3>" +
+      return '<div class="card" style="border-top:3px solid ' + accent + '">' +
+        "<h3><i class=\"area-dot\" style=\"background:" + accent + "\"></i>" + esc(a.name) + "</h3>" +
         '<p class="sum">' + esc(a.summary || "") + "</p>" +
-        '<div class="bar" style="margin:10px 0 8px"><i style="width:' + a.percent + '%"></i></div>' +
+        '<div class="bar" style="margin:10px 0 8px"><i style="width:' + a.percent + '%;background:' + accent + '"></i></div>' +
         '<span class="frac">' + a.done + " of " + a.total + " \u00b7 " + a.percent + "%</span>" +
         "<details><summary>Show topics</summary><div class=\"chips\" style=\"margin-top:8px\">" +
         chips + "</div></details></div>";
@@ -574,7 +655,8 @@
   }
 
   /* ---------- concept areas ---------- */
-  document.getElementById("areas").innerHTML = D.concepts.areas.map(function (a) {
+  document.getElementById("areas").innerHTML = D.concepts.areas.map(function (a, idx) {
+    var accent = "var(--accent-" + (idx % 7) + ")";
     var p = a.concepts.length ? Math.round(100 * a.done / a.concepts.length) : 0;
     var chips = a.concepts.map(function (c) {
       var cls = c.done ? "chip done" : "chip todo";
@@ -582,9 +664,9 @@
       var title = c.done && c.evidence.length ? c.evidence.join(", ") : (c.notes || "");
       return '<span class="' + cls + '" title="' + esc(title) + '"><i class="mark">' + mark + "</i>" + esc(c.label) + "</span>";
     }).join("");
-    return '<div class="card"><h2>' + esc(a.name) + "</h2>" +
+    return '<div class="card" style="border-top:3px solid ' + accent + '"><h2><i class="area-dot" style="background:' + accent + '"></i>' + esc(a.name) + "</h2>" +
            '<p class="sub">' + a.done + " of " + a.concepts.length + " covered</p>" +
-           '<div class="bar"><i style="width:' + p + '%"></i></div>' +
+           '<div class="bar"><i style="width:' + p + '%;background:' + accent + '"></i></div>' +
            '<div class="chips">' + chips + "</div></div>";
   }).join("");
 
