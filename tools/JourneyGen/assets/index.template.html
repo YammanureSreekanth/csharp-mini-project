@@ -198,6 +198,38 @@
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
 
+  /* ---- activity ---- */
+  .eras { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .era-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .era-card.current { border-color: var(--series-1); }
+  .era-card .v { font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
+  .era-card .k { font-size: 12.5px; color: var(--ink-muted); margin-top: 4px; }
+
+  .weekgrid { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-end; overflow-x: auto; padding-bottom: 4px; }
+  .week-col { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 46px; flex: none; }
+  .week-tile {
+    width: 42px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; border: 1px solid var(--border);
+    color: var(--ink-muted);
+  }
+  .week-tile.few { background: var(--series-1-soft); border-color: transparent; color: var(--ink); }
+  .week-tile.some { background: var(--series-1); border-color: transparent; color: #fff; opacity: 0.72; }
+  .week-tile.many { background: var(--series-1); border-color: transparent; color: #fff; }
+  .week-bars { width: 100%; height: 44px; display: flex; flex-direction: column; }
+  .bar-half { height: 22px; display: flex; justify-content: center; }
+  .bar-half.up { align-items: flex-end; }
+  .bar-half.down { align-items: flex-start; }
+  .week-bars .added { width: 10px; border-radius: 2px 2px 0 0; background: var(--series-1); }
+  .week-bars .removed { width: 10px; border-radius: 0 0 2px 2px; background: var(--series-2); }
+  .week-label { font-size: 10.5px; color: var(--ink-muted); white-space: nowrap; }
+
+  .callouts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .callout {
+    font-size: 12.5px; color: var(--ink-2); background: var(--plane); border: 1px solid var(--border);
+    border-radius: 999px; padding: 5px 12px;
+  }
+  .callout b { color: var(--ink); }
+
   /* ---- right now ---- */
   .rightnow { border-color: var(--series-1); margin-bottom: 16px; }
   .rightnow h2 { margin: 0 0 6px; font-size: 19px; }
@@ -571,22 +603,17 @@
   </div>
 
   <h2 class="section" id="activityHeading">Activity</h2>
-  <div class="charts">
-    <div class="card">
-      <h2>Commits per week</h2>
-      <p class="sub">When the work actually happened.</p>
-      <div class="chartbox"><canvas id="commitsChart"></canvas></div>
-    </div>
-    <div class="card">
-      <h2>Lines changed per week</h2>
-      <p class="sub">Added above the line, removed below.</p>
-      <div class="legend">
-        <span><i class="swatch" style="background:var(--series-1)"></i>Added</span>
-        <span><i class="swatch" style="background:var(--series-2)"></i>Removed</span>
-      </div>
-      <div class="chartbox" style="height:206px"><canvas id="churnChart"></canvas></div>
-    </div>
-  </div>
+
+  <div class="eras" id="activityEras" hidden></div>
+
+  <section class="card" style="margin-bottom:16px">
+    <h2>Weekly rhythm</h2>
+    <p class="sub">One column per week. The tile shows commits, the bars show lines added above the line and removed below.</p>
+    <div class="weekgrid" id="weekGrid"></div>
+    <p class="note" id="streakNote" hidden></p>
+    <div class="legend" id="rhythmLegend"></div>
+    <div class="callouts" id="activityCallouts"></div>
+  </section>
 
   <details class="data">
     <summary>View the underlying data as tables</summary>
@@ -616,6 +643,18 @@
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
   function num(n) { return n.toLocaleString("en-US"); }
+
+  function shortDate(iso) {
+    return new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+  }
+  function fmtRange(fromIso, toIso) {
+    var from = new Date(fromIso + "T00:00:00Z"), to = new Date(toIso + "T00:00:00Z");
+    var fromMonth = from.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });
+    var toMonth = to.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" });
+    return fromMonth === toMonth
+      ? fromMonth + " " + from.getUTCDate() + "–" + to.getUTCDate()
+      : fromMonth + " " + from.getUTCDate() + " – " + shortDate(toIso);
+  }
 
   /* A detector-provable "not started" (○) and a judgement call no detector can
      ever prove (◇) look identical as plain checkboxes but mean different
@@ -1037,6 +1076,101 @@
 
   if (conceptsOpen > 0) document.getElementById("tiersNote").hidden = false;
 
+  /* ---------- activity ---------- */
+  var weeks = D.git.weeks || [];
+  if (weeks.length) {
+    // Current run: the trailing streak of weeks with at least one commit —
+    // same rule as the hero's weekly-streak tile. Early weeks: the mirror
+    // image, the leading streak from the very start. Whatever's left between
+    // them, if anything, is the slow stretch.
+    var runStart = weeks.length;
+    for (var ri = weeks.length - 1; ri >= 0; ri--) {
+      if (weeks[ri].commits > 0) runStart = ri; else break;
+    }
+    var earlyEnd = 0;
+    for (var ei = 0; ei < weeks.length; ei++) {
+      if (weeks[ei].commits > 0) earlyEnd = ei + 1; else break;
+    }
+    if (earlyEnd > runStart) earlyEnd = runStart;
+
+    var eraDefs = [];
+    if (earlyEnd > 0) eraDefs.push({ label: "Early weeks", list: weeks.slice(0, earlyEnd) });
+    if (earlyEnd < runStart) eraDefs.push({ label: "Slow stretch", list: weeks.slice(earlyEnd, runStart) });
+    if (runStart < weeks.length) eraDefs.push({ label: "Current run", list: weeks.slice(runStart), current: true });
+
+    if (eraDefs.length > 1) {
+      document.getElementById("activityEras").hidden = false;
+      document.getElementById("activityEras").innerHTML = eraDefs.map(function (e, idx) {
+        var commits = e.list.reduce(function (s, w) { return s + w.commits; }, 0);
+        var added = e.list.reduce(function (s, w) { return s + w.added; }, 0);
+        var from = e.list[0].start;
+        var lastWeekStart = e.list[e.list.length - 1].start;
+        // The final era is likely still in progress — its real end is the last
+        // commit, not a full week out from that week's start.
+        var to;
+        if (idx === eraDefs.length - 1 && D.git.lastCommit) {
+          to = D.git.lastCommit;
+        } else {
+          var toDate = new Date(lastWeekStart + "T00:00:00Z");
+          toDate.setUTCDate(toDate.getUTCDate() + 6);
+          to = toDate.toISOString().slice(0, 10);
+        }
+        return '<div class="era-card' + (e.current ? " current" : "") + '">' +
+          '<span class="eyebrow">' + esc(e.label) + "</span>" +
+          '<div class="v">' + num(commits) + (commits === 1 ? " commit" : " commits") + "</div>" +
+          '<div class="k">' + fmtRange(from, to) + " · " + num(added) + " lines added</div>" +
+          "</div>";
+      }).join("");
+    }
+
+    var actStreak = 0;
+    for (var si = weeks.length - 1; si >= 0; si--) { if (weeks[si].commits > 0) actStreak++; else break; }
+    if (actStreak) {
+      var sn = document.getElementById("streakNote");
+      sn.innerHTML = "<b>" + actStreak + "-week streak</b> and counting";
+      sn.hidden = false;
+    }
+
+    var maxCommits = Math.max.apply(null, weeks.map(function (w) { return w.commits; })) || 1;
+    var maxChurn = Math.max.apply(null, weeks.map(function (w) { return Math.max(w.added, w.removed); })) || 1;
+
+    document.getElementById("weekGrid").innerHTML = weeks.map(function (w) {
+      var tier = w.commits === 0 ? "none" : w.commits <= Math.ceil(maxCommits * 0.25) ? "few"
+               : w.commits <= Math.ceil(maxCommits * 0.65) ? "some" : "many";
+      var addedH = Math.round(20 * w.added / maxChurn);
+      var removedH = Math.round(20 * w.removed / maxChurn);
+      return '<div class="week-col">' +
+        '<div class="week-tile ' + tier + '" title="Week of ' + w.start + ': ' + w.commits +
+        (w.commits === 1 ? " commit" : " commits") + '">' + w.commits + "</div>" +
+        '<div class="week-bars">' +
+          '<div class="bar-half up"><i class="added" style="height:' + addedH + 'px" title="' +
+          num(w.added) + ' lines added"></i></div>' +
+          '<div class="bar-half down"><i class="removed" style="height:' + removedH + 'px" title="' +
+          num(w.removed) + ' lines removed"></i></div>' +
+        "</div>" +
+        '<div class="week-label">' + w.start.slice(5) + "</div>" +
+      "</div>";
+    }).join("");
+
+    document.getElementById("rhythmLegend").innerHTML =
+      '<span><i class="swatch week-tile none" style="width:14px;height:14px;border-radius:4px"></i>none</span>' +
+      '<span><i class="swatch week-tile few" style="width:14px;height:14px;border-radius:4px"></i>a few</span>' +
+      '<span><i class="swatch week-tile some" style="width:14px;height:14px;border-radius:4px"></i>some</span>' +
+      '<span><i class="swatch week-tile many" style="width:14px;height:14px;border-radius:4px"></i>many</span>' +
+      '<span><i class="swatch" style="background:var(--series-1)"></i>lines added</span>' +
+      '<span><i class="swatch" style="background:var(--series-2)"></i>lines removed</span>';
+
+    var busiest = weeks.reduce(function (a, b) { return b.commits > a.commits ? b : a; });
+    var biggest = weeks.reduce(function (a, b) { return b.added > a.added ? b : a; });
+    var mostRemoved = weeks.reduce(function (a, b) { return b.removed > a.removed ? b : a; });
+    document.getElementById("activityCallouts").innerHTML = [
+      "Busiest week: <b>" + num(busiest.commits) + (busiest.commits === 1 ? " commit" : " commits") +
+        "</b> (" + busiest.start.slice(5) + ")",
+      "Biggest week: <b>" + num(biggest.added) + " lines added</b> (" + biggest.start.slice(5) + ")",
+      "Most removed: <b>" + num(mostRemoved.removed) + " lines</b> (" + mostRemoved.start.slice(5) + ")"
+    ].map(function (t) { return '<span class="callout">' + t + "</span>"; }).join("");
+  }
+
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1075,55 +1209,9 @@
     charts.forEach(function (c) { c.destroy(); });
     charts = [];
 
-    var s1 = css("--series-1"), s2 = css("--series-2");
     var muted = css("--ink-muted"), grid = css("--grid");
 
     Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", sans-serif';
-
-    /* Commits per week - one series, so no legend; the title names it. */
-    var weeks = D.git.weeks;
-    var o1 = baseOptions(muted, grid);
-    o1.plugins.tooltip.callbacks = {
-      title: function (items) { return "Week of " + weeks[items[0].dataIndex].start; },
-      label: function (item) { return item.parsed.y + (item.parsed.y === 1 ? " commit" : " commits"); }
-    };
-    charts.push(new Chart(document.getElementById("commitsChart"), {
-      type: "bar",
-      data: {
-        labels: weeks.map(function (w) { return w.start.slice(5); }),
-        datasets: [{
-          data: weeks.map(function (w) { return w.commits; }),
-          backgroundColor: s1, borderRadius: 4, borderSkipped: false,
-          categoryPercentage: 0.82, barPercentage: 0.88
-        }]
-      },
-      options: o1
-    }));
-
-    /* Lines changed - added up, removed down, anchored to a shared zero baseline. */
-    var o2 = baseOptions(muted, grid);
-    o2.scales.y.ticks.callback = function (v) { return num(Math.abs(v)); };
-    o2.plugins.tooltip.callbacks = {
-      title: function (items) { return "Week of " + weeks[items[0].dataIndex].start; },
-      label: function (item) {
-        return item.dataset.label + ": " + num(Math.abs(item.parsed.y)) + " lines";
-      }
-    };
-    charts.push(new Chart(document.getElementById("churnChart"), {
-      type: "bar",
-      data: {
-        labels: weeks.map(function (w) { return w.start.slice(5); }),
-        datasets: [
-          { label: "Added", data: weeks.map(function (w) { return w.added; }),
-            backgroundColor: s1, borderRadius: 4, borderSkipped: false,
-            categoryPercentage: 0.82, barPercentage: 0.88 },
-          { label: "Removed", data: weeks.map(function (w) { return -w.removed; }),
-            backgroundColor: s2, borderRadius: 4, borderSkipped: false,
-            categoryPercentage: 0.82, barPercentage: 0.88 }
-        ]
-      },
-      options: o2
-    }));
 
     /* The skyline: one bar per roadmap area, stacked done (theme-colored) over
        remaining (neutral), so height is scope and the colored part is progress. */
