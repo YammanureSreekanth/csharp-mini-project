@@ -39,6 +39,7 @@ public static class SiteWriter
         {
             title = cfg.Title,
             repoUrl,
+            techStack = cfg.TechStack,
             roadmap = cfg.Roadmap.Areas.Count == 0 ? null : new
             {
                 title = cfg.Roadmap.Title,
@@ -66,13 +67,15 @@ public static class SiteWriter
                     }),
                 }),
             },
-            assignment = cfg.Assignment.Items.Count == 0 ? null : new
+            assignment = (cfg.Assignment.Items.Count == 0 && cfg.Assignment.LinkArea.Length == 0) ? null : new
             {
                 title = cfg.Assignment.Title,
                 source = cfg.Assignment.Source,
                 assignedOn = cfg.Assignment.ShowAssignedOn ? cfg.Assignment.AssignedOn : "",
                 reviewOn = cfg.Assignment.ReviewOn,
                 personalTarget = cfg.Assignment.PersonalTarget,
+                linkArea = cfg.Assignment.LinkArea,
+                linkGroup = cfg.Assignment.LinkGroup,
                 note = cfg.Assignment.Note,
                 done = cfg.Assignment.Done,
                 inProgress = cfg.Assignment.InProgress,

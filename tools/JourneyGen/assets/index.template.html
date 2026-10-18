@@ -115,7 +115,7 @@
   /* Display type carries the page's personality; body copy stays in system-ui
      for readability. Applied once here rather than repeated per selector. */
   h1, h2, h3,
-  .ring .pct, .tile .v, .plan .count, .prov-card .headline, .topline .big {
+  .pct, .tile .v, .plan .count, .headline, .topline .big {
     font-family: var(--font-display);
   }
 
@@ -148,21 +148,45 @@
   .card h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
   .card .sub { margin: 0 0 14px; font-size: 13px; color: var(--ink-muted); }
 
-  /* ---- hero ---- */
-  .hero { display: grid; grid-template-columns: minmax(220px, 280px) 1fr; gap: 16px; margin-bottom: 16px; }
-  .ring { display: flex; align-items: center; gap: 18px; }
-  .ring svg { flex: none; }
-  .ring .pct { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
-  .ring .cap { font-size: 13px; color: var(--ink-2); }
-
-  .now {
-    margin: 0 0 12px; font-size: 13.5px; color: var(--ink-2);
-    padding: 10px 14px; border-radius: 10px;
-    background: var(--series-1-soft); border: 1px solid transparent;
+  /* ---- header extras ---- */
+  .stackbar {
+    display: inline-block; margin: 10px 0 0; font-size: 13px; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 9px 14px; max-width: 70ch;
   }
-  .now b { color: var(--ink); font-weight: 600; }
+  .tabs { display: flex; gap: 8px; margin: 18px 0; }
+  .tabs a {
+    font-size: 13px; font-weight: 600; color: var(--ink-2); text-decoration: none;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+    padding: 7px 16px; transition: color 140ms ease, border-color 140ms ease;
+  }
+  .tabs a:hover { color: var(--ink); border-color: var(--axis); }
+  html { scroll-behavior: smooth; }
+  /* Headings are jumped to directly by the tabs; without this, a fixed-less
+     page still lands them flush against the viewport edge. */
+  h2.section { scroll-margin-top: 16px; }
 
-  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(122px, 1fr)); gap: 12px; }
+  /* ---- hero: progress + provenance cards ---- */
+  .hero2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .eyebrow {
+    display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--ink-muted); font-weight: 600; margin-bottom: 14px;
+  }
+  .dualrings { display: flex; flex-wrap: wrap; gap: 28px; }
+  .ringblock { display: flex; align-items: center; gap: 14px; }
+  .ringblock svg { flex: none; }
+  .ringblock .cap { font-size: 12.5px; color: var(--ink-muted); line-height: 1.5; }
+  .ringblock .cap b { color: var(--ink-2); font-weight: 600; }
+
+  .toolblock { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--grid); }
+  .toolhead { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .toolhead span { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; }
+  .toolhead code { font-size: 12px; color: var(--ink-2); }
+  .toolstat { font-size: 14px; margin-bottom: 8px; }
+  .toolstat b { font-family: var(--font-display); color: var(--ink); }
+  .toolstat span { color: var(--ink-muted); font-size: 12.5px; margin-left: 6px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(122px, 1fr)); gap: 12px; margin-bottom: 16px; }
   .tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
   .tile .v { font-size: 24px; font-weight: 640; letter-spacing: -0.02em; }
   .tile .k { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
@@ -174,17 +198,37 @@
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
 
-  /* ---- assignment ---- */
-  .plan { display: grid; grid-template-columns: minmax(230px, 290px) 1fr; gap: 16px; }
-  .plan .count { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
-  .plan .count small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
-  .plan dl { margin: 16px 0 0; font-size: 13px; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; }
-  .plan dt { color: var(--ink-muted); }
-  .plan dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+  /* ---- right now ---- */
+  .rightnow { border-color: var(--series-1); margin-bottom: 16px; }
+  .rightnow h2 { margin: 0 0 6px; font-size: 19px; }
+  .rightnow > .sub { margin-bottom: 14px; }
+  .rn-dates { margin: 0; font-size: 13px; display: flex; gap: 6px; color: var(--ink-muted); }
+  .rn-dates dt { display: none; }
+  .rn-dates dd { margin: 0; color: var(--ink-2); }
   .due { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 10px;
-         border-radius: 999px; background: var(--series-1-soft); color: var(--ink); margin-top: 14px; }
+         border-radius: 999px; background: var(--series-1-soft); color: var(--ink); margin-top: 10px; }
 
-  .items { display: flex; flex-direction: column; }
+  .rn-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 16px; }
+  .rn-group {
+    background: var(--plane); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .rn-group.infocus { border-color: var(--series-1); background: var(--series-1-soft); grid-column: span 2; }
+  .rn-group-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .rn-group-head span:first-child { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); font-weight: 600; }
+  .rn-group-head span:last-child { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .rn-badge {
+    display: inline-block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 700; color: #fff; background: var(--series-1); border-radius: 999px;
+    padding: 2px 8px; margin-left: 8px;
+  }
+  .rn-group .state { font-size: 13px; color: var(--ink-muted); }
+  .rn-group .state.done { color: var(--good); font-weight: 600; }
+  .rn-group .bar { margin: 2px 0 0; }
+
+  .plan-fallback .count { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
+  .plan-fallback .count small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
+  .items { display: flex; flex-direction: column; margin-top: 16px; }
   .item { display: grid; grid-template-columns: 148px 1fr; gap: 14px; padding: 13px 0;
           border-top: 1px solid var(--grid); align-items: start; }
   .item:first-child { border-top: 0; }
@@ -214,18 +258,15 @@
   .chip.ready { background: var(--series-1-soft); border-color: transparent; color: var(--ink); }
   .chip.ready .mark { color: var(--series-1); }
 
-  /* ---- provenance ---- */
-  .prov-card { max-width: 440px; }
-  .prov-top { display: flex; align-items: center; gap: 18px; }
-  .prov-top svg { flex: none; }
-  .prov-card .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
-  .prov-card .headline small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
+  /* ---- provenance (now a card in .hero2) ---- */
+  .headline { font-size: 34px; font-weight: 650; letter-spacing: -0.03em; line-height: 1.1; }
+  .headline small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; letter-spacing: 0; }
   .comp-bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: var(--grid); margin: 18px 0 14px; }
   .comp-bar i { display: block; height: 100%; }
   .comp-bar i:not(:last-child) { margin-right: 2px; }
-  .prov-card .split { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
-  .prov-card .split div { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
-  .prov-card .split b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .split { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+  .split div { display: flex; align-items: center; gap: 8px; color: var(--ink-2); }
+  .split b { color: var(--ink); font-variant-numeric: tabular-nums; }
   .seal {
     display: flex; align-items: center; gap: 10px; margin-top: 16px;
     padding: 10px 14px; border-radius: 10px;
@@ -236,6 +277,13 @@
   .seal span { font-size: 12px; color: var(--ink-2); }
   .note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; }
   .note code { font-size: 12px; }
+
+  /* ---- reading the chips ---- */
+  .chip-legend { margin-bottom: 16px; }
+  .legend-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 13px; }
+  .legend-text { color: var(--ink-muted); margin-right: 10px; }
+  .chip.judge { border-style: dotted; color: var(--ink-2); }
+  .chip.judge .mark { color: var(--accent-3); }
 
   /* ---- roadmap ---- */
   .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px; }
@@ -310,10 +358,10 @@
   }
 
   @media (max-width: 720px) {
-    /* Every two-column grid collapses; a fixed min column would force the page
-       wider than the screen. */
-    .hero, .plan { grid-template-columns: 1fr; }
+    /* auto-fit grids (.hero2, .rn-groups, .dualrings) already collapse on their
+       own; only the fixed-column item rows need an explicit reset. */
     .item { grid-template-columns: 1fr; gap: 5px; }
+    .rn-group.infocus { grid-column: span 1; }
     .wrap { padding: 22px 16px 56px; }
   }
 
@@ -330,7 +378,8 @@
     <div>
       <h1>__TITLE__</h1>
       <p>__TAGLINE__</p>
-      <p class="trust"><span class="mark">&#10003;</span> Every number below is generated from the source and git history &mdash; nothing on this page is self-reported.</p>
+      <p class="stackbar" id="stackBar" hidden></p>
+      <p class="trust"><span class="mark">&#10003;</span> Evidence is generated from the source and git history. Status is declared by me.</p>
       <div class="meta">
         <a href="__REPO__">__REPO_NAME__</a>
         <span>Updated __UPDATED__</span>
@@ -340,45 +389,104 @@
     <button class="theme" id="themeBtn" type="button">Theme</button>
   </header>
 
-  <div class="hero">
-    <div class="card ring">
-      <svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true">
-        <defs>
-          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="var(--series-1)"></stop>
-            <stop offset="100%" stop-color="var(--accent-3)"></stop>
-          </linearGradient>
-        </defs>
-        <circle cx="52" cy="52" r="44" fill="none" stroke="var(--grid)" stroke-width="10"></circle>
-        <circle id="ringArc" cx="52" cy="52" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="10"
-                stroke-linecap="round" transform="rotate(-90 52 52)"></circle>
-      </svg>
-      <div>
-        <div class="pct" id="pctText">0%</div>
-        <div class="cap" id="pctCap">of tracked concepts</div>
+  <nav class="tabs">
+    <a href="#roadHeading">Roadmap</a>
+    <a href="#conceptsHeading">Concepts</a>
+    <a href="#activityHeading">Activity</a>
+  </nav>
+
+  <div class="hero2">
+    <div class="card">
+      <span class="eyebrow">Progress, two ways</span>
+      <div class="dualrings">
+        <div class="ringblock">
+          <svg width="84" height="84" viewBox="0 0 84 84" aria-hidden="true">
+            <defs>
+              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--series-1)"></stop>
+                <stop offset="100%" stop-color="var(--accent-3)"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="42" cy="42" r="35" fill="none" stroke="var(--grid)" stroke-width="8"></circle>
+            <circle id="ringArc" cx="42" cy="42" r="35" fill="none" stroke="url(#ringGrad)" stroke-width="8"
+                    stroke-linecap="round" transform="rotate(-90 42 42)"></circle>
+          </svg>
+          <div>
+            <div class="pct" id="pctText">0%</div>
+            <div class="cap">Fundamentals<br><b id="pctCap"></b><br>concepts the code already uses</div>
+          </div>
+        </div>
+        <div class="ringblock">
+          <svg width="84" height="84" viewBox="0 0 84 84" aria-hidden="true">
+            <defs>
+              <linearGradient id="roadRingGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--accent-5)"></stop>
+                <stop offset="100%" stop-color="var(--accent-1)"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="42" cy="42" r="35" fill="none" stroke="var(--grid)" stroke-width="8"></circle>
+            <circle id="roadRingArc" cx="42" cy="42" r="35" fill="none" stroke="url(#roadRingGrad)" stroke-width="8"
+                    stroke-linecap="round" transform="rotate(-90 42 42)"></circle>
+          </svg>
+          <div>
+            <div class="pct" id="roadPctText">0%</div>
+            <div class="cap">Role roadmap<br><b id="roadPctCap"></b><br><span id="roadPctSub"></span></div>
+          </div>
+        </div>
       </div>
+      <p class="note">Two scopes, two numbers. Fundamentals counts concepts I can already point to in code. The roadmap is the full list for a .NET backend role, so its denominator is bigger and most of it is still ahead of me.</p>
     </div>
-    <div>
-      <p class="now" id="nowLine" hidden></p>
-      <div class="tiles" id="tiles"></div>
+
+    <div class="card" id="provSection" hidden>
+      <span class="eyebrow">Who wrote the code</span>
+      <div class="headline" id="provPct">—<small id="provCap"></small></div>
+      <div class="comp-bar" id="provBar" role="img" aria-label="Line authorship breakdown"></div>
+      <div class="split" id="provSplit"></div>
+      <div class="seal" id="provSeal" hidden>
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="14.5" fill="none" stroke="var(--good)" stroke-width="2"></circle>
+          <path d="M9 17.5l4.5 4.5L23 11" stroke="var(--good)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <div><b>Zero AI-authored lines</b><span>Every line in the application was written by hand</span></div>
+      </div>
+      <div class="toolblock" id="toolBlock" hidden>
+        <div class="toolhead"><span>Tooling, counted separately</span><code id="toolPath">tools/JourneyGen</code></div>
+        <div class="toolstat"><b id="toolLines"></b> <span id="toolPctText"></span></div>
+        <div class="comp-bar"><i id="toolBar" style="width:100%;background:var(--prov-ai)"></i></div>
+        <p class="note">The generator builds this page, so it is kept out of the figures above and shown here instead.</p>
+      </div>
+      <details class="data" id="provAudit">
+        <summary>How this is measured, and which commits are declared</summary>
+        <div id="provAuditBody"></div>
+      </details>
     </div>
   </div>
 
-  <h2 class="section" id="planHeading" hidden>Learning plan</h2>
-  <div class="plan" id="planSection" hidden>
-    <div class="card">
-      <h2 id="planTitle">Learning plan</h2>
-      <p class="sub" id="planSource"></p>
+  <div class="tiles" id="tiles"></div>
+
+  <div class="card rightnow" id="rightNowCard" hidden>
+    <span class="eyebrow">Right now</span>
+    <h2 id="rnTitle"></h2>
+    <p class="sub" id="rnNote"></p>
+    <dl id="planDates" class="rn-dates"></dl>
+    <div class="due" id="planDue" hidden></div>
+
+    <div class="rn-groups" id="rnGroups" hidden></div>
+
+    <div class="plan-fallback" id="planFallback" hidden>
       <div class="count" id="planCount">—<small id="planCountCap"></small></div>
       <div class="bar"><i id="planBar" style="width:0%"></i></div>
-      <dl id="planDates"></dl>
-      <div class="due" id="planDue" hidden></div>
-    </div>
-    <div class="card">
-      <h2>Items</h2>
-      <p class="sub">Status is my own; the evidence beside it is generated from the source.</p>
       <div class="items" id="planItems"></div>
-      <p class="note" id="planNote" hidden></p>
+    </div>
+    <p class="note" id="planNote" hidden></p>
+  </div>
+
+  <div class="card chip-legend">
+    <span class="eyebrow">Reading the chips</span>
+    <div class="legend-row">
+      <span class="chip done"><i class="mark">&#10003;</i>Records</span><span class="legend-text">used in the code, tap for the files</span>
+      <span class="chip todo"><i class="mark">&#9675;</i>Minimal APIs</span><span class="legend-text">not started</span>
+      <span class="chip judge"><i class="mark">&#9671;</i>SOLID principles</span><span class="legend-text">self-assessed, no detector can prove it</span>
     </div>
   </div>
 
@@ -397,7 +505,7 @@
   </section>
   <div class="roadmap" id="roadAreas" hidden></div>
 
-  <h2 class="section">Concepts</h2>
+  <h2 class="section" id="conceptsHeading">Concepts</h2>
   <div class="areas" id="areas"></div>
 
   <div id="domain-model-section">
@@ -409,7 +517,7 @@
     </section>
   </div>
 
-  <h2 class="section">Activity</h2>
+  <h2 class="section" id="activityHeading">Activity</h2>
   <div class="charts">
     <div class="card">
       <h2>Commits per week</h2>
@@ -426,43 +534,6 @@
       <div class="chartbox" style="height:206px"><canvas id="churnChart"></canvas></div>
     </div>
   </div>
-
-  <h2 class="section">Provenance</h2>
-  <section class="card prov-card" id="provSection" hidden>
-    <h2>Written by me</h2>
-    <p class="sub">Application code, by line &mdash; every non-blank line attributed with <code>git blame</code>.</p>
-
-    <div class="prov-top">
-      <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
-        <defs>
-          <linearGradient id="provRingGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="var(--prov-you)"></stop>
-            <stop offset="100%" stop-color="var(--accent-3)"></stop>
-          </linearGradient>
-        </defs>
-        <circle cx="36" cy="36" r="30" fill="none" stroke="var(--grid)" stroke-width="8"></circle>
-        <circle id="provRingArc" cx="36" cy="36" r="30" fill="none" stroke="url(#provRingGrad)" stroke-width="8"
-                stroke-linecap="round" transform="rotate(-90 36 36)"></circle>
-      </svg>
-      <div class="headline" id="provPct">—<small id="provCap"></small></div>
-    </div>
-
-    <div class="comp-bar" id="provBar" role="img" aria-label="Line authorship breakdown"></div>
-    <div class="split" id="provSplit"></div>
-
-    <div class="seal" id="provSeal" hidden>
-      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
-        <circle cx="16" cy="16" r="14.5" fill="none" stroke="var(--good)" stroke-width="2"></circle>
-        <path d="M9 17.5l4.5 4.5L23 11" stroke="var(--good)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-      <div><b>Zero AI-authored lines</b><span>Every line in the application was written by hand</span></div>
-    </div>
-
-    <details class="data" id="provAudit">
-      <summary>How this is measured, and which commits are declared</summary>
-      <div id="provAuditBody"></div>
-    </details>
-  </section>
 
   <details class="data">
     <summary>View the underlying data as tables</summary>
@@ -493,25 +564,56 @@
   }
   function num(n) { return n.toLocaleString("en-US"); }
 
+  /* A detector-provable "not started" (○) and a judgement call no detector can
+     ever prove (◇) look identical as plain checkboxes but mean different
+     things, so they get distinct chip styles everywhere chips are rendered. */
+  function chipFor(i) {
+    var done = i.status === "done";
+    var wip = i.status === "in-progress";
+    var judge = !i.detectable && !done;
+    var cls = done ? "chip done" : i.ready ? "chip ready" : judge ? "chip judge" : "chip todo";
+    var mark = done ? "✓" : i.ready ? "✓" : judge ? "◇" : wip ? "◐" : "○";
+    var tip = i.ready ? "the code covers this — ready to mark complete"
+            : done && i.evidence.length ? i.evidence.join(", ")
+            : judge ? "judgement topic — no detector can prove this"
+            : (i.notes || "");
+    return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +
+           "</i>" + esc(i.label) + "</span>";
+  }
+
   /* ---------- header + hero ---------- */
   if (D.git.totalCommits > 0) {
     document.getElementById("range").textContent =
       D.git.firstCommit + " → " + D.git.lastCommit;
   }
 
+  if (D.techStack && D.techStack.length && D.git.firstCommit) {
+    var since = new Date(D.git.firstCommit + "T00:00:00Z")
+      .toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+    var bar = document.getElementById("stackBar");
+    bar.innerHTML = "<b>C# and .NET since " + esc(since) + "</b> &middot; " +
+      num(D.git.totalCommits) + " commits over " + num(D.git.activeDays) + " active days &middot; " +
+      num(D.code.lines) + " lines of C# &middot; " + D.techStack.map(esc).join(", ");
+    bar.hidden = false;
+  }
+
+  function ring(radius, arcId, pct) {
+    var arc = document.getElementById(arcId);
+    var circ = 2 * Math.PI * radius;
+    arc.setAttribute("stroke-dasharray", circ.toFixed(1));
+    arc.setAttribute("stroke-dashoffset", (circ * (1 - pct / 100)).toFixed(1));
+  }
+
   var pct = D.concepts.total ? Math.round(100 * D.concepts.done / D.concepts.total) : 0;
   document.getElementById("pctText").textContent = pct + "%";
-  document.getElementById("pctCap").textContent =
-    D.concepts.done + " of " + D.concepts.total + " tracked concepts";
-  var arc = document.getElementById("ringArc");
-  var circ = 2 * Math.PI * 44;
-  arc.setAttribute("stroke-dasharray", circ.toFixed(1));
-  arc.setAttribute("stroke-dashoffset", (circ * (1 - pct / 100)).toFixed(1));
+  document.getElementById("pctCap").textContent = D.concepts.done + " of " + D.concepts.total;
+  ring(35, "ringArc", pct);
 
-  if (D.assignment && D.assignment.note) {
-    var now = document.getElementById("nowLine");
-    now.innerHTML = "<b>Right now &mdash;</b> " + esc(D.assignment.note);
-    now.hidden = false;
+  if (D.roadmap) {
+    document.getElementById("roadPctText").textContent = D.roadmap.percent + "%";
+    document.getElementById("roadPctCap").textContent = D.roadmap.done + " of " + D.roadmap.total;
+    document.getElementById("roadPctSub").textContent = "topics across " + D.roadmap.areas.length + " areas";
+    ring(35, "roadRingArc", D.roadmap.percent);
   }
 
   /* Consecutive most-recent weeks with at least one commit — a streak says
@@ -533,80 +635,110 @@
     return '<div class="tile"><div class="v">' + t[1] + '</div><div class="k">' + t[0] + "</div></div>";
   }).join("");
 
-  /* ---------- learning plan ---------- */
+  /* ---------- right now ---------- */
   var A = D.assignment;
-  if (A && A.items && A.items.length) {
-    document.getElementById("planHeading").hidden = false;
-    document.getElementById("planSection").hidden = false;
-    document.getElementById("planTitle").textContent = A.title;
-    document.getElementById("planSource").textContent = A.source || "";
+  if (A && ((A.items && A.items.length) || A.linkArea)) {
+    document.getElementById("rightNowCard").hidden = false;
 
-    document.getElementById("planCount").firstChild.nodeValue = A.done + " of " + A.total;
-    document.getElementById("planCountCap").textContent =
-      "complete" + (A.inProgress ? " \u00b7 " + A.inProgress + " in progress" : "") +
-      (A.notStarted ? " \u00b7 " + A.notStarted + " not started" : "");
-    document.getElementById("planBar").style.width = A.donePercent + "%";
+    // A linked assignment points at one group inside a roadmap area, rather than
+    // keeping its own separate item list \u2014 the Structural patterns being worked
+    // on right now are tracked once, under the Design Patterns roadmap area, not
+    // duplicated here with a second set of detectors to keep in sync.
+    var linkedArea = null;
+    if (A.linkArea && D.roadmap) {
+      linkedArea = D.roadmap.areas.filter(function (a) { return a.name === A.linkArea; })[0] || null;
+    }
+
+    document.getElementById("rnTitle").textContent = linkedArea ? linkedArea.name : A.title;
+    document.getElementById("rnNote").textContent = A.note || A.source || "";
 
     var dates = "";
     if (A.assignedOn) dates += "<dt>Assigned</dt><dd>" + esc(A.assignedOn) + "</dd>";
-    if (A.reviewOn)   dates += "<dt>" + (A.personalTarget ? "Target to complete" : "Next review") +
-                               "</dt><dd>" + esc(A.reviewOn) + "</dd>";
     document.getElementById("planDates").innerHTML = dates;
 
     if (A.daysToReview !== null && A.daysToReview !== undefined) {
       var d = A.daysToReview;
       var due = document.getElementById("planDue");
-      due.textContent = A.personalTarget
+      var verb = A.personalTarget
         ? (d === 0 ? "Due today" : d === 1 ? "Due tomorrow" : d + " days to go")
         : (d === 0 ? "Review is today" : d === 1 ? "Review tomorrow" : "Review in " + d + " days");
+      due.textContent = verb + (A.reviewOn ? " \u00b7 " + (A.personalTarget ? "target" : "review") + " " + A.reviewOn : "");
       due.hidden = false;
     }
 
-    document.getElementById("planItems").innerHTML = A.items.map(function (i) {
-      var cls = i.status === "done" ? "done" : i.status === "in-progress" ? "wip" : "todo";
-      var word = i.status === "done" ? "Completed" : i.status === "in-progress" ? "In progress" : "Not started";
+    if (linkedArea) {
+      document.getElementById("rnGroups").hidden = false;
+      var order = [], byGroup = {};
+      linkedArea.items.forEach(function (i) {
+        var g = i.group || "Other";
+        if (!byGroup[g]) { byGroup[g] = []; order.push(g); }
+        byGroup[g].push(i);
+      });
 
-      var right = "<h3>" + esc(i.label) + "</h3>";
-      if (i.notes) right += '<p class="why">' + esc(i.notes) + "</p>";
+      document.getElementById("rnGroups").innerHTML = order.map(function (g) {
+        var items = byGroup[g];
+        var done = items.filter(function (i) { return i.status === "done"; }).length;
+        var inFocus = g === A.linkGroup;
+        var body;
+        if (done === items.length) {
+          body = '<div class="state done">\u2713 Complete</div>';
+        } else if (inFocus) {
+          body = '<div class="chips" style="margin-top:6px">' + items.map(chipFor).join("") + "</div>";
+        } else {
+          body = '<div class="state">Not started</div>';
+        }
+        return '<div class="rn-group' + (inFocus ? " infocus" : "") + '">' +
+          '<div class="rn-group-head"><span>' + esc(g) + (inFocus ? '<span class="rn-badge">In focus</span>' : "") +
+          "</span><span>" + done + "/" + items.length + "</span></div>" + body + "</div>";
+      }).join("");
+    } else {
+      document.getElementById("planFallback").hidden = false;
+      document.getElementById("planCount").firstChild.nodeValue = A.done + " of " + A.total;
+      document.getElementById("planCountCap").textContent =
+        "complete" + (A.inProgress ? " \u00b7 " + A.inProgress + " in progress" : "") +
+        (A.notStarted ? " \u00b7 " + A.notStarted + " not started" : "");
+      document.getElementById("planBar").style.width = A.donePercent + "%";
 
-      if (i.parts && i.parts.length) {
-        right += '<div class="parts">' + i.parts.map(function (p) {
-          return '<span class="part ' + (p.detected ? "yes" : "no") + '" title="' +
-                 esc((p.evidence || []).join(", ")) + '"><i class="m">' +
-                 (p.detected ? "\u2713" : "\u25CB") + "</i>" + esc(p.label) + "</span>";
-        }).join("") + "</div>";
-      } else if (i.detected && i.evidence.length) {
-        right += '<div class="ev">' + esc(i.evidence[0]) +
-                 (i.evidence.length > 1 ? " +" + (i.evidence.length - 1) : "") + "</div>";
-      } else {
-        right += '<div class="ev empty">no code for this yet</div>';
+      document.getElementById("planItems").innerHTML = A.items.map(function (i) {
+        var cls = i.status === "done" ? "done" : i.status === "in-progress" ? "wip" : "todo";
+        var word = i.status === "done" ? "Completed" : i.status === "in-progress" ? "In progress" : "Not started";
+
+        var right = "<h3>" + esc(i.label) + "</h3>";
+        if (i.notes) right += '<p class="why">' + esc(i.notes) + "</p>";
+
+        if (i.parts && i.parts.length) {
+          right += '<div class="parts">' + i.parts.map(function (p) {
+            return '<span class="part ' + (p.detected ? "yes" : "no") + '" title="' +
+                   esc((p.evidence || []).join(", ")) + '"><i class="m">' +
+                   (p.detected ? "\u2713" : "\u25CB") + "</i>" + esc(p.label) + "</span>";
+          }).join("") + "</div>";
+        } else if (i.detected && i.evidence.length) {
+          right += '<div class="ev">' + esc(i.evidence[0]) +
+                   (i.evidence.length > 1 ? " +" + (i.evidence.length - 1) : "") + "</div>";
+        } else {
+          right += '<div class="ev empty">no code for this yet</div>';
+        }
+
+        if (i.readyToAdvance) {
+          right += '<div class="ready">\u2713 the code covers this now \u2014 ready to mark complete</div>';
+        }
+        if (i.unevidenced || i.partiallyEvidenced) {
+          right += '<div class="caution">\u26A0 marked complete, not fully shown in the code</div>';
+        }
+
+        return '<div class="item"><span class="pill ' + cls + '"><i class="dot"></i>' + word +
+               "</span><div>" + right + "</div></div>";
+      }).join("");
+
+      var readyCount = A.items.filter(function (i) { return i.readyToAdvance; }).length;
+      if (readyCount) {
+        var rl = document.createElement("p");
+        rl.className = "readyline";
+        rl.innerHTML = "<b>" + readyCount + (readyCount === 1 ? " item is" : " items are") +
+          "</b> covered by the code but still marked unfinished \u2014 update <code>status</code> in " +
+          "<code>journey.json</code> before " + (A.personalTarget ? "the target date." : "the review.");
+        document.getElementById("rightNowCard").appendChild(rl);
       }
-
-      if (i.readyToAdvance) {
-        right += '<div class="ready">\u2713 the code covers this now \u2014 ready to mark complete</div>';
-      }
-      if (i.unevidenced || i.partiallyEvidenced) {
-        right += '<div class="caution">\u26A0 marked complete, not fully shown in the code</div>';
-      }
-
-      return '<div class="item"><span class="pill ' + cls + '"><i class="dot"></i>' + word +
-             "</span><div>" + right + "</div></div>";
-    }).join("");
-
-    var readyCount = A.items.filter(function (i) { return i.readyToAdvance; }).length;
-    if (readyCount) {
-      var rl = document.createElement("p");
-      rl.className = "readyline";
-      rl.innerHTML = "<b>" + readyCount + (readyCount === 1 ? " item is" : " items are") +
-        "</b> covered by the code but still marked unfinished \u2014 update <code>status</code> in " +
-        "<code>journey.json</code> before " + (A.personalTarget ? "the target date." : "the review.");
-      document.querySelector("#planSection .card").appendChild(rl);
-    }
-
-    if (A.note) {
-      var n = document.getElementById("planNote");
-      n.textContent = A.note;
-      n.hidden = false;
     }
   }
 
@@ -616,12 +748,7 @@
     document.getElementById("provSection").hidden = false;
     document.getElementById("provPct").firstChild.nodeValue = P.app.youPercent + "%";
     document.getElementById("provCap").textContent =
-      P.app.you + " of " + P.app.authored + " hand-authored lines in the application";
-
-    var provArc = document.getElementById("provRingArc");
-    var provCirc = 2 * Math.PI * 30;
-    provArc.setAttribute("stroke-dasharray", provCirc.toFixed(1));
-    provArc.setAttribute("stroke-dashoffset", (provCirc * (1 - P.app.youPercent / 100)).toFixed(1));
+      "of the application is hand-written: " + P.app.you + " of " + P.app.authored + " authored lines";
 
     var provTotal = P.app.total || 1;
     var rows = [
@@ -654,6 +781,11 @@
       "message and no trailer count as mine.</p>";
 
     if (P.tooling && P.tooling.total > 0) {
+      document.getElementById("toolLines").textContent = num(P.tooling.total) + " lines";
+      document.getElementById("toolPctText").textContent = P.tooling.aiPercent + "% AI-written";
+      document.getElementById("toolBar").style.width = P.tooling.aiPercent + "%";
+      document.getElementById("toolBlock").hidden = false;
+
       method +=
         "<p class='note'>The tooling that builds this page is a further <b>" + num(P.tooling.total) +
         "</b> lines, <b>" + P.tooling.aiPercent + "% AI-written</b> \u2014 " +
@@ -695,19 +827,6 @@
       rn.hidden = false;
     }
 
-    function chipFor(i) {
-      var done = i.status === "done";
-      var wip = i.status === "in-progress";
-      var cls = done ? "chip done" : i.ready ? "chip ready" : "chip todo";
-      var mark = done ? "\u2713" : i.ready ? "\u2713" : wip ? "\u25D0" : "\u25CB";
-      var tip = i.ready ? "the code covers this \u2014 ready to mark complete"
-              : done && i.evidence.length ? i.evidence.join(", ")
-              : !i.detectable ? "judgement topic \u2014 no detector can prove this"
-              : (i.notes || "");
-      return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +
-             "</i>" + esc(i.label) + "</span>";
-    }
-
     document.getElementById("roadAreas").innerHTML = R.areas.map(function (a, idx) {
       var accent = "var(--accent-" + (idx % 7) + ")";
 
@@ -747,9 +866,12 @@
     var accent = "var(--accent-" + (idx % 7) + ")";
     var p = a.concepts.length ? Math.round(100 * a.done / a.concepts.length) : 0;
     var chips = a.concepts.map(function (c) {
-      var cls = c.done ? "chip done" : "chip todo";
-      var mark = c.done ? "✓" : "○";
-      var title = c.done && c.evidence.length ? c.evidence.join(", ") : (c.notes || "");
+      var judge = c.planned && !c.done;
+      var cls = c.done ? "chip done" : judge ? "chip judge" : "chip todo";
+      var mark = c.done ? "✓" : judge ? "◇" : "○";
+      var title = c.done && c.evidence.length ? c.evidence.join(", ")
+                : judge ? "judgement topic — no detector can prove this"
+                : (c.notes || "");
       return '<span class="' + cls + '" title="' + esc(title) + '"><i class="mark">' + mark + "</i>" + esc(c.label) + "</span>";
     }).join("");
     return '<div class="card" style="border-top:3px solid ' + accent + '"><h2><i class="area-dot" style="background:' + accent + '"></i>' + esc(a.name) + "</h2>" +

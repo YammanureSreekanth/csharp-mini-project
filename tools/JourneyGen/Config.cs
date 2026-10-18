@@ -31,6 +31,10 @@ public sealed class JourneyConfig
 {
     public string Title = "My .NET Journey";
     public string Tagline = "";
+    /// <summary>Short, curated technology list for the header's summary line
+    /// (e.g. "ASP.NET Core", "EF Core") — declared by hand, not auto-detected,
+    /// since the point is a resume-style highlight reel, not an exhaustive scan.</summary>
+    public List<string> TechStack = new();
     public DiagramOptions Diagram = new();
     public ProvenanceConfig Provenance = new();
     public MilestoneConfig Milestone = new();
@@ -58,6 +62,7 @@ public sealed class JourneyConfig
 
         if (root.TryGetProperty("title", out var t)) cfg.Title = t.GetString() ?? cfg.Title;
         if (root.TryGetProperty("tagline", out var tl)) cfg.Tagline = tl.GetString() ?? "";
+        ReadStrings(root, "techStack", cfg.TechStack);
 
         if (root.TryGetProperty("diagram", out var d))
         {
@@ -100,6 +105,8 @@ public sealed class JourneyConfig
             if (asg.TryGetProperty("showAssignedOn", out var sao)) a.ShowAssignedOn = sao.GetBoolean();
             if (asg.TryGetProperty("reviewOn", out var ro)) a.ReviewOn = ro.GetString() ?? "";
             if (asg.TryGetProperty("personalTarget", out var ptg)) a.PersonalTarget = ptg.GetBoolean();
+            if (asg.TryGetProperty("linkArea", out var la)) a.LinkArea = la.GetString() ?? "";
+            if (asg.TryGetProperty("linkGroup", out var lg)) a.LinkGroup = lg.GetString() ?? "";
             if (asg.TryGetProperty("note", out var an)) a.Note = an.GetString() ?? "";
 
             if (asg.TryGetProperty("items", out var items) && items.ValueKind == JsonValueKind.Array)

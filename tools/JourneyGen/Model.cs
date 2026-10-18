@@ -133,6 +133,11 @@ public sealed class Assignment
     /// <summary>True when ReviewOn is a self-set goal, not someone else's review — changes
     /// the wording from "Next review" to "Target to complete" throughout.</summary>
     public bool PersonalTarget;
+    /// <summary>When set, the "Right now" card shows this roadmap area's full group
+    /// breakdown instead of (or alongside) Items — LinkGroup names which group within
+    /// it is the active one. Avoids tracking the same pattern list in two places.</summary>
+    public string LinkArea = "";
+    public string LinkGroup = "";
     public string Note = "";
     public List<AssignmentItem> Items = new();
 
