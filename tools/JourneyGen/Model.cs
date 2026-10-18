@@ -231,6 +231,9 @@ public sealed class RoadmapArea
 {
     public string Name = "";
     public string Summary = "";
+    /// <summary>Which of the page's five higher-level themes this area belongs
+    /// under (e.g. "Language and patterns"). Empty renders the area ungrouped.</summary>
+    public string Theme = "";
     public List<AssignmentItem> Items = new();
 
     public int Done => Items.Count(i => i.EffectiveStatus == "done");

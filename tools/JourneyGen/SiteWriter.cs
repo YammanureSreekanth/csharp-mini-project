@@ -51,6 +51,7 @@ public static class SiteWriter
                 areas = cfg.Roadmap.Areas.Select(a => new
                 {
                     name = a.Name,
+                    theme = a.Theme,
                     summary = a.Summary,
                     done = a.Done,
                     total = a.Items.Count,

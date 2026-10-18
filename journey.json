@@ -61,6 +61,7 @@
       "areas": [
         {
           "name": "C# and modern .NET depth",
+          "theme": "Language and patterns",
           "summary": "Strong enough that C# feels natural.",
           "items": [
             {
@@ -177,6 +178,7 @@
         },
         {
           "name": "ASP.NET Core Web APIs",
+          "theme": "Web and APIs",
           "summary": "Central to the role.",
           "items": [
             {
@@ -242,6 +244,7 @@
         },
         {
           "name": "Domain-Driven Design",
+          "theme": "Language and patterns",
           "summary": "Explicitly named in the role.",
           "items": [
             {
@@ -292,6 +295,7 @@
         },
         {
           "name": "Design Patterns in C#",
+          "theme": "Language and patterns",
           "summary": "Working through the GoF catalog by hand, one pattern at a time, in its own solution.",
           "items": [
             { "label": "SOLID Principles", "group": "Principles", "detect": "manual" },
@@ -325,6 +329,7 @@
         },
         {
           "name": "Microservices architecture",
+          "theme": "Architecture and data",
           "summary": "Know when they help and when they cost.",
           "items": [
             {
@@ -376,6 +381,7 @@
         },
         {
           "name": "Event-driven architecture and messaging",
+          "theme": "Architecture and data",
           "summary": "One of the biggest topics for the role.",
           "items": [
             {
@@ -435,6 +441,7 @@
         },
         {
           "name": "Azure cloud services",
+          "theme": "Cloud and delivery",
           "summary": "The services named on the profile.",
           "items": [
             {
@@ -481,6 +488,7 @@
         },
         {
           "name": "Infrastructure as Code (Bicep)",
+          "theme": "Cloud and delivery",
           "summary": "Declaring the whole backend, not clicking it together in the portal.",
           "items": [
             {
@@ -571,6 +579,7 @@
         },
         {
           "name": "Databases and data modeling",
+          "theme": "Architecture and data",
           "summary": "Relational and NoSQL thinking.",
           "items": [
             {
@@ -625,6 +634,7 @@
         },
         {
           "name": "Testing and code quality",
+          "theme": "Craft and quality",
           "summary": "Called out in the job description.",
           "items": [
             {
@@ -675,6 +685,7 @@
         },
         {
           "name": "CI/CD and DevOps basics",
+          "theme": "Cloud and delivery",
           "summary": "They expect pipeline improvements.",
           "items": [
             {
@@ -730,6 +741,7 @@
         },
         {
           "name": "Integrations with external systems",
+          "theme": "Web and APIs",
           "summary": "Salesforce, Dynamics, WMS, POS, OMS, WeChat.",
           "items": [
             {
@@ -788,6 +800,7 @@
         },
         {
           "name": "Observability and production readiness",
+          "theme": "Craft and quality",
           "summary": "“It works locally” is not enough.",
           "items": [
             {
@@ -846,6 +859,7 @@
         },
         {
           "name": "Security basics",
+          "theme": "Web and APIs",
           "summary": "Production awareness, not specialism.",
           "items": [
             {
@@ -892,6 +906,7 @@
         },
         {
           "name": "AI-assisted development",
+          "theme": "Craft and quality",
           "summary": "Use it professionally, not blindly.",
           "items": [
             {

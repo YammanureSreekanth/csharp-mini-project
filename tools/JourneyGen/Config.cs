@@ -155,6 +155,7 @@ public sealed class JourneyConfig
                     {
                         Name = ra.TryGetProperty("name", out var rnm) ? rnm.GetString() ?? "" : "",
                         Summary = ra.TryGetProperty("summary", out var rsm) ? rsm.GetString() ?? "" : "",
+                        Theme = ra.TryGetProperty("theme", out var rth) ? rth.GetString() ?? "" : "",
                     };
                     if (ra.TryGetProperty("items", out var rItems) && rItems.ValueKind == JsonValueKind.Array)
                         foreach (var ri in rItems.EnumerateArray())
