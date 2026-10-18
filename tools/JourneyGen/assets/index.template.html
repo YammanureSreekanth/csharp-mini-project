@@ -549,13 +549,16 @@
 
     var dates = "";
     if (A.assignedOn) dates += "<dt>Assigned</dt><dd>" + esc(A.assignedOn) + "</dd>";
-    if (A.reviewOn)   dates += "<dt>Next review</dt><dd>" + esc(A.reviewOn) + "</dd>";
+    if (A.reviewOn)   dates += "<dt>" + (A.personalTarget ? "Target to complete" : "Next review") +
+                               "</dt><dd>" + esc(A.reviewOn) + "</dd>";
     document.getElementById("planDates").innerHTML = dates;
 
     if (A.daysToReview !== null && A.daysToReview !== undefined) {
       var d = A.daysToReview;
       var due = document.getElementById("planDue");
-      due.textContent = d === 0 ? "Review is today" : d === 1 ? "Review tomorrow" : "Review in " + d + " days";
+      due.textContent = A.personalTarget
+        ? (d === 0 ? "Due today" : d === 1 ? "Due tomorrow" : d + " days to go")
+        : (d === 0 ? "Review is today" : d === 1 ? "Review tomorrow" : "Review in " + d + " days");
       due.hidden = false;
     }
 
@@ -596,7 +599,7 @@
       rl.className = "readyline";
       rl.innerHTML = "<b>" + readyCount + (readyCount === 1 ? " item is" : " items are") +
         "</b> covered by the code but still marked unfinished \u2014 update <code>status</code> in " +
-        "<code>journey.json</code> before the review.";
+        "<code>journey.json</code> before " + (A.personalTarget ? "the target date." : "the review.");
       document.querySelector("#planSection .card").appendChild(rl);
     }
 

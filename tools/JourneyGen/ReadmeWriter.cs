@@ -192,7 +192,8 @@ public static class ReadmeWriter
         {
             // The countdown belongs on the dashboard only: it moves every day, and a
             // README that changes daily means a commit every day.
-            meta.Add($"next review **{a.ReviewOn}**");
+            var label = a.PersonalTarget ? "target to complete" : "next review";
+            meta.Add($"{label} **{a.ReviewOn}**");
         }
         if (meta.Count > 0) { sb.AppendLine(string.Join(" · ", meta)); sb.AppendLine(); }
 

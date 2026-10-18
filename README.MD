@@ -31,20 +31,19 @@ _A running record of the C# and .NET ground I have actually covered, generated f
 
 ### Current focus
 
-What I am working on right now · next review **2026-10-16**
+What I am working on right now · target to complete **2026-12-01**
 
-`░░░░░░░░░░░░░░░░░░░░` **0 of 5 complete** · 0 in progress · 5 not started
+`░░░░░░░░░░░░░░░░░░░░` **0 of 7 complete** · 0 in progress · 7 not started
 
 | Item | Status | Evidence in the code |
 |---|---|---|
-| Domain layer: Product as the aggregate root<br><sub>the innermost ring — entities and business rules only, no outward dependencies</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.App.Models/Entities/Product.cs` |
-| Data-layer entities, separate from the aggregate<br><sub>ProductList and ProductListItem as plain related entities with real foreign keys, not folded into one aggregate</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.Infra/Persistance/ProductDbContext.cs` |
-| Request/response contracts isolated from the domain model<br><sub>the external API shape is allowed to diverge from the database and domain types</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.Api.Models/ErrorResponse.cs` <sub>+5</sub> |
-| Service layer combines data, applies business rules, protects contracts<br><sub>e.g. merging database product data with external image data behind one service boundary</sub> | ⬜ Not started<br><sub>→ ready to mark complete</sub> | `ProductCatalog/src/ProductCatalog.App/Services/ProductService.cs` |
-| Dependencies point inward only<br><sub>domain has no reference to infrastructure or the API layer — judgement, not detectable</sub> | ⬜ Not started | _none yet_ |
-
-> **The code now covers 4 items still marked as unfinished:** Domain layer: Product as the aggregate root, Data-layer entities, separate from the aggregate, Request/response contracts isolated from the domain model, Service layer combines data, applies business rules, protects contracts.
-> Status here is declared by hand — update `status` in `journey.json` to close them off.
+| Adapter<br><sub>wrap an incompatible interface behind the one callers expect</sub> | ⬜ Not started | _none yet_ |
+| Bridge<br><sub>decouple an abstraction from its implementation so both can vary independently</sub> | ⬜ Not started | _none yet_ |
+| Composite<br><sub>treat a single object and a tree of objects through the same interface</sub> | ⬜ Not started | _none yet_ |
+| Decorator<br><sub>attach behaviour to an object at runtime without subclassing</sub> | ⬜ Not started | _none yet_ |
+| Facade<br><sub>a simple entry point in front of a more complex subsystem</sub> | ⬜ Not started | _none yet_ |
+| Flyweight<br><sub>share state across many objects instead of duplicating it per instance</sub> | ⬜ Not started | _none yet_ |
+| Proxy<br><sub>stand in for another object to control access to it</sub> | ⬜ Not started | _none yet_ |
 
 ### Projects
 
@@ -599,6 +598,6 @@ _The ground I want to cover for my career in .NET._
 
 </details>
 
-<sub>Last updated 2026-10-17 19:07 UTC</sub>
+<sub>Last updated 2026-10-18 07:15 UTC</sub>
 
 <!-- JOURNEY:END -->

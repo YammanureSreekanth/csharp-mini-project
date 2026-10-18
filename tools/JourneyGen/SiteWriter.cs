@@ -72,6 +72,7 @@ public static class SiteWriter
                 source = cfg.Assignment.Source,
                 assignedOn = cfg.Assignment.ShowAssignedOn ? cfg.Assignment.AssignedOn : "",
                 reviewOn = cfg.Assignment.ReviewOn,
+                personalTarget = cfg.Assignment.PersonalTarget,
                 note = cfg.Assignment.Note,
                 done = cfg.Assignment.Done,
                 inProgress = cfg.Assignment.InProgress,

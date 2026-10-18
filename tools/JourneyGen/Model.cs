@@ -121,14 +121,18 @@ public sealed class ProvenanceConfig
     public List<string> ExtraPaths = new();
 }
 
-/// <summary>A learning plan handed down by someone else, with dates and declared status.</summary>
+/// <summary>A learning plan with dates and declared status — either handed down by someone
+/// else (a review date) or self-set (a personal target), distinguished by PersonalTarget.</summary>
 public sealed class Assignment
 {
     public string Title = "Learning plan";
     public string Source = "";              // who set it
     public string AssignedOn = "";           // ISO date
     public bool ShowAssignedOn = true;       // hide the date without losing it from the data
-    public string ReviewOn = "";             // ISO date of the next check-in
+    public string ReviewOn = "";             // ISO date of the next check-in, or the personal target date
+    /// <summary>True when ReviewOn is a self-set goal, not someone else's review — changes
+    /// the wording from "Next review" to "Target to complete" throughout.</summary>
+    public bool PersonalTarget;
     public string Note = "";
     public List<AssignmentItem> Items = new();
 

@@ -99,6 +99,7 @@ public sealed class JourneyConfig
             if (asg.TryGetProperty("assignedOn", out var ao)) a.AssignedOn = ao.GetString() ?? "";
             if (asg.TryGetProperty("showAssignedOn", out var sao)) a.ShowAssignedOn = sao.GetBoolean();
             if (asg.TryGetProperty("reviewOn", out var ro)) a.ReviewOn = ro.GetString() ?? "";
+            if (asg.TryGetProperty("personalTarget", out var ptg)) a.PersonalTarget = ptg.GetBoolean();
             if (asg.TryGetProperty("note", out var an)) a.Note = an.GetString() ?? "";
 
             if (asg.TryGetProperty("items", out var items) && items.ValueKind == JsonValueKind.Array)
