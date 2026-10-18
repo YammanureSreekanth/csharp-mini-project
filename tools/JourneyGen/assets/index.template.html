@@ -326,6 +326,25 @@
   .chip.todo { border-style: dashed; color: var(--ink-muted); }
   .chip .mark { font-size: 11px; }
   .chip.done .mark { color: var(--good); }
+  .xref { font-size: 10.5px; color: var(--series-1); margin-left: 4px; }
+
+  .tiers { display: flex; flex-direction: column; gap: 16px; margin-bottom: 10px; }
+  .tier-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .tier-head b { font-size: 14px; }
+  .tier-head span { font-size: 12.5px; color: var(--ink-muted); }
+  .tier.mastered .tier-head b { color: var(--good); }
+  .tier.nearly .tier-head b { color: var(--series-1); }
+  .tier.climbing .tier-head b { color: var(--accent-2); }
+
+  .mastered-card {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .mastered-card .check {
+    width: 38px; height: 38px; border-radius: 50%; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--good); color: var(--good); font-size: 18px;
+  }
+  .mastered-card .sub { margin-top: 2px; }
   .chip-group + .chip-group { margin-top: 12px; }
   .chip-group-label {
     display: flex; justify-content: space-between; font-size: 11.5px;
@@ -529,7 +548,18 @@
   <div class="themes" id="roadThemes" hidden></div>
 
   <h2 class="section" id="conceptsHeading">Concepts</h2>
-  <div class="areas" id="areas"></div>
+  <section class="card" id="conceptsSummary" style="margin-bottom:16px">
+    <h2>Concepts I can point to in code</h2>
+    <p class="sub">Language and framework features the code already uses, grouped by how close each area is to done.</p>
+    <div class="topline">
+      <span class="big" id="conceptsBig">—</span>
+      <span class="of" id="conceptsOf"></span>
+    </div>
+    <div class="bar"><i id="conceptsBar" style="width:0%"></i></div>
+  </section>
+
+  <div class="tiers" id="conceptTiers"></div>
+  <p class="note" id="tiersNote" hidden>Only open concepts are listed. Everything else in each area is already used in the code. <span class="xref">&#8599; roadmap</span> marks an open concept that also appears in the roadmap above.</p>
 
   <div id="domain-model-section">
     <h2 class="section">Domain model</h2>
@@ -940,24 +970,72 @@
     }
   }
 
-  /* ---------- concept areas ---------- */
-  document.getElementById("areas").innerHTML = D.concepts.areas.map(function (a, idx) {
-    var accent = "var(--accent-" + (idx % 7) + ")";
-    var p = a.concepts.length ? Math.round(100 * a.done / a.concepts.length) : 0;
-    var chips = a.concepts.map(function (c) {
-      var judge = c.planned && !c.done;
-      var cls = c.done ? "chip done" : judge ? "chip judge" : "chip todo";
-      var mark = c.done ? "✓" : judge ? "◇" : "○";
-      var title = c.done && c.evidence.length ? c.evidence.join(", ")
-                : judge ? "judgement topic — no detector can prove this"
-                : (c.notes || "");
-      return '<span class="' + cls + '" title="' + esc(title) + '"><i class="mark">' + mark + "</i>" + esc(c.label) + "</span>";
+  /* ---------- concepts ---------- */
+  // A concept this open also appears, by name, as a roadmap topic — worth
+  // flagging, since closing it moves two trackers at once. Word-boundary
+  // matching (not plain substring) catches "Delegates" inside the roadmap's
+  // combined "Delegates and events" without "Event" matching "Eventually".
+  function inRoadmap(label) {
+    if (!D.roadmap || !D.roadmap.areas) return false;
+    var pattern = "\\b" + label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b";
+    var re = new RegExp(pattern, "i");
+    return D.roadmap.areas.some(function (a) {
+      return a.items.some(function (i) { return re.test(i.label); });
+    });
+  }
+
+  document.getElementById("conceptsBig").textContent = pct + "%";
+  var conceptsOpen = D.concepts.total - D.concepts.done;
+  document.getElementById("conceptsOf").textContent =
+    D.concepts.done + " of " + D.concepts.total + " · " + conceptsOpen + " still open";
+  document.getElementById("conceptsBar").style.width = pct + "%";
+
+  var TIERS = [
+    { key: "mastered", label: "Mastered", test: function (p) { return p === 100; } },
+    { key: "nearly", label: "Nearly there", test: function (p) { return p >= 80 && p < 100; } },
+    { key: "climbing", label: "Still climbing", test: function (p) { return p < 80; } }
+  ];
+
+  document.getElementById("conceptTiers").innerHTML = TIERS.map(function (tier) {
+    function pctOf(a) { return a.concepts.length ? Math.round(100 * a.done / a.concepts.length) : 0; }
+    var areas = D.concepts.areas
+      .filter(function (a) { return tier.test(pctOf(a)); })
+      .sort(function (a, b) { return pctOf(b) - pctOf(a); });
+    if (!areas.length) return "";
+
+    var tDone = areas.reduce(function (s, a) { return s + a.done; }, 0);
+    var tTotal = areas.reduce(function (s, a) { return s + a.concepts.length; }, 0);
+
+    var cardsHtml = areas.map(function (a, idx) {
+      var p = pctOf(a);
+      var open = a.concepts.filter(function (c) { return !c.done; });
+
+      if (tier.key === "mastered") {
+        return '<div class="card mastered-card"><div class="check">✓</div><div>' +
+          "<h3>" + esc(a.name) + "</h3><p class=\"sub\">" + a.done + " of " + a.concepts.length + " concepts</p></div></div>";
+      }
+
+      var chips = open.map(function (c) {
+        var judge = c.planned;
+        var cls = judge ? "chip judge" : "chip todo";
+        var mark = judge ? "◇" : "○";
+        var title = judge ? "judgement topic — no detector can prove this" : (c.notes || "");
+        var tag = !judge && inRoadmap(c.label) ? '<i class="xref">↗ roadmap</i>' : "";
+        return '<span class="' + cls + '" title="' + esc(title) + '"><i class="mark">' + mark + "</i>" + esc(c.label) + tag + "</span>";
+      }).join("");
+
+      return '<div class="card"><div class="area-ring">' + miniRing("cring-" + tier.key + "-" + idx, p, themeColor("")) +
+        "<div><div class=\"pct\">" + p + "%</div></div></div><h3>" + esc(a.name) + "</h3>" +
+        '<p class="sub">' + a.done + " of " + a.concepts.length + " · " + open.length + " to go</p>" +
+        '<div class="chips">' + chips + "</div></div>";
     }).join("");
-    return '<div class="card" style="border-top:3px solid ' + accent + '"><h2><i class="area-dot" style="background:' + accent + '"></i>' + esc(a.name) + "</h2>" +
-           '<p class="sub">' + a.done + " of " + a.concepts.length + " covered</p>" +
-           '<div class="bar"><i style="width:' + p + '%;background:' + accent + '"></i></div>' +
-           '<div class="chips">' + chips + "</div></div>";
+
+    return '<section class="tier ' + tier.key + '"><div class="tier-head"><b>' + esc(tier.label) +
+      "</b><span>" + areas.length + (areas.length === 1 ? " area" : " areas") + " · " +
+      tDone + " of " + tTotal + " concepts</span></div><div class=\"roadmap\">" + cardsHtml + "</div></section>";
   }).join("");
+
+  if (conceptsOpen > 0) document.getElementById("tiersNote").hidden = false;
 
   function esc(s) {
     return String(s == null ? "" : s)
