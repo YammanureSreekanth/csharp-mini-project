@@ -44,16 +44,16 @@
     --font-display:   "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
     /* A curated rotation for roadmap areas, so the skill map reads as a
        varied map rather than N identical blue cards. */
-    --accent-0: #2a78d6; --accent-1: #0f9d8a; --accent-2: #c9820f;
-    --accent-3: #7c5cff; --accent-4: #d84f8a; --accent-5: #1aa7c9;
+    --accent-0: #2a78d6; --accent-1: #0f9d4d; --accent-2: #c9820f;
+    --accent-3: #7c5cff; --accent-4: #d8492f; --accent-5: #1aa7c9;
     --accent-6: #4f9d3a;
     --dots: rgba(11,11,11,0.05);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --plane:         #0d0d0d;
-      --surface:       #1a1a19;
+      --plane:         #08090c;
+      --surface:       #15171c;
       --ink:           #ffffff;
       --ink-2:         #c3c2b7;
       --ink-muted:     #898781;
@@ -67,16 +67,17 @@
       --prov-ai:       #d95926;
       --prov-scaffold: #199e70;
       --good:          #0ca30c;
-      --accent-0: #4f97e8; --accent-1: #2bb8a3; --accent-2: #e0a53e;
-      --accent-3: #9b84ff; --accent-4: #e876ab; --accent-5: #3fc2e0;
+      --accent-0: #4f97e8; --accent-1: #2be67a; --accent-2: #e0a53e;
+      --accent-3: #9b84ff; --accent-4: #ef7a52; --accent-5: #3fc2e0;
       --accent-6: #74c158;
       --dots: rgba(255,255,255,0.055);
+      --star-glow: 0 2px 20px rgba(57,135,229,0.28);
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --plane:         #0d0d0d;
-    --surface:       #1a1a19;
+    --plane:         #08090c;
+    --surface:       #15171c;
     --ink:           #ffffff;
     --ink-2:         #c3c2b7;
     --ink-muted:     #898781;
@@ -90,10 +91,11 @@
     --prov-ai:       #d95926;
     --prov-scaffold: #199e70;
     --good:          #0ca30c;
-    --accent-0: #4f97e8; --accent-1: #2bb8a3; --accent-2: #e0a53e;
-    --accent-3: #9b84ff; --accent-4: #e876ab; --accent-5: #3fc2e0;
+    --accent-0: #4f97e8; --accent-1: #2be67a; --accent-2: #e0a53e;
+    --accent-3: #9b84ff; --accent-4: #ef7a52; --accent-5: #3fc2e0;
     --accent-6: #74c158;
     --dots: rgba(255,255,255,0.055);
+    --star-glow: 0 2px 20px rgba(57,135,229,0.28);
   }
 
   * { box-sizing: border-box; }
@@ -109,6 +111,42 @@
     color: var(--ink);
     font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
+  }
+  /* A starfield only reads as space once the plane is dark enough; light mode
+     keeps the plain dot-grid above, which already doubles as "blueprint paper". */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body {
+      background:
+        radial-gradient(1.6px 1.6px at 8% 12%, rgba(255,255,255,0.85), transparent),
+        radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,0.65), transparent),
+        radial-gradient(1px 1px at 78% 8%, rgba(255,255,255,0.55), transparent),
+        radial-gradient(1.4px 1.4px at 23% 62%, rgba(255,255,255,0.75), transparent),
+        radial-gradient(1px 1px at 63% 71%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.6px 1.6px at 92% 48%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.2px 1.2px at 12% 88%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 55% 93%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(ellipse 900px 520px at 88% -8%, rgba(57,135,229,0.16), transparent 60%),
+        radial-gradient(ellipse 760px 520px at -8% 108%, rgba(155,132,255,0.11), transparent 60%),
+        var(--plane);
+      background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed;
+      background-repeat: no-repeat;
+    }
+  }
+  :root[data-theme="dark"] body {
+    background:
+      radial-gradient(1.6px 1.6px at 8% 12%, rgba(255,255,255,0.85), transparent),
+      radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,0.65), transparent),
+      radial-gradient(1px 1px at 78% 8%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1.4px 1.4px at 23% 62%, rgba(255,255,255,0.75), transparent),
+      radial-gradient(1px 1px at 63% 71%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.6px 1.6px at 92% 48%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.2px 1.2px at 12% 88%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 55% 93%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(ellipse 900px 520px at 88% -8%, rgba(57,135,229,0.16), transparent 60%),
+      radial-gradient(ellipse 760px 520px at -8% 108%, rgba(155,132,255,0.11), transparent 60%),
+      var(--plane);
+    background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed;
+    background-repeat: no-repeat;
   }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 72px; }
 
@@ -143,8 +181,8 @@
     transition: border-color 160ms ease, box-shadow 160ms ease;
   }
   .card:hover { border-color: var(--axis); box-shadow: 0 2px 14px rgba(0,0,0,0.05); }
-  @media (prefers-color-scheme: dark) { .card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.3); } }
-  :root[data-theme="dark"] .card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.3); }
+  @media (prefers-color-scheme: dark) { .card:hover { border-color: var(--series-1); box-shadow: var(--star-glow); } }
+  :root[data-theme="dark"] .card:hover { border-color: var(--series-1); box-shadow: var(--star-glow); }
   .card h2 { margin: 0 0 2px; font-size: 15px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
   .card .sub { margin: 0 0 14px; font-size: 13px; color: var(--ink-muted); }
 
@@ -445,7 +483,7 @@
       <h1>__TITLE__</h1>
       <p>__TAGLINE__</p>
       <p class="stackbar" id="stackBar" hidden></p>
-      <p class="trust"><span class="mark">&#10003;</span> Evidence is generated from the source and git history. Status is declared by me.</p>
+      <p class="trust"><span class="mark">&#10003;</span> This is the evidence you're looking for &mdash; generated from the source and git history. Status is self-declared.</p>
       <div class="meta">
         <a href="__REPO__">__REPO_NAME__</a>
         <span>Updated __UPDATED__</span>
@@ -456,14 +494,14 @@
   </header>
 
   <nav class="tabs">
-    <a href="#roadHeading">Roadmap</a>
-    <a href="#conceptsHeading">Concepts</a>
-    <a href="#activityHeading">Activity</a>
+    <a href="#roadHeading">The Jedi Path</a>
+    <a href="#conceptsHeading">The Force</a>
+    <a href="#activityHeading">Mission Log</a>
   </nav>
 
   <div class="hero2">
     <div class="card">
-      <span class="eyebrow">Progress, two ways</span>
+      <span class="eyebrow">Readings from the Holocron</span>
       <div class="dualrings">
         <div class="ringblock">
           <svg width="84" height="84" viewBox="0 0 84 84" aria-hidden="true">
@@ -479,7 +517,7 @@
           </svg>
           <div>
             <div class="pct" id="pctText">0%</div>
-            <div class="cap">Fundamentals<br><b id="pctCap"></b><br>concepts the code already uses</div>
+            <div class="cap">The Force<br><b id="pctCap"></b><br>powers already awakened in the code</div>
           </div>
         </div>
         <div class="ringblock">
@@ -496,15 +534,15 @@
           </svg>
           <div>
             <div class="pct" id="roadPctText">0%</div>
-            <div class="cap">Role roadmap<br><b id="roadPctCap"></b><br><span id="roadPctSub"></span></div>
+            <div class="cap">The Path Ahead<br><b id="roadPctCap"></b><br><span id="roadPctSub"></span></div>
           </div>
         </div>
       </div>
-      <p class="note">Two scopes, two numbers. Fundamentals counts concepts I can already point to in code. The roadmap is the full list for a .NET backend role, so its denominator is bigger and most of it is still ahead of me.</p>
+      <p class="note">Two scopes, two numbers. The Force counts concepts I can already point to in code. The Path Ahead is the full map for a .NET backend role, so its denominator is bigger &mdash; most of the galaxy is still unexplored.</p>
     </div>
 
     <div class="card" id="provSection" hidden>
-      <span class="eyebrow">Who wrote the code</span>
+      <span class="eyebrow">Forged by hand, or by droid?</span>
       <div class="headline" id="provPct">—<small id="provCap"></small></div>
       <div class="comp-bar" id="provBar" role="img" aria-label="Line authorship breakdown"></div>
       <div class="split" id="provSplit"></div>
@@ -513,13 +551,13 @@
           <circle cx="16" cy="16" r="14.5" fill="none" stroke="var(--good)" stroke-width="2"></circle>
           <path d="M9 17.5l4.5 4.5L23 11" stroke="var(--good)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
-        <div><b>Zero AI-authored lines</b><span>Every line in the application was written by hand</span></div>
+        <div><b>No droid wrote this</b><span>This is the way &mdash; every line in the application was written by hand</span></div>
       </div>
       <div class="toolblock" id="toolBlock" hidden>
-        <div class="toolhead"><span>Tooling, counted separately</span><code id="toolPath">tools/JourneyGen</code></div>
+        <div class="toolhead"><span>Astromech systems</span><code id="toolPath">tools/JourneyGen</code></div>
         <div class="toolstat"><b id="toolLines"></b> <span id="toolPctText"></span></div>
         <div class="comp-bar"><i id="toolBar" style="width:100%;background:var(--prov-ai)"></i></div>
-        <p class="note">The generator builds this page, so it is kept out of the figures above and shown here instead.</p>
+        <p class="note">The droid that builds this page is tallied on its own, kept out of the figures above.</p>
       </div>
       <details class="data" id="provAudit">
         <summary>How this is measured, and which commits are declared</summary>
@@ -531,7 +569,7 @@
   <div class="tiles" id="tiles"></div>
 
   <div class="card rightnow" id="rightNowCard" hidden>
-    <span class="eyebrow">Right now</span>
+    <span class="eyebrow">Current mission</span>
     <h2 id="rnTitle"></h2>
     <p class="sub" id="rnNote"></p>
     <dl id="planDates" class="rn-dates"></dl>
@@ -548,17 +586,17 @@
   </div>
 
   <div class="card chip-legend">
-    <span class="eyebrow">Reading the chips</span>
+    <span class="eyebrow">Decoding the Holocron</span>
     <div class="legend-row">
       <span class="chip done"><i class="mark">&#10003;</i>Records</span><span class="legend-text">used in the code, tap for the files</span>
       <span class="chip todo"><i class="mark">&#9675;</i>Minimal APIs</span><span class="legend-text">not started</span>
-      <span class="chip judge"><i class="mark">&#9671;</i>SOLID principles</span><span class="legend-text">self-assessed, no detector can prove it</span>
+      <span class="chip judge"><i class="mark">&#9671;</i>SOLID principles</span><span class="legend-text">self-assessed, no droid can prove it</span>
     </div>
   </div>
 
   <!-- The skill map comes right after what I'm doing today: it's the part worth
        a reader's time, so it leads rather than coming after process charts. -->
-  <h2 class="section" id="roadHeading" hidden>Roadmap</h2>
+  <h2 class="section" id="roadHeading" hidden>The Jedi Path</h2>
   <section class="card" id="roadSummary" hidden style="margin-bottom:16px">
     <h2 id="roadTitle">Roadmap</h2>
     <p class="sub" id="roadSource"></p>
@@ -571,18 +609,18 @@
   </section>
 
   <section class="card" id="skylineCard" hidden style="margin-bottom:16px">
-    <h2>The skyline</h2>
-    <p class="sub">Every tower is an area. Its height is how many topics there are; the colored part is what is built.</p>
+    <h2>The galaxy map</h2>
+    <p class="sub">Every tower marks a sector. Its height is how many topics there are; the colored part is already built.</p>
     <div class="chartbox" id="skylineBox" style="height:260px"><canvas id="skylineChart"></canvas></div>
     <div class="legend" id="skylineLegend"></div>
   </section>
 
   <div class="themes" id="roadThemes" hidden></div>
 
-  <h2 class="section" id="conceptsHeading">Concepts</h2>
+  <h2 class="section" id="conceptsHeading">The Force</h2>
   <section class="card" id="conceptsSummary" style="margin-bottom:16px">
-    <h2>Concepts I can point to in code</h2>
-    <p class="sub">Language and framework features the code already uses, grouped by how close each area is to done.</p>
+    <h2>Powers of the Force I wield</h2>
+    <p class="sub">Language and framework features the code already channels, grouped by how close each area is to mastery.</p>
     <div class="topline">
       <span class="big" id="conceptsBig">—</span>
       <span class="of" id="conceptsOf"></span>
@@ -591,7 +629,7 @@
   </section>
 
   <div class="tiers" id="conceptTiers"></div>
-  <p class="note" id="tiersNote" hidden>Only open concepts are listed. Everything else in each area is already used in the code. <span class="xref">&#8599; roadmap</span> marks an open concept that also appears in the roadmap above.</p>
+  <p class="note" id="tiersNote" hidden>Only open concepts are listed. Everything else in each area is already used in the code. <span class="xref">&#8599; the Jedi Path</span> marks an open concept that also appears on the path above.</p>
 
   <div id="domain-model-section">
     <h2 class="section">Domain model</h2>
@@ -602,13 +640,13 @@
     </section>
   </div>
 
-  <h2 class="section" id="activityHeading">Activity</h2>
+  <h2 class="section" id="activityHeading">Mission log</h2>
 
   <div class="eras" id="activityEras" hidden></div>
 
   <section class="card" style="margin-bottom:16px">
-    <h2>Weekly rhythm</h2>
-    <p class="sub">One column per week. The tile shows commits, the bars show lines added above the line and removed below.</p>
+    <h2>Hyperspace log</h2>
+    <p class="sub">One column per week. Each tile reads the commits; the bars show lines gained above and lost below.</p>
     <div class="weekgrid" id="weekGrid"></div>
     <p class="note" id="streakNote" hidden></p>
     <div class="legend" id="rhythmLegend"></div>
@@ -621,7 +659,7 @@
   </details>
 
   <footer class="page">
-    Generated by <code>tools/JourneyGen</code> from the repository source and git history.
+    Chronicled by the astromech droid <code>tools/JourneyGen</code>, from the repository source and git history.
   </footer>
 </div>
 
@@ -665,9 +703,9 @@
     var judge = !i.detectable && !done;
     var cls = done ? "chip done" : i.ready ? "chip ready" : judge ? "chip judge" : "chip todo";
     var mark = done ? "✓" : i.ready ? "✓" : judge ? "◇" : wip ? "◐" : "○";
-    var tip = i.ready ? "the code covers this — ready to mark complete"
+    var tip = i.ready ? "the code covers this — ready to advance"
             : done && i.evidence.length ? i.evidence.join(", ")
-            : judge ? "judgement topic — no detector can prove this"
+            : judge ? "judgement topic — no droid can prove this"
             : (i.notes || "");
     return '<span class="' + cls + '" title="' + esc(tip) + '"><i class="mark">' + mark +
            "</i>" + esc(i.label) + "</span>";
@@ -717,7 +755,7 @@
   }
 
   var tiles = [
-    ["Weekly streak", streak ? streak + (streak === 1 ? " week" : " weeks") : "—"],
+    ["Hyperdrive streak", streak ? streak + (streak === 1 ? " week" : " weeks") : "—"],
     ["Commits", num(D.git.totalCommits)],
     ["Active days", num(D.git.activeDays)],
     ["Lines of C#", num(D.code.lines)],
@@ -780,7 +818,7 @@
           body = '<div class="state">Not started</div>';
         }
         return '<div class="rn-group' + (inFocus ? " infocus" : "") + '">' +
-          '<div class="rn-group-head"><span>' + esc(g) + (inFocus ? '<span class="rn-badge">In focus</span>' : "") +
+          '<div class="rn-group-head"><span>' + esc(g) + (inFocus ? '<span class="rn-badge">Active mission</span>' : "") +
           "</span><span>" + done + "/" + items.length + "</span></div>" + body + "</div>";
       }).join("");
     } else {
@@ -812,7 +850,7 @@
         }
 
         if (i.readyToAdvance) {
-          right += '<div class="ready">\u2713 the code covers this now \u2014 ready to mark complete</div>';
+          right += '<div class="ready">\u2713 the code covers this now \u2014 ready to advance</div>';
         }
         if (i.unevidenced || i.partiallyEvidenced) {
           right += '<div class="caution">\u26A0 marked complete, not fully shown in the code</div>';
@@ -840,13 +878,13 @@
     document.getElementById("provSection").hidden = false;
     document.getElementById("provPct").firstChild.nodeValue = P.app.youPercent + "%";
     document.getElementById("provCap").textContent =
-      "of the application is hand-written: " + P.app.you + " of " + P.app.authored + " authored lines";
+      "of the application was forged by hand: " + P.app.you + " of " + P.app.authored + " authored lines";
 
     var provTotal = P.app.total || 1;
     var rows = [
-      ["var(--prov-you)", "Mine", P.app.you],
-      ["var(--prov-ai)", "AI-written", P.app.ai],
-      ["var(--prov-scaffold)", "Scaffold", P.app.scaffold]
+      ["var(--prov-you)", "By my own hand", P.app.you],
+      ["var(--prov-ai)", "Droid-written", P.app.ai],
+      ["var(--prov-scaffold)", "Standard issue", P.app.scaffold]
     ];
     document.getElementById("provBar").innerHTML = rows.map(function (r) {
       var w = (100 * r[2] / provTotal).toFixed(2);
@@ -915,6 +953,18 @@
   };
   function themeColor(name) { return "var(" + (THEME_COLORS[name] || "--series-1") + ")"; }
 
+  // Display-only renaming — the real theme string from journey.json stays the
+  // data of record (shown alongside, in the theme's .frac line) so the section
+  // is still legible as an actual skills map, not just in-universe flavor text.
+  var THEME_LABELS = {
+    "Language and patterns": "The Jedi Temple",
+    "Web and APIs": "The Holonet",
+    "Architecture and data": "The Death Star Plans",
+    "Cloud and delivery": "The Rebel Fleet",
+    "Craft and quality": "The Lightsaber Forge"
+  };
+  function themeLabel(name) { return THEME_LABELS[name] || name; }
+
   function miniRing(id, pct, color) {
     return '<svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">' +
       '<circle cx="23" cy="23" r="19" fill="none" stroke="var(--grid)" stroke-width="5"></circle>' +
@@ -980,7 +1030,7 @@
       document.getElementById("roadThemes").hidden = false;
 
       document.getElementById("skylineLegend").innerHTML = themeOrder.map(function (t) {
-        return '<span><i class="swatch" style="background:' + themeColor(t) + '"></i>' + esc(t) + "</span>";
+        return '<span><i class="swatch" style="background:' + themeColor(t) + '"></i>' + esc(themeLabel(t)) + "</span>";
       }).join("");
 
       document.getElementById("roadThemes").innerHTML = themeOrder.map(function (t, ti) {
@@ -993,8 +1043,8 @@
           return areaCardHtml(a, color, "ring-" + ti + "-" + ai);
         }).join("");
         return '<section class="theme-section" style="--theme-color:' + color + '">' +
-          '<div class="theme-head"><h3>' + esc(t) + "</h3>" +
-          '<span class="frac">' + done + " of " + total + " topics \u00b7 " + pct + "%</span>" +
+          '<div class="theme-head"><h3>' + esc(themeLabel(t)) + "</h3>" +
+          '<span class="frac">' + esc(t) + " \u00b7 " + done + " of " + total + " topics \u00b7 " + pct + "%</span>" +
           '<div class="theme-bar"><i style="width:' + pct + '%"></i></div></div>' +
           '<div class="roadmap">' + cardsHtml + "</div></section>";
       }).join("");
@@ -1030,9 +1080,9 @@
   document.getElementById("conceptsBar").style.width = pct + "%";
 
   var TIERS = [
-    { key: "mastered", label: "Mastered", test: function (p) { return p === 100; } },
-    { key: "nearly", label: "Nearly there", test: function (p) { return p >= 80 && p < 100; } },
-    { key: "climbing", label: "Still climbing", test: function (p) { return p < 80; } }
+    { key: "mastered", label: "Jedi Master", test: function (p) { return p === 100; } },
+    { key: "nearly", label: "Jedi Knight", test: function (p) { return p >= 80 && p < 100; } },
+    { key: "climbing", label: "Padawan", test: function (p) { return p < 80; } }
   ];
 
   document.getElementById("conceptTiers").innerHTML = TIERS.map(function (tier) {
@@ -1058,8 +1108,8 @@
         var judge = c.planned;
         var cls = judge ? "chip judge" : "chip todo";
         var mark = judge ? "◇" : "○";
-        var title = judge ? "judgement topic — no detector can prove this" : (c.notes || "");
-        var tag = !judge && inRoadmap(c.label) ? '<i class="xref">↗ roadmap</i>' : "";
+        var title = judge ? "judgement topic — no droid can prove this" : (c.notes || "");
+        var tag = !judge && inRoadmap(c.label) ? '<i class="xref">↗ the Jedi Path</i>' : "";
         return '<span class="' + cls + '" title="' + esc(title) + '"><i class="mark">' + mark + "</i>" + esc(c.label) + tag + "</span>";
       }).join("");
 
@@ -1094,9 +1144,9 @@
     if (earlyEnd > runStart) earlyEnd = runStart;
 
     var eraDefs = [];
-    if (earlyEnd > 0) eraDefs.push({ label: "Early weeks", list: weeks.slice(0, earlyEnd) });
-    if (earlyEnd < runStart) eraDefs.push({ label: "Slow stretch", list: weeks.slice(earlyEnd, runStart) });
-    if (runStart < weeks.length) eraDefs.push({ label: "Current run", list: weeks.slice(runStart), current: true });
+    if (earlyEnd > 0) eraDefs.push({ label: "First steps", list: weeks.slice(0, earlyEnd) });
+    if (earlyEnd < runStart) eraDefs.push({ label: "Exile", list: weeks.slice(earlyEnd, runStart) });
+    if (runStart < weeks.length) eraDefs.push({ label: "The rebellion rises", list: weeks.slice(runStart), current: true });
 
     if (eraDefs.length > 1) {
       document.getElementById("activityEras").hidden = false;
@@ -1127,7 +1177,7 @@
     for (var si = weeks.length - 1; si >= 0; si--) { if (weeks[si].commits > 0) actStreak++; else break; }
     if (actStreak) {
       var sn = document.getElementById("streakNote");
-      sn.innerHTML = "<b>" + actStreak + "-week streak</b> and counting";
+      sn.innerHTML = "<b>" + actStreak + "-week hyperdrive streak</b> and counting";
       sn.hidden = false;
     }
 
@@ -1164,10 +1214,10 @@
     var biggest = weeks.reduce(function (a, b) { return b.added > a.added ? b : a; });
     var mostRemoved = weeks.reduce(function (a, b) { return b.removed > a.removed ? b : a; });
     document.getElementById("activityCallouts").innerHTML = [
-      "Busiest week: <b>" + num(busiest.commits) + (busiest.commits === 1 ? " commit" : " commits") +
+      "Fiercest battle: <b>" + num(busiest.commits) + (busiest.commits === 1 ? " commit" : " commits") +
         "</b> (" + busiest.start.slice(5) + ")",
-      "Biggest week: <b>" + num(biggest.added) + " lines added</b> (" + biggest.start.slice(5) + ")",
-      "Most removed: <b>" + num(mostRemoved.removed) + " lines</b> (" + mostRemoved.start.slice(5) + ")"
+      "Biggest offensive: <b>" + num(biggest.added) + " lines added</b> (" + biggest.start.slice(5) + ")",
+      "The great purge: <b>" + num(mostRemoved.removed) + " lines</b> (" + mostRemoved.start.slice(5) + ")"
     ].map(function (t) { return '<span class="callout">' + t + "</span>"; }).join("");
   }
 
