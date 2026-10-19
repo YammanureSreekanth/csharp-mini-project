@@ -21,7 +21,7 @@
   //   "in-progress"   current focus only; shows as In progress
   //
   // Leave "status" out and the code decides. That is the normal case.
-  "title": "My .NET Journey",
+  "title": "My .NET Journey: A New Hope",
   "tagline": "A running record of the C# and .NET ground I have actually covered, generated from this repository on every push.",
 
   // Curated, not detected — a resume-style highlight reel of the stack, not an

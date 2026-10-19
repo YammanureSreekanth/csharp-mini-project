@@ -112,41 +112,98 @@
     font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  /* A starfield only reads as space once the plane is dark enough; light mode
-     keeps the plain dot-grid above, which already doubles as "blueprint paper". */
+  /* Deep space, for the mode where Star Wars happens: a vignette and two nebula
+     glows sit on the body itself (the page backdrop, painted first); two fixed
+     pseudo-element star fields paint above that but below .wrap's own content
+     (negative z-index still outranks the plain backdrop). Two layers twinkling
+     out of phase reads as a living sky without animating each star alone.
+     Light mode keeps the plain dot-grid above -- it already reads as blueprint
+     paper, which suits "the Death Star plans" well enough on its own. */
+  @keyframes twinkleA { from { opacity: 0.5; } to { opacity: 1; } }
+  @keyframes twinkleB { from { opacity: 1; } to { opacity: 0.4; } }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) body {
       background:
-        radial-gradient(1.6px 1.6px at 8% 12%, rgba(255,255,255,0.85), transparent),
-        radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,0.65), transparent),
-        radial-gradient(1px 1px at 78% 8%, rgba(255,255,255,0.55), transparent),
-        radial-gradient(1.4px 1.4px at 23% 62%, rgba(255,255,255,0.75), transparent),
-        radial-gradient(1px 1px at 63% 71%, rgba(255,255,255,0.5), transparent),
-        radial-gradient(1.6px 1.6px at 92% 48%, rgba(255,255,255,0.7), transparent),
-        radial-gradient(1.2px 1.2px at 12% 88%, rgba(255,255,255,0.6), transparent),
-        radial-gradient(1px 1px at 55% 93%, rgba(255,255,255,0.5), transparent),
-        radial-gradient(ellipse 900px 520px at 88% -8%, rgba(57,135,229,0.16), transparent 60%),
-        radial-gradient(ellipse 760px 520px at -8% 108%, rgba(155,132,255,0.11), transparent 60%),
+        radial-gradient(ellipse 100% 90% at 50% 35%, transparent 35%, rgba(3,4,8,0.62) 100%),
+        radial-gradient(ellipse 950px 600px at 88% -8%, rgba(57,135,229,0.24), transparent 60%),
+        radial-gradient(ellipse 800px 580px at -8% 108%, rgba(155,132,255,0.18), transparent 60%),
+        radial-gradient(ellipse 640px 420px at 55% 30%, rgba(239,122,82,0.06), transparent 65%),
         var(--plane);
-      background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed;
+      background-attachment: fixed;
       background-repeat: no-repeat;
     }
   }
   :root[data-theme="dark"] body {
     background:
-      radial-gradient(1.6px 1.6px at 8% 12%, rgba(255,255,255,0.85), transparent),
-      radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,0.65), transparent),
-      radial-gradient(1px 1px at 78% 8%, rgba(255,255,255,0.55), transparent),
-      radial-gradient(1.4px 1.4px at 23% 62%, rgba(255,255,255,0.75), transparent),
-      radial-gradient(1px 1px at 63% 71%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(1.6px 1.6px at 92% 48%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1.2px 1.2px at 12% 88%, rgba(255,255,255,0.6), transparent),
-      radial-gradient(1px 1px at 55% 93%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(ellipse 900px 520px at 88% -8%, rgba(57,135,229,0.16), transparent 60%),
-      radial-gradient(ellipse 760px 520px at -8% 108%, rgba(155,132,255,0.11), transparent 60%),
+      radial-gradient(ellipse 100% 90% at 50% 35%, transparent 35%, rgba(3,4,8,0.62) 100%),
+      radial-gradient(ellipse 950px 600px at 88% -8%, rgba(57,135,229,0.24), transparent 60%),
+      radial-gradient(ellipse 800px 580px at -8% 108%, rgba(155,132,255,0.18), transparent 60%),
+      radial-gradient(ellipse 640px 420px at 55% 30%, rgba(239,122,82,0.06), transparent 65%),
       var(--plane);
-    background-attachment: fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed, fixed;
+    background-attachment: fixed;
     background-repeat: no-repeat;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body::before,
+    :root:not([data-theme="light"]) body::after {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-repeat: no-repeat;
+    }
+  }
+  :root[data-theme="dark"] body::before,
+  :root[data-theme="dark"] body::after {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-repeat: no-repeat;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body::before { background:
+      radial-gradient(1.6px 1.6px at 8% 12%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 78% 8%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.4px 1.4px at 23% 62%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 63% 71%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1.6px 1.6px at 92% 48%, rgba(255,255,255,0.75), transparent),
+      radial-gradient(1.2px 1.2px at 12% 88%, rgba(255,255,255,0.65), transparent),
+      radial-gradient(1px 1px at 55% 93%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(2px 2px at 30% 15%, #fff, transparent 70%),
+      radial-gradient(7px 7px at 30% 15%, rgba(150,190,255,0.35), transparent 70%); }
+    :root:not([data-theme="light"]) body::after { background:
+      radial-gradient(1.2px 1.2px at 18% 35%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 38% 80%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1.4px 1.4px at 67% 22%, rgba(255,255,255,0.75), transparent),
+      radial-gradient(1px 1px at 83% 65%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.6px 1.6px at 95% 85%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.2px 1.2px at 5% 55%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 72% 92%, #fff, transparent 70%),
+      radial-gradient(6px 6px at 72% 92%, rgba(255,210,170,0.3), transparent 70%); }
+  }
+  :root[data-theme="dark"] body::before { background:
+    radial-gradient(1.6px 1.6px at 8% 12%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.2px 1.2px at 46% 28%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 78% 8%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.4px 1.4px at 23% 62%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 63% 71%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1.6px 1.6px at 92% 48%, rgba(255,255,255,0.75), transparent),
+    radial-gradient(1.2px 1.2px at 12% 88%, rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 55% 93%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(2px 2px at 30% 15%, #fff, transparent 70%),
+    radial-gradient(7px 7px at 30% 15%, rgba(150,190,255,0.35), transparent 70%); }
+  :root[data-theme="dark"] body::after { background:
+    radial-gradient(1.2px 1.2px at 18% 35%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 38% 80%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1.4px 1.4px at 67% 22%, rgba(255,255,255,0.75), transparent),
+    radial-gradient(1px 1px at 83% 65%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.6px 1.6px at 95% 85%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.2px 1.2px at 5% 55%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 72% 92%, #fff, transparent 70%),
+    radial-gradient(6px 6px at 72% 92%, rgba(255,210,170,0.3), transparent 70%); }
+  @media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
+    :root:not([data-theme="light"]) body::before { animation: twinkleA 4.5s ease-in-out infinite alternate; }
+    :root:not([data-theme="light"]) body::after { animation: twinkleB 6s ease-in-out infinite alternate; animation-delay: -2s; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :root[data-theme="dark"] body::before { animation: twinkleA 4.5s ease-in-out infinite alternate; }
+    :root[data-theme="dark"] body::after { animation: twinkleB 6s ease-in-out infinite alternate; animation-delay: -2s; }
   }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 72px; }
 
@@ -158,8 +215,20 @@
   }
 
   header.page { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+  header.page .crawl { margin: 0 0 6px; font-size: 12.5px; font-style: italic; color: var(--ink-muted); }
   header.page h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.02em; }
   header.page p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+  /* The crawl's gold only reads once there's a dark sky behind it to glow against. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) header.page h1 {
+      background: linear-gradient(135deg, #ffe49a 0%, #e0a53e 55%, #ffe49a 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+  }
+  :root[data-theme="dark"] header.page h1 {
+    background: linear-gradient(135deg, #ffe49a 0%, #e0a53e 55%, #ffe49a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
   .trust {
     display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
     font-size: 12.5px; color: var(--ink-2);
@@ -480,6 +549,7 @@
 
   <header class="page">
     <div>
+      <p class="crawl">A long time ago, in a codebase far, far away&hellip;</p>
       <h1>__TITLE__</h1>
       <p>__TAGLINE__</p>
       <p class="stackbar" id="stackBar" hidden></p>
